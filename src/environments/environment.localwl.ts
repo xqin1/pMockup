@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  pefDocumentArchiveURL: 'pefDocumentArchive'
+  pefDocumentArchiveURL: 'http://localhost:7001/PanoramaExtendedFramework/extendedform/docmgt/bulkarchiving'
 };

@@ -1,3 +1,57 @@
 <p>
-  document-archive works!
+  document-link page for archive
 </p>
+<div>{{documentName}}</div>
+<div>
+  <button (click)="documentArchiveDone()">done</button>
+</div>
+
+<mat-horizontal-stepper [linear]="isLinear">
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Review Metadata</ng-template>
+      <div>
+        Document Custom Form fields<br/>
+        Document Regulatory Action information<br/>
+        user can edit custom form and review updated RA information<br/>
+        user can update custom form <br/>
+      </div>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Validate</ng-template>
+      <div>
+        list of final custom form information and RA information
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Preview Document</ng-template>
+      <div>
+        this step only shows up for Word document<br/>
+        a converted PDF version will be shown<br/>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Confirm Archive</ng-template>
+    <div>
+      The document will be archived. It may take a few minutes to finish<br/>
+      <button (click)="documentArchiveDone()">Archive</button>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

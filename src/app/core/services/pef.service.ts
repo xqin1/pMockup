@@ -3,9 +3,8 @@ import { map, catchError, finalize} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ExceptionService } from '@app/core/services/exception.service';
 import { CONFIG} from '@app/core/config';
+import { environment } from '../../../environments/environment';
 
-
-const pefUrl = CONFIG.baseUrls.pef;
 
 @Injectable()
 export class PEFService {
@@ -14,10 +13,9 @@ export class PEFService {
     private http: HttpClient,
     private exceptionService: ExceptionService,
   ) {}
-
   getDocumentListByObjectID(objectID) {
     return this.http
-      .get<any>(`${pefUrl}/getDocumentsByObjectId?objectId=${objectID}`)
+      .get<any>(`${environment.pefDocumentArchiveURL}/getDocumentsByObjectId?objectId=${objectID}`)
       .pipe(
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),

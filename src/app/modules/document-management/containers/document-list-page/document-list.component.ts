@@ -5,7 +5,7 @@ import * as fromDocument from 'app/modules/document-management/reducers/index.re
 import {Observable} from 'rxjs/Observable';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { DocumentList} from '@app/modules/document-management/model/document-list.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MatSlideToggleChange} from '@angular/material';
 
 @Component({
@@ -20,15 +20,16 @@ export class DocumentListComponent implements OnInit {
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
 ) {
     this.documentListLoading$ = this.store.select((fromDocument.getDocumentListLoading));
   }
-  getArchivalEligibility(id: string): any{
+  getArchivalEligibility(id: string): any {
     return this.documentManagementService.getEligibilityByDocumentId(id);
   }
 
-  showMoreInfoToggle($event: MatSlideToggleChange, id:string){
+  showMoreInfoToggle($event: MatSlideToggleChange, id: string) {
     console.log($event);
     if ($event.checked) {
       this.showMoreInfoDocIDs.push(id);
@@ -42,6 +43,13 @@ export class DocumentListComponent implements OnInit {
     return this.showMoreInfoDocIDs.includes(id);
   }
 
+  goToDocumentLink(id: string) {
+    this.router.navigate([`../document-link/${id}`], {relativeTo: this.route});
+  }
+
+  goToDocumentArchive(id: string) {
+    this.router.navigate([`../document-archive/${id}`], {relativeTo: this.route});
+  }
   ngOnInit() {
     this.documentListLoading$.subscribe(data => {
         if (!data) {

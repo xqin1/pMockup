@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InspectionParentPageComponentComponent } from './inspection-parent-page-component.component';
-
+import { HeaderComponent} from '@app/shared/components/header/header.component';
 
 
 describe('InspectionParentPageComponentComponent', () => {

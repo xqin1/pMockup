@@ -17,6 +17,7 @@ import {MatAutocompleteModule, MatFormFieldModule} from '@angular/material';
 import { MatExpansionModule} from '@angular/material';
 import { MatRadioModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatStepperModule} from '@angular/material/stepper';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -46,6 +47,7 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatTooltipModule,
     MatFormFieldModule,
     MatExpansionModule,
+    MatStepperModule,
     MatRadioModule,
     MatSlideToggleModule
   ],
@@ -73,6 +75,7 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatExpansionModule,
     MatRadioModule,
     MatSlideToggleModule,
+    MatStepperModule,
     HeaderComponent,
     FullScreenLoaderComponent
   ]

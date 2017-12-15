@@ -7,15 +7,11 @@
       <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-      <mat-icon>info outline</mat-icon>
-      <span>More Info</span>
+      <button mat-menu-item (click)="goToDocumentLink(doc['id'])">
+        <mat-icon>link</mat-icon>
+        <span>Linking</span>
       </button>
-      <button mat-menu-item>
-      <mat-icon>link</mat-icon>
-      <span>Linking</span>
-      </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="goToDocumentArchive(doc['id'])">
       <mat-icon>all_inclusive</mat-icon>
       <span>Archive</span>
       </button>
@@ -45,11 +41,6 @@
     <mat-card-content>
       <div>Approvers Information: ...</div>
       <div>Other information: ...</div>
-      <!--<div class="toggle">-->
-        <!--<mat-slide-toggle>-->
-          <!--More Information-->
-        <!--</mat-slide-toggle>-->
-      <!--&lt;!&ndash;</div>&ndash;&gt;-->
       <div>
         <mat-slide-toggle (change)="showMoreInfoToggle($event,doc['id'])">More Information</mat-slide-toggle>
       </div>

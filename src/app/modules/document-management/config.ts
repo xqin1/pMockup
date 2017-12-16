@@ -44,5 +44,14 @@ export const DocumentConfig = {
   noDocumentLinkingCode: [
     "Archived",
     "Archiving in Progress"
+  ],
+  noPreviewCode: [
+    "Archived",
+    "Archiving in Progress"
+  ],
+  previewEligibleType: [
+    "pdf",
+    "doc",
+    "docx"
   ]
 };

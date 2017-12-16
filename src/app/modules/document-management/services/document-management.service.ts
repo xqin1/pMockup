@@ -30,18 +30,40 @@ export class DocumentManagementService {
       this.setDocumentEligibility(documentData, documentList.eligibility, doc);
       this.setDocumentApprovers(documentData, doc);
       documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);
+      documentData.previewEligible = this.setDocumentPreview(documentData, doc);
+      documentData.actionEligible = this.setDocumentAction(documentData);
       this.documentDataList.push(documentData);
     });
     return this.documentDataList;
   }
-
+  setDocumentAction(document: DocumentData): boolean {
+    let result = true;
+    if (document.archivalStatus === "Archived" && !document.reArchivalEligible) {
+      result = false;
+    }
+    return result;
+  }
+  setDocumentPreview(document: DocumentData, doc: object): boolean{
+    let result = false;
+    const ext = doc["currentVersion"]['ext'];
+    if (DocumentConfig.previewEligibleType.includes(ext)) {
+      if (document.reArchivalEligible) {
+        result = true;
+      } else {
+        if (!DocumentConfig.noPreviewCode.includes(document.archivalStatus)) {
+          result = true;
+        }
+      }
+    }
+    return result;
+  }
   setDocumentEligibility(document: DocumentData, eligibilityList: Eligibility[], doc: object) {
     const eligibility: Eligibility = eligibilityList.filter(e => {
       return e.documentID === document.documentID;
     })[0];
     document.archivalStatus = eligibility.reason;
     document.archivalEligible = eligibility.archivalEligible;
-    if (!document.archivalEligible && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
+    if (document.archivalStatus === "Archived" && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
       document.reArchivalEligible = true;
     }else {
       document.reArchivalEligible = false;
@@ -75,7 +97,6 @@ export class DocumentManagementService {
     if (customForms !== null) {
       for (let action in customForms) {
         const value = customForms[action];
-
         if (action.substring(0, 3) === "DE:") {
           action = action.substring(3);
         }

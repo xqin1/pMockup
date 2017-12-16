@@ -12,6 +12,7 @@ import { of } from 'rxjs/observable/of';
 import * as fromDocument from '@app/modules/document-management/reducers/document.reducer';
 import * as documentAction from '@app/modules/document-management/actions/document.action';
 import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
+import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 
 @Injectable()
 export class DocumentListResolverService implements Resolve<any> {
@@ -32,14 +33,15 @@ export class DocumentListResolverService implements Resolve<any> {
           if (this.documentManagementService.documentListLoaded) {
             return of(true);
           } else {
-              const objectId = route.params.id;
+              const objectId = route.params.objectId;
+              const userId = route.params.userId;
               this.store.dispatch(new documentAction.Document_List_Loading(true));
               this.pefService.getDocumentListByObjectID(objectId)
                 .subscribe( results => {
-                  this.documentManagementService.documentList = results;
+                  const documentDataList: DocumentData[] = this.documentManagementService.processDocumentList(results, userId);
                   this.documentManagementService.documentListLoaded = true;
                   this.store.dispatch(new documentAction.Document_List_Loading(false));
-                  this.store.dispatch((new documentAction.Document_List_Loaded(true)));
+                  this.store.dispatch((new documentAction.Document_List_Loaded(documentDataList)));
                   return of(true);
                 });
           }

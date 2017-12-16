@@ -7,36 +7,28 @@ import { DocumentManagementService} from '@app/modules/document-management/servi
 import { DocumentList} from '@app/modules/document-management/model/document-list.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatSlideToggleChange} from '@angular/material';
+import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 
 @Component({
-  selector: 'app-document-link',
-  templateUrl: './document-link.component.html',
-  styleUrls: ['./document-link.component.css']
+  selector: 'app-document-list-parent',
+  templateUrl: './document-list-parent.component.html',
+  styleUrls: ['./document-list-parent.component.css']
 })
-export class DocumentLinkComponent implements OnInit {
-  documentName: string;
+export class DocumentListParentComponent implements OnInit {
+  documentListLoading$: Observable<boolean>;
+  documentDataList$: Observable<DocumentData[]>;
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
-
-  getDocumentName(id: string) {
-    const document = this.documentManagementService.documentList.documents.filter(e => {
-      return e.id === id;
-    });
-    this.documentName = document[0]['name'] + '.' + document[0]['currentVersion']['ext'];
+) {
+    this.documentListLoading$ = this.store.select((fromDocument.getDocumentListLoading));
+    this.documentDataList$ = this.store.select(fromDocument.getDocumentDataList);
   }
 
-  documentLinkDone() {
-    console.log('done');
-    this.router.navigate(['../../'], {relativeTo: this.route});
-  }
   ngOnInit() {
-    this.route.params.subscribe(param => {
-      this.getDocumentName(param['id']);
-    })
+
   }
 
 }

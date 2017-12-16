@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromDocument from 'app/modules/document-management/reducers/index.reducer';
+import {Observable} from 'rxjs/Observable';
+import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import {MatSlideToggleChange} from '@angular/material';
+import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
+import { environment} from '@env/environment';
 
 @Component({
   selector: 'app-document-list',
@@ -6,10 +14,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./document-list.component.css']
 })
 export class DocumentListComponent implements OnInit {
+  documentListLoading$: Observable<boolean>;
+  showMoreInfoDocIDs: string[] = [];
+  @Input() documentDataList: DocumentData[];
+  workfrontHost = environment.workfrontHost;
+  constructor(
+    private documentManagementService: DocumentManagementService,
+    private store: Store<fromDocument.State>,
+    private route: ActivatedRoute,
+    private router: Router
+) {
+    this.documentListLoading$ = this.store.select((fromDocument.getDocumentListLoading));
+  }
 
-  constructor() { }
+  getShowDocumentLink(row: DocumentData) {
+    return `${environment.workfrontHost}/document/view?ID=${row.documentID}`;
+  }
+  showMoreInfoToggle($event: MatSlideToggleChange, id: string) {
+    console.log($event);
+    if ($event.checked) {
+      this.showMoreInfoDocIDs.push(id);
+    }else {
+      this.showMoreInfoDocIDs = this.showMoreInfoDocIDs.filter( e => {
+        return e !== id;
+      });
+    }
+  }
+  showMoreInfo(id: string): boolean {
+    return this.showMoreInfoDocIDs.includes(id);
+  }
 
+  goToDocumentLink(id: string) {
+    this.router.navigate([`../document-link/${id}`], {relativeTo: this.route});
+  }
+
+  goToDocumentArchive(id: string) {
+    this.router.navigate([`../document-archive/${id}`], {relativeTo: this.route});
+  }
   ngOnInit() {
+    this.documentListLoading$.subscribe(data => {
+        if (!data) {
+          // this.documentDataList = this.documentManagementService.documentDataList;
+          // console.log(this.documentDataList);
+        }
+
+    });
   }
 
 }

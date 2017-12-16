@@ -1,3 +1,51 @@
-<p>
-  document-list works!
-</p>
+<div class="document-list-page" *ngIf="documentDataList">
+  <div class="document-list-table">
+    <ngx-datatable
+      class="material striped document-list-datatable"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="0"
+      [rowHeight]="'auto'"
+      [rows]="documentDataList"
+      [sorts]="[
+        {prop: 'lastUpdatedDate', dir: 'desc'}
+      ]"
+    >
+      <ngx-datatable-column name="Actions" [flexGrow]="1">
+        <ng-template let-column="column" ngx-datatable-header-template>Actions</ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          myActions
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="documentName" [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Document Name</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <a [href]="getShowDocumentLink(row)" target="_blank">{{value}}</a>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="lastUpdatedDate" [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Last Modified</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="approvers" [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Document Approvals</span>
+        </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <div *ngFor="let v of value">
+            {{v}}
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop="archivalStatus"  [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Archive Status</span>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
+

@@ -29,8 +29,8 @@ export class DocumentArchiveComponent implements OnInit {
 
 
   getDocumentName(id: string) {
-    const document = this.documentManagementService.documentList.documents.filter(e => {
-      return e.id === id;
+    const document = this.documentManagementService.documentDataList.filter(e => {
+      return e.documentID === id;
     });
     this.documentName = document[0]['name'] + '.' + document[0]['currentVersion']['ext'];
   }

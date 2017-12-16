@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  pefDocumentArchiveURL: 'pefDocumentArchive'
+  pefDocumentArchiveURL: 'pefDocumentArchive',
+  workfrontHost: 'http://panoramaams-pps.preprod.fda.gov'
 };

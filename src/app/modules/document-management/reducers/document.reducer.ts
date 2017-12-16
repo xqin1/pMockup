@@ -1,14 +1,23 @@
 import * as documentAction from '@app/modules/document-management/actions/document.action.ts';
+import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 
 
 export interface State {
   documentListLoading: boolean;
   documentListLoaded: boolean;
+  documentDataList: DocumentData[];
+  objCode: string;
+  selectedDocument: DocumentData;
+  navIndex: number;
 }
 
 const initialState: State = {
   documentListLoading: true,
-  documentListLoaded: false
+  documentListLoaded: false,
+  documentDataList: null,
+  objCode: null,
+  selectedDocument: null,
+  navIndex: 1
 };
 
 export function reducer(state = initialState, action: documentAction.Actions): State {
@@ -22,7 +31,8 @@ export function reducer(state = initialState, action: documentAction.Actions): S
     case documentAction.DOCUMENT_LIST_LOADED: {
       return {
         ...state,
-        documentListLoaded: action.payload
+        documentListLoaded: true,
+        documentDataList: action.payload
       };
     }
     default: {
@@ -32,5 +42,6 @@ export function reducer(state = initialState, action: documentAction.Actions): S
 }
 export const getDocumentListLoading = (state: State) => state.documentListLoading;
 export const getDocumentListLoaded = (state: State) => state.documentListLoaded;
+export const getDocumentDataList = (state: State) => state.documentDataList;
 
 

@@ -61,3 +61,7 @@ export const getDocumentListLoading = createSelector(
   getDocumentState,
   fromDocument.getDocumentListLoading
 );
+export const getDocumentDataList = createSelector(
+  getDocumentState,
+  fromDocument.getDocumentDataList
+);

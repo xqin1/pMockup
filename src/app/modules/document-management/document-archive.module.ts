@@ -14,6 +14,8 @@ import { DocumentValidateParentPageComponent } from './containers/document-valid
 import { DocumentValidationComponent } from './components/document-validation/document-validation.component';
 import { DocumentConfirmationComponent } from './components/document-confirmation/document-confirmation.component';
 import { DocumentConfirmationParentPageComponent } from './containers/document-confirmation-parent-page/document-confirmation-parent-page.component';
+import { ReArchiveDialogComponent } from './components/re-archive-dialog/re-archive-dialog.component';
+import { FilePreviewDialogComponent } from './components/file-preview-dialog/file-preview-dialog.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,7 @@ import { DocumentConfirmationParentPageComponent } from './containers/document-c
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers)
   ],
-  declarations: [routedComponents, DocumentListComponent, NavigationComponent, DocumentValidateParentPageComponent, DocumentValidationComponent, DocumentConfirmationComponent, DocumentConfirmationParentPageComponent],
+  declarations: [routedComponents, DocumentListComponent, NavigationComponent, DocumentValidateParentPageComponent, DocumentValidationComponent, DocumentConfirmationComponent, DocumentConfirmationParentPageComponent, ReArchiveDialogComponent, FilePreviewDialogComponent],
   providers: [ DocumentManagementService, DocumentListResolverService]
 })
 export class DocumentArchiveModule { }

@@ -23,4 +23,7 @@ export class DocumentValidationComponent implements OnInit {
   archive() {
     this.archiveDocument.emit(this.selectedDocument);
   }
+  reArchive(data: DocumentData): void {
+
+  }
 }

@@ -20,6 +20,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatStepperModule} from '@angular/material/stepper';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // components
 import { HeaderComponent} from '@app/shared/components/header/header.component';
@@ -49,7 +50,8 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatExpansionModule,
     MatStepperModule,
     MatRadioModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDialogModule
   ],
   declarations: [HeaderComponent, FullScreenLoaderComponent],
   exports: [
@@ -76,6 +78,7 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatRadioModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatDialogModule,
     HeaderComponent,
     FullScreenLoaderComponent
   ]

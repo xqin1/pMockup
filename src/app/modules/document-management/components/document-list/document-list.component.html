@@ -39,7 +39,7 @@
             </div>
             <div matTooltip="Archive the document" matTooltipPosition="right">
               <span [hidden]="!row.archivalEligible">
-                <button mat-menu-item (click)="doArchive(row)">
+                <button mat-menu-item (click)="archive(row)">
                   <mat-icon>unarchive</mat-icon>
                   <span>Archive</span>
               </button>
@@ -47,7 +47,7 @@
             </div>
             <div matTooltip="Re Archive will bypass eligibility check and not update regulatory data" matTooltipPosition="right">
               <span [hidden]="!row.reArchivalEligible">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="reArchive(row)">
                   <mat-icon>redo</mat-icon>
                   <span>Re Archive</span>
                 </button>

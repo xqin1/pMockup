@@ -43,13 +43,6 @@ export class DocumentArchiveComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.getDocumentName(param['id']);
     });
-
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['']
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['']
-    });
   }
 
 }

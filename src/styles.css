@@ -21,3 +21,7 @@
 .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell{
   font-size:12px !important;
 }
+
+.mat-tab-label {
+  margin-right: 80px !important;
+}

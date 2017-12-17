@@ -1,8 +1,8 @@
 export const DocumentConfig = {
   navigation: [
-    {name: "Select Document", value: "select", index: 0},
-    {name: "Validate", value: "validate", index: 1},
-    {name: "Confirm Archive", value: "confirm", index: 2}
+    {name: "Select Document", value: "select", index: 0, icon: "find_in_page"},
+    {name: "Validate", value: "validate", index: 1, icon: "check_circle"},
+    {name: "Confirm Archive", value: "confirm", index: 2, icon: "unarchive"}
   ],
   customFormExcludeFields: [
     "Access to Document Linking",

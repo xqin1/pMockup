@@ -1,13 +1,13 @@
 
-  <H3>
+  <H3 mat-dialog-title>
     Re Archiving: {{data.documentName}}
   </H3>
-  <div>
+  <mat-dialog-content>
     <p>Please note re-archiving will bypass all eligibility check and will <strong>NOT</strong> update regulatory data</p>
-  </div>
-  <div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-raised-button color="primary" (click)="dialogRef.close(true)">Confirm</button>
-  </div>
+  </mat-dialog-actions>
 
 

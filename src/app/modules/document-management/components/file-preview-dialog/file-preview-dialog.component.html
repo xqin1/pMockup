@@ -1,3 +1,12 @@
-<p>
-  file-preview-dialog works!
-</p>
+
+<H3 mat-dialog-title>
+  Preview Document: {{data["document"]["documentName"]}}
+</H3>
+<mat-dialog-content>
+  <div class="file-preview">
+    <img src="assets/pdf_doc.png"/>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

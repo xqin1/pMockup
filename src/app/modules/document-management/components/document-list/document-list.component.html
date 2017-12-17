@@ -31,7 +31,7 @@
             </div>
             <div matTooltip="Preview what the document looks like when it is archived" matTooltipPosition="right">
               <span [hidden]="!row.previewEligible">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="preview(row)">
                   <mat-icon>spellcheck</mat-icon>
                   <span>Preview</span>
                 </button>

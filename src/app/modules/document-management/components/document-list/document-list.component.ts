@@ -4,9 +4,10 @@ import * as fromDocument from 'app/modules/document-management/reducers/index.re
 import {Observable} from 'rxjs/Observable';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import { environment} from '@env/environment';
 import {ReArchiveDialogComponent} from '@app/modules/document-management/components/re-archive-dialog/re-archive-dialog.component';
+import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 
 @Component({
   selector: 'app-document-list',
@@ -40,6 +41,13 @@ export class DocumentListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('dialog closed');
       console.log(result);
+    });
+  }
+  preview(doc: DocumentData) {
+    this.dialog.open(FilePreviewDialogComponent, {
+      width: '800px',
+      height: '600px',
+      data: {document: doc, pdfContent: 'pdfContent'}
     });
   }
   ngOnInit() {

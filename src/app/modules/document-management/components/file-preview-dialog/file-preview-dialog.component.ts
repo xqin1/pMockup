@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-file-preview-dialog',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilePreviewDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<FilePreviewDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: any
+  ) { }
 
   ngOnInit() {
   }

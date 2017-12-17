@@ -4,7 +4,9 @@ import * as fromDocument from 'app/modules/document-management/reducers/index.re
 import {Observable} from 'rxjs/Observable';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { environment} from '@env/environment';
+import {ReArchiveDialogComponent} from '@app/modules/document-management/components/re-archive-dialog/re-archive-dialog.component';
 
 @Component({
   selector: 'app-document-list',
@@ -18,6 +20,7 @@ export class DocumentListComponent implements OnInit {
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
+    public dialog: MatDialog
 ) {
     this.documentListLoading$ = this.store.select((fromDocument.getDocumentListLoading));
   }
@@ -28,6 +31,16 @@ export class DocumentListComponent implements OnInit {
 
   archive(data: DocumentData) {
     this.documentArchive.emit(data);
+  }
+  reArchive(doc: DocumentData): void {
+    const dialogRef = this.dialog.open(ReArchiveDialogComponent, {
+      width: '400px',
+      data: doc
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('dialog closed');
+      console.log(result);
+    });
   }
   ngOnInit() {
   }

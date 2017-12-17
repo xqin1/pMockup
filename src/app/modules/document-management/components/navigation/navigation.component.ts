@@ -26,10 +26,6 @@ export class NavigationComponent implements OnInit {
     }
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log("change");
-    console.log(changes);
-    console.log(this.objectId);
-    console.log(this.userId);
     if (changes["navIndex"] && changes["navIndex"].currentValue === 0 && typeof changes["navIndex"].previousValue !== 'undefined') {
       this.router.navigate(['/document-archive', 'document-list', this.objectId, this.userId]);
     }

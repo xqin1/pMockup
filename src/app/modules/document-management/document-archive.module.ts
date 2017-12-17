@@ -25,7 +25,8 @@ import { FilePreviewDialogComponent } from './components/file-preview-dialog/fil
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers)
   ],
-  declarations: [routedComponents, DocumentListComponent, NavigationComponent, DocumentValidateParentPageComponent, DocumentValidationComponent, DocumentConfirmationComponent, DocumentConfirmationParentPageComponent, ReArchiveDialogComponent, FilePreviewDialogComponent],
-  providers: [ DocumentManagementService, DocumentListResolverService]
+  declarations: [routedComponents],
+  providers: [ DocumentManagementService, DocumentListResolverService],
+  entryComponents: [ReArchiveDialogComponent, FilePreviewDialogComponent]
 })
 export class DocumentArchiveModule { }

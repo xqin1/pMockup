@@ -6,7 +6,9 @@ export interface State {
   documentListLoading: boolean;
   documentListLoaded: boolean;
   documentDataList: DocumentData[];
+  objId: string;
   objCode: string;
+  userId: string;
   selectedDocument: DocumentData;
   navIndex: number;
 }
@@ -15,7 +17,9 @@ const initialState: State = {
   documentListLoading: true,
   documentListLoaded: false,
   documentDataList: null,
+  objId: null,
   objCode: null,
+  userId: null,
   selectedDocument: null,
   navIndex: 0
 };
@@ -32,7 +36,16 @@ export function reducer(state = initialState, action: documentAction.Actions): S
       return {
         ...state,
         documentListLoaded: true,
-        documentDataList: action.payload
+        documentDataList: action.payload.documentListData,
+        objId: action.payload.objId,
+        objCode: action.payload.objCode,
+        userId: action.payload.userId
+      };
+    }
+    case documentAction.DOCUMENT_SELECTED: {
+      return {
+        ...state,
+        selectedDocument: action.payload
       };
     }
     case documentAction.NAVIGATION_INDEX_CHANGED: {
@@ -50,5 +63,8 @@ export const getDocumentListLoading = (state: State) => state.documentListLoadin
 export const getDocumentListLoaded = (state: State) => state.documentListLoaded;
 export const getDocumentDataList = (state: State) => state.documentDataList;
 export const getNavigationIndex = (state: State) => state.navIndex;
+export const getSelectedDocument = (state: State) => state.selectedDocument;
+export const getObjectId = (state: State) => state.objId;
+export const getUserId = (state: State) => state.userId;
 
 

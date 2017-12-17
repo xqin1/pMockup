@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromDocument from 'app/modules/document-management/reducers/index.reducer';
 import {Observable} from 'rxjs/Observable';
@@ -6,6 +6,7 @@ import { DocumentManagementService} from '@app/modules/document-management/servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import { environment} from '@env/environment';
+import {Navigation} from '@app/modules/document-management/model/navigation.model';
 
 @Component({
   selector: 'app-document-list',
@@ -16,6 +17,7 @@ export class DocumentListComponent implements OnInit {
   documentListLoading$: Observable<boolean>;
   showMoreInfoDocIDs: string[] = [];
   @Input() documentDataList: DocumentData[];
+  @Output() documentArchive= new EventEmitter<DocumentData>();
   workfrontHost = environment.workfrontHost;
   constructor(
     private documentManagementService: DocumentManagementService,
@@ -38,17 +40,12 @@ export class DocumentListComponent implements OnInit {
     this.router.navigate([`../document-link/${id}`], {relativeTo: this.route});
   }
 
-  goToDocumentArchive(id: string) {
-    this.router.navigate([`../document-archive/${id}`], {relativeTo: this.route});
+  doArchive(data: DocumentData) {
+    console.log("do archive");
+    console.log(data);
+    this.documentArchive.emit(data);
   }
   ngOnInit() {
-    this.documentListLoading$.subscribe(data => {
-        if (!data) {
-          // this.documentDataList = this.documentManagementService.documentDataList;
-          // console.log(this.documentDataList);
-        }
-
-    });
   }
 
 }

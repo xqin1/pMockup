@@ -39,7 +39,7 @@
             </div>
             <div matTooltip="Archive the document" matTooltipPosition="right">
               <span [hidden]="!row.archivalEligible">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="doArchive(row)">
                   <mat-icon>unarchive</mat-icon>
                   <span>Archive</span>
               </button>

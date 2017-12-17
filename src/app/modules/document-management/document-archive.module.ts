@@ -10,6 +10,10 @@ import { DocumentManagementService} from '@app/modules/document-management/servi
 import { DocumentManagementRoutingModule, routedComponents } from './document-archive-routing.module';
 import { DocumentListComponent } from './components/document-list/document-list.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { DocumentValidateParentPageComponent } from './containers/document-validate-parent-page/document-validate-parent-page.component';
+import { DocumentValidationComponent } from './components/document-validation/document-validation.component';
+import { DocumentConfirmationComponent } from './components/document-confirmation/document-confirmation.component';
+import { DocumentConfirmationParentPageComponent } from './containers/document-confirmation-parent-page/document-confirmation-parent-page.component';
 
 @NgModule({
   imports: [
@@ -19,7 +23,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers)
   ],
-  declarations: [routedComponents, DocumentListComponent, NavigationComponent],
+  declarations: [routedComponents, DocumentListComponent, NavigationComponent, DocumentValidateParentPageComponent, DocumentValidationComponent, DocumentConfirmationComponent, DocumentConfirmationParentPageComponent],
   providers: [ DocumentManagementService, DocumentListResolverService]
 })
 export class DocumentArchiveModule { }

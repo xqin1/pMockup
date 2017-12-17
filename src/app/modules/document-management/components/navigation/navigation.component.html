@@ -1,4 +1,4 @@
-<mat-tab-group (selectChange)="tabChange($event)">
+<mat-tab-group (selectChange)="tabChange($event)" [selectedIndex]="navIndex">
   <mat-tab *ngFor="let e of navItems" [disabled]="disableTab(e)">
     <ng-template mat-tab-label>
       <span class="nav-index">

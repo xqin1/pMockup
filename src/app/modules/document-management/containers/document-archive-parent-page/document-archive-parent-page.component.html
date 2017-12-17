@@ -1,7 +1,9 @@
 <div fxLayout="column" class="fixVertical">
   <div fxLayout="row" fxLayoutAlign="space-around center" class="navigation-row">
     <app-navigation
-      [navIndex]="navIndex | async"
+      [navIndex]="navIndex$ | async"
+      [objectId]="objectId$ | async"
+      [userId]="userId$ | async"
       (navIndexChange)="onNavIndexChange($event)">
     </app-navigation>
   </div>

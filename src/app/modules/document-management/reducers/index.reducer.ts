@@ -69,3 +69,15 @@ export const getNavigationIndex = createSelector(
   getDocumentState,
   fromDocument.getNavigationIndex
 );
+export const getSelectedDocument = createSelector(
+  getDocumentState,
+  fromDocument.getSelectedDocument
+);
+export const getObjectId = createSelector(
+  getDocumentState,
+  fromDocument.getObjectId
+);
+export const getUserId = createSelector(
+  getDocumentState,
+  fromDocument.getUserId
+);

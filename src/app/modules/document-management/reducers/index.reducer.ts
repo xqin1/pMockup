@@ -65,3 +65,7 @@ export const getDocumentDataList = createSelector(
   getDocumentState,
   fromDocument.getDocumentDataList
 );
+export const getNavigationIndex = createSelector(
+  getDocumentState,
+  fromDocument.getNavigationIndex
+);

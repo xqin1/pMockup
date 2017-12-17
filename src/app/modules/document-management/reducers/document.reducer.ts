@@ -17,7 +17,7 @@ const initialState: State = {
   documentDataList: null,
   objCode: null,
   selectedDocument: null,
-  navIndex: 1
+  navIndex: 0
 };
 
 export function reducer(state = initialState, action: documentAction.Actions): State {
@@ -35,6 +35,12 @@ export function reducer(state = initialState, action: documentAction.Actions): S
         documentDataList: action.payload
       };
     }
+    case documentAction.NAVIGATION_INDEX_CHANGED: {
+      return {
+        ...state,
+        navIndex: action.payload
+      };
+    }
     default: {
       return state;
     }
@@ -43,5 +49,6 @@ export function reducer(state = initialState, action: documentAction.Actions): S
 export const getDocumentListLoading = (state: State) => state.documentListLoading;
 export const getDocumentListLoaded = (state: State) => state.documentListLoaded;
 export const getDocumentDataList = (state: State) => state.documentDataList;
+export const getNavigationIndex = (state: State) => state.navIndex;
 
 

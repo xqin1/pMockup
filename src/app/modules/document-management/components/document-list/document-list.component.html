@@ -19,41 +19,40 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu" [overlapTrigger]="false">
-            <span
-                  [hidden]="row.documentLinkURL===null">
-              <span matTooltip="Open a new window for document linking" [matTooltipPosition]="after">
-                <a [href]="row.documentLinkURL" target="_blank">
-                <button mat-menu-item>
-                  <mat-icon>repeat</mat-icon>
-                  <span>Link Document</span>
-                </button>
-              </a>
+            <div matTooltip="Open a new window for document linking" matTooltipPosition="right">
+              <span [hidden]="row.documentLinkURL===null">
+                  <a [href]="row.documentLinkURL" target="_blank">
+                  <button mat-menu-item>
+                    <mat-icon>repeat</mat-icon>
+                    <span>Link Document</span>
+                  </button>
+                </a>
               </span>
-            </span>
-            <span matTooltip="Preview what the document looks like when it's archived"
-
-                  [hidden]="!row.previewEligible">
+            </div>
+            <div matTooltip="Preview what the document looks like when it is archived" matTooltipPosition="right">
+              <span [hidden]="!row.previewEligible">
                 <button mat-menu-item>
                   <mat-icon>spellcheck</mat-icon>
                   <span>Preview</span>
                 </button>
-            </span>
-            <span matTooltip="Archive the document"
-
-                  [hidden]="!row.archivalEligible">
-              <button mat-menu-item>
-                <mat-icon>unarchive</mat-icon>
-                <span>Archive</span>
+              </span>
+            </div>
+            <div matTooltip="Archive the document" matTooltipPosition="right">
+              <span [hidden]="!row.archivalEligible">
+                <button mat-menu-item>
+                  <mat-icon>unarchive</mat-icon>
+                  <span>Archive</span>
               </button>
-            </span>
-            <span matTooltip="Re Archive the document, it will bypass eligibility check and not update regulatory data"
-
-                  [hidden]="!row.reArchivalEligible">
-              <button mat-menu-item>
-                <mat-icon>redo</mat-icon>
-                <span>Re Archive</span>
-              </button>
-            </span>
+              </span>
+            </div>
+            <div matTooltip="Re Archive will bypass eligibility check and not update regulatory data" matTooltipPosition="right">
+              <span [hidden]="!row.reArchivalEligible">
+                <button mat-menu-item>
+                  <mat-icon>redo</mat-icon>
+                  <span>Re Archive</span>
+                </button>
+              </span>
+            </div>
           </mat-menu>
         </ng-template>
       </ngx-datatable-column>

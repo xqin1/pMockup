@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as doucmentAction from 'app/modules/document-management/actions/document.action';
 import * as fromDocument from 'app/modules/document-management/reducers/index.reducer';
@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { DocumentList} from '@app/modules/document-management/model/document-list.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MatSlideToggleChange} from '@angular/material';
+import {MatSlideToggleChange, MatStepper} from '@angular/material';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 
 @Component({

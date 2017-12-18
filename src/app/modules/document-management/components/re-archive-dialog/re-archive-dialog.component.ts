@@ -11,7 +11,7 @@ export class ReArchiveDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ReArchiveDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: DocumentData
+    @Inject(MAT_DIALOG_DATA) public data: DocumentData
   ) { }
 
   ngOnInit() {

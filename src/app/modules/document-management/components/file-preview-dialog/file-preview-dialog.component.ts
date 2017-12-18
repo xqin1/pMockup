@@ -10,7 +10,7 @@ export class FilePreviewDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<FilePreviewDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {

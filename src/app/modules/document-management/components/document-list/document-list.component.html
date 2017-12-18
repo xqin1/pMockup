@@ -56,12 +56,19 @@
           </mat-menu>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column prop="documentName" [flexGrow]="2">
+      <ngx-datatable-column prop="documentName" [flexGrow]="3">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span (click)="sort()">Document Name</span>
         </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <a [href]="getShowDocumentLink(row)" target="_blank">{{value}}</a>
+          <span>
+            <a [href]="getShowDocumentLink(row)" target="_blank">
+              {{value}}
+              <img src="assets/archived.png" *ngIf="row.archivalStatus==='Archived'" class="archived-img"/>
+            </a>
+
+          </span>
+
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column prop="lastUpdatedDate" [flexGrow]="1">

@@ -12,8 +12,8 @@ import { of } from 'rxjs/observable/of';
 import * as fromDocument from '@app/modules/document-management/reducers/document.reducer';
 import * as documentAction from '@app/modules/document-management/actions/document.action';
 import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
-import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {DocumentListLoadPayload} from '@app/modules/document-management/model/document-list-load-payload.model';
+import {DocumentConfig} from '@app/modules/document-management/config';
 
 @Injectable()
 export class DocumentListResolverService implements Resolve<any> {
@@ -39,6 +39,8 @@ export class DocumentListResolverService implements Resolve<any> {
               this.store.dispatch(new documentAction.Document_List_Loading(true));
               this.pefService.getDocumentListByObjectID(objectId)
                 .subscribe( results => {
+                  // TODO: comment the following line when deploying
+                  results = DocumentConfig.fakeDocumentList;
                   const payload = new DocumentListLoadPayload();
                   payload.documentListData = this.documentManagementService.processDocumentList(results, userId);
                   payload.objId = objectId;

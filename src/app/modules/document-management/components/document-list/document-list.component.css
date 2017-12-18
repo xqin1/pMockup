@@ -45,3 +45,7 @@ blockquote p {
 a {
   text-decoration: none;
 }
+
+.archived-img {
+  margin-left: 5px;
+}

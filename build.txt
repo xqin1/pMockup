@@ -1,0 +1,53 @@
+for local development using nginx server:
+ng build --watch
+
+for local deployment
+ng build --environment localwl --bh /panoramaUI/
+
+
+for PPS
+ng build --environment pps --bh /PEF_nda/
+
+http://localhost:7001/panoramaUI/#/document-management/588a2bdd0002f5cf45eb34f0fe284c3a/document-list
+
+http://panoramaams-pps.preprod.fda.gov/PEF_nda/#/document-management/588a2bdd0002f5cf45eb34f0fe284c3a/document-list
+
+
+
+http://panoramaams-pps.preprod.fda.gov/PanoramaExtendedFramework/extendedform/docmgt/bulkarchiving/index?sessionId=f1f1d9fa7bf2401b9d38279a04bce27e&userId=555b623a00007f7603d0f0a9d389926f&objectId=59ba91ee004ea6f6017cee244808ea63
+
+
+sampel project:
+http://panoramaams-pps.preprod.fda.gov/task/view?ID=59ba91ee004ea6f6017cee244808ea63&activeTab=list-task-documents
+http://panoramaams.preprod.fda.gov/task/view?ID=58e7e113001899de5ab40e11ad43a99a&activeTab=list-task-documents
+
+//one document ready for archive
+http://panoramaams.preprod.fda.gov/task/view?ID=59a9b249017b286fe062758bb0a640b5
+
+pps url:
+http://panoramaams-pps.preprod.fda.gov/PEF_nda/#/document-archive/document-list/59ba91ee004ea6f6017cee244808ea63/555b623a00007f7603d0f0a9d389926f
+
+local url:
+pps
+http://localhost:9092/#/document-archive/document-list/59ba91ee004ea6f6017cee244808ea63/555b623a00007f7603d0f0a9d389926f
+
+//preprod
+http://localhost:9092/#/document-archive/document-list/58e7e113001899de5ab40e11ad43a99a/555b6319000d129c8b3dbcd5478b52a2
+http://localhost:9092/#/document-archive/document-list/59a9b249017b286fe062758bb0a640b5/555b6319000d129c8b3dbcd5478b52a2
+
+http://panoramaams.preprod.fda.gov/PanoramaExtendedFramework/extendedform/docmgt/bulkarchiving/index?sessionId=48f0f71c30734fb5801cab26122fa4c1&userId=555b6319000d129c8b3dbcd5478b52a2&objectId=58e7e113001899de5ab40e11ad43a99a
+
+
+//local db update
+//to preprod
+update EFF_CONFIGURATION set property_string_value='Xx2ABdDx'
+where property_name='workfront.darrts.password';
+update EFF_CONFIGURATION set property_string_value='panoramaams.preprod.fda.gov'
+where property_name='workfront.host';
+commit;
+
+update EFF_CONFIGURATION set property_string_value='http://panoramaams.preprod.fda.gov/PanoramaDocMgmt'
+where property_name='document.management.service.base.url';
+update EFF_CONFIGURATION set property_string_value='http://panoramaams-pps.preprod.fda.gov/PanoramaDocMgmt/document/archive?'
+where property_name='bulkarchiving.webhooks.service.base.url';
+commit;

@@ -15,10 +15,13 @@
       <!-- Row Detail Template -->
       <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-          <div style="padding-left:35px;">
-            <div><strong>will show custom form data and regulatory updates</strong></div>
-            <div>{{row.archivalStatus}}, {{row.documentName}}</div>
-          </div>
+          <!--<div style="padding-left:35px;">-->
+            <!--<div><strong>will show custom form data and regulatory updates</strong></div>-->
+            <!--<div>{{row.archivalStatus}}, {{row.documentName}}</div>-->
+          <!--</div>-->
+          <app-document-detail
+          >
+          </app-document-detail>
         </ng-template>
       </ngx-datatable-row-detail>
 

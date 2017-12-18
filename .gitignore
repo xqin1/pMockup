@@ -43,3 +43,6 @@ Thumbs.db
 
 #svn
 /.svn
+
+#war file
+/target

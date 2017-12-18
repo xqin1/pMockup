@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromDocument from 'app/modules/document-management/reducers/index.reducer';
 import {Observable} from 'rxjs/Observable';
@@ -18,6 +18,7 @@ export class DocumentListComponent implements OnInit {
   documentListLoading$: Observable<boolean>;
   @Input() documentDataList: DocumentData[];
   @Output() documentArchive= new EventEmitter<DocumentData>();
+  @ViewChild('myTable') table: any;
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
@@ -49,6 +50,15 @@ export class DocumentListComponent implements OnInit {
       height: '600px',
       data: {document: doc, pdfContent: 'pdfContent'}
     });
+  }
+
+  toggleExpandRow(row) {
+    console.log('Toggled Expand Row!', row);
+    this.table.rowDetail.toggleExpandRow(row);
+  }
+
+  onDetailToggle(event) {
+    console.log('Detail Toggled', event);
   }
   ngOnInit() {
   }

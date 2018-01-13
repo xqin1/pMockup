@@ -1,6 +1,13 @@
 <app-document-list
+  [documentListLoading] = "documentListLoading$ | async"
   [documentDataList] = "documentDataList$ | async"
-  (documentArchive) = "onDocumentArchive($event)">
+  [documentRegulatoryActionList] = "documentRegulatoryActionList$ | async"
+  [selectedDocumentID] = "selectedDocumentID$ | async"
+
+  (documentValidate) = "onDocumentValidate($event)"
+  (documentSelected) = "onDocumentSelected($event)"
+  (documentRegulatoryActionUpdated) = "onDocumentRegulatoryActionUpdated($event)">
+
 </app-document-list>
 
 

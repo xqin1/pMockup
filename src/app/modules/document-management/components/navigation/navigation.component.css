@@ -1,11 +1,18 @@
 .nav-index {
-  font-weight:600;
-  font-size: 32px;
-  margin-right: 15px;
+  font-size: 1.5em;
+  margin-right: 10px;
 }
 .nav-name {
-  font-wdith: 500;
-  font-size: 20px;
+  font-size: 14px;
   margin-right: 10px;
+}
+
+.nav-active {
+  background-color: #80D8FF;
+}
+
+/deep/ .mat-tab-label mat-ripple mat-tab-label-active {
+  background-color: #80D8FF !important;
+
 }
 

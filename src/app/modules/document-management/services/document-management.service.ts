@@ -16,24 +16,28 @@ export class DocumentManagementService {
   constructor() { }
 
   processDocumentList(documentList: DocumentList, userId: string): DocumentData[] {
-    this.userId = userId;
-    this.projectStatus = documentList.documents[0]["project"]["status"];
-    if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
-      this.projectClosed = true;
+    if(documentList.documents.length > 0) {
+      this.userId = userId;
+      this.projectStatus = documentList.documents[0]["project"]["status"];
+      if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
+        this.projectClosed = true;
+      }
+      documentList.documents.forEach(doc => {
+        const documentData: DocumentData = new DocumentData();
+        documentData.documentID = doc["id"];
+        documentData.documentName = `${doc["name"]}.${doc["currentVersion"]['ext']}`;
+        // documentData.lastUpdatedDate =  moment(new Date(doc['lastModDate'])).format("MM/DD/YYYY HH:mm:ss");
+        documentData.lastUpdatedDate = new Date(doc['lastModDate']);
+
+        documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
+        this.setDocumentEligibility(documentData, documentList.eligibility, doc);
+        this.setDocumentApprovers(documentData, doc);
+        documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);
+        documentData.previewEligible = this.setDocumentPreview(documentData, doc);
+        documentData.actionEligible = this.setDocumentAction(documentData);
+        this.documentDataList.push(documentData);
+      });
     }
-    documentList.documents.forEach(doc => {
-      const documentData: DocumentData = new DocumentData();
-      documentData.documentID = doc["id"];
-      documentData.documentName = `${doc["name"]}.${doc["currentVersion"]['ext']}`;
-      documentData.lastUpdatedDate =  moment(new Date(doc['lastModDate'])).format("MM/DD/YYYY HH:mm:ss");
-      documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
-      this.setDocumentEligibility(documentData, documentList.eligibility, doc);
-      this.setDocumentApprovers(documentData, doc);
-      documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);
-      documentData.previewEligible = this.setDocumentPreview(documentData, doc);
-      documentData.actionEligible = this.setDocumentAction(documentData);
-      this.documentDataList.push(documentData);
-    });
     return this.documentDataList;
   }
   setDocumentAction(document: DocumentData): boolean {
@@ -43,7 +47,7 @@ export class DocumentManagementService {
     }
     return result;
   }
-  setDocumentPreview(document: DocumentData, doc: object): boolean{
+  setDocumentPreview(document: DocumentData, doc: object): boolean {
     let result = false;
     const ext = doc["currentVersion"]['ext'];
     if (DocumentConfig.previewEligibleType.includes(ext)) {
@@ -121,6 +125,41 @@ export class DocumentManagementService {
       });
     }
     return customFormData;
+  }
+  setRegulatoryActionData(regulatoryActions: ValuePair[]): ValuePair[] {
+    const regulatoryActionData: ValuePair[] = [];
+    if (regulatoryActions !== null) {
+      const regulatoryActionMap: ValuePair[] = regulatoryActions.sort();
+      const actionsWithoutPrefix: string[] = [];
+      const regulatoryActionMap2: Object[] = [];
+      regulatoryActionMap.forEach(function (item) {
+        for (let action in item) {
+          const value = item[action];
+          if (action.substring(0, 3) === "DE:") {
+            action = action.substring(3);
+          }
+          actionsWithoutPrefix.push(action);
+          const obj = {};
+          obj[action] = value;
+          regulatoryActionMap2.push(obj);
+        }
+      });
+      actionsWithoutPrefix.sort().forEach(sortAction => {
+        regulatoryActionMap2.forEach(item => {
+          for (const action in item) {
+            if (action === sortAction) {
+              if (item[action] !== "" && item[action] !== null && !DocumentConfig.regulatoryActionExcludeFields.includes(action)) {
+                const regulatoryActionObj: ValuePair = new ValuePair();
+                regulatoryActionObj.name = action;
+                regulatoryActionObj.value = this.parseDateField(action, item[action]);
+                regulatoryActionData.push(regulatoryActionObj);
+              }
+            }
+          }
+        });
+      });
+    }
+    return regulatoryActionData;
   }
   parseDateField(fieldName: string, fieldValue: string): string {
     let result = null;

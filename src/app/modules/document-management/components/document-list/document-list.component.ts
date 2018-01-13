@@ -1,13 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromDocument from 'app/modules/document-management/reducers/index.reducer';
-import {Observable} from 'rxjs/Observable';
-import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, SimpleChange, OnChanges} from '@angular/core';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {MatDialog} from '@angular/material';
 import { environment} from '@env/environment';
 import {ReArchiveDialogComponent} from '@app/modules/document-management/components/re-archive-dialog/re-archive-dialog.component';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
+import { PEFService} from '@app/core/services/pef.service';
+import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
+import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 
 @Component({
   selector: 'app-document-list',
@@ -15,24 +14,29 @@ import { FilePreviewDialogComponent} from '@app/modules/document-management/comp
   styleUrls: ['./document-list.component.css']
 })
 export class DocumentListComponent implements OnInit {
-  documentListLoading$: Observable<boolean>;
+  @Input() documentListLoading: boolean;
   @Input() documentDataList: DocumentData[];
-  @Output() documentArchive= new EventEmitter<DocumentData>();
+  @Input() documentRegulatoryActionList: DocumentRegulatoryActionPayload[];
+  @Input() selectedDocumentID: string;
+  @Output() documentSelected= new EventEmitter<String>();
+  @Output() documentValidate = new EventEmitter<String>();
+  @Output() documentRegulatoryActionUpdated = new EventEmitter<DocumentRegulatoryActionPayload>();
+
   @ViewChild('myTable') table: any;
   constructor(
-    private documentManagementService: DocumentManagementService,
-    private store: Store<fromDocument.State>,
-    public dialog: MatDialog
-) {
-    this.documentListLoading$ = this.store.select((fromDocument.getDocumentListLoading));
-  }
+    public dialog: MatDialog,
+    private pefService: PEFService,
+    private documentManagementService: DocumentManagementService
+) {}
+
+  getRegulatoryActionData(documentID: string){
+    return this.documentRegulatoryActionList.filter((d) => {
+      return d.documentID === documentID;
+    })[0];
+}
 
   getShowDocumentLink(row: DocumentData) {
     return `${environment.workfrontHost}/document/view?ID=${row.documentID}`;
-  }
-
-  archive(data: DocumentData) {
-    this.documentArchive.emit(data);
   }
   reArchive(doc: DocumentData): void {
     const dialogRef = this.dialog.open(ReArchiveDialogComponent, {
@@ -53,12 +57,30 @@ export class DocumentListComponent implements OnInit {
   }
 
   toggleExpandRow(row) {
-    console.log('Toggled Expand Row!', row);
-    this.table.rowDetail.toggleExpandRow(row);
+    if (this.getRegulatoryActionData(row.documentID)) {
+      this.table.rowDetail.toggleExpandRow(row);
+    } else {
+      this.pefService.getRegulatoryActionByDocumentID(row.documentID)
+        .subscribe( result => {
+          const ra = new DocumentRegulatoryActionPayload();
+          ra.documentID = row.documentID;
+          ra.regulatoryActions = this.documentManagementService.setRegulatoryActionData(result.regulatoryActions);
+          this.documentRegulatoryActionUpdated.emit(ra);
+           this.table.rowDetail.toggleExpandRow(row);
+        });
+    }
   }
 
   onDetailToggle(event) {
     console.log('Detail Toggled', event);
+  }
+  documentSelectionChange(data: DocumentData) {
+    this.documentSelected.emit(data.documentID);
+  }
+  validate() {
+    console.log("validate");
+    console.log(this.selectedDocumentID);
+    this.documentValidate.emit(this.selectedDocumentID);
   }
   ngOnInit() {
   }

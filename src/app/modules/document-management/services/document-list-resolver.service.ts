@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { PEFService} from '@app/core/services/pef.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
- import { forkJoin } from 'rxjs/observable/forkJoin';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 import * as fromDocument from '@app/modules/document-management/reducers/document.reducer';
 import * as documentAction from '@app/modules/document-management/actions/document.action';
 import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';

@@ -1,9 +1,18 @@
+
+<div class="instruction" *ngIf="documentListLoading">
+  Loading Data......
+</div>
 <div class="document-list-page" *ngIf="documentDataList">
+  <div class="instruction">
+    <p>
+      Select the document you would like to archive
+    </p>
+  </div>
   <div class="document-list-table">
     <ngx-datatable #myTable
       class="material striped document-list-datatable"
       [columnMode]="'flex'"
-      [headerHeight]="50"
+      [headerHeight]="35"
       [footerHeight]="30"
       [rowHeight]="'auto'"
       [rows]="documentDataList"
@@ -13,61 +22,28 @@
       ]"
     >
       <!-- Row Detail Template -->
-      <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
+      <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
         <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
           <!--<div style="padding-left:35px;">-->
             <!--<div><strong>will show custom form data and regulatory updates</strong></div>-->
             <!--<div>{{row.archivalStatus}}, {{row.documentName}}</div>-->
           <!--</div>-->
-          <app-document-detail
-          >
+          <app-document-detail [documentData]="row" [regulatoryData]=getRegulatoryActionData(row.documentID)>
+
           </app-document-detail>
         </ng-template>
       </ngx-datatable-row-detail>
 
       <!-- Column Templates -->
-      <ngx-datatable-column name="Actions" [flexGrow]="1">
-        <ng-template let-column="column" ngx-datatable-header-template>Actions</ng-template>
+      <ngx-datatable-column name="Actions" [flexGrow]="0.5">
+        <ng-template let-column="column" ngx-datatable-header-template></ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <button mat-icon-button [matMenuTriggerFor]="menu" [hidden]="!row.actionEligible">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu" [overlapTrigger]="false">
-            <div matTooltip="Open a new window for document linking" matTooltipPosition="right">
-              <span [hidden]="row.documentLinkURL===null">
-                  <a [href]="row.documentLinkURL" target="_blank">
-                  <button mat-menu-item>
-                    <mat-icon>repeat</mat-icon>
-                    <span>Link Document</span>
-                  </button>
-                </a>
-              </span>
-            </div>
-            <div matTooltip="Preview what the document looks like when it is archived" matTooltipPosition="right">
-              <span [hidden]="!row.previewEligible">
-                <button mat-menu-item (click)="preview(row)">
-                  <mat-icon>spellcheck</mat-icon>
-                  <span>Preview</span>
-                </button>
-              </span>
-            </div>
-            <div matTooltip="Archive the document" matTooltipPosition="right">
-              <span [hidden]="!row.archivalEligible">
-                <button mat-menu-item (click)="archive(row)">
-                  <mat-icon>unarchive</mat-icon>
-                  <span>Archive</span>
-              </button>
-              </span>
-            </div>
-            <div matTooltip="Re Archive will bypass eligibility check and not update regulatory data" matTooltipPosition="right">
-              <span [hidden]="!row.reArchivalEligible">
-                <button mat-menu-item (click)="reArchive(row)">
-                  <mat-icon>redo</mat-icon>
-                  <span>Re Archive</span>
-                </button>
-              </span>
-            </div>
-          </mat-menu>
+          <div class="radio-selection" *ngIf="row.archivalEligible||row.reArchivalEligible">
+            <mat-radio-button name="archiveSelection" [checked]="false"
+                              (change)="documentSelectionChange(row)">
+
+            </mat-radio-button>
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column [flexGrow]="0">
@@ -91,14 +67,15 @@
               {{value}}
               <img src="assets/archived.png" *ngIf="row.archivalStatus==='Archived'" class="archived-img"/>
             </a>
-
           </span>
-
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column prop="lastUpdatedDate" [flexGrow]="1">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span (click)="sort()">Last Modified</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value | date: "MM/dd/yyyy HH:mm:ss"}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column prop="approvers" [flexGrow]="2">
@@ -118,5 +95,15 @@
       </ngx-datatable-column>
     </ngx-datatable>
   </div>
+  <div class="document-list-action">
+    <span>
+      <button mat-button [disabled]="true">Previous Step</button>
+      <button mat-raised-button color="accent"
+              (click)="validate()" [disabled]="selectedDocumentID === null">
+        Next Step
+      </button>
+    </span>
+  </div>
 </div>
+
 

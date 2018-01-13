@@ -3,7 +3,7 @@ import {ValuePair} from '@app/modules/document-management/model/value-pair.model
 export class DocumentData {
   documentID: string;
   documentName: string;
-  lastUpdatedDate: string;
+  lastUpdatedDate: Date;
   approvers: string[];
   documentLinkURL: string;
   archivalStatus: string;
@@ -12,5 +12,4 @@ export class DocumentData {
   previewEligible: boolean;
   actionEligible: boolean;
   customFormData: ValuePair[];
-  regulatoryData: ValuePair[];
 }

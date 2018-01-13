@@ -6,6 +6,8 @@ import {Observable} from 'rxjs/Observable';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
+import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
+import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 
 @Component({
   selector: 'app-document-list-parent',
@@ -15,6 +17,8 @@ import {DocumentData} from '@app/modules/document-management/model/documant-data
 export class DocumentListParentComponent implements OnInit {
   documentListLoading$: Observable<boolean>;
   documentDataList$: Observable<DocumentData[]>;
+  documentRegulatoryActionList$: Observable<DocumentRegulatoryActionPayload[]>;
+  selectedDocumentID$: Observable<string>;
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
@@ -23,13 +27,20 @@ export class DocumentListParentComponent implements OnInit {
 ) {
     this.documentListLoading$ = this.store.select((fromDocument.getDocumentListLoading));
     this.documentDataList$ = this.store.select(fromDocument.getDocumentDataList);
+    this.documentRegulatoryActionList$ = this.store.select(fromDocument.getDocumentRegulatoryActionList);
+    this.selectedDocumentID$ = this.store.select(fromDocument.getSelectedDocumentID);
   }
 
   ngOnInit() {
   }
-  onDocumentArchive(data: DocumentData) {
+  onDocumentSelected(documentID: string) {
+    this.store.dispatch(new documentAction.Document_Selected(documentID));
+  }
+  onDocumentValidate(documentID: string) {
     this.store.dispatch(new documentAction.Navigation_Index_Changed(1));
-    this.store.dispatch(new documentAction.Document_Selected(data));
-    this.router.navigate(['/document-archive', 'validation', data.documentID]);
+    this.router.navigate(['/document-archive', 'validation', documentID]);
+  }
+  onDocumentRegulatoryActionUpdated(ra: DocumentRegulatoryActionPayload) {
+    this.store.dispatch(new documentAction.Document_Regulatory_Action_Updated(ra));
   }
 }

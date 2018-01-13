@@ -1,15 +1,17 @@
 import * as documentAction from '@app/modules/document-management/actions/document.action.ts';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
+import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 
 
 export interface State {
   documentListLoading: boolean;
   documentListLoaded: boolean;
   documentDataList: DocumentData[];
+  documentRegulatoryActionList: DocumentRegulatoryActionPayload[];
   objId: string;
   objCode: string;
   userId: string;
-  selectedDocument: DocumentData;
+  selectedDocumentID: string;
   navIndex: number;
 }
 
@@ -17,10 +19,11 @@ const initialState: State = {
   documentListLoading: true,
   documentListLoaded: false,
   documentDataList: null,
+  documentRegulatoryActionList: [],
   objId: null,
   objCode: null,
   userId: null,
-  selectedDocument: null,
+  selectedDocumentID: null,
   navIndex: 0
 };
 
@@ -45,7 +48,7 @@ export function reducer(state = initialState, action: documentAction.Actions): S
     case documentAction.DOCUMENT_SELECTED: {
       return {
         ...state,
-        selectedDocument: action.payload
+        selectedDocumentID: action.payload
       };
     }
     case documentAction.NAVIGATION_INDEX_CHANGED: {
@@ -53,6 +56,14 @@ export function reducer(state = initialState, action: documentAction.Actions): S
         ...state,
         navIndex: action.payload
       };
+    }
+    case documentAction.DOCUMENT_REGULATORY_ACTION_UPDATED: {
+        const newDocumentRegulatoryActionList = [].concat(state.documentRegulatoryActionList);
+        newDocumentRegulatoryActionList.push(action.payload);
+        return {
+          ...state,
+          documentRegulatoryActionList: newDocumentRegulatoryActionList
+        };
     }
     default: {
       return state;
@@ -62,9 +73,15 @@ export function reducer(state = initialState, action: documentAction.Actions): S
 export const getDocumentListLoading = (state: State) => state.documentListLoading;
 export const getDocumentListLoaded = (state: State) => state.documentListLoaded;
 export const getDocumentDataList = (state: State) => state.documentDataList;
+export const getDocumentRegulatoryActionList = (state: State) => state.documentRegulatoryActionList;
 export const getNavigationIndex = (state: State) => state.navIndex;
-export const getSelectedDocument = (state: State) => state.selectedDocument;
+export const getSelectedDocumentID = (state: State) => state.selectedDocumentID;
 export const getObjectId = (state: State) => state.objId;
 export const getUserId = (state: State) => state.userId;
+export const getSelectedDocument = (state: State) => {
+  return state.documentDataList.filter((d) => {
+     return d.documentID === state.selectedDocumentID;
+  })[0];
+};
 
 

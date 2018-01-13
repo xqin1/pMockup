@@ -1,6 +1,8 @@
 .fixVertical  {
   flex: 1 1 100%;
   min-height:100vh;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .flex-container{

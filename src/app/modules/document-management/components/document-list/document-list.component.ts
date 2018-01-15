@@ -48,7 +48,7 @@ export class DocumentListComponent implements OnInit {
       console.log(result);
     });
   }
-  preview(doc: DocumentData) {
+  showPDFPreview(doc: DocumentData) {
     this.dialog.open(FilePreviewDialogComponent, {
       width: '800px',
       height: '600px',

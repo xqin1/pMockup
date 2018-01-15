@@ -11,7 +11,7 @@
   background-color: #bcbcbc !important;
 }
 .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
-  background-color: #d7d7d7;
+  background-color: #80D8FF;
 }
 .ngx-datatable.material .datatable-header .datatable-header-cell{
   font-weight: 600 !important;

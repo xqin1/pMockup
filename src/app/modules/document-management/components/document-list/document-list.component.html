@@ -39,7 +39,7 @@
         <ng-template let-column="column" ngx-datatable-header-template></ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <div class="radio-selection" *ngIf="row.archivalEligible||row.reArchivalEligible">
-            <mat-radio-button name="archiveSelection" [checked]="false"
+            <mat-radio-button name="archiveSelection" [checked]="row.documentID===selectedDocumentID"
                               (change)="documentSelectionChange(row)">
 
             </mat-radio-button>
@@ -88,6 +88,21 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
+      <ngx-datatable-column [flexGrow]="1">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span>PDF Preview</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span>
+            <a (click)="showPDFPreview(row)">
+              <img src="assets/pdf_preview.png"
+                   *ngIf="row.previewEligible"
+                   class="preview-img"
+                   ng-click="showPDFPreview(row)"/>
+            </a>
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column prop="archivalStatus"  [flexGrow]="2">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span (click)="sort()">Archive Status</span>
@@ -97,7 +112,7 @@
   </div>
   <div class="document-list-action">
     <span>
-      <button mat-button [disabled]="true">Previous Step</button>
+      <!--<button mat-button [disabled]="true">Previous Step</button>-->
       <button mat-raised-button color="accent"
               (click)="validate()" [disabled]="selectedDocumentID === null">
         Next Step

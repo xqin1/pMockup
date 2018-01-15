@@ -50,6 +50,11 @@ a {
   margin-left: 5px;
 }
 
+.preview-img {
+  background:transparent;
+  height: 30px;
+  cursor:pointer;
+}
 .instruction{
   padding-top: 10px;
 }

@@ -1,4 +1,15 @@
 .document-confirmation-card {
   width: 90%;
-  height: 600px
+  min-height: 250px;
+  margin-top: 15px;
+}
+
+.confirmation-title{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.confirmation-subtitle{
+  font-size: 14px;
+  font-widht:500;
 }

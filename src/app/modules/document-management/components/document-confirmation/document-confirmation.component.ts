@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
+import {Component, Input, OnInit} from '@angular/core';
+import { Location} from '@angular/common';
 
 @Component({
   selector: 'app-document-confirmation',
@@ -7,15 +7,21 @@ import {DocumentData} from '@app/modules/document-management/model/documant-data
   styleUrls: ['./document-confirmation.component.css']
 })
 export class DocumentConfirmationComponent implements OnInit {
-  @Input() selectedDocument: DocumentData;
-  @Output() doneArchive = new EventEmitter<boolean>();
-  constructor() { }
+  @Input() userID: string;
+  @Input() objID: string;
+  location: Location;
+  constructor(
+    location: Location
+  ) {
+    this.location = location;
+  }
 
   ngOnInit() {
   }
 
-  done() {
-    this.doneArchive.emit(true);
+  checkStatus() {
+    console.log(window.location.origin + "/#/document-archive/document-list/" + this.objID + "/" + this.userID)
+    this.location.go("document-archive/document-list/" + this.objID + "/" + this.userID);
+    window.location.reload();
   }
-
 }

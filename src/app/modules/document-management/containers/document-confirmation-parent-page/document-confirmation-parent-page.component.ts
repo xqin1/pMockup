@@ -12,24 +12,17 @@ import {DocumentData} from '@app/modules/document-management/model/documant-data
   styleUrls: ['./document-confirmation-parent-page.component.css']
 })
 export class DocumentConfirmationParentPageComponent implements OnInit {
-  selectedDocument$: Observable<DocumentData>;
+  userID$: Observable<string>;
+  objID$: Observable<string>;
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
-    private route: ActivatedRoute,
-    private router: Router
   ) {
-    this.selectedDocument$ = this.store.select((fromDocument.getSelectedDocument));
+    this.userID$ = this.store.select((fromDocument.getUserId));
+    this.objID$ = this.store.select((fromDocument.getObjectId));
   }
 
   ngOnInit() {
-  }
-
-  onDoneArchive(result: boolean) {
-    if (result) {
-      this.store.dispatch(new documentAction.Navigation_Index_Changed(0));
-    }
-
   }
 
 }

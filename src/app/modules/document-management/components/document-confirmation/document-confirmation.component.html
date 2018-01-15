@@ -1,14 +1,19 @@
 <mat-card class="document-confirmation-card">
   <mat-card-header>
-    <mat-card-title>Archive Confirmation</mat-card-title>
+    <mat-card-title>
+      <div class="confirmation-title">
+        The document you have selected is now being archived.
+      </div>
+    </mat-card-title>
     <mat-card-subtitle>
-      Document: {{selectedDocument.documentName}}
+      <div class="confirmation-subtitle">
+        To view document archival status please click on 'Check Status' button
+      </div>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-      This document was sent to archive successfully.
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="done()">Done</button>
+    <button mat-raised-button color="accent" (click)="checkStatus()">Check Status</button>
   </mat-card-actions>
 </mat-card>

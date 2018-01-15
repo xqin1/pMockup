@@ -19,6 +19,9 @@ export class NavigationComponent implements OnInit {
     private router: Router
   ) { }
   disableTab(nav: Navigation): boolean {
+    if (this.navIndex === 2 && nav.index < this.navIndex){
+      return true;
+    }
     if (nav.index > this.navIndex) {
       return true;
     }else {

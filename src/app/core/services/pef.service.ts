@@ -5,6 +5,7 @@ import { ExceptionService } from '@app/core/services/exception.service';
 import { environment } from '../../../environments/environment';
 import {RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
 import {LoggerService} from '@app/core/services/logger.service';
+import {ArchiveResponse} from '@app/modules/document-management/model/archive-response.model';
 
 
 @Injectable()
@@ -35,6 +36,18 @@ export class PEFService {
         finalize(() => {
           // do something
           this.logger.log("done with retrieving regulatory data");
+        })
+      );
+  }
+  archiveDocument(documentID: string, userID: string) {
+    return this.http
+      .get<ArchiveResponse>(`${environment.pefDocumentArchiveURL}/archiveDocument?documentID=${documentID}&userSessionID=null&userID=${userID}`)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          // do something
+          this.logger.log("done with archiving document");
         })
       );
   }

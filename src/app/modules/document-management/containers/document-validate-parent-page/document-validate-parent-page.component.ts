@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
+import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 
 @Component({
   selector: 'app-document-validate-parent-page',
@@ -14,6 +15,8 @@ import {DocumentData} from '@app/modules/document-management/model/documant-data
 })
 export class DocumentValidateParentPageComponent implements OnInit {
   selectedDocument$: Observable<DocumentData>;
+  selectedRegulatoryData$: Observable<DocumentRegulatoryActionPayload>;
+  userID: Observable<string>;
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
@@ -21,7 +24,8 @@ export class DocumentValidateParentPageComponent implements OnInit {
     private router: Router
   ) {
     this.selectedDocument$ = this.store.select((fromDocument.getSelectedDocument));
-
+    this.selectedRegulatoryData$ = this.store.select(fromDocument.getSelectedRegulatoryAction);
+    this.userID = this.store.select((fromDocument.getUserId));
   }
 
   ngOnInit() {

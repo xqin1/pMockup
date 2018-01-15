@@ -69,6 +69,7 @@ export class DocumentManagementService {
     document.archivalEligible = eligibility.archivalEligible;
     if (document.archivalStatus === "Archived" && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
       document.reArchivalEligible = true;
+      document.archivalStatus += " - Ready to ReArchive";
     }else {
       document.reArchivalEligible = false;
     }

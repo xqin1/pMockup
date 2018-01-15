@@ -1,4 +1,14 @@
 .document-validation-card {
   width: 90%;
-  height: 600px
+  min-height: 250px;
+  margin-top: 15px;
+}
+.validation-title{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.validation-document{
+  font-size: 14px;
+  font-widht:500;
 }

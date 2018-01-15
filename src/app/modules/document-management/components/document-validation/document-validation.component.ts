@@ -1,8 +1,10 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {MatDialog} from '@angular/material';
-import {ReArchiveDialogComponent} from '@app/modules/document-management/components/re-archive-dialog/re-archive-dialog.component';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
+import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
+import {environment} from '@env/environment';
+import { PEFService} from '@app/core/services/pef.service';
 
 
 @Component({
@@ -12,13 +14,19 @@ import { FilePreviewDialogComponent} from '@app/modules/document-management/comp
 })
 export class DocumentValidationComponent implements OnInit {
   @Input() selectedDocument: DocumentData;
+  @Input() selectedRegulatoryData: DocumentRegulatoryActionPayload;
+  @Input() userID: string;
   @Output() cancelArchive = new EventEmitter<boolean>();
   @Output() archiveDocument = new EventEmitter<DocumentData>();
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private pefService: PEFService
   ) { }
 
   ngOnInit() {
+  }
+  getShowDocumentLink(documentID: string) {
+    return `${environment.workfrontHost}/document/view?ID=${documentID}`;
   }
   preview() {
     this.dialog.open(FilePreviewDialogComponent, {
@@ -31,6 +39,10 @@ export class DocumentValidationComponent implements OnInit {
     this.cancelArchive.emit(true);
   }
   archive() {
-    this.archiveDocument.emit(this.selectedDocument);
+    this.pefService.archiveDocument(this.selectedDocument.documentID, this.userID)
+      .subscribe( result => {
+        console.log(result);
+        this.archiveDocument.emit(this.selectedDocument);
+      });
   }
 }

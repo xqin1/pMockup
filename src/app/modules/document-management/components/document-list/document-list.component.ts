@@ -29,7 +29,7 @@ export class DocumentListComponent implements OnInit {
     private documentManagementService: DocumentManagementService
 ) {}
 
-  getRegulatoryActionData(documentID: string){
+  getRegulatoryActionData(documentID: string) {
     return this.documentRegulatoryActionList.filter((d) => {
       return d.documentID === documentID;
     })[0];
@@ -80,7 +80,23 @@ export class DocumentListComponent implements OnInit {
   validate() {
     console.log("validate");
     console.log(this.selectedDocumentID);
-    this.documentValidate.emit(this.selectedDocumentID);
+    if (this.isDocumentRegulatoryDataExist(this.selectedDocumentID)) {
+      this.documentValidate.emit(this.selectedDocumentID);
+    } else {
+      this.pefService.getRegulatoryActionByDocumentID(this.selectedDocumentID)
+        .subscribe( result => {
+          const ra = new DocumentRegulatoryActionPayload();
+          ra.documentID = this.selectedDocumentID;
+          ra.regulatoryActions = this.documentManagementService.setRegulatoryActionData(result.regulatoryActions);
+          this.documentRegulatoryActionUpdated.emit(ra);
+          this.documentValidate.emit(this.selectedDocumentID);
+        });
+    }
+  }
+  isDocumentRegulatoryDataExist(documentID: string): boolean {
+    return this.documentRegulatoryActionList.filter((r) => {
+      return r.documentID === documentID;
+    }).length === 1;
   }
   ngOnInit() {
   }

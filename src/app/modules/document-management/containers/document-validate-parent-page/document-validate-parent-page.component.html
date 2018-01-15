@@ -1,5 +1,7 @@
 <app-document-validation
   [selectedDocument]="selectedDocument$ | async"
+  [selectedRegulatoryData]="selectedRegulatoryData$ | async"
+  [userID]="userID | async"
   (cancelArchive)="onCancelArchive($event)"
   (archiveDocument)="onArchiveDocument($event)">
 

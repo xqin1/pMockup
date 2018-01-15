@@ -83,5 +83,10 @@ export const getSelectedDocument = (state: State) => {
      return d.documentID === state.selectedDocumentID;
   })[0];
 };
+export const getSelectedRegulatoryAction = (state: State) => {
+  return state.documentRegulatoryActionList.filter((d) => {
+    return d.documentID === state.selectedDocumentID;
+  })[0];
+};
 
 

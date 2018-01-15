@@ -1,18 +1,30 @@
 <mat-card class="document-validation-card">
   <mat-card-header>
-    <mat-card-title>Validation</mat-card-title>
+    <mat-card-title>
+      <div class="validation-title">
+        Below changes will
+        <span *ngIf="selectedDocument.reArchivalEligible">NOT</span>
+        occur upon document archival. Click Archive if you would like to proceed.
+        To make updates, click on the document name.
+      </div>
+    </mat-card-title>
     <mat-card-subtitle>
-      Document: {{selectedDocument.documentName}}
+      <div class="validate-document">
+        Document:
+        <a [href]="getShowDocumentLink(selectedDocument.documentID)" target="_blank">
+          {{selectedDocument.documentName}}
+        </a>
+      </div>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div *ngFor=" let c of selectedDocument.customFormData">
-      <span>{{c.name}} | {{c.value}}</span>
-    </div>
+    <app-document-detail [documentData]="selectedDocument" [regulatoryData]="selectedRegulatoryData">
+
+    </app-document-detail>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="cancel()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="preview()">Preview Document</button>
-    <button mat-raised-button color="primary" (click)="archive()">Archive</button>
+    <button mat-button (click)="cancel()">Previous Step</button>
+    <button mat-raised-button color="accent" (click)="preview()">Preview Document</button>
+    <button mat-raised-button color="accent" (click)="archive()">Archive</button>
   </mat-card-actions>
 </mat-card>

@@ -77,6 +77,10 @@ export const getSelectedDocument = createSelector(
   getDocumentState,
   fromDocument.getSelectedDocument
 );
+export const getSelectedRegulatoryAction = createSelector(
+  getDocumentState,
+  fromDocument.getSelectedRegulatoryAction
+);
 export const getSelectedDocumentID = createSelector(
   getDocumentState,
   fromDocument.getSelectedDocumentID

@@ -1,7 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
-import {MatDialog} from '@angular/material';
-import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 import {environment} from '@env/environment';
 import { PEFService} from '@app/core/services/pef.service';
@@ -19,7 +17,6 @@ export class DocumentValidationComponent implements OnInit {
   @Output() cancelArchive = new EventEmitter<boolean>();
   @Output() archiveDocument = new EventEmitter<DocumentData>();
   constructor(
-    public dialog: MatDialog,
     private pefService: PEFService
   ) { }
 
@@ -27,13 +24,6 @@ export class DocumentValidationComponent implements OnInit {
   }
   getShowDocumentLink(documentID: string) {
     return `${environment.workfrontHost}/document/view?ID=${documentID}`;
-  }
-  preview() {
-    this.dialog.open(FilePreviewDialogComponent, {
-      width: '800px',
-      height: '600px',
-      data: {document: this.selectedDocument, pdfContent: 'pdfContent'}
-    });
   }
   cancel() {
     this.cancelArchive.emit(true);

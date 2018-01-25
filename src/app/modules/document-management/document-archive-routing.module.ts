@@ -10,7 +10,6 @@ import { DocumentValidationComponent} from '@app/modules/document-management/com
 import { DocumentConfirmationParentPageComponent} from '@app/modules/document-management/containers/document-confirmation-parent-page/document-confirmation-parent-page.component';
 import { DocumentConfirmationComponent} from '@app/modules/document-management/components/document-confirmation/document-confirmation.component';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
-import { ReArchiveDialogComponent} from '@app/modules/document-management/components/re-archive-dialog/re-archive-dialog.component';
 
 const routes: Routes = [
   {
@@ -49,4 +48,4 @@ export class DocumentManagementRoutingModule { }
 export const routedComponents = [DocumentListParentComponent, NavigationComponent,
   DocumentListComponent, DocumentArchiveParentPageComponent, DocumentValidateParentPageComponent,
   DocumentValidationComponent, DocumentConfirmationParentPageComponent, DocumentConfirmationComponent,
-  FilePreviewDialogComponent, ReArchiveDialogComponent];
+  FilePreviewDialogComponent];

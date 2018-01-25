@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild, SimpleChange,
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {MatDialog} from '@angular/material';
 import { environment} from '@env/environment';
-import {ReArchiveDialogComponent} from '@app/modules/document-management/components/re-archive-dialog/re-archive-dialog.component';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import { PEFService} from '@app/core/services/pef.service';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
@@ -27,27 +26,27 @@ export class DocumentListComponent implements OnInit {
     public dialog: MatDialog,
     private pefService: PEFService,
     private documentManagementService: DocumentManagementService
-) {}
+  ) {}
 
   getRegulatoryActionData(documentID: string) {
     return this.documentRegulatoryActionList.filter((d) => {
       return d.documentID === documentID;
     })[0];
-}
+  }
 
   getShowDocumentLink(row: DocumentData) {
     return `${environment.workfrontHost}/document/view?ID=${row.documentID}`;
   }
-  reArchive(doc: DocumentData): void {
-    const dialogRef = this.dialog.open(ReArchiveDialogComponent, {
-      width: '400px',
-      data: doc
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog closed');
-      console.log(result);
-    });
-  }
+  // reArchive(doc: DocumentData): void {
+  //   const dialogRef = this.dialog.open(ReArchiveDialogComponent, {
+  //     width: '400px',
+  //     data: doc
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('dialog closed');
+  //     console.log(result);
+  //   });
+  // }
   showPDFPreview(doc: DocumentData) {
     this.dialog.open(FilePreviewDialogComponent, {
       width: '800px',
@@ -97,6 +96,9 @@ export class DocumentListComponent implements OnInit {
     return this.documentRegulatoryActionList.filter((r) => {
       return r.documentID === documentID;
     }).length === 1;
+  }
+  isProjectClosed(): boolean {
+    return this.documentManagementService.projectClosed;
   }
   ngOnInit() {
   }

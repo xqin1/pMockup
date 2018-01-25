@@ -8,7 +8,7 @@ export class DocumentData {
   documentLinkURL: string;
   archivalStatus: string;
   archivalEligible: boolean;
-  reArchivalEligible: boolean;
+  // reArchivalEligible: boolean;
   previewEligible: boolean;
   actionEligible: boolean;
   customFormData: ValuePair[];

@@ -42,7 +42,7 @@ export class DocumentManagementService {
   }
   setDocumentAction(document: DocumentData): boolean {
     let result = true;
-    if (document.archivalStatus === "Archived" && !document.reArchivalEligible) {
+    if (document.archivalStatus === "Archived") {
       result = false;
     }
     return result;
@@ -51,13 +51,9 @@ export class DocumentManagementService {
     let result = false;
     const ext = doc["currentVersion"]['ext'];
     if (DocumentConfig.previewEligibleType.includes(ext)) {
-      if (document.reArchivalEligible) {
-        result = true;
-      } else {
         if (!DocumentConfig.noPreviewCode.includes(document.archivalStatus)) {
           result = true;
         }
-      }
     }
     return result;
   }
@@ -67,12 +63,12 @@ export class DocumentManagementService {
     })[0];
     document.archivalStatus = eligibility.reason;
     document.archivalEligible = eligibility.archivalEligible;
-    if (document.archivalStatus === "Archived" && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
-      document.reArchivalEligible = true;
-      document.archivalStatus += " - Ready to ReArchive";
-    }else {
-      document.reArchivalEligible = false;
-    }
+    // if (document.archivalStatus === "Archived" && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
+    //   document.reArchivalEligible = true;
+    //   document.archivalStatus += " - Ready to ReArchive";
+    // }else {
+    //   document.reArchivalEligible = false;
+    // }
    }
 
   setDocumentApprovers(document: DocumentData, doc: object) {

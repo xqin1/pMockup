@@ -2,7 +2,10 @@
 <div class="instruction" *ngIf="documentListLoading">
   Loading Data......
 </div>
-<div class="document-list-page" *ngIf="documentDataList">
+<div class="close-project-section" *ngIf="isProjectClosed()">
+  <h1>The review is complete and no documents can be archived</h1>
+</div>
+<div class="document-list-page" *ngIf="documentDataList && !isProjectClosed()">
   <div class="instruction">
     <p>
       Select the document you would like to archive
@@ -38,7 +41,7 @@
       <ngx-datatable-column name="Actions" [flexGrow]="0.5">
         <ng-template let-column="column" ngx-datatable-header-template></ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <div class="radio-selection" *ngIf="row.archivalEligible||row.reArchivalEligible">
+          <div class="radio-selection" *ngIf="row.archivalEligible">
             <mat-radio-button name="archiveSelection" [checked]="row.documentID===selectedDocumentID"
                               (change)="documentSelectionChange(row)">
 
@@ -93,7 +96,7 @@
           <span>PDF Preview</span>
         </ng-template>
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <span>
+          <span *ngIf="row.documentID===selectedDocumentID">
             <a (click)="showPDFPreview(row)">
               <img src="assets/pdf_preview.png"
                    *ngIf="row.previewEligible"

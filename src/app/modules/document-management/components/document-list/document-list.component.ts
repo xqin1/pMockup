@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import { environment} from '@env/environment';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import { PEFService} from '@app/core/services/pef.service';
+import { DMService} from '@app/core/services/dm.service';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 
@@ -25,6 +26,7 @@ export class DocumentListComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private pefService: PEFService,
+    private dmService: DMService,
     private documentManagementService: DocumentManagementService
   ) {}
 
@@ -48,6 +50,10 @@ export class DocumentListComponent implements OnInit {
   //   });
   // }
   showPDFPreview(doc: DocumentData) {
+    this.dmService.getPDFPreviewByDocumentID(doc.documentID)
+      .subscribe( result => {
+        console.log(result);
+      })
     this.dialog.open(FilePreviewDialogComponent, {
       width: '800px',
       height: '600px',

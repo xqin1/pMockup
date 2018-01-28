@@ -1,16 +1,21 @@
+put nginx on c drive
+
 for local development using nginx server:
 ng build --watch
+ng build --target=production
 
 for local deployment
 ng build --environment localwl --bh /panoramaUI/
+ng build --target=production --environment localwl --bh /panoramaUI/
 
 
 for PPS
 ng build --environment pps --bh /PEF_nda/
+ng build --target=production --environment pps --bh /PEF_nda/
 
-http://localhost:7001/panoramaUI/#/document-management/588a2bdd0002f5cf45eb34f0fe284c3a/document-list
 
-http://panoramaams-pps.preprod.fda.gov/PEF_nda/#/document-management/588a2bdd0002f5cf45eb34f0fe284c3a/document-list
+http://localhost:7001/panoramaUI/#/document-archive/document-list/59ba91ee004ea6f6017cee244808ea63/555b623a00007f7603d0f0a9d389926f
+
 
 
 
@@ -21,6 +26,12 @@ sampel project:
 http://panoramaams-pps.preprod.fda.gov/task/view?ID=59ba91ee004ea6f6017cee244808ea63&activeTab=list-task-documents
 http://panoramaams.preprod.fda.gov/task/view?ID=58e7e113001899de5ab40e11ad43a99a&activeTab=list-task-documents
 
+complete project:
+http://panoramaams-pps.preprod.fda.gov/project/view?ID=556dfc3800006541efe53ea150167d9e&activeTab=list-project-documents
+
+multiple ready for archive projects
+http://panoramaams-pps.preprod.fda.gov/project/view?ID=59414944002509e7853b69cb023fe332
+
 //one document ready for archive
 http://panoramaams.preprod.fda.gov/task/view?ID=59a9b249017b286fe062758bb0a640b5
 
@@ -30,6 +41,8 @@ http://panoramaams-pps.preprod.fda.gov/PEF_nda/#/document-archive/document-list/
 local url:
 pps
 http://localhost:9092/#/document-archive/document-list/59ba91ee004ea6f6017cee244808ea63/555b623a00007f7603d0f0a9d389926f
+//no document, for local development
+http://localhost:9092/#/document-archive/document-list/58629efa0001381bacf135739892f94a/555b623a00007f7603d0f0a9d389926f
 
 //preprod
 http://localhost:9092/#/document-archive/document-list/58e7e113001899de5ab40e11ad43a99a/555b6319000d129c8b3dbcd5478b52a2

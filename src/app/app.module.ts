@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { SharedModule} from './shared/shared.module';
 
 import { PEFService} from '@app/core/services/pef.service';
+import { DMService} from '@app/core/services/dm.service';
 
 
 @NgModule({
@@ -73,7 +74,9 @@ import { PEFService} from '@app/core/services/pef.service';
      */
     { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
 
-    PEFService
+    PEFService,
+    DMService
+
   ],
   bootstrap: [AppComponent]
 })

@@ -15,7 +15,7 @@
     <ngx-datatable #myTable
       class="material striped document-list-datatable"
       [columnMode]="'flex'"
-      [headerHeight]="35"
+      [headerHeight]="40"
       [footerHeight]="30"
       [rowHeight]="'auto'"
       [rows]="documentDataList"
@@ -109,6 +109,9 @@
       <ngx-datatable-column prop="archivalStatus"  [flexGrow]="2">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span (click)="sort()">Archive Status</span>
+        </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            <div class="eligibility-status-text">{{value}}</div>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

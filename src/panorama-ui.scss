@@ -8,7 +8,7 @@ $mh-app-accent: mat-palette($mat-light-blue, A100);
 $mh-app-theme: mat-light-theme($mh-app-primary, $mh-app-accent);
 
 $custom-typography: mat-typography-config(
-  $font-family: 'lucida grande, tahoma, verdana, arial, sans-serif',
+  $font-family: "'lucida grande', tahoma, verdana, arial, sans-serif",
   $body-1: mat-typography-level(12px, 16px, 500),
   $button: mat-typography-level(12px, 16px, 500)
 );

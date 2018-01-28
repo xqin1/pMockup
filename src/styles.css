@@ -17,7 +17,9 @@
   font-weight: 600 !important;
   font-size: 12px !important;
   color: #222222 !important;
+  vertical-align: middle !important;
 }
+
 
 .ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell{
   font-size:11px !important;
@@ -44,6 +46,6 @@ html{
   background: #FFF;
 }
 
-body {
-  font-size:small;
-}
+/*body {*/
+  /*font-size:small;*/
+/*}*/

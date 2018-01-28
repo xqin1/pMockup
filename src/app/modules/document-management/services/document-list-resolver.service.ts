@@ -40,7 +40,7 @@ export class DocumentListResolverService implements Resolve<any> {
               this.pefService.getDocumentListByObjectID(objectId)
                 .subscribe( results => {
                   // TODO: comment the following line when deploying
-                   // results = DocumentConfig.fakeDocumentList;
+                    results = DocumentConfig.fakeDocumentList;
                   const payload = new DocumentListLoadPayload();
                   payload.documentListData = this.documentManagementService.processDocumentList(results, userId);
                   payload.objId = objectId;

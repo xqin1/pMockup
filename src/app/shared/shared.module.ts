@@ -6,6 +6,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule} from '@angular/material';
+import { MatSnackBarModule} from '@angular/material';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -38,6 +40,8 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatTabsModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
     MatChipsModule,
     MatCardModule,
     MatSidenavModule,
@@ -65,6 +69,8 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatChipsModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
     MatCheckboxModule,
     MatCardModule,
     MatSidenavModule,

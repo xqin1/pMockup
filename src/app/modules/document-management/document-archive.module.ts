@@ -9,6 +9,7 @@ import { DocumentListResolverService} from '@app/modules/document-management/ser
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { DocumentManagementRoutingModule, routedComponents } from './document-archive-routing.module';
 import { FilePreviewDialogComponent } from './components/file-preview-dialog/file-preview-dialog.component';
+import { NotificationComponent} from '@app/shared/components/notification/notification.component';
 import { DocumentDetailComponent } from './components/document-detail/document-detail.component';
 
 @NgModule({
@@ -21,6 +22,6 @@ import { DocumentDetailComponent } from './components/document-detail/document-d
   ],
   declarations: [routedComponents, DocumentDetailComponent],
   providers: [ DocumentManagementService, DocumentListResolverService],
-  entryComponents: [FilePreviewDialogComponent]
+  entryComponents: [FilePreviewDialogComponent, NotificationComponent]
 })
 export class DocumentArchiveModule { }

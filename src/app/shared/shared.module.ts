@@ -27,6 +27,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 // components
 import { HeaderComponent} from '@app/shared/components/header/header.component';
 import { FullScreenLoaderComponent } from './components/full-screen-loader/full-screen-loader.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   imports: [
@@ -57,7 +58,7 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatSlideToggleModule,
     MatDialogModule
   ],
-  declarations: [HeaderComponent, FullScreenLoaderComponent],
+  declarations: [HeaderComponent, FullScreenLoaderComponent, NotificationComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -86,7 +87,8 @@ import { FullScreenLoaderComponent } from './components/full-screen-loader/full-
     MatStepperModule,
     MatDialogModule,
     HeaderComponent,
-    FullScreenLoaderComponent
+    FullScreenLoaderComponent,
+    NotificationComponent
   ]
 })
 export class SharedModule { }

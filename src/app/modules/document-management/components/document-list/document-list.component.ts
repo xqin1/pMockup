@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild, SimpleChange, OnChanges} from '@angular/core';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material';
 import { environment} from '@env/environment';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
+import { NotificationComponent} from '@app/shared/components/notification/notification.component';
 import { PEFService} from '@app/core/services/pef.service';
 import { DMService} from '@app/core/services/dm.service';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
@@ -25,10 +27,12 @@ export class DocumentListComponent implements OnInit {
   @ViewChild('myTable') table: any;
   constructor(
     public dialog: MatDialog,
+    public snackkBar: MatSnackBar,
     private pefService: PEFService,
     private dmService: DMService,
     private documentManagementService: DocumentManagementService
-  ) {}
+  ) {
+  }
 
   getRegulatoryActionData(documentID: string) {
     return this.documentRegulatoryActionList.filter((d) => {
@@ -50,15 +54,21 @@ export class DocumentListComponent implements OnInit {
   //   });
   // }
   showPDFPreview(doc: DocumentData) {
+    const snackBarRef = this.snackkBar.openFromComponent(NotificationComponent, {
+      data: "Loading PDF Preview...",
+      verticalPosition: "top"
+    });
     this.dmService.getPDFPreviewByDocumentID(doc.documentID)
       .subscribe( result => {
+        snackBarRef.dismiss();
+        this.dialog.open(FilePreviewDialogComponent, {
+          width: '800px',
+          height: '600px',
+          data: {document: doc, pdfContent: 'pdfContent'}
+        });
         console.log(result);
-      })
-    this.dialog.open(FilePreviewDialogComponent, {
-      width: '800px',
-      height: '600px',
-      data: {document: doc, pdfContent: 'pdfContent'}
-    });
+      });
+
   }
 
   toggleExpandRow(row) {

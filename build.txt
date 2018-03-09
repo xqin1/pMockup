@@ -13,6 +13,10 @@ for PPS
 ng build --environment pps --bh /PEF_nda/
 ng build --target=production --environment pps --bh /PEF_nda/
 
+local URLs
+http://localhost:9092/dmDocumentManagement/pdfPreview?documentId=58629efa0001381bacf135739892f94a
+http://localhost:7001/PanoramaDocMgmt/documentManagement/pdfPreview?documentId=5963b4970008909bc3febe44dd340938
+http://localhost:9092/pefDocumentArchive/getDocumentsByObjectId?objectId=58629efa0001381bacf135739892f94a
 
 http://localhost:7001/panoramaUI/#/document-archive/document-list/59ba91ee004ea6f6017cee244808ea63/555b623a00007f7603d0f0a9d389926f
 
@@ -63,4 +67,10 @@ update EFF_CONFIGURATION set property_string_value='http://panoramaams.preprod.f
 where property_name='document.management.service.base.url';
 update EFF_CONFIGURATION set property_string_value='http://panoramaams-pps.preprod.fda.gov/PanoramaDocMgmt/document/archive?'
 where property_name='bulkarchiving.webhooks.service.base.url';
+update EFF_CONFIGURATION set property_string_value='http://localhost:7001/PanoramaDocMgmt'
+where property_name='document.management.service.base.url'
 commit;
+
+http://localhost:7001/PanoramaDocMgmt/documentManagement/eligibility?documentId=5a68abb3001433537a2605221f4a824b&userId=5720e0b40005cf8f952b487291b2aa3b
+
+http://localhost:7001/PanoramaDocMgmt/documentManagement/eligibility/isPassODMEligibilityCheck?documentId=594958cc0002dbc3c4e8a0d0eb33f4a3&userId=555b623a00007f7603d0f0a9d389926f

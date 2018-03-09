@@ -28,6 +28,7 @@
         "dev": "environments/environment.ts",
         "localwl": "environments/environment.localwl.ts",
         "pps": "environments/environment.pps.ts",
+        "preprod": "environments/environment.preprod.ts",
         "prod": "environments/environment.prod.ts"
       }
     }

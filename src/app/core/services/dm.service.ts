@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, catchError, finalize} from 'rxjs/operators';
+import { map, delay, catchError, finalize} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ExceptionService } from '@app/core/services/exception.service';
 import { environment } from '../../../environments/environment';
@@ -23,6 +23,7 @@ export class DMService {
       })
       .pipe(
         map(res => res),
+        delay(5000),
         catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with retrieving PEF preview data");

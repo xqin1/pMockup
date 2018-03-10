@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { PEFService} from '@app/core/services/pef.service';
+import { DMService} from '@app/core/services/dm.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { forkJoin } from 'rxjs/observable/forkJoin';
@@ -13,13 +14,16 @@ import * as fromDocument from '@app/modules/document-management/reducers/documen
 import * as documentAction from '@app/modules/document-management/actions/document.action';
 import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import {DocumentListLoadPayload} from '@app/modules/document-management/model/document-list-load-payload.model';
+import {DocumentList} from '@app/modules/document-management/model/document-list.model';
 import {DocumentConfig} from '@app/modules/document-management/config';
+import {Eligibility} from '@app/modules/document-management/model/document-list.model';
 
 @Injectable()
 export class DocumentListResolverService implements Resolve<any> {
   documentListLoaded$: Observable<boolean>;
   constructor(
     private pefService: PEFService,
+    private dmService: DMService,
     private store: Store<fromDocument.State>,
     private documentManagementService: DocumentManagementService
   ) {
@@ -37,19 +41,44 @@ export class DocumentListResolverService implements Resolve<any> {
               const objectId = route.params.objectId;
               const userId = route.params.userId;
               this.store.dispatch(new documentAction.Document_List_Loading(true));
-              this.pefService.getDocumentListByObjectID(objectId)
-                .subscribe( results => {
+              this.dmService.getDocumentListByObjectId(objectId)
+                .subscribe( documentList => {
                   // TODO: comment the following line when deploying
-                    results = DocumentConfig.fakeDocumentList;
-                  const payload = new DocumentListLoadPayload();
-                  payload.documentListData = this.documentManagementService.processDocumentList(results, userId);
-                  payload.objId = objectId;
-                  payload.userId = userId;
-                  payload.objCode = results.objectCode;
-                  this.documentManagementService.documentListLoaded = true;
-                  this.store.dispatch(new documentAction.Document_List_Loading(false));
-                  this.store.dispatch((new documentAction.Document_List_Loaded(payload)));
-                  return of(true);
+                  //  results = DocumentConfig.fakeDocumentList;
+                  const results = new DocumentList();
+                  results.documents = [];
+                  results.eligibility = [];
+                  results.objectCode = null;
+                  results.documents = documentList;
+                  results.objectCode = documentList[0]["docObjCode"];
+
+                  const eligibilityCheckIDs: string[] = this.documentManagementService.getEligibilityCheckIDs(results);
+                  const eligibilityRequestList: any[] = [];
+                  for (const id of eligibilityCheckIDs){
+                    eligibilityRequestList.push(this.dmService.getArchivalEligibilityByDocumentIdAndUserId(id, userId));
+                  }
+                  forkJoin(eligibilityRequestList).subscribe(eligibilityList => {
+                    for (const eligibility of eligibilityList){
+                      const e = new Eligibility();
+                      e.documentId = eligibility["documentId"];
+                      e.archivalEligible = eligibility["eligible"];
+                      e.reason = eligibility["reasons"];
+                      results.eligibility.push(e);
+                    }
+                    console.log(results);
+                    const payload = new DocumentListLoadPayload();
+                    //
+                    payload.documentListData = this.documentManagementService.processDocumentList(results, userId);
+                    payload.objId = objectId;
+                    payload.userId = userId;
+                    payload.objCode = results.documents[0].docObjCode;
+                    console.log(payload);
+                    this.documentManagementService.documentListLoaded = true;
+                    this.store.dispatch(new documentAction.Document_List_Loading(false));
+                    this.store.dispatch((new documentAction.Document_List_Loaded(payload)));
+                    return of(true);
+                  });
+
                 });
           }
   }

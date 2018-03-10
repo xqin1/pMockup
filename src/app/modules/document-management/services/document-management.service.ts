@@ -18,10 +18,10 @@ export class DocumentManagementService {
   processDocumentList(documentList: DocumentList, userId: string): DocumentData[] {
     if(documentList.documents.length > 0) {
       this.userId = userId;
-      this.projectStatus = documentList.documents[0]["project"]["status"];
-      if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
-        this.projectClosed = true;
-      }
+     // this.projectStatus = documentList.documents[0]["project"]["status"];
+     //  if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
+     //    this.projectClosed = true;
+     //  }
       documentList.documents.forEach(doc => {
         const documentData: DocumentData = new DocumentData();
         documentData.documentID = doc["id"];
@@ -30,7 +30,7 @@ export class DocumentManagementService {
         documentData.lastUpdatedDate = new Date(doc['lastModDate']);
 
         documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
-        this.setDocumentEligibility(documentData, documentList.eligibility, doc);
+       // this.setDocumentEligibility(documentData, documentList.eligibility, doc);
         this.setDocumentApprovers(documentData, doc);
         documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);
         documentData.previewEligible = this.setDocumentPreview(documentData, doc);
@@ -57,19 +57,19 @@ export class DocumentManagementService {
     }
     return result;
   }
-  setDocumentEligibility(document: DocumentData, eligibilityList: Eligibility[], doc: object) {
-    const eligibility: Eligibility = eligibilityList.filter(e => {
-      return e.documentID === document.documentID;
-    })[0];
-    document.archivalStatus = eligibility.reason;
-    document.archivalEligible = eligibility.archivalEligible;
-    // if (document.archivalStatus === "Archived" && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
-    //   document.reArchivalEligible = true;
-    //   document.archivalStatus += " - Ready to ReArchive";
-    // }else {
-    //   document.reArchivalEligible = false;
-    // }
-   }
+  // setDocumentEligibility(document: DocumentData, eligibilityList: Eligibility[], doc: object) {
+  //   const eligibility: Eligibility = eligibilityList.filter(e => {
+  //     return e.documentID === document.documentID;
+  //   })[0];
+  //   document.archivalStatus = eligibility.reason;
+  //   document.archivalEligible = eligibility.archivalEligible;
+  //   // if (document.archivalStatus === "Archived" && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
+  //   //   document.reArchivalEligible = true;
+  //   //   document.archivalStatus += " - Ready to ReArchive";
+  //   // }else {
+  //   //   document.reArchivalEligible = false;
+  //   // }
+  //  }
 
   setDocumentApprovers(document: DocumentData, doc: object) {
     const array = [];
@@ -200,6 +200,26 @@ export class DocumentManagementService {
       }
     }
     return documentLink;
+  }
+
+  getEligibilityCheckIDs(documentList: DocumentList): string[] {
+    const list: string[] = [];
+    for (const doc of documentList.documents) {
+      let archivalStatus: string = null;
+      if (doc["parameterValues"]){
+        archivalStatus = doc["parameterValues"]["DE:Document Archival Status"];
+      }
+      if (archivalStatus === "Archving start" || archivalStatus === "Archiving in progress"){
+        const eligibility = new Eligibility();
+        eligibility.documentId = doc["id"];
+        eligibility.archivalEligible = false;
+        eligibility.reason = [];
+        documentList.eligibility.push(eligibility);
+      }else {
+        list.push(doc["id"]);
+      }
+    }
+    return list;
   }
 }
 

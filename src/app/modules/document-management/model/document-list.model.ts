@@ -1,10 +1,10 @@
-export interface Eligibility {
-  documentID: string;
+export class Eligibility {
+  documentId: string;
   archivalEligible: boolean;
-  reason: string;
+  reason: any[];
 
 }
-export class DocumentList{
+export class DocumentList {
   objectCode: string;
   documents: any[];
   eligibility: Eligibility[];

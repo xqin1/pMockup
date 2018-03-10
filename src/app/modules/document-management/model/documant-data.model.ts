@@ -9,7 +9,10 @@ export class DocumentData {
   archivalStatus: string;
   archivalEligible: boolean;
   // reArchivalEligible: boolean;
-  previewEligible: boolean;
-  actionEligible: boolean;
+   previewEligible: boolean;
+   actionEligible: boolean;
   customFormData: ValuePair[];
+  regulatoryData: any;
+  eligibilityData: any;
+  eligibilityAction: boolean;
 }

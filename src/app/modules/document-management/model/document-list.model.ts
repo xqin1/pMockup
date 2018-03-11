@@ -1,7 +1,7 @@
 export class Eligibility {
   documentId: string;
   archivalEligible: boolean;
-  reason: any[];
+  reason: string[][];
 
 }
 export class DocumentList {

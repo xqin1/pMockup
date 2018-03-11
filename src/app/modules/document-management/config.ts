@@ -41,13 +41,20 @@ export const DocumentConfig = {
     "NAP",
     "CLD"
   ],
+  archivingStatusCode: [
+    "Archived",
+    "Archiving in Progress",
+    "Archiving start"
+  ],
   noDocumentLinkingCode: [
     "Archived",
-    "Archiving in Progress"
+    "Archiving in Progress",
+    "Archiving start"
   ],
   noPreviewCode: [
     "Archived",
-    "Archiving in Progress"
+    "Archiving in Progress",
+    "Archiving start"
   ],
   previewEligibleType: [
     "pdf",

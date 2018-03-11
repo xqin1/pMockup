@@ -12,8 +12,8 @@ export class DocumentData {
   // reArchivalEligible: boolean;
    previewEligible: boolean;
    actionEligible: boolean;
-  customFormData: ValuePair[];
+  customFormData: ValuePair[]; //with values
   regulatoryData: ValuePair[];
-  eligibilityData: Eligibility[];
+  eligibilityData: Eligibility;
   eligibilityAction: boolean;
 }

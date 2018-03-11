@@ -5,6 +5,7 @@ import {Eligibility} from '@app/modules/document-management/model/document-list.
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import { DocumentConfig } from '@app/modules/document-management/config.ts';
 import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
+import {CONFIG} from '@app/core/config';
 
 @Injectable()
 export class DocumentManagementService {
@@ -24,52 +25,67 @@ export class DocumentManagementService {
      //  }
       documentList.documents.forEach(doc => {
         const documentData: DocumentData = new DocumentData();
-        documentData.documentID = doc["id"];
-        documentData.documentName = `${doc["name"]}.${doc["currentVersion"]['ext']}`;
-        // documentData.lastUpdatedDate =  moment(new Date(doc['lastModDate'])).format("MM/DD/YYYY HH:mm:ss");
-        documentData.lastUpdatedDate = new Date(doc['lastModDate']);
-
-        documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
-       // this.setDocumentEligibility(documentData, documentList.eligibility, doc);
-        this.setDocumentApprovers(documentData, doc);
-        documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);
-        documentData.previewEligible = this.setDocumentPreview(documentData, doc);
-        documentData.actionEligible = this.setDocumentAction(documentData);
+        documentData.eligibilityData = documentList.eligibility.filter(e => {
+          return e.documentId === doc["id"];
+        })[0];
+        this.processDocument(documentData, doc);
         this.documentDataList.push(documentData);
       });
     }
     return this.documentDataList;
   }
-  setDocumentAction(document: DocumentData): boolean {
-    let result = true;
-    if (document.archivalStatus === "Archived") {
-      result = false;
-    }
-    return result;
+  processDocument(documentData: DocumentData, doc: any): DocumentData{
+    documentData.documentID = doc["id"];
+    documentData.documentName = `${doc["name"]}.${doc["currentVersion"]['ext']}`;
+    documentData.lastUpdatedDate = new Date(doc['lastModDate']);
+    documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
+    this.setDocumentArchivalStatus(documentData);
+    this.setDocumentApprovers(documentData, doc);
+    documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);
+    // documentData.previewEligible = this.setDocumentPreview(documentData, doc);
+    // documentData.actionEligible = this.setDocumentAction(documentData);
+    return documentData;
   }
-  setDocumentPreview(document: DocumentData, doc: object): boolean {
-    let result = false;
-    const ext = doc["currentVersion"]['ext'];
-    if (DocumentConfig.previewEligibleType.includes(ext)) {
-        if (!DocumentConfig.noPreviewCode.includes(document.archivalStatus)) {
-          result = true;
-        }
+  setDocumentArchivalStatus(document: DocumentData): void {
+    document.archivalEligible = document.eligibilityData.archivalEligible;
+    let archivalStatus: string = null;
+    // get existing archival status
+    for (const as of document.customFormData) {
+      if (as.name === "Document Archival Status") {
+        archivalStatus = as.value;
+      }
     }
-    return result;
+    if (archivalStatus !== null) {
+      if (!DocumentConfig.archivingStatusCode.includes(archivalStatus) && document.archivalEligible){
+        archivalStatus = `Ready to archive.\n${archivalStatus}`;
+      }
+    }
+    if (archivalStatus === null && !document.archivalEligible){
+      archivalStatus = document.eligibilityData.reason[0][0];
+      if (document.eligibilityData.reason.length > 1) {
+        const numberOfOtherReasons = document.eligibilityData.reason.length - 1;
+        archivalStatus += ` and ${numberOfOtherReasons} other(s)`;
+      }
+    }
+    document.archivalStatus = archivalStatus;
   }
-  // setDocumentEligibility(document: DocumentData, eligibilityList: Eligibility[], doc: object) {
-  //   const eligibility: Eligibility = eligibilityList.filter(e => {
-  //     return e.documentID === document.documentID;
-  //   })[0];
-  //   document.archivalStatus = eligibility.reason;
-  //   document.archivalEligible = eligibility.archivalEligible;
-  //   // if (document.archivalStatus === "Archived" && doc["currentVersion"]["externalIntegrationType"] !== "WEBHOOKS") {
-  //   //   document.reArchivalEligible = true;
-  //   //   document.archivalStatus += " - Ready to ReArchive";
-  //   // }else {
-  //   //   document.reArchivalEligible = false;
-  //   // }
-  //  }
+  // setDocumentAction(document: DocumentData): boolean {
+  //   let result = true;
+  //   if (document.archivalStatus === "Archived") {
+  //     result = false;
+  //   }
+  //   return result;
+  // }
+  // setDocumentPreview(document: DocumentData, doc: object): boolean {
+  //   let result = false;
+  //   const ext = doc["currentVersion"]['ext'];
+  //   if (DocumentConfig.previewEligibleType.includes(ext)) {
+  //       if (!DocumentConfig.noPreviewCode.includes(document.archivalStatus)) {
+  //         result = true;
+  //       }
+  //   }
+  //   return result;
+  // }
 
   setDocumentApprovers(document: DocumentData, doc: object) {
     const array = [];
@@ -110,7 +126,9 @@ export class DocumentManagementService {
         customForms2.forEach(item => {
           for (const action in item) {
             if (action === sortAction) {
-              if (item[action] !== "" && item[action] !== null && !DocumentConfig.customFormExcludeFields.includes(action)) {
+              if (item[action] !== "" && item[action] !== null
+                // && !DocumentConfig.customFormExcludeFields.includes(action)
+              ) {
                 const customFormObj: ValuePair = new ValuePair();
                 customFormObj.name = action;
                 customFormObj.value = this.parseDateField(action, item[action]);
@@ -145,7 +163,9 @@ export class DocumentManagementService {
         regulatoryActionMap2.forEach(item => {
           for (const action in item) {
             if (action === sortAction) {
-              if (item[action] !== "" && item[action] !== null && !DocumentConfig.regulatoryActionExcludeFields.includes(action)) {
+              if (item[action] !== "" && item[action] !== null
+                // && !DocumentConfig.regulatoryActionExcludeFields.includes(action)
+              ) {
                 const regulatoryActionObj: ValuePair = new ValuePair();
                 regulatoryActionObj.name = action;
                 regulatoryActionObj.value = this.parseDateField(action, item[action]);

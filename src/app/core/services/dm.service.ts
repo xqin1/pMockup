@@ -7,7 +7,6 @@ import {RegulatoryData} from '@app/modules/document-management/model/regulatory-
 import {LoggerService} from '@app/core/services/logger.service';
 import {ArchiveResponse} from '@app/modules/document-management/model/archive-response.model';
 import {Eligibility} from '@app/modules/document-management/model/document-list.model';
-import {EligibilityResponse} from '@app/modules/document-management/model/eligibility-response.model';
 
 
 @Injectable()
@@ -45,7 +44,7 @@ export class DMService {
   }
   getArchivalEligibilityByDocumentIdAndUserId(documentId: string, userId: string) {
     return this.http
-      .get<EligibilityResponse>(`${environment.documentManagementURL}/documentManagement/eligibility?documentId=${documentId}&userId=${userId}`)
+      .get<Eligibility>(`${environment.documentManagementURL}/documentManagement/eligibility?documentId=${documentId}&userId=${userId}`)
       .pipe(
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),

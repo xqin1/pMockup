@@ -16,7 +16,7 @@ export class DocumentManagementService {
   constructor() { }
 
   processDocumentList(documentList: DocumentList, userId: string): DocumentData[] {
-    if(documentList.documents.length > 0) {
+    if (documentList.documents.length > 0) {
       this.userId = userId;
      // this.projectStatus = documentList.documents[0]["project"]["status"];
      //  if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
@@ -79,7 +79,7 @@ export class DocumentManagementService {
       const status = data[i]['status'];
       if (data[i]['status'] !== "CANCELED") {
         const statusTrimmed = status.replace(/_/g, ' ');
-        let approval = data[i]['approver']['displayName'] + " - " + statusTrimmed;
+        let approval = data[i]['approver']['name'] + " - " + statusTrimmed;
 
         if (data[i]['status'] !== "NEW") {
           const approvalDate = new Date(data[i]['approvalDate']);
@@ -96,7 +96,7 @@ export class DocumentManagementService {
     const actionsWithoutPrefix: string[] = [];
     const customForms2 = [];
     if (customForms !== null) {
-      for (let action in customForms) {
+      for (let action of Object.keys(customForms)) {
         const value = customForms[action];
         if (action.substring(0, 3) === "DE:") {
           action = action.substring(3);
@@ -130,7 +130,7 @@ export class DocumentManagementService {
       const actionsWithoutPrefix: string[] = [];
       const regulatoryActionMap2: Object[] = [];
       regulatoryActionMap.forEach(function (item) {
-        for (let action in item) {
+        for (let action of Object.keys(item)) {
           const value = item[action];
           if (action.substring(0, 3) === "DE:") {
             action = action.substring(3);
@@ -201,12 +201,11 @@ export class DocumentManagementService {
     }
     return documentLink;
   }
-
   getEligibilityCheckIDs(documentList: DocumentList): string[] {
     const list: string[] = [];
     for (const doc of documentList.documents) {
       let archivalStatus: string = null;
-      if (doc["parameterValues"]){
+      if (doc["parameterValues"]) {
         archivalStatus = doc["parameterValues"]["DE:Document Archival Status"];
       }
       if (archivalStatus === "Archving start" || archivalStatus === "Archiving in progress"){
@@ -222,4 +221,3 @@ export class DocumentManagementService {
     return list;
   }
 }
-

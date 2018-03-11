@@ -1,4 +1,5 @@
 import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
+import {Eligibility} from '@app/modules/document-management/model/document-list.model';
 
 export class DocumentData {
   documentID: string;
@@ -12,7 +13,7 @@ export class DocumentData {
    previewEligible: boolean;
    actionEligible: boolean;
   customFormData: ValuePair[];
-  regulatoryData: any;
-  eligibilityData: any;
+  regulatoryData: ValuePair[];
+  eligibilityData: Eligibility[];
   eligibilityAction: boolean;
 }

@@ -10,7 +10,7 @@ import { DocumentManagementService} from '@app/modules/document-management/servi
 import { DocumentManagementRoutingModule, routedComponents } from './document-archive-routing.module';
 import { FilePreviewDialogComponent } from './components/file-preview-dialog/file-preview-dialog.component';
 import { NotificationComponent} from '@app/shared/components/notification/notification.component';
-import { DocumentDetailComponent } from './components/document-detail/document-detail.component';
+import { DocumentMetadataComponent } from './components/document-metadata/document-metadata.component';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import { DocumentDetailComponent } from './components/document-detail/document-d
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers)
   ],
-  declarations: [routedComponents, DocumentDetailComponent],
+  declarations: [routedComponents, DocumentMetadataComponent],
   providers: [ DocumentManagementService, DocumentListResolverService],
   entryComponents: [FilePreviewDialogComponent, NotificationComponent]
 })

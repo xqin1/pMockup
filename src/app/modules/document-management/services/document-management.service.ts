@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { DocumentList} from '@app/modules/document-management/model/document-list.model';
 import * as moment from 'moment';
-import {Eligibility} from '@app/modules/document-management/model/document-list.model';
+import {Eligibility} from '@app/modules/document-management/model/eligibility.model';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import { DocumentConfig } from '@app/modules/document-management/config.ts';
 import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
-import {CONFIG} from '@app/core/config';
+import {DocumentApprover} from '@app/modules/document-management/model/document-approver.model';
+import {DocumentMetadata} from '@app/modules/document-management/model/document-metadata.model';
 
 @Injectable()
 export class DocumentManagementService {
@@ -13,12 +14,15 @@ export class DocumentManagementService {
   documentDataList: DocumentData[] = [];
   projectStatus: string = null;
   projectClosed = false;
-  userId: string = null;
+  objectCode: string = null;
+  documentMetadata: DocumentMetadata = new DocumentMetadata();
   constructor() { }
 
-  processDocumentList(documentList: DocumentList, userId: string): DocumentData[] {
+  processDocumentList(documentList: DocumentList, userId: string, objectId: string): DocumentData[] {
     if (documentList.documents.length > 0) {
-      this.userId = userId;
+      this.documentMetadata.userId = userId;
+      this.documentMetadata.objectId = objectId;
+      this.documentMetadata.objectCode = documentList.objectCode;
      // this.projectStatus = documentList.documents[0]["project"]["status"];
      //  if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
      //    this.projectClosed = true;
@@ -88,23 +92,21 @@ export class DocumentManagementService {
   // }
 
   setDocumentApprovers(document: DocumentData, doc: object) {
-    const array = [];
     const data = doc["approvals"];
-
+    const approvers: DocumentApprover[] = [];
     for (let i = 0; i < data.length; i++) {
-      const status = data[i]['status'];
-      if (data[i]['status'] !== "CANCELED") {
-        const statusTrimmed = status.replace(/_/g, ' ');
-        let approval = data[i]['approver']['name'] + " - " + statusTrimmed;
-
-        if (data[i]['status'] !== "NEW") {
-          const approvalDate = new Date(data[i]['approvalDate']);
-          approval += ' ' + moment(approvalDate).format("MM/DD/YYYY");
-        }
-        array[i] = approval;
+      if (data[i]['status'] !== "CANCELLED") {
+        const approver: DocumentApprover = new DocumentApprover();
+        approver.status = data[i]['status'];
+        approver.approverID = data[i]['approverID'];
+        approver.approvalDate = data[i]['approvalDate'];
+        approver.approverName = data[i]['approver']['name'];
+        approver.requesterID = data[i]['requestDate'];
+        approver.reqeustDate = data[i]['requestID'];
+        approvers.push(approver);
       }
     }
-    document.approvers =  array;
+    document.approvers =  approvers;
   }
 
   setCustmFormData(customForms: object): ValuePair[] {

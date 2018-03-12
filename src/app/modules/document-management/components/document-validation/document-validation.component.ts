@@ -13,7 +13,6 @@ import { PEFService} from '@app/core/services/pef.service';
 export class DocumentValidationComponent implements OnInit {
   @Input() selectedDocument: DocumentData;
   @Input() selectedRegulatoryData: DocumentRegulatoryActionPayload;
-  @Input() userID: string;
   @Output() cancelArchive = new EventEmitter<boolean>();
   @Output() archiveDocument = new EventEmitter<DocumentData>();
   constructor(
@@ -29,7 +28,7 @@ export class DocumentValidationComponent implements OnInit {
     this.cancelArchive.emit(true);
   }
   archive() {
-    this.pefService.archiveDocument(this.selectedDocument.documentID, this.userID)
+    this.pefService.archiveDocument(this.selectedDocument.documentID, null)
       .subscribe( result => {
         console.log(result);
         this.archiveDocument.emit(this.selectedDocument);

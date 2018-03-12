@@ -16,7 +16,7 @@ import {DocumentManagementService} from '@app/modules/document-management/servic
 import {DocumentListLoadPayload} from '@app/modules/document-management/model/document-list-load-payload.model';
 import {DocumentList} from '@app/modules/document-management/model/document-list.model';
 import {DocumentConfig} from '@app/modules/document-management/config';
-import {Eligibility} from '@app/modules/document-management/model/document-list.model';
+import {Eligibility} from '@app/modules/document-management/model/eligibility.model';
 
 @Injectable()
 export class DocumentListResolverService implements Resolve<any> {
@@ -48,7 +48,6 @@ export class DocumentListResolverService implements Resolve<any> {
                   const results = new DocumentList();
                   results.documents = [];
                   results.eligibility = [];
-                  results.objectCode = null;
                   results.documents = documentList;
                   results.objectCode = documentList[0]["docObjCode"];
 
@@ -65,13 +64,9 @@ export class DocumentListResolverService implements Resolve<any> {
                       e.reason = eligibility["reasons"];
                       results.eligibility.push(e);
                     }
-                    console.log(results);
                     const payload = new DocumentListLoadPayload();
                     //
-                    payload.documentListData = this.documentManagementService.processDocumentList(results, userId);
-                    payload.objId = objectId;
-                    payload.userId = userId;
-                    payload.objCode = results.documents[0].docObjCode;
+                    payload.documentListData = this.documentManagementService.processDocumentList(results, userId, objectId);
                     console.log(payload);
                     this.documentManagementService.documentListLoaded = true;
                     this.store.dispatch(new documentAction.Document_List_Loading(false));

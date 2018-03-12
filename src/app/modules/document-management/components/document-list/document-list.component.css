@@ -46,9 +46,6 @@ a {
   text-decoration: none;
 }
 
-.archived-img {
-  margin-left: 5px;
-}
 
 .preview-img {
   background:transparent;
@@ -67,4 +64,21 @@ a {
 }
 .eligibility-status-text {
   white-space: pre-wrap;
+}
+.document-list-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
+}
+.document-card-list {
+  padding-bottom: 15px;
+}
+
+ .document-card-list:hover {
+  cursor: pointer;
+
+  /*Opacity*/
+  zoom: 1;
+  filter: alpha(opacity=100);
+  opacity: 1;
 }

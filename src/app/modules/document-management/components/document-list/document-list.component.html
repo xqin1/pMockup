@@ -6,125 +6,129 @@
   <h1>The review is complete and no documents can be archived</h1>
 </div>
 <div class="document-list-page" *ngIf="documentDataList && !isProjectClosed()">
-  <div class="instruction">
-    <p>
-      Select the document you would like to archive
-    </p>
+  <div class="document-list-title">
+    Document List
   </div>
-  <div class="document-list-table">
-    <ngx-datatable #myTable
-      class="material striped document-list-datatable"
-      [columnMode]="'flex'"
-      [headerHeight]="40"
-      [footerHeight]="30"
-      [rowHeight]="'auto'"
-      [rows]="documentDataList"
-      [limit]="10"
-      [sorts]="[
-        {prop: 'lastUpdatedDate', dir: 'desc'}
-      ]"
-    >
-      <!-- Row Detail Template -->
-      <ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">
-        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-          <!--<div style="padding-left:35px;">-->
-            <!--<div><strong>will show custom form data and regulatory updates</strong></div>-->
-            <!--<div>{{row.archivalStatus}}, {{row.documentName}}</div>-->
+  <div *ngFor="let document of documentDataList; index as i;" class="document-card-list">
+    <app-document-detail
+      [documentData]="document">
+    </app-document-detail>
+  </div>
+
+  <!--<div class="document-list-table">-->
+    <!--<ngx-datatable #myTable-->
+      <!--class="material striped document-list-datatable"-->
+      <!--[columnMode]="'flex'"-->
+      <!--[headerHeight]="40"-->
+      <!--[footerHeight]="30"-->
+      <!--[rowHeight]="'auto'"-->
+      <!--[rows]="documentDataList"-->
+      <!--[limit]="10"-->
+      <!--[sorts]="[-->
+        <!--{prop: 'lastUpdatedDate', dir: 'desc'}-->
+      <!--]"-->
+    <!--&gt;-->
+      <!--&lt;!&ndash; Row Detail Template &ndash;&gt;-->
+      <!--<ngx-datatable-row-detail [rowHeight]="'auto'" #myDetailRow (toggle)="onDetailToggle($event)">-->
+        <!--<ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>-->
+          <!--&lt;!&ndash;<div style="padding-left:35px;">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div><strong>will show custom form data and regulatory updates</strong></div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div>{{row.archivalStatus}}, {{row.documentName}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--<app-document-metadata [documentData]="row" [regulatoryData]=getRegulatoryActionData(row.documentID)>-->
+
+          <!--</app-document-metadata>-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-row-detail>-->
+
+      <!--&lt;!&ndash; Column Templates &ndash;&gt;-->
+      <!--<ngx-datatable-column name="Actions" [flexGrow]="0.5">-->
+        <!--<ng-template let-column="column" ngx-datatable-header-template></ng-template>-->
+        <!--<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>-->
+          <!--<div class="radio-selection" *ngIf="row.archivalEligible">-->
+            <!--<mat-radio-button name="archiveSelection" [checked]="row.documentID===selectedDocumentID"-->
+                              <!--(change)="documentSelectionChange(row)">-->
+
+            <!--</mat-radio-button>-->
           <!--</div>-->
-          <app-document-detail [documentData]="row" [regulatoryData]=getRegulatoryActionData(row.documentID)>
-
-          </app-document-detail>
-        </ng-template>
-      </ngx-datatable-row-detail>
-
-      <!-- Column Templates -->
-      <ngx-datatable-column name="Actions" [flexGrow]="0.5">
-        <ng-template let-column="column" ngx-datatable-header-template></ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <div class="radio-selection" *ngIf="row.archivalEligible">
-            <mat-radio-button name="archiveSelection" [checked]="row.documentID===selectedDocumentID"
-                              (change)="documentSelectionChange(row)">
-
-            </mat-radio-button>
-          </div>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column [flexGrow]="0">
-        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-          <a
-            href="javascript:void(0)"
-            [class.datatable-icon-right]="!expanded"
-            [class.datatable-icon-down]="expanded"
-            title="Show More Information"
-            (click)="toggleExpandRow(row)">
-          </a>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column prop="documentName" [flexGrow]="3">
-        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-          <span (click)="sort()">Document Name</span>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <span>
-            <a [href]="getShowDocumentLink(row)" target="_blank">
-              {{value}}
-              <img src="assets/archived.png" *ngIf="row.archivalStatus==='Archived'" class="archived-img"/>
-            </a>
-          </span>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column prop="lastUpdatedDate" [flexGrow]="1">
-        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-          <span (click)="sort()">Last Modified</span>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          {{value | date: "MM/dd/yyyy HH:mm:ss"}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column prop="approvers" [flexGrow]="2">
-        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-          <span (click)="sort()">Document Approvals</span>
-        </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          <div *ngFor="let v of value">
-            {{v}}
-          </div>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column [flexGrow]="1">
-        <ng-template let-column="column" ngx-datatable-header-template>
-          <span>PDF Preview</span>
-        </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-          <span *ngIf="row.documentID===selectedDocumentID">
-            <a (click)="showPDFPreview(row)">
-              <img src="assets/pdf_preview.png"
-                   *ngIf="row.previewEligible"
-                   class="preview-img"
-                   ng-click="showPDFPreview(row)"/>
-            </a>
-          </span>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column prop="archivalStatus"  [flexGrow]="2">
-        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-          <span (click)="sort()">Archive Status</span>
-        </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            <div class="eligibility-status-text">{{value}}</div>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
-  </div>
-  <div class="document-list-action">
-    <span>
-      <!--<button mat-button [disabled]="true">Previous Step</button>-->
-      <button mat-raised-button color="accent"
-              (click)="validate()" [disabled]="selectedDocumentID === null">
-        Next Step
-      </button>
-    </span>
-  </div>
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+      <!--<ngx-datatable-column [flexGrow]="0">-->
+        <!--<ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>-->
+          <!--<a-->
+            <!--href="javascript:void(0)"-->
+            <!--[class.datatable-icon-right]="!expanded"-->
+            <!--[class.datatable-icon-down]="expanded"-->
+            <!--title="Show More Information"-->
+            <!--(click)="toggleExpandRow(row)">-->
+          <!--</a>-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+      <!--<ngx-datatable-column prop="documentName" [flexGrow]="3">-->
+        <!--<ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>-->
+          <!--<span (click)="sort()">Document Name</span>-->
+        <!--</ng-template>-->
+        <!--<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>-->
+          <!--<span>-->
+            <!--<a [href]="getShowDocumentLink(row)" target="_blank">-->
+              <!--{{value}}-->
+              <!--<img src="assets/archived.png" *ngIf="row.archivalStatus==='Archived'" class="archived-img"/>-->
+            <!--</a>-->
+          <!--</span>-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+      <!--<ngx-datatable-column prop="lastUpdatedDate" [flexGrow]="1">-->
+        <!--<ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>-->
+          <!--<span (click)="sort()">Last Modified</span>-->
+        <!--</ng-template>-->
+        <!--<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>-->
+          <!--{{value | date: "MM/dd/yyyy HH:mm:ss"}}-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+      <!--<ngx-datatable-column prop="approvers" [flexGrow]="2">-->
+        <!--<ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>-->
+          <!--<span (click)="sort()">Document Approvals</span>-->
+        <!--</ng-template>-->
+        <!--<ng-template let-value="value" ngx-datatable-cell-template>-->
+          <!--<div *ngFor="let v of value">-->
+            <!--{{v}}-->
+          <!--</div>-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+      <!--<ngx-datatable-column [flexGrow]="1">-->
+        <!--<ng-template let-column="column" ngx-datatable-header-template>-->
+          <!--<span>PDF Preview</span>-->
+        <!--</ng-template>-->
+        <!--<ng-template let-row="row" let-value="value" ngx-datatable-cell-template>-->
+          <!--<span *ngIf="row.documentID===selectedDocumentID">-->
+            <!--<a (click)="showPDFPreview(row)">-->
+              <!--<img src="assets/pdf_preview.png"-->
+                   <!--*ngIf="row.previewEligible"-->
+                   <!--class="preview-img"-->
+                   <!--ng-click="showPDFPreview(row)"/>-->
+            <!--</a>-->
+          <!--</span>-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+      <!--<ngx-datatable-column prop="archivalStatus"  [flexGrow]="2">-->
+        <!--<ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>-->
+          <!--<span (click)="sort()">Archive Status</span>-->
+        <!--</ng-template>-->
+        <!--<ng-template let-value="value" ngx-datatable-cell-template>-->
+            <!--<div class="eligibility-status-text">{{value}}</div>-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+    <!--</ngx-datatable>-->
+  <!--</div>-->
+  <!--<div class="document-list-action">-->
+    <!--<span>-->
+      <!--&lt;!&ndash;<button mat-button [disabled]="true">Previous Step</button>&ndash;&gt;-->
+      <!--<button mat-raised-button color="accent"-->
+              <!--(click)="validate()" [disabled]="selectedDocumentID === null">-->
+        <!--Next Step-->
+      <!--</button>-->
+    <!--</span>-->
+  <!--</div>-->
 </div>
 
 

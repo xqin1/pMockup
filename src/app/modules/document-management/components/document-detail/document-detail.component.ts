@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
-import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
-import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
+import {environment} from '@env/environment';
+import {DocumentApprover} from '@app/modules/document-management/model/document-approver.model';
+import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 
 @Component({
   selector: 'app-document-detail',
@@ -10,32 +11,40 @@ import {ValuePair} from '@app/modules/document-management/model/value-pair.model
 })
 export class DocumentDetailComponent implements OnInit {
   @Input() documentData: DocumentData;
-  @Input() regulatoryData: DocumentRegulatoryActionPayload;
-  constructor() { }
+  @Input() userId: string;
+  constructor(
+    private documentManagementService: DocumentManagementService
+  ) { }
 
-  showDetailTable(): boolean {
-    if((this.documentData &&this.documentData.customFormData.length > 0) ||
-      (this.regulatoryData && this.regulatoryData.regulatoryActions.length > 0)) {
+  getShowDocumentLink(documentData: DocumentData): string {
+    return `${environment.workfrontHost}/document/view?ID=${documentData.documentID}`;
+  }
+
+  getApprovalStatus(approver: DocumentApprover): string {
+    return `${approver.approverName} - ${approver.status}`;
+  }
+
+  getApprovalDate(approver: DocumentApprover): Date {
+    if(approver.status !== "NEW") {
+      return approver.approvalDate;
+    }else{
+      return null;
+    }
+  }
+  isReadyToApprove(approver: DocumentApprover): boolean {
+    if (approver.status !== "APPROVED" && approver.approverID === this.documentManagementService.documentMetadata.userId) {
       return true;
     } else {
       return false;
     }
   }
-  getRegulatoryDisplayData(): ValuePair[] {
-    const displayData: ValuePair[] = [];
-    this.regulatoryData.regulatoryActions.forEach((r) => {
-      let exist = false;
-      this.documentData.customFormData.forEach((c) => {
-        if(c.name === r.name) {
-          exist = true;
-        }
-      });
-      if (!exist) {
-        displayData.push(r);
-      }
-    })
-    return displayData;
-}
+  isReadyToRequestApproval(approver: DocumentApprover): boolean {
+    if (approver.status !== "APPROVED" && approver.approverID !== this.documentManagementService.documentMetadata.userId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   ngOnInit() {
   }
 

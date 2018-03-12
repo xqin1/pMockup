@@ -69,10 +69,6 @@ export const getDocumentRegulatoryActionList = createSelector(
   getDocumentState,
   fromDocument.getDocumentRegulatoryActionList
 );
-export const getNavigationIndex = createSelector(
-  getDocumentState,
-  fromDocument.getNavigationIndex
-);
 export const getSelectedDocument = createSelector(
   getDocumentState,
   fromDocument.getSelectedDocument
@@ -84,12 +80,4 @@ export const getSelectedRegulatoryAction = createSelector(
 export const getSelectedDocumentID = createSelector(
   getDocumentState,
   fromDocument.getSelectedDocumentID
-);
-export const getObjectId = createSelector(
-  getDocumentState,
-  fromDocument.getObjectId
-);
-export const getUserId = createSelector(
-  getDocumentState,
-  fromDocument.getUserId
 );

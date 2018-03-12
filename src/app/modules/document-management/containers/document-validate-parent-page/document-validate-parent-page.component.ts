@@ -16,7 +16,6 @@ import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/
 export class DocumentValidateParentPageComponent implements OnInit {
   selectedDocument$: Observable<DocumentData>;
   selectedRegulatoryData$: Observable<DocumentRegulatoryActionPayload>;
-  userID: Observable<string>;
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
@@ -25,7 +24,6 @@ export class DocumentValidateParentPageComponent implements OnInit {
   ) {
     this.selectedDocument$ = this.store.select((fromDocument.getSelectedDocument));
     this.selectedRegulatoryData$ = this.store.select(fromDocument.getSelectedRegulatoryAction);
-    this.userID = this.store.select((fromDocument.getUserId));
   }
 
   ngOnInit() {

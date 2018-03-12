@@ -1,9 +1,5 @@
-export class Eligibility {
-  documentId: string;
-  archivalEligible: boolean;
-  reason: string[][];
+import {Eligibility} from '@app/modules/document-management/model/eligibility.model';
 
-}
 export class DocumentList {
   objectCode: string;
   documents: any[];

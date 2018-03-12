@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import {RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
 import {LoggerService} from '@app/core/services/logger.service';
 import {ArchiveResponse} from '@app/modules/document-management/model/archive-response.model';
-import {Eligibility} from '@app/modules/document-management/model/document-list.model';
+import {Eligibility} from '@app/modules/document-management/model/eligibility.model';
 
 
 @Injectable()

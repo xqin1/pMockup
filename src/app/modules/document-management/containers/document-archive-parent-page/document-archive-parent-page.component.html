@@ -1,12 +1,4 @@
 <div fxLayout="column" class="fixVertical">
-  <div fxLayout="row" class="navigation-row">
-    <app-navigation
-      [navIndex]="navIndex$ | async"
-      [objectId]="objectId$ | async"
-      [userId]="userId$ | async"
-      (navIndexChange)="onNavIndexChange($event)">
-    </app-navigation>
-  </div>
   <div class="flex-container" fxFlex fxFlexFill>
     <router-outlet></router-outlet>
   </div>

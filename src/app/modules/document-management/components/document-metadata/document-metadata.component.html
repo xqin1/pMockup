@@ -1,0 +1,52 @@
+<div class="document-metadata-page">
+  <div class="no-data-section" *ngIf="!showMetadataTable()">
+    <p>
+      No smart template interview or regulatory information exists for this document
+    </p>
+  </div>
+  <div class="document-metadata-table-section" *ngIf="showMetadataTable()">
+    <table class="expanded-info-table">
+      <tbody>
+        <tr>
+          <th class="expanded-info-header">
+            Validate Smart Template Interview Information
+          </th>
+          <th class="expanded-info-header">
+            Review Regulatory Information
+          </th>
+        </tr>
+      <tr>
+        <td class="communication-info">
+          <table class="communication-info-table">
+            <tbody>
+              <tr *ngFor="let c of documentData.customFormData" class="expand-table-row">
+                <td class="left-column">
+                  <b>{{c.name}}:</b>
+                </td>
+                <td class="right-column">
+                  {{c.value}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td class="regulatory-actions">
+          <table class="reg-action-table" *ngIf="regulatoryData">
+            <tbody>
+              <tr *ngFor="let r of getRegulatoryDisplayData()" class="expand-table-row">
+                <td class="left-column">
+                  <b>{{r.name}}:</b>
+                </td>
+                <td class="right-column">
+                    {{r.value}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

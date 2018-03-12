@@ -40,9 +40,7 @@ export class DocumentListComponent implements OnInit {
     })[0];
   }
 
-  getShowDocumentLink(row: DocumentData) {
-    return `${environment.workfrontHost}/document/view?ID=${row.documentID}`;
-  }
+
   // reArchive(doc: DocumentData): void {
   //   const dialogRef = this.dialog.open(ReArchiveDialogComponent, {
   //     width: '400px',

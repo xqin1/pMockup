@@ -1,0 +1,65 @@
+.expanded-info-table {
+  border: 1px solid #888;
+  margin: 0 auto;
+  width: 80%;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 11px;
+  border-top-color:grey;
+  border-right-color:grey;
+  border-bottom-color:grey;
+  border-left-color:grey;
+
+}
+
+.expanded-info-table th {
+  border: 1px solid #888;
+}
+
+.expand-table-row {
+  border-bottom: 1px solid lightgrey;
+}
+
+.expanded-info-header {
+  text-align: center;
+  height: 30px;
+}
+
+.communication-info {
+  border-right: 1px solid #888;
+  border-top: none;
+  width: 50%;
+}
+
+.regulatory-actions {
+  border-top: none;
+  width: 50%;
+}
+
+.communication-info-table {
+   width: 100%;
+   text-aligh: right;
+   font-size: 10px;
+ }
+
+.reg-action-table {
+  width: 100%;
+  text-aligh: right;
+  font-size: 10px;
+}
+.left-column {
+   width: 50%;
+   text-align: right;
+   padding: 8px 10px 8px 10px;
+ }
+.right-column {
+  width: 50%;
+  text-align: left;
+  padding: 8px 10px 8px 10px;
+}
+.no-data-section {
+  text-align: center;
+}

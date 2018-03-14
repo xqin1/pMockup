@@ -45,34 +45,41 @@ export class DocumentListResolverService implements Resolve<any> {
                 .subscribe( documentList => {
                   // TODO: comment the following line when deploying
                   //  results = DocumentConfig.fakeDocumentList;
-                  const results = new DocumentList();
-                  results.documents = [];
-                  results.eligibility = [];
-                  results.documents = documentList;
-                  results.objectCode = documentList[0]["docObjCode"];
+                  if(documentList.length > 0) {
+                    const results = new DocumentList();
+                    results.documents = [];
+                    results.eligibility = [];
+                    results.documents = documentList;
+                    results.objectCode = documentList[0]["docObjCode"];
 
-                  const eligibilityCheckIDs: string[] = this.documentManagementService.getEligibilityCheckIDs(results);
-                  const eligibilityRequestList: any[] = [];
-                  for (const id of eligibilityCheckIDs){
-                    eligibilityRequestList.push(this.dmService.getArchivalEligibilityByDocumentIdAndUserId(id, userId));
-                  }
-                  forkJoin(eligibilityRequestList).subscribe(eligibilityList => {
-                    for (const eligibility of eligibilityList){
-                      const e = new Eligibility();
-                      e.documentId = eligibility["documentId"];
-                      e.archivalEligible = eligibility["eligible"];
-                      e.reason = eligibility["reasons"];
-                      results.eligibility.push(e);
+                    const eligibilityCheckIDs: string[] = this.documentManagementService.getEligibilityCheckIDs(results);
+                    const eligibilityRequestList: any[] = [];
+                    for (const id of eligibilityCheckIDs) {
+                      eligibilityRequestList.push(this.dmService.getArchivalEligibilityByDocumentIdAndUserId(id, userId));
                     }
+                    forkJoin(eligibilityRequestList).subscribe(eligibilityList => {
+                      for (const eligibility of eligibilityList) {
+                        const e = new Eligibility();
+                        e.documentId = eligibility["documentId"];
+                        e.archivalEligible = eligibility["eligible"];
+                        e.reason = eligibility["reasons"];
+                        results.eligibility.push(e);
+                      }
+                      const payload = new DocumentListLoadPayload();
+                      //
+                      payload.documentListData = this.documentManagementService.processDocumentList(results, userId, objectId);
+                      console.log(payload);
+                      this.documentManagementService.documentListLoaded = true;
+                      this.store.dispatch(new documentAction.Document_List_Loading(false));
+                      this.store.dispatch((new documentAction.Document_List_Loaded(payload)));
+                      return of(true);
+                    });
+                  }else{
                     const payload = new DocumentListLoadPayload();
-                    //
-                    payload.documentListData = this.documentManagementService.processDocumentList(results, userId, objectId);
-                    console.log(payload);
-                    this.documentManagementService.documentListLoaded = true;
                     this.store.dispatch(new documentAction.Document_List_Loading(false));
                     this.store.dispatch((new documentAction.Document_List_Loaded(payload)));
                     return of(true);
-                  });
+                  }
 
                 });
           }

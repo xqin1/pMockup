@@ -70,15 +70,5 @@ a {
   font-weight: bold;
   margin: 20px;
 }
-.document-card-list {
-  padding-bottom: 15px;
-}
 
- .document-card-list:hover {
-  cursor: pointer;
 
-  /*Opacity*/
-  zoom: 1;
-  filter: alpha(opacity=100);
-  opacity: 1;
-}

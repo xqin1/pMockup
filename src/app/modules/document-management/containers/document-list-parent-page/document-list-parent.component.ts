@@ -37,10 +37,10 @@ export class DocumentListParentComponent implements OnInit {
     this.store.dispatch(new documentAction.Document_Selected(documentID));
   }
   onDocumentValidate(documentID: string) {
-    this.store.dispatch(new documentAction.Navigation_Index_Changed(1));
     this.router.navigate(['/document-archive', 'validation', documentID]);
   }
-  onDocumentRegulatoryActionUpdated(ra: DocumentRegulatoryActionPayload) {
-    this.store.dispatch(new documentAction.Document_Regulatory_Action_Updated(ra));
+  onRegulatoryData(documentId: string) {
+    console.log("document list parent: " + documentId);
+   this.store.dispatch(new documentAction.Document_Regulatory_Action_Update(documentId));
   }
 }

@@ -11,6 +11,7 @@ import { DocumentManagementRoutingModule, routedComponents } from './document-ar
 import { FilePreviewDialogComponent } from './components/file-preview-dialog/file-preview-dialog.component';
 import { NotificationComponent} from '@app/shared/components/notification/notification.component';
 import { DocumentMetadataComponent } from './components/document-metadata/document-metadata.component';
+import {DocumentEffects} from '@app/modules/document-management/effects/document.effect';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { DocumentMetadataComponent } from './components/document-metadata/docume
     SharedModule,
     DocumentManagementRoutingModule,
     NgxDatatableModule,
-    StoreModule.forFeature('documentManagement', reducers)
+    StoreModule.forFeature('documentManagement', reducers),
+    EffectsModule.forFeature([DocumentEffects])
   ],
   declarations: [routedComponents, DocumentMetadataComponent],
   providers: [ DocumentManagementService, DocumentListResolverService],

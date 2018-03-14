@@ -1,6 +1,7 @@
 import * as documentAction from '@app/modules/document-management/actions/document.action.ts';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
+import {LoadingStatus} from '@app/modules/document-management/model/loading-status.model';
 
 
 export interface State {
@@ -9,6 +10,7 @@ export interface State {
   documentDataList: DocumentData[];
   documentRegulatoryActionList: DocumentRegulatoryActionPayload[];
   selectedDocumentID: string;
+  regulatoryLoadingStatus: LoadingStatus;
 }
 
 const initialState: State = {
@@ -17,6 +19,7 @@ const initialState: State = {
   documentDataList: null,
   documentRegulatoryActionList: [],
   selectedDocumentID: null,
+  regulatoryLoadingStatus: null
 };
 
 export function reducer(state = initialState, action: documentAction.Actions): State {
@@ -40,7 +43,15 @@ export function reducer(state = initialState, action: documentAction.Actions): S
         selectedDocumentID: action.payload
       };
     }
-
+    case documentAction.DOCUMENT_REGULATORY_ACTION_UPDATE: {
+      const regulatoryLoadingStatus: LoadingStatus = new LoadingStatus();
+      regulatoryLoadingStatus.documentId = action.payload;
+      regulatoryLoadingStatus.loading = true;
+      return {
+        ...state,
+        regulatoryLoadingStatus: regulatoryLoadingStatus
+      };
+    }
     case documentAction.DOCUMENT_REGULATORY_ACTION_UPDATED: {
         const newDocumentRegulatoryActionList = [].concat(state.documentRegulatoryActionList);
         newDocumentRegulatoryActionList.push(action.payload);
@@ -69,5 +80,5 @@ export const getSelectedRegulatoryAction = (state: State) => {
     return d.documentID === state.selectedDocumentID;
   })[0];
 };
-
+export const getRegulaotryLoadingStatus = (state: State) => state.regulatoryLoadingStatus;
 

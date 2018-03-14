@@ -63,14 +63,18 @@ export class DocumentManagementService {
       if (!DocumentConfig.archivingStatusCode.includes(archivalStatus) && document.archivalEligible){
         archivalStatus = `Ready to archive.\n${archivalStatus}`;
       }
-    }
-    if (archivalStatus === null && !document.archivalEligible){
-      archivalStatus = document.eligibilityData.reason[0][0];
-      if (document.eligibilityData.reason.length > 1) {
-        const numberOfOtherReasons = document.eligibilityData.reason.length - 1;
-        archivalStatus += ` and ${numberOfOtherReasons} other(s)`;
+    } else {
+      if (document.archivalEligible) {
+        archivalStatus = "Ready to archive";
+      }else{
+        archivalStatus = document.eligibilityData.reason[0][0];
+        if (document.eligibilityData.reason.length > 1) {
+          const numberOfOtherReasons = document.eligibilityData.reason.length - 1;
+          archivalStatus += ` and ${numberOfOtherReasons} other(s)`;
+        }
       }
     }
+
     document.archivalStatus = archivalStatus;
   }
   // setDocumentAction(document: DocumentData): boolean {

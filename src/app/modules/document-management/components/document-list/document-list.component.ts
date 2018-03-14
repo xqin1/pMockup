@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, SimpleChange, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChange, OnChanges} from '@angular/core';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import { MatDialog } from '@angular/material';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material';
-import { environment} from '@env/environment';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import { NotificationComponent} from '@app/shared/components/notification/notification.component';
 import { PEFService} from '@app/core/services/pef.service';
@@ -22,9 +21,8 @@ export class DocumentListComponent implements OnInit {
   @Input() selectedDocumentID: string;
   @Output() documentSelected= new EventEmitter<String>();
   @Output() documentValidate = new EventEmitter<String>();
-  @Output() documentRegulatoryActionUpdated = new EventEmitter<DocumentRegulatoryActionPayload>();
+  @Output() regulatoryData = new EventEmitter<String>();
 
-  @ViewChild('myTable') table: any;
   constructor(
     public dialog: MatDialog,
     public snackkBar: MatSnackBar,
@@ -34,6 +32,10 @@ export class DocumentListComponent implements OnInit {
   ) {
   }
 
+  onRegulatoryData(documentId: string){
+    this.regulatoryData.emit(documentId);
+    console.log("document list emit: " + documentId);
+  }
   getRegulatoryActionData(documentID: string) {
     return this.documentRegulatoryActionList.filter((d) => {
       return d.documentID === documentID;
@@ -69,20 +71,20 @@ export class DocumentListComponent implements OnInit {
 
   }
 
-  toggleExpandRow(row) {
-    if (this.getRegulatoryActionData(row.documentID)) {
-      this.table.rowDetail.toggleExpandRow(row);
-    } else {
-      this.pefService.getRegulatoryActionByDocumentID(row.documentID)
-        .subscribe( result => {
-          const ra = new DocumentRegulatoryActionPayload();
-          ra.documentID = row.documentID;
-          ra.regulatoryActions = this.documentManagementService.setRegulatoryActionData(result.regulatoryActions);
-          this.documentRegulatoryActionUpdated.emit(ra);
-           this.table.rowDetail.toggleExpandRow(row);
-        });
-    }
-  }
+  // toggleExpandRow(row) {
+  //   if (this.getRegulatoryActionData(row.documentID)) {
+  //     this.table.rowDetail.toggleExpandRow(row);
+  //   } else {
+  //     this.pefService.getRegulatoryActionByDocumentID(row.documentID)
+  //       .subscribe( result => {
+  //         const ra = new DocumentRegulatoryActionPayload();
+  //         ra.documentID = row.documentID;
+  //         ra.regulatoryActions = this.documentManagementService.setRegulatoryActionData(result.regulatoryActions);
+  //         this.documentRegulatoryActionUpdated.emit(ra);
+  //          this.table.rowDetail.toggleExpandRow(row);
+  //       });
+  //   }
+  // }
 
   onDetailToggle(event) {
     console.log('Detail Toggled', event);
@@ -101,7 +103,7 @@ export class DocumentListComponent implements OnInit {
           const ra = new DocumentRegulatoryActionPayload();
           ra.documentID = this.selectedDocumentID;
           ra.regulatoryActions = this.documentManagementService.setRegulatoryActionData(result.regulatoryActions);
-          this.documentRegulatoryActionUpdated.emit(ra);
+          // this.documentRegulatoryActionUpdated.emit(ra);
           this.documentValidate.emit(this.selectedDocumentID);
         });
     }

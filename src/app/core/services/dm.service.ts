@@ -54,4 +54,16 @@ export class DMService {
         })
       );
   }
+  getRegulatoryActionByDocumentID(documentID) {
+    return this.http
+      .get<RegulatoryData>(`${environment.pefDocumentArchiveURL}/getRegulatoryActions?documentID=${documentID}`)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          // do something
+          this.logger.log("done with retrieving regulatory data");
+        })
+      );
+  }
 }

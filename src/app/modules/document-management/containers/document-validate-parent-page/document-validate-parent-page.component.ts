@@ -31,13 +31,11 @@ export class DocumentValidateParentPageComponent implements OnInit {
 
   onCancelArchive(result: boolean) {
     if (result) {
-      this.store.dispatch(new documentAction.Navigation_Index_Changed(0));
     }
 
   }
 
   onArchiveDocument(data: DocumentData) {
-    this.store.dispatch(new documentAction.Navigation_Index_Changed(2));
     this.router.navigate(['/document-archive', 'confirmation', data.documentID]);
   }
 

@@ -81,3 +81,7 @@ export const getSelectedDocumentID = createSelector(
   getDocumentState,
   fromDocument.getSelectedDocumentID
 );
+export const getRegulatoryLoadingStatus = createSelector(
+  getDocumentState,
+  fromDocument.getRegulaotryLoadingStatus
+);

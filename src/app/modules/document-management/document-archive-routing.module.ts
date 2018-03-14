@@ -4,7 +4,8 @@ import { DocumentListParentComponent} from './containers/document-list-parent-pa
 import { DocumentListComponent} from './components/document-list/document-list.component';
 import {DocumentArchiveParentPageComponent} from '@app/modules/document-management/containers/document-archive-parent-page/document-archive-parent-page.component';
 import { DocumentListResolverService} from '@app/modules/document-management/services/document-list-resolver.service';
-import { DocumentValidateParentPageComponent} from '@app/modules/document-management/containers/document-validate-parent-page/document-validate-parent-page.component';
+import { DocumentMetadataParentPageComponent} from '@app/modules/document-management/containers/document-metadata-parent-page/document-metadata-parent-page.component';
+import { DocumentMetadataComponent} from '@app/modules/document-management/components/document-metadata/document-metadata.component';
 import { DocumentValidationComponent} from '@app/modules/document-management/components/document-validation/document-validation.component';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import { DocumentDetailComponent} from '@app/modules/document-management/components/document-detail/document-detail.component';
@@ -26,8 +27,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'validation/:documentId',
-        component: DocumentValidateParentPageComponent,
+        path: 'document-metadata/:documentId',
+        component: DocumentMetadataParentPageComponent,
 
       }
     ]
@@ -40,6 +41,6 @@ const routes: Routes = [
 })
 export class DocumentManagementRoutingModule { }
 export const routedComponents = [DocumentListParentComponent,
-  DocumentListComponent, DocumentArchiveParentPageComponent, DocumentValidateParentPageComponent,
-  DocumentValidationComponent,
+  DocumentListComponent, DocumentArchiveParentPageComponent, DocumentMetadataParentPageComponent,
+  DocumentMetadataComponent,
   FilePreviewDialogComponent, DocumentDetailComponent];

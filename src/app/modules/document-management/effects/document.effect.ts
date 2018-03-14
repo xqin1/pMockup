@@ -34,6 +34,7 @@ export class DocumentEffects {
         .pipe(
             map((results: RegulatoryData) => {
               const ra = new DocumentRegulatoryActionPayload();
+              ra.documentID = documentId;
               if (results.regulatoryActionExist) {
                 ra.regulatoryActions = this.documentManagementService.setRegulatoryActionData(results.regulatoryActions);
               }else{

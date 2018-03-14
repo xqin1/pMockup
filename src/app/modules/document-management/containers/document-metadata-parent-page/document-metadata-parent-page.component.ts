@@ -9,11 +9,11 @@ import {DocumentData} from '@app/modules/document-management/model/documant-data
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 
 @Component({
-  selector: 'app-document-validate-parent-page',
-  templateUrl: './document-validate-parent-page.component.html',
-  styleUrls: ['./document-validate-parent-page.component.css']
+  selector: 'app-document-metadata-parent-page',
+  templateUrl: './document-metadata-parent-page.component.html',
+  styleUrls: ['./document-metadata-parent-page.component.css']
 })
-export class DocumentValidateParentPageComponent implements OnInit {
+export class DocumentMetadataParentPageComponent implements OnInit {
   selectedDocument$: Observable<DocumentData>;
   selectedRegulatoryData$: Observable<DocumentRegulatoryActionPayload>;
   constructor(

@@ -7,6 +7,7 @@ import { DocumentConfig } from '@app/modules/document-management/config.ts';
 import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
 import {DocumentApprover} from '@app/modules/document-management/model/document-approver.model';
 import {DocumentMetadata} from '@app/modules/document-management/model/document-metadata.model';
+import { RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
 
 @Injectable()
 export class DocumentManagementService {
@@ -43,6 +44,9 @@ export class DocumentManagementService {
     documentData.documentName = `${doc["name"]}.${doc["currentVersion"]['ext']}`;
     documentData.lastUpdatedDate = new Date(doc['lastModDate']);
     documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
+    documentData.regulatoryData = new RegulatoryData();
+    documentData.regulatoryData.regulatoryActionExist = false;
+    documentData.regulatoryData.regulatoryActions = [];
     this.setDocumentArchivalStatus(documentData);
     this.setDocumentApprovers(documentData, doc);
     documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);

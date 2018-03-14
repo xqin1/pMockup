@@ -3,6 +3,7 @@ import {DocumentData} from '@app/modules/document-management/model/documant-data
 import {environment} from '@env/environment';
 import {DocumentApprover} from '@app/modules/document-management/model/document-approver.model';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-document-detail',
@@ -14,7 +15,9 @@ export class DocumentDetailComponent implements OnInit {
   @Input() userId: string;
   @Output() regulatoryData = new EventEmitter<string>();
   constructor(
-    private documentManagementService: DocumentManagementService
+    private documentManagementService: DocumentManagementService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   getShowDocumentLink(documentData: DocumentData): string {
@@ -62,12 +65,10 @@ export class DocumentDetailComponent implements OnInit {
     return document.archivalStatus.includes("Ineligible for Archiving");
   }
   showMetaData(document: DocumentData): void {
-    if (document.regulatoryData){
-      console.log("regulatory data exist");
-    } else {
+    if (!document.regulatoryData.regulatoryActionExist){
       this.regulatoryData.emit(document.documentID);
-      console.log("regulatory data not exist");
     }
+    this.router.navigate(['/document-management', 'metadata', document.documentID]);
   }
   ngOnInit() {
   }

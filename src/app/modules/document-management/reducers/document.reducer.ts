@@ -2,7 +2,7 @@ import * as documentAction from '@app/modules/document-management/actions/docume
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 import {LoadingStatus} from '@app/modules/document-management/model/loading-status.model';
-
+import { RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
 
 export interface State {
   documentListLoading: boolean;
@@ -53,11 +53,16 @@ export function reducer(state = initialState, action: documentAction.Actions): S
       };
     }
     case documentAction.DOCUMENT_REGULATORY_ACTION_UPDATED: {
-        const newDocumentRegulatoryActionList = [].concat(state.documentRegulatoryActionList);
-        newDocumentRegulatoryActionList.push(action.payload);
+        const newDocumentDataList = JSON.parse(JSON.stringify(state.documentDataList));
+        newDocumentDataList.map((d: DocumentData) => {
+          if (d.documentID === action.payload.documentID){
+            d.regulatoryData.regulatoryActions = [].concat(action.payload.regulatoryActions);
+            d.regulatoryData.regulatoryActionExist = true;
+          }
+        });
         return {
           ...state,
-          documentRegulatoryActionList: newDocumentRegulatoryActionList
+          documentDataList: newDocumentDataList
         };
     }
     default: {

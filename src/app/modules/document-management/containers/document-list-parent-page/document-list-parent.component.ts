@@ -40,7 +40,6 @@ export class DocumentListParentComponent implements OnInit {
     this.router.navigate(['/document-archive', 'validation', documentID]);
   }
   onRegulatoryData(documentId: string) {
-    console.log("document list parent: " + documentId);
    this.store.dispatch(new documentAction.Document_Regulatory_Action_Update(documentId));
   }
 }

@@ -45,7 +45,7 @@ export class DocumentListResolverService implements Resolve<any> {
                 .subscribe( documentList => {
                   // TODO: comment the following line when deploying
                   //  results = DocumentConfig.fakeDocumentList;
-                  if(documentList.length > 0) {
+                  if (documentList.length > 0) {
                     const results = new DocumentList();
                     results.documents = [];
                     results.eligibility = [];

@@ -10,12 +10,10 @@ import {ValuePair} from '@app/modules/document-management/model/value-pair.model
 })
 export class DocumentMetadataComponent implements OnInit {
   @Input() documentData: DocumentData;
-  @Input() regulatoryData: DocumentRegulatoryActionPayload;
   constructor() { }
 
   showMetadataTable(): boolean {
-    if ((this.documentData && this.documentData.customFormData.length > 0) ||
-      (this.regulatoryData && this.regulatoryData.regulatoryActions.length > 0)) {
+    if ((this.documentData && this.documentData.customFormData.length > 0)) {
       return true;
     } else {
       return false;
@@ -23,7 +21,7 @@ export class DocumentMetadataComponent implements OnInit {
   }
   getRegulatoryDisplayData(): ValuePair[] {
     const displayData: ValuePair[] = [];
-    this.regulatoryData.regulatoryActions.forEach((r) => {
+    this.documentData.regulatoryData.regulatoryActions.forEach((r) => {
       let exist = false;
       this.documentData.customFormData.forEach((c) => {
         if (c.name === r.name) {

@@ -4,7 +4,7 @@ import { PageNotFoundComponent} from '@app/core/components/page-not-found/page-n
 
 const routes: Routes = [
   {
-    path: 'document-archive',
+    path: 'document-management',
     loadChildren: './modules/document-management/document-archive.module#DocumentArchiveModule',
   },
     { path: '**', component: PageNotFoundComponent }

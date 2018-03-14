@@ -1,0 +1,6 @@
+<app-document-metadata
+  [documentData]="selectedDocument$ | async"
+  (cancelArchive)="onCancelArchive($event)"
+  (archiveDocument)="onArchiveDocument($event)">
+
+</app-document-metadata>

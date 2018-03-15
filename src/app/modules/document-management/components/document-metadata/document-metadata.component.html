@@ -5,6 +5,12 @@
     </p>
   </div>
   <div class="document-metadata-table-section" *ngIf="showMetadataTable()">
+    <div class="document-link-link">
+      <button mat-button color="primary" (click)="goToDocumentList()">
+        <mat-icon>keyboard_return</mat-icon>back to document list
+      </button>
+    </div>
+    <h2>Document Metadata</h2>
     <table class="expanded-info-table">
       <tbody>
         <tr>
@@ -31,7 +37,7 @@
           </table>
         </td>
         <td class="regulatory-actions">
-          <table class="reg-action-table" *ngIf="regulatoryData">
+          <table class="reg-action-table">
             <tbody>
               <tr *ngFor="let r of getRegulatoryDisplayData()" class="expand-table-row">
                 <td class="left-column">

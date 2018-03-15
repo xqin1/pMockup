@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import * as fromDocument from 'app/modules/document-management/reducers/index.reducer';
-import * as documentAction from '@app/modules/document-management/actions/document.action';
 
 @Component({
-  selector: 'app-document-archive-parent-page',
-  templateUrl: './document-archive-parent-page.component.html',
-  styleUrls: ['./document-archive-parent-page.component.css']
+  selector: 'app-document-management-parent-page',
+  templateUrl: './document-management-parent-page.component.html',
+  styleUrls: ['./document-management-parent-page.component.css']
 })
-export class DocumentArchiveParentPageComponent implements OnInit {
+export class DocumentManagementParentPageComponent implements OnInit {
   documentListLoading$: Observable<boolean>;
   constructor(
     private store: Store<fromDocument.State>,

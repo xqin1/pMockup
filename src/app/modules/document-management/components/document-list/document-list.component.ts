@@ -34,64 +34,8 @@ export class DocumentListComponent implements OnInit {
 
   onRegulatoryData(documentId: string){
     this.regulatoryData.emit(documentId);
-    console.log("document list emit: " + documentId);
-  }
-  getRegulatoryActionData(documentID: string) {
-    return this.documentRegulatoryActionList.filter((d) => {
-      return d.documentID === documentID;
-    })[0];
   }
 
-
-  // reArchive(doc: DocumentData): void {
-  //   const dialogRef = this.dialog.open(ReArchiveDialogComponent, {
-  //     width: '400px',
-  //     data: doc
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('dialog closed');
-  //     console.log(result);
-  //   });
-  // }
-  showPDFPreview(doc: DocumentData) {
-    const snackBarRef = this.snackkBar.openFromComponent(NotificationComponent, {
-      data: "Loading PDF Preview...",
-      verticalPosition: "top"
-    });
-    this.dmService.getPDFPreviewByDocumentID(doc.documentID)
-      .subscribe( result => {
-        snackBarRef.dismiss();
-        this.dialog.open(FilePreviewDialogComponent, {
-          width: '800px',
-          height: '600px',
-          data: {document: doc, pdfContent: 'pdfContent'}
-        });
-        console.log(result);
-      });
-
-  }
-
-  // toggleExpandRow(row) {
-  //   if (this.getRegulatoryActionData(row.documentID)) {
-  //     this.table.rowDetail.toggleExpandRow(row);
-  //   } else {
-  //     this.pefService.getRegulatoryActionByDocumentID(row.documentID)
-  //       .subscribe( result => {
-  //         const ra = new DocumentRegulatoryActionPayload();
-  //         ra.documentID = row.documentID;
-  //         ra.regulatoryActions = this.documentManagementService.setRegulatoryActionData(result.regulatoryActions);
-  //         this.documentRegulatoryActionUpdated.emit(ra);
-  //          this.table.rowDetail.toggleExpandRow(row);
-  //       });
-  //   }
-  // }
-
-  onDetailToggle(event) {
-    console.log('Detail Toggled', event);
-  }
-  documentSelectionChange(data: DocumentData) {
-    this.documentSelected.emit(data.documentID);
-  }
   validate() {
     console.log("validate");
     console.log(this.selectedDocumentID);

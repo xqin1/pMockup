@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
-import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
 
 @Component({
@@ -33,7 +32,11 @@ export class DocumentMetadataComponent implements OnInit {
       }
     });
     return displayData;
-}
+  }
+  goToDocumentList(): void {
+    console.log("go back");
+    // this.router.navigate(['/document-management', 'document-list', documentID]);
+  }
   ngOnInit() {
   }
 }

@@ -6,7 +6,6 @@ import {DocumentArchiveParentPageComponent} from '@app/modules/document-manageme
 import { DocumentListResolverService} from '@app/modules/document-management/services/document-list-resolver.service';
 import { DocumentMetadataParentPageComponent} from '@app/modules/document-management/containers/document-metadata-parent-page/document-metadata-parent-page.component';
 import { DocumentMetadataComponent} from '@app/modules/document-management/components/document-metadata/document-metadata.component';
-import { DocumentValidationComponent} from '@app/modules/document-management/components/document-validation/document-validation.component';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import { DocumentDetailComponent} from '@app/modules/document-management/components/document-detail/document-detail.component';
 

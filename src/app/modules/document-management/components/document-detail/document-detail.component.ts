@@ -68,7 +68,7 @@ export class DocumentDetailComponent implements OnInit {
     if (!document.regulatoryData.regulatoryActionExist){
       this.regulatoryData.emit(document.documentID);
     }
-    this.router.navigate(['/document-management', 'metadata', document.documentID]);
+    this.router.navigate(['/document-management', 'document-metadata', document.documentID]);
   }
   ngOnInit() {
   }

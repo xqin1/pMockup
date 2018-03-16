@@ -8,7 +8,6 @@ export interface State {
   documentListLoading: boolean;
   documentListLoaded: boolean;
   documentDataList: DocumentData[];
-  documentRegulatoryActionList: DocumentRegulatoryActionPayload[];
   selectedDocumentID: string;
   regulatoryLoadingStatus: LoadingStatus;
 }
@@ -17,7 +16,6 @@ const initialState: State = {
   documentListLoading: true,
   documentListLoaded: false,
   documentDataList: null,
-  documentRegulatoryActionList: [],
   selectedDocumentID: null,
   regulatoryLoadingStatus: null
 };
@@ -54,16 +52,22 @@ export function reducer(state = initialState, action: documentAction.Actions): S
     }
     case documentAction.DOCUMENT_REGULATORY_ACTION_UPDATED: {
         const newDocumentDataList = JSON.parse(JSON.stringify(state.documentDataList));
-        newDocumentDataList.map((d: DocumentData) => {
+      const regulatoryLoadingStatus: LoadingStatus = new LoadingStatus();
+
+      newDocumentDataList.map((d: DocumentData) => {
           if (d.documentID === action.payload.documentID){
             d.regulatoryData.regulatoryActions = [].concat(action.payload.regulatoryActions);
             d.regulatoryData.regulatoryActionExist = true;
+            regulatoryLoadingStatus.documentId = d.documentID;
           }
         });
-        return {
+      regulatoryLoadingStatus.loading = true;
+      return {
           ...state,
-          documentDataList: newDocumentDataList
-        };
+          documentDataList: newDocumentDataList,
+          regulatoryLoadingStatus: regulatoryLoadingStatus
+
+      };
     }
     default: {
       return state;
@@ -73,16 +77,10 @@ export function reducer(state = initialState, action: documentAction.Actions): S
 export const getDocumentListLoading = (state: State) => state.documentListLoading;
 export const getDocumentListLoaded = (state: State) => state.documentListLoaded;
 export const getDocumentDataList = (state: State) => state.documentDataList;
-export const getDocumentRegulatoryActionList = (state: State) => state.documentRegulatoryActionList;
 export const getSelectedDocumentID = (state: State) => state.selectedDocumentID;
 export const getSelectedDocument = (state: State) => {
   return state.documentDataList.filter((d) => {
      return d.documentID === state.selectedDocumentID;
-  })[0];
-};
-export const getSelectedRegulatoryAction = (state: State) => {
-  return state.documentRegulatoryActionList.filter((d) => {
-    return d.documentID === state.selectedDocumentID;
   })[0];
 };
 export const getRegulaotryLoadingStatus = (state: State) => state.regulatoryLoadingStatus;

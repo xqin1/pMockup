@@ -7,6 +7,7 @@ import { DocumentManagementService} from '@app/modules/document-management/servi
 import { ActivatedRoute, Router } from '@angular/router';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
+import {LoadingStatus} from '@app/modules/document-management/model/loading-status.model';
 
 @Component({
   selector: 'app-document-metadata-parent-page',
@@ -15,7 +16,7 @@ import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/
 })
 export class DocumentMetadataParentPageComponent implements OnInit {
   selectedDocument$: Observable<DocumentData>;
-  selectedRegulatoryData$: Observable<DocumentRegulatoryActionPayload>;
+  regulatoryDataLoadingStatus$: Observable<LoadingStatus>;
   constructor(
     private documentManagementService: DocumentManagementService,
     private store: Store<fromDocument.State>,
@@ -23,7 +24,7 @@ export class DocumentMetadataParentPageComponent implements OnInit {
     private router: Router
   ) {
     this.selectedDocument$ = this.store.select((fromDocument.getSelectedDocument));
-    this.selectedRegulatoryData$ = this.store.select(fromDocument.getSelectedRegulatoryAction);
+    this.regulatoryDataLoadingStatus$ = this.store.select((fromDocument.getRegulatoryLoadingStatus));
   }
 
   ngOnInit() {

@@ -8,6 +8,7 @@ import {ValuePair} from '@app/modules/document-management/model/value-pair.model
 import {DocumentApprover} from '@app/modules/document-management/model/document-approver.model';
 import {DocumentMetadata} from '@app/modules/document-management/model/document-metadata.model';
 import { RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
+import {LoggerService} from '@app/core/services/logger.service';
 
 @Injectable()
 export class DocumentManagementService {
@@ -15,9 +16,10 @@ export class DocumentManagementService {
   documentDataList: DocumentData[] = [];
   projectStatus: string = null;
   projectClosed = false;
-  objectCode: string = null;
   documentMetadata: DocumentMetadata = new DocumentMetadata();
-  constructor() { }
+  constructor(
+    private logger: LoggerService
+  ) { }
 
   processDocumentList(documentList: DocumentList, userId: string, objectId: string): DocumentData[] {
     if (documentList.documents.length > 0) {
@@ -33,6 +35,7 @@ export class DocumentManagementService {
         documentData.eligibilityData = documentList.eligibility.filter(e => {
           return e.documentId === doc["id"];
         })[0];
+        console.log(documentData);
         this.processDocument(documentData, doc);
         this.documentDataList.push(documentData);
       });
@@ -42,6 +45,8 @@ export class DocumentManagementService {
   processDocument(documentData: DocumentData, doc: any): DocumentData{
     documentData.documentID = doc["id"];
     documentData.documentName = `${doc["name"]}.${doc["currentVersion"]['ext']}`;
+    documentData.documentSize = doc["currentVersion"]['docSize'];
+    documentData.documentVersion = doc["currentVersion"]['version'];
     documentData.lastUpdatedDate = new Date(doc['lastModDate']);
     documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
     documentData.regulatoryData = new RegulatoryData();
@@ -71,10 +76,14 @@ export class DocumentManagementService {
       if (document.archivalEligible) {
         archivalStatus = "Ready to archive";
       }else{
-        archivalStatus = document.eligibilityData.reason[0][0];
-        if (document.eligibilityData.reason.length > 1) {
-          const numberOfOtherReasons = document.eligibilityData.reason.length - 1;
-          archivalStatus += ` and ${numberOfOtherReasons} other(s)`;
+        if (document.eligibilityData.reason.length > 0) {
+          archivalStatus = document.eligibilityData.reason[0][0];
+          if (document.eligibilityData.reason.length > 1) {
+            const numberOfOtherReasons = document.eligibilityData.reason.length - 1;
+            archivalStatus += ` and ${numberOfOtherReasons} other(s)`;
+          }
+        }else{
+          this.logger.error("error when setting archival status");
         }
       }
     }
@@ -174,7 +183,7 @@ export class DocumentManagementService {
           for (const action in item) {
             if (action === sortAction) {
               if (item[action] !== "" && item[action] !== null
-                // && !DocumentConfig.regulatoryActionExcludeFields.includes(action)
+                 && !DocumentConfig.regulatoryActionExcludeFields.includes(action)
               ) {
                 const regulatoryActionObj: ValuePair = new ValuePair();
                 regulatoryActionObj.name = action;
@@ -238,7 +247,7 @@ export class DocumentManagementService {
       if (doc["parameterValues"]) {
         archivalStatus = doc["parameterValues"]["DE:Document Archival Status"];
       }
-      if (archivalStatus === "Archving start" || archivalStatus === "Archiving in progress"){
+      if (archivalStatus === "Archiving start" || archivalStatus === "Archiving in progress"){
         const eligibility = new Eligibility();
         eligibility.documentId = doc["id"];
         eligibility.archivalEligible = false;

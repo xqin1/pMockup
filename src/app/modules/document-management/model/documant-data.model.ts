@@ -7,6 +7,8 @@ export class DocumentData {
   documentID: string;
   documentName: string;
   lastUpdatedDate: Date;
+  documentSize: number;
+  documentVersion: string;
   approvers: DocumentApprover[];
   documentLinkURL: string;
   archivalStatus: string;

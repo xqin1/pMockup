@@ -42,6 +42,10 @@
   background-color: #add2e7 !important;
 }
 
+.mat-card-header-text {
+  width: 100%;
+}
+
 html{
   background: #FFF;
 }

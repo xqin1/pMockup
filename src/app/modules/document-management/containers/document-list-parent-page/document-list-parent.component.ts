@@ -27,7 +27,6 @@ export class DocumentListParentComponent implements OnInit {
 ) {
     this.documentListLoading$ = this.store.select((fromDocument.getDocumentListLoading));
     this.documentDataList$ = this.store.select(fromDocument.getDocumentDataList);
-    this.documentRegulatoryActionList$ = this.store.select(fromDocument.getDocumentRegulatoryActionList);
     this.selectedDocumentID$ = this.store.select(fromDocument.getSelectedDocumentID);
   }
 

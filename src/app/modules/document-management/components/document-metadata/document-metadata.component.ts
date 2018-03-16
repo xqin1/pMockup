@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange, OnChanges } from '@angular/core';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {ValuePair} from '@app/modules/document-management/model/value-pair.model';
+import {LoadingStatus} from '@app/modules/document-management/model/loading-status.model';
+import {MatSnackBar} from '@angular/material';
+import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-document-metadata',
@@ -9,7 +13,17 @@ import {ValuePair} from '@app/modules/document-management/model/value-pair.model
 })
 export class DocumentMetadataComponent implements OnInit {
   @Input() documentData: DocumentData;
-  constructor() { }
+  @Input() regulatoryDataLoadingStatus: LoadingStatus;
+  // set toggleNotification(status: LoadingStatus) {
+  //   status.loading ? this.snackBar.open("Loading Regulatory Data"): null;
+  //   console.log("set: " + status.loading);
+  // }
+  constructor(
+    public snackBar: MatSnackBar,
+    private documentManagementService: DocumentManagementService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   showMetadataTable(): boolean {
     if ((this.documentData && this.documentData.customFormData.length > 0)) {
@@ -34,9 +48,10 @@ export class DocumentMetadataComponent implements OnInit {
     return displayData;
   }
   goToDocumentList(): void {
-    console.log("go back");
-    // this.router.navigate(['/document-management', 'document-list', documentID]);
+    this.router.navigate(['/document-management', 'document-list',
+      this.documentManagementService.documentMetadata.objectId, this.documentData.documentID]);
   }
   ngOnInit() {
+    // this.snackBar.open("Loading Regulatory Data");
   }
 }

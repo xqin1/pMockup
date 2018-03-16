@@ -44,7 +44,7 @@ export class DocumentListResolverService implements Resolve<any> {
               this.dmService.getDocumentListByObjectId(objectId)
                 .subscribe( documentList => {
                   // TODO: comment the following line when deploying
-                  //  results = DocumentConfig.fakeDocumentList;
+                    // documentList = DocumentConfig.fakeDocumentList;
                   if (documentList.length > 0) {
                     const results = new DocumentList();
                     results.documents = [];

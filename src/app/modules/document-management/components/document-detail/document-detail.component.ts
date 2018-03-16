@@ -4,6 +4,10 @@ import {environment} from '@env/environment';
 import {DocumentApprover} from '@app/modules/document-management/model/document-approver.model';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material';
+import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
+import { NotificationComponent} from '@app/shared/components/notification/notification.component';
 
 @Component({
   selector: 'app-document-detail',
@@ -17,11 +21,15 @@ export class DocumentDetailComponent implements OnInit {
   constructor(
     private documentManagementService: DocumentManagementService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   getShowDocumentLink(documentData: DocumentData): string {
     return `${environment.workfrontHost}/document/view?ID=${documentData.documentID}`;
+  }
+  getDocumentDownloadLink(documentData: DocumentData): string {
+    return `${environment.workfrontHost}/document/download?ID=${documentData.documentID}`;
   }
 
   getApprovalStatus(approver: DocumentApprover): string {
@@ -69,6 +77,13 @@ export class DocumentDetailComponent implements OnInit {
       this.regulatoryData.emit(document.documentID);
     }
     this.router.navigate(['/document-management', 'document-metadata', document.documentID]);
+  }
+  showPDFPreview(documentData: DocumentData) {
+    this.dialog.open(FilePreviewDialogComponent, {
+      height: "600px",
+      width: '800px',
+      data: documentData
+    });
   }
   ngOnInit() {
   }

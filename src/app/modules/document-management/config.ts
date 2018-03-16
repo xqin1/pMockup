@@ -43,7 +43,7 @@ export const DocumentConfig = {
   ],
   archivingStatusCode: [
     "Archived",
-    "Archiving in Progress",
+    "Archiving in progress",
     "Archiving start"
   ],
   noDocumentLinkingCode: [

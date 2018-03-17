@@ -1,31 +1,31 @@
 <div class="document-metadata-page">
+  <h2>Document Metadata</h2>
+  <div class="document-link-link">
+    <button mat-button color="primary" (click)="goToDocumentList()">
+      <mat-icon>keyboard_return</mat-icon>back to document list
+    </button>
+  </div>
   <div class="no-data-section" *ngIf="!showMetadataTable()">
     <p>
       No smart template interview or regulatory information exists for this document
     </p>
   </div>
   <div class="document-metadata-table-section" *ngIf="showMetadataTable()">
-    <div class="document-link-link">
-      <button mat-button color="primary" (click)="goToDocumentList()">
-        <mat-icon>keyboard_return</mat-icon>back to document list
-      </button>
-    </div>
-    <h2>Document Metadata</h2>
     <table class="expanded-info-table">
       <tbody>
         <tr>
           <th class="expanded-info-header">
-            Validate Smart Template Interview Information
+            Smart Template Interview Information
           </th>
           <th class="expanded-info-header">
-            Review Regulatory Information
+            Regulatory Information
           </th>
         </tr>
       <tr>
         <td class="communication-info">
           <table class="communication-info-table">
             <tbody>
-              <tr *ngFor="let c of documentData.customFormData" class="expand-table-row">
+              <tr *ngFor="let c of customFieldDisplayData" class="expand-table-row">
                 <td class="left-column">
                   <b>{{c.name}}:</b>
                 </td>

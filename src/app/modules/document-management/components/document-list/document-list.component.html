@@ -2,20 +2,24 @@
 <div class="instruction" *ngIf="documentListLoading">
   Loading Data......
 </div>
-<div class="close-project-section" *ngIf="isProjectClosed()">
+<div class="close-project-section" *ngIf="false">
   <h1>The review is complete and no documents can be archived</h1>
 </div>
 <div class="no-document-exist" *ngIf="!documentListLoading && !documentDataList">
   No Document uploaded.
 </div>
-<div class="document-list-page" *ngIf="documentDataList && !isProjectClosed()">
+<div class="document-list-page" *ngIf="documentDataList">
   <div class="document-list-title">
-    Document List
+    <span>Document List ({{documentDataList.length}})</span>
   </div>
   <div *ngFor="let document of documentDataList; index as i;" class="document-card-list">
     <app-document-detail
       [documentData]="document"
-      (regulatoryData)="onRegulatoryData($event)">
+      [selectedDocumentId]="selectedDocumentId"
+      (documentSelected)="onDocumentSelected($event)"
+      (regulatoryData)="onRegulatoryData($event)"
+      (documentLinkData)="onDocumentLinkData($event)"
+      (pdfData)="onPDFData($event)">
     </app-document-detail>
   </div>
 

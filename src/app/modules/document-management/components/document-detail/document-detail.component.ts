@@ -15,9 +15,14 @@ import { NotificationComponent} from '@app/shared/components/notification/notifi
   styleUrls: ['./document-detail.component.css']
 })
 export class DocumentDetailComponent implements OnInit {
+  customFieldCount: number;
+  documentLinkCount: number;
   @Input() documentData: DocumentData;
-  @Input() userId: string;
+  @Input() selectedDocumentId: string;
+  @Output() documentSelected = new EventEmitter<string>();
   @Output() regulatoryData = new EventEmitter<string>();
+  @Output() documentLinkData = new EventEmitter<string>();
+  @Output() pdfData = new EventEmitter<string>();
   constructor(
     private documentManagementService: DocumentManagementService,
     private route: ActivatedRoute,
@@ -37,7 +42,7 @@ export class DocumentDetailComponent implements OnInit {
   }
 
   getApprovalDate(approver: DocumentApprover): Date {
-    if(approver.status !== "NEW") {
+    if (approver.status !== "NEW") {
       return approver.approvalDate;
     }else{
       return null;
@@ -76,16 +81,38 @@ export class DocumentDetailComponent implements OnInit {
     if (!document.regulatoryData.regulatoryActionExist){
       this.regulatoryData.emit(document.documentID);
     }
+    this.documentSelected.emit(document.documentID);
     this.router.navigate(['/document-management', 'document-metadata', document.documentID]);
   }
-  showPDFPreview(documentData: DocumentData) {
+  showDocumentLink(document: DocumentData): void {
+    if (!document.documentLinkData.documentLinkExist){
+      this.documentLinkData.emit(document.documentID);
+    }
+    this.documentSelected.emit(document.documentID);
+    this.router.navigate(['/document-management', 'document-link', document.documentID]);
+  }
+  showPDFPreview(document: DocumentData) {
+    this.documentSelected.emit(document.documentID);
+    // this.pdfData.emit(document.documentID);
     this.dialog.open(FilePreviewDialogComponent, {
       height: "600px",
       width: '800px',
-      data: documentData
+      data: document
     });
   }
+  getCustomFieldCount() {
+    return this.documentManagementService.getCustomFieldDisplay(this.documentData.customFormData).length;
+  }
+  getDocumentLinkCount() {
+    let count = 0;
+    if (this.documentData.documentLinkData.documentLinkExist) {
+      count = this.documentData.documentLinkData.linkedGUIDS.split(",").length;
+    }
+    return count;
+  }
   ngOnInit() {
+    this.customFieldCount = this.getCustomFieldCount();
+    this.documentLinkCount = this.getDocumentLinkCount();
   }
 
 }

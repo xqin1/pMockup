@@ -9,6 +9,7 @@ import {DocumentApprover} from '@app/modules/document-management/model/document-
 import {DocumentMetadata} from '@app/modules/document-management/model/document-metadata.model';
 import { RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
 import {LoggerService} from '@app/core/services/logger.service';
+import {DocumentLinkData} from '@app/modules/document-management/model/document-link-data.model';
 
 @Injectable()
 export class DocumentManagementService {
@@ -54,7 +55,7 @@ export class DocumentManagementService {
     documentData.regulatoryData.regulatoryActions = [];
     this.setDocumentArchivalStatus(documentData);
     this.setDocumentApprovers(documentData, doc);
-    documentData.documentLinkURL = this.setDocumentLinkURL(documentData, doc);
+    this.setDocumentLinkData(documentData, doc);
     // documentData.previewEligible = this.setDocumentPreview(documentData, doc);
     // documentData.actionEligible = this.setDocumentAction(documentData);
     return documentData;
@@ -90,23 +91,6 @@ export class DocumentManagementService {
 
     document.archivalStatus = archivalStatus;
   }
-  // setDocumentAction(document: DocumentData): boolean {
-  //   let result = true;
-  //   if (document.archivalStatus === "Archived") {
-  //     result = false;
-  //   }
-  //   return result;
-  // }
-  // setDocumentPreview(document: DocumentData, doc: object): boolean {
-  //   let result = false;
-  //   const ext = doc["currentVersion"]['ext'];
-  //   if (DocumentConfig.previewEligibleType.includes(ext)) {
-  //       if (!DocumentConfig.noPreviewCode.includes(document.archivalStatus)) {
-  //         result = true;
-  //       }
-  //   }
-  //   return result;
-  // }
 
   setDocumentApprovers(document: DocumentData, doc: object) {
     const data = doc["approvals"];
@@ -229,16 +213,26 @@ export class DocumentManagementService {
       return fieldValue;
     }
   }
-  setDocumentLinkURL(document: DocumentData, doc: object): string {
-    let documentLink: string = null;
-    if (!DocumentConfig.noDocumentLinkingCode.includes(document.archivalStatus)) {
-      if (typeof doc["parameterValues"] !== 'undefined' ) {
-        if (typeof doc["parameterValues"]["DE:Access to Document Linking"] !== "undefined") {
-          documentLink = doc["parameterValues"]["DE:Access to Document Linking"];
-        }
+  // setDocumentLinkURL(document: DocumentData, doc: object): string {
+  //   let documentLink: string = null;
+  //   if (typeof doc["parameterValues"] !== 'undefined' ) {
+  //     if (typeof doc["parameterValues"]["DE:Access to Document Linking"] !== "undefined") {
+  //       documentLink = doc["parameterValues"]["DE:Access to Document Linking"];
+  //     }
+  //   }
+  //
+  //   return documentLink;
+  // }
+  setDocumentLinkData(document: DocumentData, doc: object): void {
+    const documentLinkData: DocumentLinkData = new DocumentLinkData();
+    documentLinkData.documentLinkExist = false;
+    if (typeof doc["parameterValues"] !== 'undefined' ) {
+      if (typeof doc["parameterValues"]["DE:Linked Project/Program GUIDs"] !== "undefined") {
+        documentLinkData.linkedGUIDS = doc["parameterValues"]["DE:Linked Project/Program GUIDs"];
+        documentLinkData.documentLinkExist = true;
       }
     }
-    return documentLink;
+    document.documentLinkData = documentLinkData;
   }
   getEligibilityCheckIDs(documentList: DocumentList): string[] {
     const list: string[] = [];
@@ -258,5 +252,23 @@ export class DocumentManagementService {
       }
     }
     return list;
+  }
+  getCustomFieldDisplay(customFields: ValuePair[]): ValuePair[] {
+    const displayFields: ValuePair[] = [];
+    for (const c of customFields) {
+      if (!DocumentConfig.customFormExcludeFields.includes(c.name)){
+        displayFields.push(c);
+      }
+    }
+    return displayFields;
+  }
+  getRegulatoryDataDisplay(regulatoryData: ValuePair[]): ValuePair[] {
+    const displayFields: ValuePair[] = [];
+    for (const c of regulatoryData) {
+      if (!DocumentConfig.regulatoryActionExcludeFields.includes(c.name)){
+        displayFields.push(c);
+      }
+    }
+    return displayFields;
   }
 }

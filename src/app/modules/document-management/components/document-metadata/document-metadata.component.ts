@@ -12,12 +12,9 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./document-metadata.component.css']
 })
 export class DocumentMetadataComponent implements OnInit {
+  customFieldDisplayData: ValuePair[];
   @Input() documentData: DocumentData;
   @Input() regulatoryDataLoadingStatus: LoadingStatus;
-  // set toggleNotification(status: LoadingStatus) {
-  //   status.loading ? this.snackBar.open("Loading Regulatory Data"): null;
-  //   console.log("set: " + status.loading);
-  // }
   constructor(
     public snackBar: MatSnackBar,
     private documentManagementService: DocumentManagementService,
@@ -52,6 +49,6 @@ export class DocumentMetadataComponent implements OnInit {
       this.documentManagementService.documentMetadata.objectId, this.documentData.documentID]);
   }
   ngOnInit() {
-    // this.snackBar.open("Loading Regulatory Data");
+    this.customFieldDisplayData = this.documentManagementService.getCustomFieldDisplay(this.documentData.customFormData);
   }
 }

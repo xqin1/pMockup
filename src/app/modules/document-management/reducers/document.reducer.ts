@@ -10,6 +10,7 @@ export interface State {
   documentDataList: DocumentData[];
   selectedDocumentID: string;
   regulatoryLoadingStatus: LoadingStatus;
+  linkedProjectLoadingStatus: LoadingStatus;
 }
 
 const initialState: State = {
@@ -17,7 +18,8 @@ const initialState: State = {
   documentListLoaded: false,
   documentDataList: null,
   selectedDocumentID: null,
-  regulatoryLoadingStatus: null
+  regulatoryLoadingStatus: null,
+  linkedProjectLoadingStatus: null
 };
 
 export function reducer(state = initialState, action: documentAction.Actions): State {

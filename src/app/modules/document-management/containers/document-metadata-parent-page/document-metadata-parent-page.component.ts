@@ -37,7 +37,7 @@ export class DocumentMetadataParentPageComponent implements OnInit {
   }
 
   onArchiveDocument(data: DocumentData) {
-    this.router.navigate(['/document-archive', 'confirmation', data.documentID]);
+    this.router.navigate(['/document-management', 'confirmation', data.documentID]);
   }
 
 }

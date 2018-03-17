@@ -8,6 +8,8 @@ import { DocumentMetadataParentPageComponent} from '@app/modules/document-manage
 import { DocumentMetadataComponent} from '@app/modules/document-management/components/document-metadata/document-metadata.component';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import { DocumentDetailComponent} from '@app/modules/document-management/components/document-detail/document-detail.component';
+import { DocumentLinkComponent} from '@app/modules/document-management/components/document-link/document-link.component';
+import { DocumentLinkParentComponent} from '@app/modules/document-management/containers/document-link-parent-page/document-link-parent.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,10 @@ const routes: Routes = [
         path: 'document-metadata/:documentId',
         component: DocumentMetadataParentPageComponent,
 
+      },
+      {
+        path: 'document-link/:documentId',
+        component: DocumentLinkParentComponent
       }
     ]
   }
@@ -39,7 +45,9 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class DocumentManagementRoutingModule { }
-export const routedComponents = [DocumentListParentComponent,
-  DocumentListComponent, DocumentManagementParentPageComponent, DocumentMetadataParentPageComponent,
-  DocumentMetadataComponent,
-  FilePreviewDialogComponent, DocumentDetailComponent];
+export const routedComponents = [
+    DocumentManagementParentPageComponent,
+    DocumentListParentComponent, DocumentListComponent, DocumentDetailComponent,
+    DocumentMetadataParentPageComponent, DocumentMetadataComponent,
+    DocumentLinkParentComponent, DocumentLinkComponent,
+    FilePreviewDialogComponent];

@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class DocumentMetadataComponent implements OnInit {
   customFieldDisplayData: ValuePair[];
+  editMode = false;
   @Input() documentData: DocumentData;
   @Input() regulatoryDataLoadingStatus: LoadingStatus;
   constructor(
@@ -23,7 +24,7 @@ export class DocumentMetadataComponent implements OnInit {
   ) { }
 
   showMetadataTable(): boolean {
-    if ((this.documentData && this.documentData.customFormData.length > 0)) {
+    if ((this.documentData && this.customFieldDisplayData.length > 0)) {
       return true;
     } else {
       return false;
@@ -47,6 +48,9 @@ export class DocumentMetadataComponent implements OnInit {
   goToDocumentList(): void {
     this.router.navigate(['/document-management', 'document-list',
       this.documentManagementService.documentMetadata.objectId, this.documentManagementService.documentMetadata.userId]);
+  }
+  editCustomFormData() {
+    this.editMode = true;
   }
   ngOnInit() {
     this.customFieldDisplayData = this.documentManagementService.getCustomFieldDisplay(this.documentData.customFormData);

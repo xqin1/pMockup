@@ -14,16 +14,21 @@
   </div>
   <div class="document-page-content">
     <div class="no-data-section" *ngIf="!showMetadataTable()">
-      <p>
+      <h3>
         No smart template interview or regulatory information exists for this document
-      </p>
+      </h3>
     </div>
     <div class="document-metadata-table-section" *ngIf="showMetadataTable()">
       <table class="expanded-info-table">
         <tbody>
           <tr>
             <th class="expanded-info-header">
-              Smart Template Interview Information
+              <span>Smart Template Interview Information</span>
+              <span>
+                <button mat-button color="primary" (click)="editCustomFormData()">
+                  <mat-icon>edit</mat-icon>Edit
+                </button>
+              </span>
             </th>
             <th class="expanded-info-header">
               Regulatory Information
@@ -61,6 +66,18 @@
         </tr>
         </tbody>
       </table>
+    </div>
+    <div class="document-metadata-button">
+      <span>
+        <button mat-button color="primary">
+          <mat-icon>clear</mat-icon>Cancel
+        </button>
+      </span>
+      <span>
+        <button mat-button color="primary">
+          <mat-icon>save</mat-icon>Save
+        </button>
+      </span>
     </div>
   </div>
 </div>

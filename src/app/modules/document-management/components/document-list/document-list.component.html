@@ -1,16 +1,23 @@
-
-<div class="instruction" *ngIf="documentListLoading">
-  Loading Data......
-</div>
-<div class="close-project-section" *ngIf="false">
-  <h1>The review is complete and no documents can be archived</h1>
-</div>
-<div class="no-document-exist" *ngIf="!documentListLoading && !documentDataList">
-  No Document uploaded.
-</div>
-<div class="document-list-page" *ngIf="documentDataList">
-  <div class="document-list-title">
-    <span>Document List ({{documentDataList.length}})</span>
+<div class="document-list-page">
+  <div class="instruction" *ngIf="documentListLoading">
+    Loading Data......
+  </div>
+  <div class="close-project-section" *ngIf="false">
+    <h1>The review is complete and no documents can be archived</h1>
+  </div>
+  <div class="no-document-exist" *ngIf="!documentListLoading && !documentDataList">
+    No Document uploaded.
+  </div>
+  <div class="document-page-header" *ngIf="documentDataList">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span class="document-page-title">Document List ({{documentDataList.length}})</span>
+        <span class="line-spacer"></span>
+        <span class="document-list-refresh-icon" matTooltip="refresh document list">
+            <mat-icon color="primary">refresh</mat-icon>
+        </span>
+      </mat-toolbar-row>
+    </mat-toolbar>
   </div>
   <div *ngFor="let document of documentDataList; index as i;" class="document-card-list">
     <app-document-detail
@@ -22,7 +29,7 @@
       (pdfData)="onPDFData($event)">
     </app-document-detail>
   </div>
-
+</div>
   <!--<div class="document-list-table">-->
     <!--<ngx-datatable #myTable-->
       <!--class="material striped document-list-datatable"-->
@@ -137,6 +144,6 @@
       <!--</button>-->
     <!--</span>-->
   <!--</div>-->
-</div>
+
 
 

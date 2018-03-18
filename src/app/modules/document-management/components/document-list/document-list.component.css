@@ -24,24 +24,6 @@
   margin:10px auto;
 }
 
-blockquote {
-  background: #f9f9f9;
-  border-left: 5px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-  color: #ccc;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-blockquote p {
-  display: inline;
-}
-
 a {
   text-decoration: none;
 }
@@ -65,10 +47,10 @@ a {
 .eligibility-status-text {
   white-space: pre-wrap;
 }
-.document-list-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 20px;
-}
 
+.document-card-list {
+  padding-top: 5px;
+}
+.document-list-refresh-icon {
+}
 

@@ -1,12 +1,19 @@
 <div class="document-link-page">
-  <h2>Document Link</h2>
-  <div class="document-link-link">
-    <button mat-button color="primary" (click)="goToDocumentList()">
-      <mat-icon>keyboard_return</mat-icon>back to document list
-    </button>
+  <div class="document-page-header">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span class="document-page-title">Document Link</span>
+        <span class="line-spacer"></span>
+        <span class="document-link-link">
+          <button mat-button color="primary" (click)="goToDocumentList()">
+            <mat-icon>keyboard_return</mat-icon>back to document list
+          </button>
+        </span>
+      </mat-toolbar-row>
+    </mat-toolbar>
   </div>
-  <div class="document-link-content">
-    Document linking content {{documentData.documentLinkData}}
+  <div class="document-page-content">
+    Document linking content {{documentData.documentLinkData | json}}
   </div>
 </div>
 

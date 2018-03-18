@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material';
 import { FilePreviewDialogComponent} from '@app/modules/document-management/components/file-preview-dialog/file-preview-dialog.component';
 import { NotificationComponent} from '@app/shared/components/notification/notification.component';
+import { ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/archive-confirmation-dialog/archive-confirmation-dialog.component';
 
 @Component({
   selector: 'app-document-detail',
@@ -100,6 +101,25 @@ export class DocumentDetailComponent implements OnInit {
       data: document
     });
   }
+  showArchiveConfirmationDialog(document: DocumentData) {
+    this.documentSelected.emit(document.documentID);
+    // this.pdfData.emit(document.documentID);
+    const dialogRef = this.dialog.open(ArchiveConfirmationDialogComponent, {
+      height: "400px",
+      width: '800px',
+      data: document
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === "archive") {
+        this.archiveDocument();
+      } else if (result === "link") {
+        this.showDocumentLink(this.documentData);
+      } else if (result === "metadata") {
+        this.showMetaData(this.documentData);
+      }
+      console.log("dialog close: " + result);
+    });
+  }
   getCustomFieldCount() {
     return this.documentManagementService.getCustomFieldDisplay(this.documentData.customFormData).length;
   }
@@ -109,6 +129,10 @@ export class DocumentDetailComponent implements OnInit {
       count = this.documentData.documentLinkData.linkedGUIDS.split(",").length;
     }
     return count;
+  }
+  archiveDocument() {
+    console.log(`archive document: doucmentId=${this.selectedDocumentId},
+    userId=${this.documentManagementService.documentMetadata.userId}` );
   }
   ngOnInit() {
     this.customFieldCount = this.getCustomFieldCount();

@@ -46,7 +46,7 @@ export class DocumentMetadataComponent implements OnInit {
   }
   goToDocumentList(): void {
     this.router.navigate(['/document-management', 'document-list',
-      this.documentManagementService.documentMetadata.objectId, this.documentData.documentID]);
+      this.documentManagementService.documentMetadata.objectId, this.documentManagementService.documentMetadata.userId]);
   }
   ngOnInit() {
     this.customFieldDisplayData = this.documentManagementService.getCustomFieldDisplay(this.documentData.customFormData);

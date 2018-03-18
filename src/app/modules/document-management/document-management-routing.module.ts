@@ -10,6 +10,7 @@ import { FilePreviewDialogComponent} from '@app/modules/document-management/comp
 import { DocumentDetailComponent} from '@app/modules/document-management/components/document-detail/document-detail.component';
 import { DocumentLinkComponent} from '@app/modules/document-management/components/document-link/document-link.component';
 import { DocumentLinkParentComponent} from '@app/modules/document-management/containers/document-link-parent-page/document-link-parent.component';
+import { ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/archive-confirmation-dialog/archive-confirmation-dialog.component';
 
 const routes: Routes = [
   {
@@ -50,4 +51,5 @@ export const routedComponents = [
     DocumentListParentComponent, DocumentListComponent, DocumentDetailComponent,
     DocumentMetadataParentPageComponent, DocumentMetadataComponent,
     DocumentLinkParentComponent, DocumentLinkComponent,
+    ArchiveConfirmationDialogComponent,
     FilePreviewDialogComponent];

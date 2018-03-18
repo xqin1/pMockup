@@ -91,7 +91,7 @@
     </mat-card-content>
     <mat-card-actions>
       <span class="document-action-button">
-        <button mat-button color="primary">
+        <button mat-button color="primary" (click)="showArchiveConfirmationDialog(documentData)">
           <mat-icon>archive</mat-icon>Archive
         </button>
       </span>

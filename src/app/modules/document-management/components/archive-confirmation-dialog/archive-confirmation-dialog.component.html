@@ -1,0 +1,56 @@
+<div class="archive-confirmation-dialog">
+  <div class="document-page-header">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span class="confirmation-icon">
+          <mat-icon color="warn" class="warning-icon">warning</mat-icon>
+        </span>
+        <span class="document-page-title">Archive Confirmation: {{data.documentName}}</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div class="archive-confirmation-content">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          Upon document archival, the following will happen:
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <blockquote>
+          <div>
+            Regulaotry Action data might get updated on program, project, task and document level.
+          </div>
+          <div>
+            <button mat-button tabindex="-1" color="primary" (click)="dialogRef.close('metadata')">
+              <mat-icon>description</mat-icon>Review Document Metadata
+            </button>
+          </div>
+        </blockquote>
+        <blockquote>
+          <div>
+            The archived document cannot be linked to other programs and projects.
+          </div>
+          <div>
+            <button mat-button tabindex="-1" color="primary" (click)="dialogRef.close('link')">
+              <mat-icon>compare_arrows</mat-icon>Link Document
+            </button>
+          </div>
+        </blockquote>
+      </mat-card-content>
+      <mat-card-actions>
+        <span class="document-action-button">
+          <button mat-button mat-dialog-close tabindex="0">
+            <mat-icon>cancel</mat-icon>cancel
+          </button>
+        </span>
+        <span class="document-action-button">
+          <button mat-button color="primary" (click)="dialogRef.close('archive')">
+            <mat-icon>archive</mat-icon>Archive
+          </button>
+        </span>
+      </mat-card-actions>
+
+    </mat-card>
+  </div>
+</div>

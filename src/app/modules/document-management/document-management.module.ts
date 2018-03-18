@@ -11,6 +11,7 @@ import { DocumentManagementRoutingModule, routedComponents } from './document-ma
 import { FilePreviewDialogComponent } from './components/file-preview-dialog/file-preview-dialog.component';
 import { NotificationComponent} from '@app/shared/components/notification/notification.component';
 import {DocumentEffects} from '@app/modules/document-management/effects/document.effect';
+import {ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/archive-confirmation-dialog/archive-confirmation-dialog.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,6 @@ import {DocumentEffects} from '@app/modules/document-management/effects/document
   ],
   declarations: [routedComponents],
   providers: [ DocumentManagementService, DocumentListResolverService],
-  entryComponents: [FilePreviewDialogComponent, NotificationComponent]
+  entryComponents: [FilePreviewDialogComponent, NotificationComponent, ArchiveConfirmationDialogComponent]
 })
 export class DocumentManagementModule { }

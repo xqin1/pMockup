@@ -11,6 +11,8 @@ import { DocumentDetailComponent} from '@app/modules/document-management/compone
 import { DocumentLinkComponent} from '@app/modules/document-management/components/document-link/document-link.component';
 import { DocumentLinkParentComponent} from '@app/modules/document-management/containers/document-link-parent-page/document-link-parent.component';
 import { ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/archive-confirmation-dialog/archive-confirmation-dialog.component';
+import { DocumentEligibilityParentComponent} from '@app/modules/document-management/containers/document-eligibility-parent-page/document-eligibility-parent.component';
+import { DocumentEligibilityComponent} from '@app/modules/document-management/components/document-eligibility/document-eligibility.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,10 @@ const routes: Routes = [
       {
         path: 'document-link/:documentId',
         component: DocumentLinkParentComponent
+      },
+      {
+        path: 'document-eligibility/:documentId',
+        component: DocumentEligibilityParentComponent
       }
     ]
   }
@@ -51,5 +57,6 @@ export const routedComponents = [
     DocumentListParentComponent, DocumentListComponent, DocumentDetailComponent,
     DocumentMetadataParentPageComponent, DocumentMetadataComponent,
     DocumentLinkParentComponent, DocumentLinkComponent,
+    DocumentEligibilityParentComponent, DocumentEligibilityComponent,
     ArchiveConfirmationDialogComponent,
     FilePreviewDialogComponent];

@@ -133,7 +133,8 @@ export class DocumentDetailComponent implements OnInit {
     userId=${this.documentManagementService.documentMetadata.userId}` );
   }
   showEligibilityList(document: DocumentData) {
-    console.log("show detial");
+    this.documentSelected.emit(document.documentID);
+    this.router.navigate(['/document-management', 'document-eligibility', document.documentID]);
   }
   ngOnInit() {
     this.customFieldCount = this.getCustomFieldCount();

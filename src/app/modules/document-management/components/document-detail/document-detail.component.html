@@ -66,35 +66,62 @@
           <div class="section-content">
             <span [ngSwitch]="getArchivalStatus(documentData)">
               <span *ngSwitchCase="'Archiving start'">
-                <mat-spinner color="primary" [strokeWidth]="2" [diameter]="20"></mat-spinner>
+                <span>
+                  <mat-spinner color="primary" [strokeWidth]="2" [diameter]="20"></mat-spinner>
+                </span>
+                <span class="archival-status-text">
+                  {{documentData.archivalStatus}}
+                </span>
               </span>
-               <span *ngSwitchCase="'Archiving in progress'">
-                <mat-spinner color="primary" [strokeWidth]="2" [diameter]="20"></mat-spinner>
+              <span *ngSwitchCase="'Archiving in progress'">
+                 <span>
+                  <mat-spinner color="primary" [strokeWidth]="2" [diameter]="20"></mat-spinner>
+                 </span>
+                 <span class="archival-status-text">
+                  {{documentData.archivalStatus}}
+                 </span>
               </span>
+
               <span *ngSwitchCase="'Archived'">
-                <mat-icon color="primary">storage</mat-icon>
+                <span>
+                  <mat-icon color="primary">storage</mat-icon>
+                </span>
+                <span class="archival-status-text">
+                  {{documentData.archivalStatus}}
+                 </span>
               </span>
               <span *ngSwitchCase="'Ineligible for Archiving'">
-                <mat-icon color="warn">report</mat-icon>
+                <div class="document-action-button">
+                  <button mat-button color="warn" (click)="showEligibilityList(documentData)">
+                    <mat-icon>report</mat-icon>Show Details
+                  </button>
+                </div>
+                <div class="eligible-status-text">
+                  {{documentData.archivalStatus}}
+                 </div>
               </span>
                <span *ngSwitchCase="'Ready to archive'">
-                <mat-icon color="primary">check_circle</mat-icon>
+                 <div class="document-action-button">
+                  <button mat-button class="archive-button" color="primary" (click)="showArchiveConfirmationDialog(documentData)">
+                    <mat-icon class="archive-icon">play_circle_outline</mat-icon>
+                    <span class="archive-text">Archive</span>
+                  </button>
+                </div>
+                <div class="archive-status-text">
+                  {{documentData.archivalStatus}}
+                 </div>
               </span>
             </span>
-            <span class="archival-status-text">{{documentData.archivalStatus}}</span>
-          </div>
-          <div *ngIf="isShowEligibilityButton(documentData)">
-            <button mat-button color="primary">Show Details</button>
           </div>
         </div>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <span class="document-action-button">
-        <button mat-button color="primary" (click)="showArchiveConfirmationDialog(documentData)">
-          <mat-icon>archive</mat-icon>Archive
-        </button>
-      </span>
+      <!--<span class="document-action-button">-->
+        <!--<button mat-button color="primary" (click)="showArchiveConfirmationDialog(documentData)">-->
+          <!--<mat-icon>archive</mat-icon>Archive-->
+        <!--</button>-->
+      <!--</span>-->
       <span class="document-action-button">
         <button mat-button color="primary" (click)="showMetaData(documentData)">
           <mat-icon>description</mat-icon>Metadata ({{customFieldCount}})

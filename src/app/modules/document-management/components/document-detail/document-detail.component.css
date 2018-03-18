@@ -40,6 +40,19 @@
 }
 
 .document-action-button {
-  padding-left: 65px;
+}
+
+.archive-button {
+  height: 64px;
+}
+.archive-icon {
+  font-size: 54px;
+  color: green;
+}
+.archive-text {
+  padding-left: 25px
+}
+.archive-status-text {
+  padding-top: 15px;
 }
 

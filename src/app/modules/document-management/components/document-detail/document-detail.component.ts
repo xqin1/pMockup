@@ -75,9 +75,7 @@ export class DocumentDetailComponent implements OnInit {
       return document.archivalStatus;
     }
   }
-  isShowEligibilityButton(document: DocumentData): boolean {
-    return document.archivalStatus.includes("Ineligible for Archiving");
-  }
+
   showMetaData(document: DocumentData): void {
     if (!document.regulatoryData.regulatoryActionExist){
       this.regulatoryData.emit(document.documentID);
@@ -111,7 +109,7 @@ export class DocumentDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === "archive") {
-        this.archiveDocument();
+        this.archiveDocument(this.documentData);
       } else if (result === "link") {
         this.showDocumentLink(this.documentData);
       } else if (result === "metadata") {
@@ -130,9 +128,12 @@ export class DocumentDetailComponent implements OnInit {
     }
     return count;
   }
-  archiveDocument() {
-    console.log(`archive document: doucmentId=${this.selectedDocumentId},
+  archiveDocument(document: DocumentData) {
+    console.log(`archive document: doucmentId=${document.documentID},
     userId=${this.documentManagementService.documentMetadata.userId}` );
+  }
+  showEligibilityList(document: DocumentData) {
+    console.log("show detial");
   }
   ngOnInit() {
     this.customFieldCount = this.getCustomFieldCount();

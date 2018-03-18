@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
+import {DocumentConfig} from '@app/modules/document-management/config';
 
 @Component({
   selector: 'app-document-list',
@@ -8,6 +9,10 @@ import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/
   styleUrls: ['./document-list.component.css']
 })
 export class DocumentListComponent implements OnInit {
+  projectClosed = true;
+  taskApprovalExist = true;
+  taskApprovals = DocumentConfig.fakeTaskApprovals;
+
   @Input() documentListLoading: boolean;
   @Input() documentDataList: DocumentData[];
   @Input() selectedDocumentId: string;
@@ -30,6 +35,12 @@ export class DocumentListComponent implements OnInit {
   }
   onPDFData(documentId: string) {
     this.documentSelected.emit(documentId);
+  }
+  hideProjectClosed(){
+    this.projectClosed = false;
+  }
+  hideTaskApprovals() {
+    this.taskApprovalExist = false;
   }
   ngOnInit() {
   }

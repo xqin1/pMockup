@@ -53,4 +53,11 @@ a {
 }
 .document-list-refresh-icon {
 }
+.warning-icon {
+  font-size: 48px;
+}
+.warning-section {
+  margin: 10px;
+  background-color: whitesmoke;
+}
 

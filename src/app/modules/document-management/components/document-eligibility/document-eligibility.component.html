@@ -22,12 +22,9 @@
               <mat-icon mat-list-icon color="primary">info_outline</mat-icon>
               <h4 mat-line>Solution</h4>
               <p mat-line>{{item[1]}}</p>
-              <p mat-line *ngIf="item[2]!==null && item[2] !== ''; else nolink">
+              <p mat-line *ngIf="item[2]!==null && item[2] !== ''">
                 For more information please refer to the Platform User Guides <a href='{{item[2]}}' target='_blank'>HERE</a> or contact CDER Informatics <a href='mailto:CDERInformatics@fda.hhs.gov'>CDERInformatics@fda.hhs.gov</a> for assistance.
               </p>
-              <ng-template #nolink>
-                Please contact CDER Informatics <a href='mailto:CDERInformatics@fda.hhs.gov'>CDERInformatics@fda.hhs.gov</a> for assistance.
-              </ng-template>
             </mat-list-item>
             <mat-divider></mat-divider>
           </mat-list>

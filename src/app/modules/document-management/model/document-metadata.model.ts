@@ -3,4 +3,5 @@ export class DocumentMetadata {
   userId: string;
   objectCode: string;
   projectClosed: boolean;
+  pendingTaskApprovals: boolean;
 }

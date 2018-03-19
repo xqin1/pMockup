@@ -22,13 +22,27 @@
         The review is complete and no documents can be archived. Please send a Project Status Change Request to <a href='mailto:CDERInformatics@fda.hhs.gov'>CDERInformatics@fda.hhs.gov</a> for assistance.
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center" class="warning-section" *ngIf="taskApprovalExist">
-      <div fxFlex="100px">
-        <mat-icon color="warn" class="warning-icon">warning</mat-icon>
+    <div *ngIf="hasPendingTaskApproval()" class="warning-section">
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div fxFlex="100px">
+          <mat-icon color="warn" class="warning-icon">warning</mat-icon>
+        </div>
+        <div fxFlex="450px">
+            <span>
+              <h3>Routing for concurrence is still in progress: {{taskApprovals.stageName}}</h3>
+            </span>
+        </div>
+        <div fxFlex>
+          <span class="document-action-button">
+            <button mat-button color="primary" (click)="toggleApproverDetail()">
+              <mat-icon>people_outline</mat-icon>Details
+            </button>
+          </span>
+        </div>
       </div>
-      <div fxFlex>
-        <h3>Routing for concurrence is still in progress: {{taskApprovals.stageName}}</h3>
+      <div *ngIf="showDetail" class="approver-detail">
         <div *ngFor="let approver of taskApprovals.approvers;index as i"  class="section content">
+          <div>
             <span>
              {{approver["approverName"]}} -
             </span>
@@ -38,10 +52,8 @@
             <span *ngIf="approver['status'] !== 'Approved'">
               <button mat-button color="primary">Send Notification</button>
             </span>
+          </div>
         </div>
-      </div>
-      <div fxFlex="100px">
-        <button mat-button (click)="hideTaskApprovals()">Close</button>
       </div>
     </div>
     <div class="no-document-exist" *ngIf="documentDataList.length===0">

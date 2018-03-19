@@ -10,7 +10,7 @@ import { DocumentManagementService} from '@app/modules/document-management/servi
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentListComponent implements OnInit {
-  taskApprovalExist = true;
+  showDetail = false;
   taskApprovals = DocumentConfig.fakeTaskApprovals;
 
   @Input() documentListLoading: boolean;
@@ -40,8 +40,11 @@ export class DocumentListComponent implements OnInit {
   isProjectClosed(): boolean {
     return this.documentManagementService.documentMetadata.projectClosed;
   }
-  hideTaskApprovals() {
-    this.taskApprovalExist = false;
+  hasPendingTaskApproval() {
+    return this.documentManagementService.documentMetadata.pendingTaskApprovals;
+  }
+  toggleApproverDetail() {
+    this.showDetail = !this.showDetail;
   }
   ngOnInit() {
   }

@@ -48,6 +48,7 @@
 .archive-icon {
   font-size: 54px;
   color: green;
+  vertical-align: sub !important;
 }
 .archive-text {
   padding-left: 25px

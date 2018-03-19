@@ -23,30 +23,34 @@ export class DocumentManagementService {
   ) { }
 
   processDocumentList(documentList: DocumentList, userId: string, objectId: string): DocumentData[] {
+    console.log("documentList");
+    console.log(documentList);
     if (documentList.documents.length > 0) {
       this.documentMetadata.userId = userId;
       this.documentMetadata.objectId = objectId;
       this.documentMetadata.objectCode = documentList.objectCode;
-     // this.projectStatus = documentList.documents[0]["project"]["status"];
-     //  if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
-     //    this.projectClosed = true;
-     //  }
       this.documentMetadata.projectClosed = false;
-      console.log(documentList.eligibility);
+      this.documentMetadata.pendingTaskApprovals = false;
       if (documentList.eligibility.length > 0) {
-        if (documentList.eligibility[0].reason.length > 0) {
-          if (documentList.eligibility[0].reason[0].toString().toUpperCase().includes("REVIEW IS COMPLETE")) {
-            this.documentMetadata.projectClosed = true;
+        if (documentList.eligibility[0]) {
+          for (const e of documentList.eligibility ) {
+            if (e.reason.length > 0) {
+              for (const r of e.reason) {
+                if ( r[0].toString().toUpperCase().includes("REVIEW IS COMPLETE")) {
+                  this.documentMetadata.projectClosed = true;
+                } else if ( r[0].toString().toUpperCase().includes("ROUTING FOR CONCURRENCE")) {
+                  this.documentMetadata.pendingTaskApprovals = true;
+                }
+              }
+            }
           }
         }
       }
-      console.log(this.documentMetadata)
       documentList.documents.forEach(doc => {
         const documentData: DocumentData = new DocumentData();
         documentData.eligibilityData = documentList.eligibility.filter(e => {
           return e.documentId === doc["id"];
         })[0];
-        console.log(documentData);
         this.processDocument(documentData, doc);
         this.documentDataList.push(documentData);
       });

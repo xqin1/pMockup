@@ -19,17 +19,6 @@ export class DocumentEligibilityComponent implements OnInit {
     this.router.navigate(['/document-management', 'document-list',
       this.documentManagementService.documentMetadata.objectId, this.documentManagementService.documentMetadata.userId]);
   }
-  getContactText(link: string): string {
-    let text = "";
-    if (link !== null && link !== "") {
-      text = "For more information please refer to the Platform User Guides <a href='" +
-        link + "' target='_blank'>HERE</a> " +
-        "or contact CDER Informatics <a href='mailto:CDERInformatics@fda.hhs.gov'>CDERInformatics@fda.hhs.gov</a> for assistance.";
-    } else {
-      text = "Please contact CDER Informatics <a href='mailto:CDERInformatics@fda.hhs.gov'>CDERInformatics@fda.hhs.gov</a> for assistance.";
-    }
-    return text;
-  }
   ngOnInit() {
   }
 

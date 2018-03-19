@@ -1,15 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import { DocumentData} from '@app/modules/document-management/model/documant-data.model';
-import {DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';
 import {DocumentConfig} from '@app/modules/document-management/config';
+import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 
 @Component({
   selector: 'app-document-list',
   templateUrl: './document-list.component.html',
-  styleUrls: ['./document-list.component.css']
+  styleUrls: ['./document-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentListComponent implements OnInit {
-  projectClosed = true;
   taskApprovalExist = true;
   taskApprovals = DocumentConfig.fakeTaskApprovals;
 
@@ -21,6 +21,7 @@ export class DocumentListComponent implements OnInit {
   @Output() regulatoryData = new EventEmitter<String>();
 
   constructor(
+    private documentManagementService: DocumentManagementService
   ) {
   }
 
@@ -36,8 +37,8 @@ export class DocumentListComponent implements OnInit {
   onPDFData(documentId: string) {
     this.documentSelected.emit(documentId);
   }
-  hideProjectClosed(){
-    this.projectClosed = false;
+  isProjectClosed(): boolean {
+    return this.documentManagementService.documentMetadata.projectClosed;
   }
   hideTaskApprovals() {
     this.taskApprovalExist = false;

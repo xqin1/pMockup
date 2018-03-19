@@ -31,6 +31,16 @@ export class DocumentManagementService {
      //  if (DocumentConfig.projectClosedCode.includes(this.projectStatus)) {
      //    this.projectClosed = true;
      //  }
+      this.documentMetadata.projectClosed = false;
+      console.log(documentList.eligibility);
+      if (documentList.eligibility.length > 0) {
+        if (documentList.eligibility[0].reason.length > 0) {
+          if (documentList.eligibility[0].reason[0].toString().toUpperCase().includes("REVIEW IS COMPLETE")) {
+            this.documentMetadata.projectClosed = true;
+          }
+        }
+      }
+      console.log(this.documentMetadata)
       documentList.documents.forEach(doc => {
         const documentData: DocumentData = new DocumentData();
         documentData.eligibilityData = documentList.eligibility.filter(e => {

@@ -14,15 +14,12 @@
         </mat-toolbar-row>
       </mat-toolbar>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center" class="warning-section" *ngIf="projectClosed">
+    <div fxLayout="row" fxLayoutAlign="start center" class="warning-section" *ngIf="isProjectClosed()">
       <div fxFlex="100px">
         <mat-icon color="warn" class="warning-icon">warning</mat-icon>
       </div>
       <div fxFlex>
         The review is complete and no documents can be archived. Please send a Project Status Change Request to <a href='mailto:CDERInformatics@fda.hhs.gov'>CDERInformatics@fda.hhs.gov</a> for assistance.
-      </div>
-      <div fxFlex="100px">
-        <button mat-button (click)="hideProjectClosed()">Close</button>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" class="warning-section" *ngIf="taskApprovalExist">
@@ -44,7 +41,7 @@
         </div>
       </div>
       <div fxFlex="100px">
-        <button mat-button (click)="hideProjectClosed()">Close</button>
+        <button mat-button (click)="hideTaskApprovals()">Close</button>
       </div>
     </div>
     <div class="no-document-exist" *ngIf="documentDataList.length===0">

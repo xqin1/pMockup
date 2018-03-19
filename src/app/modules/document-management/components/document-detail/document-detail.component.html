@@ -15,26 +15,53 @@
         </span>
       </mat-card-title>
       <mat-card-subtitle>
-        Last Uploaded Date: {{documentData.lastUpdatedDate | date: "MM/dd/yyyy HH:mm:ss"}} |
-        Version: {{documentData.documentVersion}}
-        <a [href]="getDocumentDownloadLink(documentData)">
-          <button mat-button color="primary">
-            <mat-icon>file_download</mat-icon>Download
-          </button>
-        </a>
+        <div fxLayou="row" fxLayoutAlign="space-between start">
+          <div fxFlex="noshrink">
+            <span>Last Uploaded Date: {{documentData.lastUpdatedDate | date: "MM/dd/yyyy HH:mm:ss"}} | </span>
+            <span>Size: {{documentData.documentSize/1024 | number: '1.0-0'}}K | </span>
+            <span>Version: {{documentData.documentVersion}}</span>
+          </div>
+          <div fxFlex>
+            <span class="line-spacer"></span>
+          </div>
+          <div fxFlex="noshrink">
+            <span class="document-action-button">
+              <button mat-button color="primary" (click)="showMetaData(documentData)">
+                <mat-icon>description</mat-icon>Metadata ({{customFieldCount}})
+              </button>
+            </span>
+            <span class="document-action-button">
+            <button mat-button color="primary" (click)="showDocumentLink(documentData)">
+              <mat-icon>compare_arrows</mat-icon>Link Document ({{documentLinkCount}})
+            </button>
+          </span>
+            <span class="document-action-button">
+            <button mat-button color="primary" (click)="showPDFPreview(documentData)">
+              <mat-icon>picture_as_pdf</mat-icon>PDF Preview
+            </button>
+          </span>
+            <span>
+              <a [href]="getDocumentDownloadLink(documentData)">
+                <button mat-button color="primary">
+                  <mat-icon>file_download</mat-icon>Download
+                </button>
+              </a>
+            </span>
+          </div>
+        </div>
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <div fxLayou="row" fxLayoutAlign="space-around">
+      <div fxLayou="row" fxLayoutAlign="space-around start">
         <div fxFlex>
           <div class="section-header">
             <span>Document Approvals: </span>
             <span>
               {{documentData.approvers.length}}
             </span>
-            <span *ngIf="documentData.approvers.length===0 && documentData.archivalStatus !== 'Archived'">
+            <div *ngIf="documentData.approvers.length===0 && documentData.archivalStatus !== 'Archived'">
               <button mat-button color="primary">Request Approval</button>
-            </span>
+            </div>
           </div>
           <div *ngFor="let approver of documentData.approvers;index as i"  class="section content">
             <span>
@@ -116,27 +143,5 @@
         </div>
       </div>
     </mat-card-content>
-    <mat-card-actions>
-      <!--<span class="document-action-button">-->
-        <!--<button mat-button color="primary" (click)="showArchiveConfirmationDialog(documentData)">-->
-          <!--<mat-icon>archive</mat-icon>Archive-->
-        <!--</button>-->
-      <!--</span>-->
-      <span class="document-action-button">
-        <button mat-button color="primary" (click)="showMetaData(documentData)">
-          <mat-icon>description</mat-icon>Metadata ({{customFieldCount}})
-        </button>
-      </span>
-      <span class="document-action-button">
-        <button mat-button color="primary" (click)="showDocumentLink(documentData)">
-          <mat-icon>compare_arrows</mat-icon>Link Document ({{documentLinkCount}})
-        </button>
-      </span>
-      <span class="document-action-button">
-        <button mat-button color="primary" (click)="showPDFPreview(documentData)">
-          <mat-icon>picture_as_pdf</mat-icon>PDF Preview
-        </button>
-      </span>
-    </mat-card-actions>
   </mat-card>
 </div>

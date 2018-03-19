@@ -9,9 +9,34 @@
           </a>
             <img src="assets/archived.png" *ngIf="documentData.archivalStatus==='Archived'" class="archived-img"/>
         </span>
-        <span class="line-spacer"></span>
-        <span class="document-refresh-icon" matTooltip="refresh document">
-          <mat-icon color="primary">refresh</mat-icon>
+        <span class="document-action-icon">
+        <span class="document-action-button">
+          <button mat-button color="primary" (click)="showMetaData(documentData)">
+            <mat-icon>description</mat-icon>Metadata ({{customFieldCount}})
+          </button>
+        </span>
+        <span class="document-action-button">
+          <button mat-button color="primary" (click)="showDocumentLink(documentData)">
+            <mat-icon>compare_arrows</mat-icon>Link Document ({{documentLinkCount}})
+          </button>
+        </span>
+        <span class="document-action-button">
+          <button mat-button color="primary" (click)="showPDFPreview(documentData)">
+            <mat-icon>picture_as_pdf</mat-icon>PDF Preview
+          </button>
+        </span>
+        <span>
+          <a [href]="getDocumentDownloadLink(documentData)" class="no-decoration">
+            <button mat-button color="primary">
+              <mat-icon>file_download</mat-icon>Download
+            </button>
+          </a>
+        </span>
+        <span>
+          <button mat-button color="primary">
+            <mat-icon>refresh</mat-icon>Refresh
+          </button>
+        </span>
         </span>
       </mat-card-title>
       <mat-card-subtitle>
@@ -20,33 +45,6 @@
             <span>Last Uploaded Date: {{documentData.lastUpdatedDate | date: "MM/dd/yyyy HH:mm:ss"}} | </span>
             <span>Size: {{documentData.documentSize/1024 | number: '1.0-0'}}K | </span>
             <span>Version: {{documentData.documentVersion}}</span>
-          </div>
-          <div fxFlex>
-            <span class="line-spacer"></span>
-          </div>
-          <div fxFlex="noshrink">
-            <span class="document-action-button">
-              <button mat-button color="primary" (click)="showMetaData(documentData)">
-                <mat-icon>description</mat-icon>Metadata ({{customFieldCount}})
-              </button>
-            </span>
-            <span class="document-action-button">
-            <button mat-button color="primary" (click)="showDocumentLink(documentData)">
-              <mat-icon>compare_arrows</mat-icon>Link Document ({{documentLinkCount}})
-            </button>
-          </span>
-            <span class="document-action-button">
-            <button mat-button color="primary" (click)="showPDFPreview(documentData)">
-              <mat-icon>picture_as_pdf</mat-icon>PDF Preview
-            </button>
-          </span>
-            <span>
-              <a [href]="getDocumentDownloadLink(documentData)">
-                <button mat-button color="primary">
-                  <mat-icon>file_download</mat-icon>Download
-                </button>
-              </a>
-            </span>
           </div>
         </div>
       </mat-card-subtitle>

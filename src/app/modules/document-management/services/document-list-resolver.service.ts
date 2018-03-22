@@ -50,7 +50,7 @@ export class DocumentListResolverService implements Resolve<any> {
                     results.documents = [];
                     results.eligibility = [];
                     results.documents = documentList;
-                    results.objectCode = documentList[0]["docObjCode"];
+                    results.objectCode = documentList[0].topDocObjCode;
 
                     const eligibilityCheckIDs: string[] = this.documentManagementService.getEligibilityCheckIDs(results);
                     const eligibilityRequestList: any[] = [];

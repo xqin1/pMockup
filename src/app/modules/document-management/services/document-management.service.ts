@@ -10,13 +10,12 @@ import {DocumentMetadata} from '@app/modules/document-management/model/document-
 import { RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
 import {LoggerService} from '@app/core/services/logger.service';
 import {DocumentLinkData} from '@app/modules/document-management/model/document-link-data.model';
+import { Document} from '@app/core/model/workfront/Document.model';
 
 @Injectable()
 export class DocumentManagementService {
   documentListLoaded = false;
   documentDataList: DocumentData[] = [];
-  projectStatus: string = null;
-  projectClosed = false;
   documentMetadata: DocumentMetadata = new DocumentMetadata();
   constructor(
     private logger: LoggerService
@@ -46,24 +45,24 @@ export class DocumentManagementService {
           }
         }
       }
-      documentList.documents.forEach(doc => {
+      for (const doc of documentList.documents){
         const documentData: DocumentData = new DocumentData();
         documentData.eligibilityData = documentList.eligibility.filter(e => {
-          return e.documentId === doc["id"];
+          return e.documentId === doc.id;
         })[0];
         this.processDocument(documentData, doc);
         this.documentDataList.push(documentData);
-      });
+      };
     }
     return this.documentDataList;
   }
   processDocument(documentData: DocumentData, doc: any): DocumentData{
-    documentData.documentID = doc["id"];
-    documentData.documentName = `${doc["name"]}.${doc["currentVersion"]['ext']}`;
-    documentData.documentSize = doc["currentVersion"]['docSize'];
-    documentData.documentVersion = doc["currentVersion"]['version'];
-    documentData.lastUpdatedDate = new Date(doc['lastModDate']);
-    documentData.customFormData = this.setCustmFormData(doc["parameterValues"]);
+    documentData.documentID = doc.id;
+    documentData.documentName = `${doc.name}.${doc.currentVersion.ext}`;
+    documentData.documentSize = doc.currentVersion.docSize;
+    documentData.documentVersion = doc.currentVersion.version;
+    documentData.lastUpdatedDate = new Date(doc.lastModDate);
+    documentData.customFormData = this.setCustmFormData(doc.parameterValues);
     documentData.regulatoryData = new RegulatoryData();
     documentData.regulatoryData.regulatoryActionExist = false;
     documentData.regulatoryData.regulatoryActions = [];
@@ -106,18 +105,18 @@ export class DocumentManagementService {
     document.archivalStatus = archivalStatus;
   }
 
-  setDocumentApprovers(document: DocumentData, doc: object) {
-    const data = doc["approvals"];
+  setDocumentApprovers(document: DocumentData, doc: Document) {
+    const data = doc.approvals;
     const approvers: DocumentApprover[] = [];
     for (let i = 0; i < data.length; i++) {
-      if (data[i]['status'] !== "CANCELLED") {
+      if (data[i]['status'].toString() !== "CANCELLED") {
         const approver: DocumentApprover = new DocumentApprover();
-        approver.status = data[i]['status'];
-        approver.approverID = data[i]['approverID'];
-        approver.approvalDate = data[i]['approvalDate'];
-        approver.approverName = data[i]['approver']['name'];
-        approver.requesterID = data[i]['requestDate'];
-        approver.reqeustDate = data[i]['requestID'];
+        approver.status = data[i].status.toString();
+        approver.approverID = data[i].approverID;
+        approver.approvalDate = data[i].approvalDate;
+        approver.approverName = data[i].approver.name;
+        approver.requesterID = data[i].requestorID;
+        approver.reqeustDate = data[i].requestDate
         approvers.push(approver);
       }
     }
@@ -257,7 +256,7 @@ export class DocumentManagementService {
       }
       if (archivalStatus === "Archiving start" || archivalStatus === "Archiving in progress"){
         const eligibility = new Eligibility();
-        eligibility.documentId = doc["id"];
+        eligibility.documentId = doc.id;
         eligibility.archivalEligible = false;
         eligibility.reason = [];
         documentList.eligibility.push(eligibility);

@@ -4,6 +4,9 @@ for local development using nginx server:
 ng build --watch
 ng build --target=production
 
+for local development using webpack dev server
+ng start
+
 for local deployment
 ng build --environment localwl --bh /panoramaUI/
 ng build --target=production --environment localwl --bh /panoramaUI/

@@ -1,3 +1,9 @@
 {
-  "/pefDocumentArchive": "http://localhost:7001/PanoramaExtendedFramework/extendedform/docmgt/bulkarchiving"
+  "/dmService": {
+    "target": "http://localhost:7001/PanoramaDocMgmt",
+    "secure": false,
+    "pathRewrite": {
+      "^/dmService": ""
+    }
+  }
 }

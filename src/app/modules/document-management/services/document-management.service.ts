@@ -52,7 +52,7 @@ export class DocumentManagementService {
         })[0];
         this.processDocument(documentData, doc);
         this.documentDataList.push(documentData);
-      };
+      }
     }
     return this.documentDataList;
   }
@@ -160,7 +160,13 @@ export class DocumentManagementService {
   setRegulatoryActionData(regulatoryActions: ValuePair[]): ValuePair[] {
     const regulatoryActionData: ValuePair[] = [];
     if (regulatoryActions !== null) {
-      const regulatoryActionMap: ValuePair[] = regulatoryActions.sort();
+      console.log(regulatoryActions);
+      const regulatoryActionMap: any[] = Object.keys(regulatoryActions).map((key) => {
+        const obj = {};
+        obj[key] = regulatoryActions[key];
+        return obj;
+      });
+      console.log(regulatoryActionMap);
       const actionsWithoutPrefix: string[] = [];
       const regulatoryActionMap2: Object[] = [];
       regulatoryActionMap.forEach(function (item) {

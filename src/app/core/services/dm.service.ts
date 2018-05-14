@@ -56,7 +56,7 @@ export class DMService {
   }
   getRegulatoryActionByDocumentID(documentID) {
     return this.http
-      .get<RegulatoryData>(`${environment.pefDocumentArchiveURL}/getRegulatoryActions?documentID=${documentID}`)
+      .get<RegulatoryData>(`${environment.documentManagementURL}/documentManagement/regulatoryActions?documentId=${documentID}`)
       .pipe(
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),

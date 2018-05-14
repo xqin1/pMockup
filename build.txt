@@ -5,15 +5,14 @@ ng build --watch
 ng build --target=production
 
 for local development using webpack dev server
-ng start
+npm start
 
 for local deployment
-ng build --environment localwl --bh /panoramaUI/
-ng build --target=production --environment localwl --bh /panoramaUI/
+ng build --prod --configuration=localwl --base-href=/panoramaUI/
 
 
 for PPS
-ng build --environment pps --bh /PEF_nda/
+ng build --prod --configuration=pps --base-href=/PEF_nda/
 ng build --target=production --environment pps --bh /PEF_nda/
 
 local URLs
@@ -21,7 +20,7 @@ http://localhost:9092/dmDocumentManagement/pdfPreview?documentId=58629efa0001381
 http://localhost:7001/PanoramaDocMgmt/documentManagement/pdfPreview?documentId=5963b4970008909bc3febe44dd340938
 http://localhost:9092/pefDocumentArchive/getDocumentsByObjectId?objectId=58629efa0001381bacf135739892f94a
 
-http://localhost:7001/panoramaUI/#/document-archive/document-list/59ba91ee004ea6f6017cee244808ea63/555b623a00007f7603d0f0a9d389926f
+http://localhost:7001/panoramaUI/#/document-management/document-list/59ba91ee004ea6f6017cee244808ea63/555b623a00007f7603d0f0a9d389926f
 
 
 

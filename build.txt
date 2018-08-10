@@ -76,3 +76,18 @@ commit;
 http://localhost:7001/PanoramaDocMgmt/documentManagement/eligibility?documentId=5a68abb3001433537a2605221f4a824b&userId=5720e0b40005cf8f952b487291b2aa3b
 
 http://localhost:7001/PanoramaDocMgmt/documentManagement/eligibility/isPassODMEligibilityCheck?documentId=594958cc0002dbc3c4e8a0d0eb33f4a3&userId=555b623a00007f7603d0f0a9d389926f
+
+
+
+//current UI
+//one doc
+http://localhost:9091/WEB-INF/views/formsDocMgt/BulkArchivingFormIndex.html?userId=555b623a00007f7603d0f0a9d389926f&objectId=59ba91d1004e9969f61be86a70d06073
+
+http://localhost:9091/WEB-INF/views/formsDocMgt/BulkArchivingFormIndex.html?userId=555b623a00007f7603d0f0a9d389926f&objectId=
+59ba91ee004ea6f6017cee244808ea63
+
+
+
+8http://localhost:7001/PanoramaExtendedFramework/extendedform/docmgt/documentlink/index?documentID=5afc77e8002284cdd2f0472d8a501d02&atTaskSessionID=84d939d2c76c48b7abfa3043b0c43dc4
+
+http://localhost:9091/WEB-INF/views/formsDocMgt/DocumentLinkIndex.html?documentID=5afc77e8002284cdd2f0472d8a501d02&atTaskSessionID=84d939d2c76c48b7abfa3043b0c43dc4

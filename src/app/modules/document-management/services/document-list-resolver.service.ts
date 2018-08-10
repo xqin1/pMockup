@@ -7,9 +7,7 @@ import {
 import { Store } from '@ngrx/store';
 import { PEFService} from '@app/core/services/pef.service';
 import { DMService} from '@app/core/services/dm.service';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { Observable ,  of ,  forkJoin } from 'rxjs';
 import * as fromDocument from '@app/modules/document-management/reducers/document.reducer';
 import * as documentAction from '@app/modules/document-management/actions/document.action';
 import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
@@ -44,7 +42,7 @@ export class DocumentListResolverService implements Resolve<any> {
               this.dmService.getDocumentListByObjectId(objectId)
                 .subscribe( documentList => {
                   // TODO: comment the following line when deploying
-                    // documentList = DocumentConfig.fakeDocumentList;
+                  //   documentList = DocumentConfig.fakeDocumentList;
                   if (documentList.length > 0) {
                     const results = new DocumentList();
                     results.documents = [];

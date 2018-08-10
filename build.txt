@@ -9,7 +9,7 @@ npm start
 
 for local deployment
 ng build --prod --configuration=localwl --base-href=/panoramaUI/
-
+grunt war
 
 for PPS
 ng build --prod --configuration=pps --base-href=/PEF_nda/

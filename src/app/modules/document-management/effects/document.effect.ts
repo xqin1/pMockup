@@ -1,9 +1,7 @@
 import { Injectable, InjectionToken, Optional, Inject } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { empty } from 'rxjs/observable/empty';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  EMPTY as empty ,  of } from 'rxjs';
 import { DMService} from '@app/core/services/dm.service';
 import * as documentAction from '@app/modules/document-management/actions/document.action.ts';
 import { DocumentRegulatoryActionPayload} from '@app/modules/document-management/model/document-regulatory-action-paylaod.model';

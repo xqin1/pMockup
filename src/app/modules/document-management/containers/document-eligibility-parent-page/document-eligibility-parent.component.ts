@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 import {Store} from '@ngrx/store';
 import * as fromDocument from '@app/modules/document-management/reducers/index.reducer';

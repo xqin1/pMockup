@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import {Store} from '@ngrx/store';
 import * as fromDocument from '@app/modules/document-management/reducers/index.reducer';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {LoadingStatus} from '@app/modules/document-management/model/loading-status.model';
 import {DocumentData} from '@app/modules/document-management/model/documant-data.model';
 

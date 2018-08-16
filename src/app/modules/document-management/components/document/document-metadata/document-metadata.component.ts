@@ -46,7 +46,7 @@ export class DocumentMetadataComponent implements OnInit {
     return displayData;
   }
   goToDocumentList(): void {
-    this.router.navigate(['/document-management', 'document-list',
+    this.router.navigate(['/document-management', 'document', 'document-list',
       this.documentManagementService.documentMetadata.objectId, this.documentManagementService.documentMetadata.userId]);
   }
   editCustomFormData() {

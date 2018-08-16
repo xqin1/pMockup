@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PortalService} from '@app/modules/document-management/services/portal.service';
 
 @Component({
   selector: 'app-portal-header',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortalHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private portalService: PortalService
+  ) { }
+
+  userName: String;
 
   ngOnInit() {
+    this.userName = this.portalService.user.name;
   }
 
 }

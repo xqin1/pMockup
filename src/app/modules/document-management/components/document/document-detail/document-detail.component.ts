@@ -5,9 +5,7 @@ import {DocumentApprover} from 'app/modules/document-management/model/document-a
 import { DocumentManagementService} from 'app/modules/document-management/services/document-management.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material';
 import { FilePreviewDialogComponent} from 'app/modules/document-management/components/document/file-preview-dialog/file-preview-dialog.component';
-import { NotificationComponent} from 'app/shared/components/notification/notification.component';
 import { ArchiveConfirmationDialogComponent} from 'app/modules/document-management/components/document/archive-confirmation-dialog/archive-confirmation-dialog.component';
 
 @Component({
@@ -81,14 +79,14 @@ export class DocumentDetailComponent implements OnInit {
       this.regulatoryData.emit(document.documentID);
     }
     this.documentSelected.emit(document.documentID);
-    this.router.navigate(['/document', 'document-metadata', document.documentID]);
+    this.router.navigate(['/document-management', 'document', 'document-metadata', document.documentID]);
   }
   showDocumentLink(document: DocumentData): void {
     if (!document.documentLinkData.documentLinkExist){
       this.documentLinkData.emit(document.documentID);
     }
     this.documentSelected.emit(document.documentID);
-    this.router.navigate(['/document', 'document-link', document.documentID]);
+    this.router.navigate(['/document-management', 'document', 'document-link', document.documentID]);
   }
   showPDFPreview(document: DocumentData) {
     this.documentSelected.emit(document.documentID);

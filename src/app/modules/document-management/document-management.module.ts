@@ -13,6 +13,7 @@ import { NotificationComponent} from '@app/shared/components/notification/notifi
 import {DocumentEffects} from '@app/modules/document-management/effects/document.effect';
 import {ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/document/archive-confirmation-dialog/archive-confirmation-dialog.component';
 import { AuthModule} from '@app/modules/document-management/auth/auth.module';
+import { PortalService} from '@app/modules/document-management/services/portal.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { AuthModule} from '@app/modules/document-management/auth/auth.module';
     AuthModule
   ],
   declarations: [routedComponents],
-  providers: [ DocumentManagementService, DocumentListResolverService],
+  providers: [ DocumentManagementService, DocumentListResolverService, PortalService],
   entryComponents: [FilePreviewDialogComponent, NotificationComponent, ArchiveConfirmationDialogComponent]
 })
 export class DocumentManagementModule { }

@@ -57,7 +57,7 @@ export class DocumentManagementService {
     return this.documentDataList;
   }
   processDocument(documentData: DocumentData, doc: any): DocumentData{
-    documentData.documentID = doc.id;
+    documentData.documentID = doc.ID;
     documentData.documentName = `${doc.name}.${doc.currentVersion.ext}`;
     documentData.documentSize = doc.currentVersion.docSize;
     documentData.documentVersion = doc.currentVersion.version;

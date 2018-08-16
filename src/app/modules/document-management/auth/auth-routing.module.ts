@@ -5,7 +5,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'portal/login',
     component: LoginPageComponent
   }
 ];

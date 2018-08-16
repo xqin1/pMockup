@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 
 import * as AuthAction from '../actions/auth.action';
 import { DMService} from '@app/core/services/dm.service';
+import { PortalService} from '@app/modules/document-management/services/portal.service';
 
 @Injectable()
 export class AuthEffects {
@@ -21,6 +22,7 @@ export class AuthEffects {
             .pipe(
               map(result => {
                 if (result) {
+                  this.portalService.setCurrentUser(result);
                   return new AuthAction.LoginSuccess(true);
                 } else {
                   return new AuthAction.LoginFailure('Email address is not valid');
@@ -43,13 +45,14 @@ export class AuthEffects {
     .ofType(AuthAction.LOGIN_REDIRECT, AuthAction.LOGOUT)
     .pipe(
       tap(authed => {
-        this.router.navigate(['document-management/login']);
+        this.router.navigate(['document-management/portal/login']);
       })
     );
 
   constructor(
     private actions$: Actions,
     private dmService: DMService,
-    private router: Router
+    private router: Router,
+    private portalService: PortalService
   ) {}
 }

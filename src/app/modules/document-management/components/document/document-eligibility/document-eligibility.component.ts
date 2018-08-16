@@ -16,7 +16,7 @@ export class DocumentEligibilityComponent implements OnInit {
     private router: Router
   ) { }
   goToDocumentList(): void {
-    this.router.navigate(['/document-management', 'document-list',
+    this.router.navigate(['/document-management', 'document', 'document-list',
       this.documentManagementService.documentMetadata.objectId, this.documentManagementService.documentMetadata.userId]);
   }
   ngOnInit() {

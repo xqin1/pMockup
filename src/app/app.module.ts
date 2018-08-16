@@ -76,8 +76,7 @@ import { DMService} from '@app/core/services/dm.service';
 
     PEFService,
     DMService
-
-  ],
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

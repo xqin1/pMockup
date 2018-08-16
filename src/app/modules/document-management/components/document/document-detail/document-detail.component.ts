@@ -81,14 +81,14 @@ export class DocumentDetailComponent implements OnInit {
       this.regulatoryData.emit(document.documentID);
     }
     this.documentSelected.emit(document.documentID);
-    this.router.navigate(['/document-management', 'document-metadata', document.documentID]);
+    this.router.navigate(['/document', 'document-metadata', document.documentID]);
   }
   showDocumentLink(document: DocumentData): void {
     if (!document.documentLinkData.documentLinkExist){
       this.documentLinkData.emit(document.documentID);
     }
     this.documentSelected.emit(document.documentID);
-    this.router.navigate(['/document-management', 'document-link', document.documentID]);
+    this.router.navigate(['/document', 'document-link', document.documentID]);
   }
   showPDFPreview(document: DocumentData) {
     this.documentSelected.emit(document.documentID);
@@ -134,7 +134,7 @@ export class DocumentDetailComponent implements OnInit {
   }
   showEligibilityList(document: DocumentData) {
     this.documentSelected.emit(document.documentID);
-    this.router.navigate(['/document-management', 'document-eligibility', document.documentID]);
+    this.router.navigate(['/document', 'document-eligibility', document.documentID]);
   }
   ngOnInit() {
     this.customFieldCount = this.getCustomFieldCount();

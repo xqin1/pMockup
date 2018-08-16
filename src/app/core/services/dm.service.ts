@@ -33,7 +33,7 @@ export class DMService {
   }
   getDocumentListByObjectId(objectId: string) {
     return this.http
-      .get(`${environment.documentManagementURL}/documentManagement/documentList?objectId=${objectId}`)
+      .get(`${environment.documentManagementURL}/portal/documentList?objectId=${objectId}`)
       .pipe(
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),
@@ -63,6 +63,19 @@ export class DMService {
         finalize(() => {
           // do something
           this.logger.log("done with retrieving regulatory data");
+        })
+      );
+  }
+  portalLogIn(emailAddress: string) {
+    console.log(emailAddress);
+    return this.http
+      .get<RegulatoryData>(`${environment.documentManagementURL}/portal/security/getUserByEmailAddress?emailAddress=${emailAddress}`)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          // do something
+          this.logger.log("done with login");
         })
       );
   }

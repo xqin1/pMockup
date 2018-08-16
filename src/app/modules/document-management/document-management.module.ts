@@ -8,10 +8,11 @@ import { reducers } from './reducers/index.reducer';
 import { DocumentListResolverService} from '@app/modules/document-management/services/document-list-resolver.service';
 import { DocumentManagementService} from '@app/modules/document-management/services/document-management.service';
 import { DocumentManagementRoutingModule, routedComponents } from './document-management-routing.module';
-import { FilePreviewDialogComponent } from './components/file-preview-dialog/file-preview-dialog.component';
+import { FilePreviewDialogComponent } from './components/document/file-preview-dialog/file-preview-dialog.component';
 import { NotificationComponent} from '@app/shared/components/notification/notification.component';
 import {DocumentEffects} from '@app/modules/document-management/effects/document.effect';
-import {ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/archive-confirmation-dialog/archive-confirmation-dialog.component';
+import {ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/document/archive-confirmation-dialog/archive-confirmation-dialog.component';
+import { AuthModule} from '@app/modules/document-management/auth/auth.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {ArchiveConfirmationDialogComponent} from '@app/modules/document-manageme
     DocumentManagementRoutingModule,
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers),
-    EffectsModule.forFeature([DocumentEffects])
+    EffectsModule.forFeature([DocumentEffects]),
+    AuthModule
   ],
   declarations: [routedComponents],
   providers: [ DocumentManagementService, DocumentListResolverService],

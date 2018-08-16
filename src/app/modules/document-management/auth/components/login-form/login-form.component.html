@@ -1,0 +1,75 @@
+<div class="login-form">
+<form [formGroup]="loginForm" (ngSubmit)="submit()">
+<mat-card>
+  <mat-card-title>Portal Login</mat-card-title>
+  <mat-card-content>
+        <mat-form-field class="element-full-width">
+          <input matInput placeholder="FDA Email Address" formControlName="email" data-cy="email-input">
+          <mat-hint class="input-error" *ngIf="errorMessage">
+            {{errorMessage}}
+          </mat-hint>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button data-cy="submit">
+         <mat-icon>account_circle</mat-icon> Login
+        </button>
+
+  </mat-card-content>
+</mat-card>
+</form>
+</div>
+
+<!--<div class="legend" *ngIf="mapLegend !== null">-->
+  <!--<mat-expansion-panel [expanded]="true" class="legend-panel">-->
+    <!--<mat-expansion-panel-header>-->
+      <!--<mat-panel-title *ngIf="mapLegend.legendType==='thematic'">-->
+        <!--{{thematicLegend.title}}-->
+      <!--</mat-panel-title>-->
+      <!--<mat-panel-title *ngIf="mapLegend.legendType==='bivariable'">-->
+        <!--birariable title-->
+      <!--</mat-panel-title>-->
+    <!--</mat-expansion-panel-header>-->
+    <!--<div *ngIf="mapLegend.legendType==='thematic'" class="thematic-legend">-->
+      <!--<div *ngFor="let pair of thematicLegend.content">-->
+        <!--<span class="thematic-swatch" [ngStyle]="{'background-color':pair.name}"></span>-->
+        <!--<span>{{pair.code}}</span>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngIf="mapLegend.legendType==='bivariable'">-->
+      <!--<div class="bivariable-legend-block">-->
+        <!--<div class="bivariable-swatch-block">-->
+          <!--<div class="bivariable-swatch-row">-->
+            <!--<span *ngFor="let c of mapLegend.colors[2]" [ngStyle]="{background:c}" class="bivarialbe-swatch-cell">&nbsp;</span>-->
+          <!--</div>-->
+          <!--<div class="bivariable-swatch-row">-->
+            <!--<span *ngFor="let c of mapLegend.colors[1]" [ngStyle]="{background:c}" class="bivarialbe-swatch-cell">&nbsp;</span>-->
+          <!--</div>-->
+          <!--<div class="bivariable-swatch-row">-->
+            <!--<span *ngFor="let c of mapLegend.colors[0]" [ngStyle]="{background:c}" class="bivarialbe-swatch-cell">&nbsp;</span>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="x-axis">-->
+          <!--<span class="x-axis-first"></span>-->
+          <!--<span class="x-axis-second">{{mapLegend.values[1][0]}}</span>-->
+          <!--<span class="x-axis-third"></span>-->
+          <!--<span class="x-axis-fourth">{{mapLegend.values[1][1]}}</span>-->
+          <!--<span class="x-axis-fifth"></span>-->
+          <!--<span class="x-axis-sixth">{{mapLegend.values[1][2]}}</span>-->
+          <!--<span class="x-axis-title">{{mapLegend.title[0]}}</span>-->
+        <!--</div>-->
+        <!--<div class="y-axis rotate">-->
+          <!--<span class="y-axis-first"></span>-->
+          <!--<span class="y-axis-second">{{getFormmattedNumber(mapLegend.values[0][0])}}</span>-->
+          <!--<span class="y-axis-third"></span>-->
+          <!--<span class="y-axis-fourth">{{getFormmattedNumber(mapLegend.values[0][1])}}</span>-->
+          <!--<span class="y-axis-fifth"></span>-->
+          <!--<span class="y-axis-sixth">{{getFormmattedNumber(mapLegend.values[0][2])}}</span>-->
+          <!--<span class="y-axis-title">{{mapLegend.title[1]}}</span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</mat-expansion-panel>-->
+<!--</div>-->
+
+
+

@@ -48,7 +48,7 @@ export class DocumentManagementService {
       for (const doc of documentList.documents){
         const documentData: DocumentData = new DocumentData();
         documentData.eligibilityData = documentList.eligibility.filter(e => {
-          return e.documentId === doc.id;
+          return e.documentId === doc.ID;
         })[0];
         this.processDocument(documentData, doc);
         this.documentDataList.push(documentData);
@@ -116,7 +116,7 @@ export class DocumentManagementService {
         approver.approvalDate = data[i].approvalDate;
         approver.approverName = data[i].approver.name;
         approver.requesterID = data[i].requestorID;
-        approver.reqeustDate = data[i].requestDate
+        approver.reqeustDate = data[i].requestDate;
         approvers.push(approver);
       }
     }
@@ -262,12 +262,12 @@ export class DocumentManagementService {
       }
       if (archivalStatus === "Archiving start" || archivalStatus === "Archiving in progress"){
         const eligibility = new Eligibility();
-        eligibility.documentId = doc.id;
+        eligibility.documentId = doc.ID;
         eligibility.archivalEligible = false;
         eligibility.reason = [];
         documentList.eligibility.push(eligibility);
       }else {
-        list.push(doc["id"]);
+        list.push(doc.ID);
       }
     }
     return list;

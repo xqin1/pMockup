@@ -4,7 +4,7 @@ import { DocumentVersion} from '@app/core/model/workfront/DocumentVersion.model'
 import {DocumentApproval} from '@app/core/model/workfront/DocumentApproval.model';
 
 export class Document {
-  id: string;
+  ID: string;
   objCode: string;
   parameterValues: object;
   accessorIDs: string[];

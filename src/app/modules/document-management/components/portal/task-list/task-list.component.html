@@ -1,29 +1,25 @@
-<mat-card class="task-list-item">
-  <mat-card-title>Active Task List</mat-card-title>
-  <mat-card-content>
-    <mat-list *ngFor="let task of taskList;index as i">
-      <mat-list-item
-        (click)="onSelectTask(task)"
-        [ngClass]="{'task-list-item-selected': selectedTaskId===task.ID}">
-    <span class="task-list-left">
-      <div class="task-name">{{task.name}}</div>
-      <div class="project-name">{{task.project.name}}</div>
-    </span>
+<div class="task-list-page">
+  <div class="task-page-header">
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span class="task-page-title">Active Task List ({{taskList.length}})</span>
         <span class="line-spacer"></span>
-        <span class="task-list-right">
-      <div class="goal-date">
-        Goal:<br/>
-        {{task.project.parameterValues["DE:Goal Date"]}}
-      </div>
-      <div>
-        <mat-chip-list>
-          <mat-chip selected color="primary">build</mat-chip>
-        </mat-chip-list>
-      </div>
-    </span>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+        <span class="task-list-refresh-icon" matTooltip="refresh task list">
+            <mat-icon color="primary">refresh</mat-icon>
+        </span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div class="no-task-exist" *ngIf="taskList.length===0">
+    No Active Task.
+  </div>
+  <div *ngFor="let task of taskList; index as i;" class="task-card-list">
+  <app-task-list-item
+    [taskData]="task"
+    [selectedTaskId]="selectedTaskId"
+    (selectTask)="onSelectTask($event)">
+  </app-task-list-item>
+</div>
+</div>
+
 

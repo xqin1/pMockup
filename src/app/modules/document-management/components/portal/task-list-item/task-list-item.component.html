@@ -1,3 +1,41 @@
-<p>
-  task-list-item works!
-</p>
+
+<div>
+  <mat-card class="task-detail-card" [ngClass]="{'task-detail-card-selected': selectedTaskId===taskData.ID}">
+    <mat-card-header>
+      <mat-card-title>
+        <div fxLayou="row" fxLayoutAlign="space-around start">
+          <div fxFlex="250px">
+            <span class="task-name">
+              <a [href]="getShowTaskLink(taskData)" target="_blank" class="title-link">
+                {{taskData.name}}
+              </a>
+            </span>
+          </div>
+          <div fxFlex>
+            <span>
+              Goal: <br/>
+              {{taskData.project.parameterValues["DE:Goal Date"]}}
+            </span>
+          </div>
+        </div>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayou="row" fxLayoutAlign="space-around start">
+        <div fxFlex="250px">
+            <span class="project-name">
+              <a [href]="getShowProjectLink(taskData)" target="_blank" class="title-link">
+                {{taskData.project.name}}
+              </a>
+            </span>
+        </div>
+        <div fxFlex>
+          <mat-chip-list>
+            <mat-chip selected color="primary">build</mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

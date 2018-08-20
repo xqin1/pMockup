@@ -1,0 +1,16 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { Task} from '@app/core/model/workfront/Task.model';
+
+@Component({
+  selector: 'app-task-detail',
+  templateUrl: './task-detail.component.html',
+  styleUrls: ['./task-detail.component.css']
+})
+export class TaskDetailComponent implements OnInit {
+  @Input() selectedTask: Task;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

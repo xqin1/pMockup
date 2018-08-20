@@ -1,10 +1,12 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromDocument from './document.reducer';
+import * as fromTask from './task.reducer';
 
 
 export interface DocumentManagementState {
   document: fromDocument.State;
+  task: fromTask.State;
 
 }
 
@@ -13,30 +15,11 @@ export interface State extends fromRoot.State {
 }
 
 export const reducers = {
-  document: fromDocument.reducer
+  document: fromDocument.reducer,
+  task: fromTask.reducer
 };
 
-/**
- * A selector function is a map function factory. We pass it parameters and it
- * returns a function that maps from the larger state tree into a smaller
- * piece of state. This selector simply selects the `books` state.
- *
- * Selectors are used with the `select` operator.
- *
- * ```ts
- * class MyComponent {
- * 	constructor(state$: Observable<State>) {
- * 	  this.booksState$ = state$.select(getBooksState);
- * 	}
- * }
- * ```
- */
-
-/**
- * The createFeatureSelector function selects a piece of state from the root of the state object.
- * This is used for selecting feature states that are loaded eagerly or lazily.
-*/
-export const getDocumentManagementState = createFeatureSelector<DocumentManagementState>('documentManagement');
+export const getDocumentManagementState = createFeatureSelector<State, DocumentManagementState>('documentManagement');
 
 /**
  * Every reducer module exports selector functions, however child reducers
@@ -47,12 +30,13 @@ export const getDocumentManagementState = createFeatureSelector<DocumentManageme
  * only recompute when arguments change. The created selectors can also be composed
  * together to select different pieces of state.
  */
+
+// for document state
 export const getDocumentState = createSelector(
   getDocumentManagementState,
   state => state.document
 );
 
-// selectors for data
 export const getDocumentListLoaded = createSelector(
   getDocumentState,
   fromDocument.getDocumentListLoaded
@@ -77,3 +61,40 @@ export const getRegulatoryLoadingStatus = createSelector(
   getDocumentState,
   fromDocument.getRegulaotryLoadingStatus
 );
+
+// for task state
+export const getTaskState = createSelector(
+  getDocumentManagementState,
+  state => state.task
+);
+
+export const getTaskListLoading = createSelector(
+  getTaskState,
+  fromTask.getTAskListLoading
+);
+
+export const getTaskListLoaded = createSelector(
+  getTaskState,
+  fromTask.getTaskListLoaded
+);
+
+export const getTaskList = createSelector(
+  getTaskState,
+  fromTask.getTaskList
+);
+
+export const getSelectedTaskId = createSelector(
+  getTaskState,
+  fromTask.getSelectedTaskId
+);
+
+export const getSelectedTask = createSelector(
+  getTaskList,
+  getSelectedTaskId,
+  (tasks, id) => {
+  //  console.log("select task being called");
+    return tasks.filter(t => t.ID === id)[0];
+  }
+);
+
+

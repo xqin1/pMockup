@@ -2,11 +2,17 @@ describe('Portal Header Test', () => {
     beforeEach(function() {
       cy.visit('/#/document-management/portal');
       cy.fixture('portal/user').as('user');
+      cy.fixture('portal/task-list').as('task-list');
       cy.server();
       cy.route({
         method: 'GET',
         url: '**/getUserByEmailAddress**',
         response: '@user'
+      });
+      cy.route({
+        method: 'GET',
+        url: '**/taskList**',
+        response: '@task-list'
       })
       cy.get('[data-cy=email-input]')
         .type('xiaoming.qin@fda.hhs.gov');

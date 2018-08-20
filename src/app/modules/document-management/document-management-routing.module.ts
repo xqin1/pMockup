@@ -17,6 +17,17 @@ import { DocumentPortalHeaderParentPageComponent} from '@app/modules/document-ma
 import { DocumentPortalParentPageComponent} from '@app/modules/document-management/containers/portal/document-portal-parent-page/document-portal-parent-page.component';
 import { PortalHeaderComponent } from '@app/modules/document-management/components/portal/portal-header/portal-header.component';
 import { AuthGuardService} from '@app/modules/document-management/auth/services/auth-guard.service';
+import { TaskListResolverService} from '@app/modules/document-management/services/task-list-resolver.service';
+import { TaskListParentPageComponent } from './containers/portal/task-list-parent-page/task-list-parent-page.component';
+import { TaskListComponent } from './components/portal/task-list/task-list.component';
+import { TaskDetailComponent } from './components/portal/task-detail/task-detail.component';
+import { TaskDetailParentPageComponent } from './containers/portal/task-detail-parent-page/task-detail-parent-page.component';
+import { TaskStateParentPageComponent } from './containers/portal/task-state-parent-page/task-state-parent-page.component';
+import { TaskStateComponent } from './components/portal/task-state/task-state.component';
+import { TaskStateBuildComponent } from './components/portal/task-state-build/task-state-build.component';
+import { TaskStateConcurComponent } from './components/portal/task-state-concur/task-state-concur.component';
+import { TaskStateSignComponent } from './components/portal/task-state-sign/task-state-sign.component';
+import { TaskStateArchiveComponent } from './components/portal/task-state-archive/task-state-archive.component';
 
 const routes: Routes = [
   {
@@ -53,7 +64,7 @@ const routes: Routes = [
     path: 'portal',
     component: DocumentPortalParentPageComponent,
     resolve: {
-      // data: DocumentListResolverService
+       data: TaskListResolverService
     },
     canActivate: [AuthGuardService],
     children: [
@@ -98,4 +109,14 @@ export const routedComponents = [
 
 DocumentPortalHeaderParentPageComponent,
 DocumentPortalParentPageComponent,
-PortalHeaderComponent];
+PortalHeaderComponent,
+  TaskListParentPageComponent,
+  TaskListComponent,
+  TaskDetailComponent,
+  TaskDetailParentPageComponent,
+  TaskStateParentPageComponent,
+  TaskStateComponent,
+  TaskStateBuildComponent,
+  TaskStateConcurComponent,
+  TaskStateSignComponent,
+  TaskStateArchiveComponent];

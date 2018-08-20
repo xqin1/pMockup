@@ -7,6 +7,7 @@ import {RegulatoryData} from '@app/modules/document-management/model/regulatory-
 import {LoggerService} from '@app/core/services/logger.service';
 import {ArchiveResponse} from '@app/modules/document-management/model/archive-response.model';
 import {Eligibility} from '@app/modules/document-management/model/eligibility.model';
+import {Task} from '@app/core/model/workfront/Task.model';
 
 
 @Injectable()
@@ -76,6 +77,18 @@ export class DMService {
         finalize(() => {
           // do something
           this.logger.log("done with login");
+        })
+      );
+  }
+  getTaskListByUserId(userId) {
+    return this.http
+      .get<Task[]>(`${environment.documentManagementURL}/portal/taskList?userId=${userId}`)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          // do something
+          this.logger.log("done with task list data");
         })
       );
   }

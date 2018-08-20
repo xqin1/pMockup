@@ -1,3 +1,6 @@
+export interface ProjecCustomField {
+  "DE:Goal Date": string;
+}
 export class Project {
   ID: string;
   name: string
@@ -6,6 +9,6 @@ export class Project {
   projectedCompletionDate: Date;
   status: string;
   objCode: string;
-  parameterValues: object;
+  parameterValues: ProjecCustomField;
 
 }

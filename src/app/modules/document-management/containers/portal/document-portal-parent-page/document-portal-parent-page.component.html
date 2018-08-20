@@ -1,7 +1,14 @@
 <div fxLayout="column" class="fixVertical">
   <app-document-portal-header-parent-page></app-document-portal-header-parent-page>
   <div class="flex-container" fxFlex fxFlexFill>
-    <router-outlet></router-outlet>
+    <div fxLayout="row" fxlayoutAlign="center center" fxLayoutGap="5px" class="content-row">
+      <div fxFlex="400px" class="content-left">
+        <app-task-list-parent-page></app-task-list-parent-page>
+      </div>
+      <div fxFlex class="content-right">
+        <app-task-detail-parent-page></app-task-detail-parent-page>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -14,6 +14,9 @@ import {DocumentEffects} from '@app/modules/document-management/effects/document
 import {ArchiveConfirmationDialogComponent} from '@app/modules/document-management/components/document/archive-confirmation-dialog/archive-confirmation-dialog.component';
 import { AuthModule} from '@app/modules/document-management/auth/auth.module';
 import { PortalService} from '@app/modules/document-management/services/portal.service';
+import {TaskEffects} from '@app/modules/document-management/effects/task.effect';
+import { TaskListResolverService} from '@app/modules/document-management/services/task-list-resolver.service';
+import { TaskListItemComponent } from './components/portal/task-list-item/task-list-item.component';
 
 @NgModule({
   imports: [
@@ -22,11 +25,11 @@ import { PortalService} from '@app/modules/document-management/services/portal.s
     DocumentManagementRoutingModule,
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers),
-    EffectsModule.forFeature([DocumentEffects]),
+    EffectsModule.forFeature([DocumentEffects, TaskEffects]),
     AuthModule
   ],
-  declarations: [routedComponents],
-  providers: [ DocumentManagementService, DocumentListResolverService, PortalService],
+  declarations: [routedComponents, TaskListItemComponent],
+  providers: [ DocumentManagementService, DocumentListResolverService, PortalService, TaskListResolverService],
   entryComponents: [FilePreviewDialogComponent, NotificationComponent, ArchiveConfirmationDialogComponent]
 })
 export class DocumentManagementModule { }

@@ -1,0 +1,5 @@
+<app-task-list
+  [taskList]="taskList$ | async"
+  [selectedTaskId]="selectedTaskId | async"
+  (selectTask)="onTaskSelected($event)">
+</app-task-list>

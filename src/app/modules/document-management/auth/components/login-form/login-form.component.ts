@@ -11,7 +11,7 @@ export class LoginFormComponent implements OnInit {
   @Output() submitted = new EventEmitter<String>();
 
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl(''),
+    email: new FormControl('david.gittes@fda.hhs.gov'),
   });
   constructor(
   ) { }

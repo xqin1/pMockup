@@ -1,0 +1,29 @@
+<mat-card class="task-list-item">
+  <mat-card-title>Active Task List</mat-card-title>
+  <mat-card-content>
+    <mat-list *ngFor="let task of taskList;index as i">
+      <mat-list-item
+        (click)="onSelectTask(task)"
+        [ngClass]="{'task-list-item-selected': selectedTaskId===task.ID}">
+    <span class="task-list-left">
+      <div class="task-name">{{task.name}}</div>
+      <div class="project-name">{{task.project.name}}</div>
+    </span>
+        <span class="line-spacer"></span>
+        <span class="task-list-right">
+      <div class="goal-date">
+        Goal:<br/>
+        {{task.project.parameterValues["DE:Goal Date"]}}
+      </div>
+      <div>
+        <mat-chip-list>
+          <mat-chip selected color="primary">build</mat-chip>
+        </mat-chip-list>
+      </div>
+    </span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+

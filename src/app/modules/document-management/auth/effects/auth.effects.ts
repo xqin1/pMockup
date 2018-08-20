@@ -33,11 +33,13 @@ export class AuthEffects {
         catchError(error => of(new AuthAction.LoginFailure(error)))
     );
 
-  @Effect({ dispatch: false })
+  @Effect({dispatch: false})
   loginSuccess$ = this.actions$
     .ofType(AuthAction.LOGIN_SUCCESS)
     .pipe(
-      tap(() => this.router.navigate(['/document-management/portal']))
+      tap(() => {
+        this.router.navigate(['/document-management/portal']);
+      })
     );
 
   @Effect({ dispatch: false })

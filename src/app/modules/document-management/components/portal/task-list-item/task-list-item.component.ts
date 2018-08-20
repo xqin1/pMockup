@@ -12,16 +12,16 @@ export class TaskListItemComponent implements OnInit {
   @Output() selectTask = new EventEmitter<Task>();
   constructor() { }
 
-  onSelectTask(task: Task) {
+  onTaskSelected(task: Task) {
     this.selectTask.emit(task);
   }
 
-  getShowTaskLink(task: Task) {
-    console.log('show task link');
+  getShowTaskLink(taskId: string) {
+    console.log("task id: " + taskId);
   }
 
   getShowProjectLink(task: Task) {
-    console.log('show project link');
+    console.log("project id: " + task.project.ID);
   }
 
   getTaskState(task: Task) {

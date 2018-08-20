@@ -12,7 +12,7 @@ export class TaskListComponent implements OnInit {
   @Output() selectTask = new EventEmitter<Task>();
   constructor() { }
 
-  onSelectTask(task: Task) {
+  onTaskSelected(task: Task) {
     this.selectTask.emit(task);
   }
   ngOnInit() {

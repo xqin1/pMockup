@@ -1,12 +1,13 @@
 
-<div>
-  <mat-card class="task-detail-card" [ngClass]="{'task-detail-card-selected': selectedTaskId===taskData.ID}">
+<div (click)="onTaskSelected(taskData); false">
+  <mat-card class="task-detail-card"
+            [ngClass]="{'task-detail-card-selected': selectedTaskId===taskData.ID}">
     <mat-card-header>
       <mat-card-title>
         <div fxLayou="row" fxLayoutAlign="space-around start">
           <div fxFlex="250px">
             <span class="task-name">
-              <a [href]="getShowTaskLink(taskData)" target="_blank" class="title-link">
+              <a [href]="getShowTaskLink(taskData.ID)" target="_blank" class="title-link">
                 {{taskData.name}}
               </a>
             </span>

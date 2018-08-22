@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '@app/core/model/workfront/Task.model';
+import { TaskData} from '@app/modules/document-management/model/task-data.model';
 import * as fromTask from '@app/modules/document-management/reducers/index.reducer';
 import {Observable} from 'rxjs/index';
 import {select, Store} from '@ngrx/store';
@@ -10,7 +10,7 @@ import {select, Store} from '@ngrx/store';
   styleUrls: ['./task-detail-parent-page.component.css']
 })
 export class TaskDetailParentPageComponent implements OnInit {
-  selectedTask$: Observable<Task>;
+  selectedTask$: Observable<TaskData>;
   constructor(
     private store: Store<fromTask.State>
   ) {

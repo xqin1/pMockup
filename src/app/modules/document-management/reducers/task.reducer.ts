@@ -1,10 +1,10 @@
 import { TaskActionTypes, TaskActionsUnion} from '@app/modules/document-management/actions/task.action';
-import { Task } from '@app/core/model/workfront/Task.model';
+import {TaskData} from '@app/modules/document-management/model/task-data.model';
 
 export interface State {
   taskListLoaded: boolean;
   taskListLoading: boolean;
-  taskList: Task[];
+  taskList: TaskData[];
   selectedTaskId: string;
 }
 
@@ -32,14 +32,14 @@ export function reducer(
         taskListLoaded: true,
         taskListLoading: false,
         taskList: action.payload,
-        selectedTaskId: action.payload[0]["ID"]
+        selectedTaskId: action.payload[0].task["ID"]
       };
     }
 
     case TaskActionTypes.TaskSelected: {
         return {
           ...state,
-          selectedTaskId: action.payload.ID
+          selectedTaskId: action.payload.task.ID
         };
     }
 

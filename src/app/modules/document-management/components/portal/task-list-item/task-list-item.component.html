@@ -1,21 +1,21 @@
 
-<div (click)="onTaskSelected(taskData); false">
+<div (click)="onTaskSelected(taskData)">
   <mat-card class="task-detail-card"
-            [ngClass]="{'task-detail-card-selected': selectedTaskId===taskData.ID}">
+            [ngClass]="{'task-detail-card-selected': selectedTaskId===taskData.task.ID}">
     <mat-card-header>
       <mat-card-title>
         <div fxLayou="row" fxLayoutAlign="space-around start">
           <div fxFlex="250px">
             <span class="task-name">
-              <a [href]="getShowTaskLink(taskData.ID)" target="_blank" class="title-link">
-                {{taskData.name}}
+              <a [href]="getShowTaskLink(taskData.task.ID)" target="_blank" class="title-link">
+                {{taskData.task.name}}
               </a>
             </span>
           </div>
           <div fxFlex>
             <span>
-              Goal: <br/>
-              {{taskData.project.parameterValues["DE:Goal Date"]}}
+              Goal Date: <br/>
+              {{taskData.task.project.parameterValues["DE:Goal Date"]}}
             </span>
           </div>
         </div>
@@ -25,14 +25,14 @@
       <div fxLayou="row" fxLayoutAlign="space-around start">
         <div fxFlex="250px">
             <span class="project-name">
-              <a [href]="getShowProjectLink(taskData)" target="_blank" class="title-link">
-                {{taskData.project.name}}
+              <a [href]="getShowProjectLink(taskData.task.project.ID)" target="_blank" class="title-link">
+                {{taskData.task.project.name}}
               </a>
             </span>
         </div>
         <div fxFlex>
           <mat-chip-list>
-            <mat-chip selected color="primary">build</mat-chip>
+            <mat-chip selected color="primary">{{taskData.state}}</mat-chip>
           </mat-chip-list>
         </div>
       </div>

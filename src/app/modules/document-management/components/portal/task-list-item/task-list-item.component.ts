@@ -1,30 +1,33 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import {Task} from '@app/core/model/workfront/Task.model';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { TaskData} from '@app/modules/document-management/model/task-data.model';
+import { environment} from '@env/environment';
 
 @Component({
   selector: 'app-task-list-item',
   templateUrl: './task-list-item.component.html',
-  styleUrls: ['./task-list-item.component.css']
+  styleUrls: ['./task-list-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListItemComponent implements OnInit {
-  @Input() taskData: Task;
+  @Input() taskData: TaskData;
   @Input() selectedTaskId: string;
-  @Output() selectTask = new EventEmitter<Task>();
+  @Output() selectTask = new EventEmitter<TaskData>();
   constructor() { }
 
-  onTaskSelected(task: Task) {
+  onTaskSelected(task: TaskData) {
     this.selectTask.emit(task);
   }
 
   getShowTaskLink(taskId: string) {
-    console.log("task id: " + taskId);
+    return `${environment.workfrontHost}/task/view?ID=${taskId}`;
   }
 
-  getShowProjectLink(task: Task) {
-    console.log("project id: " + task.project.ID);
+  getShowProjectLink(projectId: string) {
+    return `${environment.workfrontHost}/project/view?ID=${projectId}`;
+
   }
 
-  getTaskState(task: Task) {
+  getTaskState(taskData: TaskData) {
     console.log('show task state');
   }
   ngOnInit() {

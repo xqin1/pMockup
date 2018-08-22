@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {Task} from '@app/core/model/workfront/Task.model';
+import { TaskData} from '@app/modules/document-management/model/task-data.model';
 
 export enum TaskActionTypes {
   TaskListLoad = '[Task] Task List Load',
@@ -20,7 +20,7 @@ export class TaskListLoad implements Action {
 export class TaskListLoadSuccess implements Action {
   readonly type = TaskActionTypes.TaskListLoadSuccess;
 
-  constructor(public payload: Task[]) {}
+  constructor(public payload: TaskData[]) {}
 }
 
 export class TaskListLoadError implements Action {
@@ -38,7 +38,7 @@ export class TaskLoad implements Action {
 export class TaskLoadSuccess implements Action {
   readonly type = TaskActionTypes.TaskLoadSuccess;
 
-  constructor(public payload: Task) {}
+  constructor(public payload: TaskData) {}
 }
 
 export class TaskLoadError implements Action {
@@ -50,7 +50,7 @@ export class TaskLoadError implements Action {
 export class TaskSelected implements Action {
   readonly type = TaskActionTypes.TaskSelected;
 
-  constructor(public payload: Task) {}
+  constructor(public payload: TaskData) {}
 }
 
 export type TaskActionsUnion =

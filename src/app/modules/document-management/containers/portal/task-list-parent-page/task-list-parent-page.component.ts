@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Task } from '@app/core/model/workfront/Task.model';
+import { TaskData} from '@app/modules/document-management/model/task-data.model';
 import * as fromTask from '@app/modules/document-management/reducers/index.reducer';
 import * as taskActions from '@app/modules/document-management/actions/task.action';
 
@@ -11,9 +11,9 @@ import * as taskActions from '@app/modules/document-management/actions/task.acti
   styleUrls: ['./task-list-parent-page.component.css']
 })
 export class TaskListParentPageComponent implements OnInit {
-  taskList$: Observable<Task[]>;
+  taskList$: Observable<TaskData[]>;
   selectedTaskId: Observable<string>;
-  selectedTask: Observable<Task>;
+  selectedTask: Observable<TaskData>;
   constructor(
     private store: Store<fromTask.State>
   ) {
@@ -22,7 +22,7 @@ export class TaskListParentPageComponent implements OnInit {
     this.selectedTask = this.store.pipe(select(fromTask.getSelectedTask));
   }
 
-  onTaskSelected(task: Task){
+  onTaskSelected(task: TaskData){
     this.store.dispatch(new taskActions.TaskSelected(task));
   }
   ngOnInit() {

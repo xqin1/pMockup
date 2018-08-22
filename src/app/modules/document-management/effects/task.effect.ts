@@ -16,6 +16,7 @@ import {
   TaskListLoadSuccess,
   TaskListLoad
 } from '@app/modules/document-management/actions/task.action';
+import {TaskData} from '@app/modules/document-management/model/task-data.model';
 
 @Injectable()
 export class TaskEffects {
@@ -31,7 +32,16 @@ export class TaskEffects {
     switchMap(() =>
       this.dmService.getTaskListByUserId(this.portalService.user.ID).pipe(
        // toArray(),
-        map((tasks: Task[]) => new TaskListLoadSuccess(tasks)),
+        map((tasks: Task[]) => {
+          const taskList: TaskData[] = [];
+          for (const t of tasks) {
+            const taskData: TaskData = new TaskData();
+            taskData.task = t;
+            taskData.state = this.portalService.getTaskState(t);
+            taskList.push(taskData);
+          }
+          return new TaskListLoadSuccess(taskList);
+        }),
         catchError(error => of(new TaskListLoadError(error)))
       )
     )

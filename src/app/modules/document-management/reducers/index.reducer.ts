@@ -93,7 +93,7 @@ export const getSelectedTask = createSelector(
   getSelectedTaskId,
   (tasks, id) => {
   //  console.log("select task being called");
-    return tasks.filter(t => t.ID === id)[0];
+    return tasks.filter(t => t.task.ID === id)[0];
   }
 );
 

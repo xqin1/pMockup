@@ -1,5 +1,6 @@
 describe('Portal Header Test', () => {
     beforeEach(function() {
+      cy.viewport('macbook-13');
       cy.visit('/#/document-management/portal');
       cy.fixture('portal/user').as('user');
       cy.fixture('portal/task-list').as('task-list');

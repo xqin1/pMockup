@@ -17,5 +17,5 @@ export class DocumentApproval {
   document: Document;
   note: object;
   requestor: User;
-  status: object;
+  status: string;
 }

@@ -1,5 +1,5 @@
 
-<div (click)="onTaskSelected(taskData)">
+<div (click)="onTaskSelected(taskData)" data-cy="task-item">
   <mat-card class="task-detail-card"
             [ngClass]="{'task-detail-card-selected': selectedTaskId===taskData.task.ID}">
     <mat-card-header>
@@ -32,7 +32,9 @@
         </div>
         <div fxFlex>
           <mat-chip-list>
-            <mat-chip selected color="primary">{{taskData.state}}</mat-chip>
+            <mat-chip selected color="primary">
+              <span class="state-text">{{taskData.state}}</span>
+            </mat-chip>
           </mat-chip-list>
         </div>
       </div>

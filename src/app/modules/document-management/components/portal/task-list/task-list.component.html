@@ -1,5 +1,5 @@
 <div class="task-list-page">
-  <div class="task-page-header">
+  <div class="task-list-page-header">
     <mat-toolbar>
       <mat-toolbar-row>
         <span class="task-page-title">Active Task List ({{taskList.length}})</span>
@@ -13,12 +13,14 @@
   <div class="no-task-exist" *ngIf="taskList.length===0">
     No Active Task.
   </div>
-  <div *ngFor="let task of taskList; index as i;" class="task-card-list">
-  <app-task-list-item
-    [taskData]="task"
-    [selectedTaskId]="selectedTaskId"
-    (selectTask)="onTaskSelected($event)">
-  </app-task-list-item>
+  <div class="task-list-container">
+    <div *ngFor="let task of taskList; index as i;" class="task-card-list">
+    <app-task-list-item
+      [taskData]="task"
+      [selectedTaskId]="selectedTaskId"
+      (selectTask)="onTaskSelected($event)">
+    </app-task-list-item>
+  </div>
 </div>
 </div>
 

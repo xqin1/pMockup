@@ -12,13 +12,16 @@
 }
 
 .mat-expansion-panel-header{
-  background-color: #cfeef7;
+  background-color: #cfeef7 !important;
   height:85px !important;
 }
 .mat-expansion-panel-body{
-  background-color: #eff7f5;
+  background-color: #eff7f5 !important;
   padding-bottom: 5px !important;
 }
 .mat-expansion-panel {
   overflow:auto !important;
+}
+.panel-content {
+  padding-top: 10px;
 }

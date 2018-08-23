@@ -1,6 +1,6 @@
 <div class="task-detail-container">
-    <mat-expansion-panel [expanded]="true" >
-      <mat-expansion-panel-header>
+    <mat-expansion-panel [expanded]="true" #matExpansionPanel>
+      <mat-expansion-panel-header (click)="expandPanel(matExpansionPanel, $event)">
         <mat-panel-title>
           <span>
             <div class="task-name">
@@ -17,12 +17,13 @@
             <div>Status: {{selectedTask.task.status}}</div>
             <div>Due Date: {{selectedTask.task.plannedCompletionDate}}</div>
           </span>
-          <span class="task-refresh-icon" matTooltip="refresh task">
+          <span class="task-refresh-icon" matTooltip="refresh task" (click)="refreshTask()">
             <mat-icon color="primary">refresh</mat-icon>
         </span>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div fxLayout="row" fxLayoutAlign="space-around start">
+      <div class="panel-content">
+        <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
         <div fxFlex>
           <mat-card class="project-card">
             <mat-card-header>
@@ -59,6 +60,7 @@
             </mat-card-content>
           </mat-card>
         </div>
+      </div>
       </div>
     </mat-expansion-panel>
 </div>

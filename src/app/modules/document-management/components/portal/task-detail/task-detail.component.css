@@ -10,3 +10,15 @@
   font-size: 16px;
   font-weight:bold;
 }
+
+.mat-expansion-panel-header{
+  background-color: #cfeef7;
+  height:85px !important;
+}
+.mat-expansion-panel-body{
+  background-color: #eff7f5;
+  padding-bottom: 5px !important;
+}
+.mat-expansion-panel {
+  overflow:auto !important;
+}

@@ -32,7 +32,7 @@
         </div>
         <div fxFlex>
           <mat-chip-list>
-            <mat-chip selected color="primary">
+            <mat-chip selected [style.background-color]="getStateBackgroundColor(taskData.state)">
               <span class="state-text">{{taskData.state}}</span>
             </mat-chip>
           </mat-chip-list>

@@ -1,3 +1,30 @@
-<p>
-  task-state works!
-</p>
+<div class="task-state">
+  <mat-card>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step>
+          <ng-template matStepLabel>Build</ng-template>
+          <app-task-state-build
+            [selectedTask]="selectedTask">
+          </app-task-state-build>
+      </mat-step>
+      <mat-step>
+          <ng-template matStepLabel>Concur</ng-template>
+        <app-task-state-concur
+          [selectedTask]="selectedTask">
+        </app-task-state-concur>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Sign</ng-template>
+        <app-task-state-sign
+          [selectedTask]="selectedTask">
+        </app-task-state-sign>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Archive</ng-template>
+        <app-task-state-archive
+          [selectedTask]="selectedTask">
+        </app-task-state-archive>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>

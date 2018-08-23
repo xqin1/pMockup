@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { TaskData} from '@app/modules/document-management/model/task-data.model';
 import { environment} from '@env/environment';
+import { DocumentConfig} from '@app/modules/document-management/config';
 
 @Component({
   selector: 'app-task-list-item',
@@ -29,6 +30,11 @@ export class TaskListItemComponent implements OnInit {
 
   getTaskState(taskData: TaskData) {
     console.log('show task state');
+  }
+
+  getStateBackgroundColor(stateName: String): string{
+    console.log(stateName);
+    return DocumentConfig.taskState.filter(s => s["name"] === stateName)[0]["color"];
   }
   ngOnInit() {
   }

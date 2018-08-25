@@ -41,4 +41,17 @@
   cursor: pointer;
   font-weight: bold;
 }
+.detail-section-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+dl dt {
+  font-weight: bold;
+  float: left;
+  padding-bottom: 2px;
+  padding-right: 2px;
+}
+dl dd {
+  padding-bottom: 2px;
+}
 

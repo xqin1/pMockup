@@ -8,6 +8,7 @@ export interface ProjecCustomField {
   "DE:Established Name";
   "DE:Dosage Form";
   "DE:Submission Type";
+  "DE:Product";
 }
 export class Project {
   ID: string;

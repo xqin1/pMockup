@@ -12,6 +12,7 @@ a:hover {
 }
 .task-detail-card:hover {
   background-color: #b3e5fc1c;
+  cursor: pointer;
   /*Opacity: 0.7;*/
   /*zoom: 1;*/
   /*filter: alpha(opacity=100);*/
@@ -23,6 +24,7 @@ a:hover {
   border-style: solid;
   border-width: thin;
   background-color: #d7edf7;
+  cursor: default;
   /*Opacity*/
   /*zoom: 1;*/
   /*filter: alpha(opacity=100);*/

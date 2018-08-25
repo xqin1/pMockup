@@ -31,37 +31,56 @@
         <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
         <div fxFlex>
           <mat-card class="detail-card">
-            <mat-card-header>
-                <mat-card-title>
-                  Submission Information
-                </mat-card-title>
-            </mat-card-header>
             <mat-card-content>
-              project information
+              <div class="detail-section-title">Submission Information</div>
+              <div class="detail-section-content">
+                <dl>
+                  <dt>Submission:</dt>
+                  <dd>{{selectedTask.task.project.name}}&nbsp;</dd>
+                  <dt>Submission Classification:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:Submission Classification"]}}&nbsp;</dd>
+                  <dt>Supplement Sub Types:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:Supplement Sub Type"]}}&nbsp;</dd>
+                  <dt>FDA Received Date:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:FDA Received Date"]}}&nbsp;</dd>
+                  <dt>Goal Date:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:Goal Date"]}}&nbsp;</dd>
+                  <dt>Applicant Requester:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:Applicant"]}}&nbsp;</dd>
+                </dl>
+              </div>
             </mat-card-content>
           </mat-card>
         </div>
         <div fxFlex>
           <mat-card class="detail-card">
-            <mat-card-header>
-              <mat-card-title>
-                Product Information
-              </mat-card-title>
-            </mat-card-header>
             <mat-card-content>
-              product information
+              <div class="detail-section-title">Product Information</div>
+              <div class="detail-section-content">
+                <dl>
+                  <dt>Product:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:Product"]}}&nbsp;</dd>
+                  <dt>Dosage Form:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:Dosage Form"]}}&nbsp;</dd>
+                  <dt>Project Type:</dt>
+                  <dd>{{selectedTask.task.project.parameterValues["DE:Submission Type"]}}&nbsp;</dd>
+                </dl>
+              </div>
             </mat-card-content>
           </mat-card>
         </div>
         <div fxFlex>
           <mat-card class="detail-card">
-            <mat-card-header>
-              <mat-card-title>
-                Task Information
-              </mat-card-title>
-            </mat-card-header>
             <mat-card-content>
-              task information
+              <div class="detail-section-title">Task Information</div>
+              <div class="detail-section-content">
+                <dl>
+                  <dt>Quality MRD:</dt>
+                  <dd>???&nbsp;</dd>
+                  <dt>QDD:</dt>
+                  <dd>???&nbsp;</dd>
+                </dl>
+              </div>
             </mat-card-content>
           </mat-card>
         </div>

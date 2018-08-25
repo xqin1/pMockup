@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, OnInit } from '@angular/core';
 import { TaskData} from '@app/modules/document-management/model/task-data.model';
 import {environment} from '@env/environment';
 import { MatExpansionPanel} from '@angular/material';
-import {EventTargetLike, FromEventTarget} from 'rxjs/internal/observable/fromEvent';
 
 @Component({
   selector: 'app-task-detail',
@@ -11,27 +10,25 @@ import {EventTargetLike, FromEventTarget} from 'rxjs/internal/observable/fromEve
 })
 export class TaskDetailComponent implements OnInit {
   @Input() selectedTask: TaskData;
+  @ViewChild('detailPanel') detailPanel: MatExpansionPanel;
+  panelOpenState = true;
   constructor() { }
 
   getShowTaskLink(taskId: string) {
     return `${environment.workfrontHost}/task/view?ID=${taskId}`;
   }
 
-  refreshTask() {
+  refreshTask(event: Event) {
+    event.stopPropagation();
     console.log("refresh task");
   }
 
-  expandPanel(matExpansionPanel: MatExpansionPanel, event: Event): void {
-    event.stopPropagation(); // Preventing event bubbling
-
-    if (!this._isExpansionIndicator(event)) {
-      matExpansionPanel.toggle(); // Here's the magic
-    }
+  taskLinkClick(event: Event) {
+    event.stopPropagation();
   }
 
-  private _isExpansionIndicator(event: Event): boolean {
-    const expansionIndicatorClass = 'mat-expansion-indicator';
-    return (event.target["classList"] && event.target["classList"].contains(expansionIndicatorClass) );
+  togglePanel() {
+    this.detailPanel.toggle();
   }
   ngOnInit() {
   }

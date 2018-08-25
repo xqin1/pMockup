@@ -1,5 +1,6 @@
 .task-detail-header-right {
   margin-right: 25px;
+  font-size: 14px;
 }
 
 .task-refresh-icon {
@@ -10,18 +11,34 @@
   font-size: 16px;
   font-weight:bold;
 }
-
+.task-link {
+  font-size: 12px;
+  padding-top: 5px;
+}
+.due-date {
+  padding-top: 5px;
+}
 .mat-expansion-panel-header{
   background-color: #cfeef7 !important;
-  height:85px !important;
+  cursor: pointer !important;
 }
-.mat-expansion-panel-body{
-  background-color: #eff7f5 !important;
-  padding-bottom: 5px !important;
-}
+
 .mat-expansion-panel {
   overflow:auto !important;
+  background: #b3e5fc1c !important;
 }
+
 .panel-content {
   padding-top: 10px;
 }
+.detail-card {
+  background: #b3e5fc1c !important;
+}
+
+.panel-toggle {
+  background: #cfeef7;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+

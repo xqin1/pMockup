@@ -23,7 +23,6 @@ export class TaskListResolverService implements Resolve<any> {
     this.store.dispatch(new TaskListLoad());
     return this.waitForTaskListToLoad().pipe(
       switchMap((loaded) => {
-        console.log(loaded);
         return loaded ? of(true) : of(false);
       })
     );

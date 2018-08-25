@@ -7,15 +7,13 @@
         <div fxLayou="row" fxLayoutAlign="space-around start">
           <div fxFlex="250px">
             <span class="task-name">
-              <a [href]="getShowTaskLink(taskData.task.ID)" target="_blank" class="title-link">
                 {{taskData.task.name}}
-              </a>
             </span>
           </div>
           <div fxFlex>
             <span>
               Goal Date: <br/>
-              {{taskData.task.project.parameterValues["DE:Goal Date"]}}
+              {{taskData.task.plannedCompletionDate | date: 'shortDate'}}
             </span>
           </div>
         </div>
@@ -25,9 +23,7 @@
       <div fxLayou="row" fxLayoutAlign="space-around start">
         <div fxFlex="250px">
             <span class="project-name">
-              <a [href]="getShowProjectLink(taskData.task.project.ID)" target="_blank" class="title-link">
                 {{taskData.task.project.name}}
-              </a>
             </span>
         </div>
         <div fxFlex>

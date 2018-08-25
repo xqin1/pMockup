@@ -1,2 +1,49 @@
-build page
-{{selectedTask.task.name}}
+<div class="task-state-build">
+    <div [ngSwitch]="selectedTask.state">
+      <div *ngSwitchCase="'Build'">
+        <div class="section-title">
+          Build A Document
+        </div>
+        <div class="section-instruction">
+          Select Start to create a document using the Document Builder
+        </div>
+        <div class="section-action">
+          <div *ngIf="showBuildButton()">
+            <button mat-raised-button class="section-button" (click)="buildDocument()">
+              <span class="button-text">Build</span>
+            </button>
+          </div>
+          <div *ngIf="!showBuildButton()">
+            <button mat-raised-button class="section-progress-button">
+              <span class="spinner"><mat-spinner [diameter]="35"></mat-spinner></span>
+              <span class="button-text">Build in Progress...</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'Upload'">
+        <div class="section-title">
+          Upload A Document
+        </div>
+        <div class="section-instruction">
+          Select Upload to upload a document to the task
+        </div>
+        <div class="section-action">
+          <button mat-raised-button class="section-button" color="green" (click)="uploadDocument()">
+            <span class="button-text">Upload</span>
+          </button>
+        </div>
+      </div>
+      <div *ngSwitchCase="'Unsupported'">
+        <div class="section-title">
+          Unsupport Task
+        </div>
+        <div class="section-instruction">
+          The application currently does not support this task
+        </div>
+      </div>
+      <div *ngSwitchDefault>
+          <app-document-item></app-document-item>
+      </div>
+    </div>
+</div>

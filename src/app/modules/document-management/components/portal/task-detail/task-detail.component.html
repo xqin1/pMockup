@@ -92,10 +92,10 @@
     <div fxFlex="200px">
       <div class="panel-toggle" (click)="togglePanel()">
         <span *ngIf="panelOpenState">
-         <button mat-button>Hide Submission Detail <mat-icon color="primary">toggle_off</mat-icon></button>
+          <button mat-button><strong>Hide Submission Detail</strong><mat-icon color="primary">toggle_off</mat-icon></button>
         </span>
         <span *ngIf="!panelOpenState">
-         <button mat-button>Show Submission Detail <mat-icon color="primary">toggle_on</mat-icon></button>
+          <button mat-button><strong>Show Submission Detail</strong><mat-icon color="primary">toggle_on</mat-icon></button>
         </span>
       </div>
     </div>

@@ -6,13 +6,15 @@ export interface State {
   taskListLoading: boolean;
   taskList: TaskData[];
   selectedTaskId: string;
+  documentBuildIds: string[];
 }
 
 const initialState: State = {
   taskListLoaded: false,
   taskListLoading: false,
   taskList: [],
-  selectedTaskId: null
+  selectedTaskId: null,
+  documentBuildIds: []
 };
 
 export function reducer(
@@ -32,7 +34,8 @@ export function reducer(
         taskListLoaded: true,
         taskListLoading: false,
         taskList: action.payload,
-        selectedTaskId: action.payload[0].task["ID"]
+        selectedTaskId: action.payload[0].task["ID"],
+        documentBuildIds: []
       };
     }
 
@@ -40,6 +43,17 @@ export function reducer(
         return {
           ...state,
           selectedTaskId: action.payload.task.ID
+        };
+    }
+
+    case TaskActionTypes.DocumentBuild: {
+        const ids = [].concat(state.documentBuildIds);
+        if (!ids.includes(action.payload)) {
+          ids.push(action.payload);
+        }
+        return {
+          ...state,
+          documentBuildIds: ids
         };
     }
 
@@ -76,3 +90,5 @@ export const getTAskListLoading = (state: State) => state.taskListLoading;
 export const getTaskList = (state: State) => state.taskList;
 
 export const getSelectedTaskId = (state: State) => state.selectedTaskId;
+
+export const getDocumentBuildIds = (state: State) => state.documentBuildIds;

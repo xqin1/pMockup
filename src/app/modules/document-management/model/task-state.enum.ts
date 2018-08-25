@@ -4,5 +4,5 @@ export enum TaskState {
   Concur = "Concur",
   Sign = "Sign",
   Archive = "Archive",
-  NotApplicable = "N/A"
+  Unsupported= "Unsupported"
 }

@@ -82,7 +82,7 @@ export const DocumentConfig = {
     {"name": "Sign", "index": 2, "color": "#30a362"},
     {"name": "Archive", "index": 3, "color": "#991030"},
     {"name": "Upload", "index": 0, "color": "#c85def"},
-    {"name": "N/A", "index": 0, "color": "#ef1c04"},
+    {"name": "Unsupported", "index": 0, "color": "#ef1c04"},
 ]
 
 

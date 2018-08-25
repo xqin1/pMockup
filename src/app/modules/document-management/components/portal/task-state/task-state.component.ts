@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ViewChild, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {TaskData} from '@app/modules/document-management/model/task-data.model';
 import {MatHorizontalStepper, MatStep} from '@angular/material';
 import { DocumentConfig} from '@app/modules/document-management/config';
@@ -12,14 +12,18 @@ import { DocumentConfig} from '@app/modules/document-management/config';
 export class TaskStateComponent implements OnInit, OnChanges {
   @Input() selectedTaskId: string;
   @Input() selectedTask: TaskData;
+  @Input() documentBuildIds: string[];
+  @Output() documentBuild = new EventEmitter<string>();
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   @ViewChild('stepBuild') stepBuild: MatStep;
   @ViewChild('stepConcur') stepConcur: MatStep;
   @ViewChild('stepSign') stepSign: MatStep;
   @ViewChild('stepArchive') stepArchive: MatStep;
-  isLinear = true;
   constructor() { }
 
+  onDocumentBuild(taskId: string) {
+    this.documentBuild.emit(taskId);
+  }
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
     if (changes["selectedTask"] && typeof this.stepper !== "undefined") {

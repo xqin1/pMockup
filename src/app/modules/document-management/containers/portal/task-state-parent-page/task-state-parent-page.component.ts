@@ -12,11 +12,17 @@ import {select, Store} from '@ngrx/store';
 export class TaskStateParentPageComponent implements OnInit {
   selectedTaskId: Observable<string>;
   selectedTask: Observable<TaskData>;
+  documentBuildIds: Observable<string[]>;
   constructor(
     private store: Store<fromTask.State>
   ) {
     this.selectedTaskId = this.store.pipe(select(fromTask.getSelectedTaskId));
     this.selectedTask = this.store.pipe(select(fromTask.getSelectedTask));
+    this.documentBuildIds = this.store.pipe(select(fromTask.getDocumentBuildIds));
+  }
+
+  onDocumentBuild(taskId: string) {
+    this.store.dispatch(new taskActions.DocumentBuild(taskId));
   }
 
   ngOnInit() {

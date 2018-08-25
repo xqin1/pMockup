@@ -3,6 +3,7 @@ import { TaskData} from '@app/modules/document-management/model/task-data.model'
 import * as fromTask from '@app/modules/document-management/reducers/index.reducer';
 import {Observable} from 'rxjs/index';
 import {select, Store} from '@ngrx/store';
+import * as taskActions from '@app/modules/document-management/actions/task.action';
 
 @Component({
   selector: 'app-task-detail-parent-page',
@@ -17,6 +18,9 @@ export class TaskDetailParentPageComponent implements OnInit {
     this.selectedTask$ = this.store.pipe(select(fromTask.getSelectedTask));
   }
 
+  onTaskUpdate(taskId: string) {
+    this.store.dispatch(new taskActions.TaskLoad(taskId));
+  }
   ngOnInit() {
   }
 

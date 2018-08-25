@@ -28,7 +28,7 @@ export class TaskEffects {
 
   @Effect()
   loadTaskList$: Observable<Action> = this.actions$.pipe(
-    ofType(TaskActionTypes.TaskListLoad),
+    ofType<TaskListLoad>(TaskActionTypes.TaskListLoad),
     switchMap(() =>
       this.dmService.getTaskListByUserId(this.portalService.user.ID).pipe(
        // toArray(),
@@ -41,6 +41,27 @@ export class TaskEffects {
             taskList.push(taskData);
           }
           return new TaskListLoadSuccess(taskList);
+        }),
+        catchError(error => of(new TaskListLoadError(error)))
+      )
+    )
+  );
+
+  @Effect()
+  loadTask$: Observable<Action> = this.actions$.pipe(
+    ofType<TaskLoad>(TaskActionTypes.TaskLoad),
+    map(action => action.payload),
+    mergeMap((taskId) =>
+      this.dmService.getTaskByTaskId(taskId).pipe(
+        map((tasks: Task[]) => {
+          if (tasks.length === 1) {
+            const taskData: TaskData = new TaskData();
+            taskData.task = tasks[0];
+            taskData.state = this.portalService.getTaskState(tasks[0]);
+            return new TaskLoadSuccess(taskData);
+          }else {
+            return new TaskLoadError('task load failed');
+          }
         }),
         catchError(error => of(new TaskListLoadError(error)))
       )

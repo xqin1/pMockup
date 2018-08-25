@@ -50,7 +50,6 @@ export class DMService {
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
-          // do something
           this.logger.log("done with retrieving eligibility data");
         })
       );
@@ -62,7 +61,6 @@ export class DMService {
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
-          // do something
           this.logger.log("done with retrieving regulatory data");
         })
       );
@@ -75,7 +73,6 @@ export class DMService {
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
-          // do something
           this.logger.log("done with login");
         })
       );
@@ -87,8 +84,18 @@ export class DMService {
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
-          // do something
           this.logger.log("done with task list data");
+        })
+      );
+  }
+  getTaskByTaskId(taskId) {
+    return this.http
+      .get<Task[]>(`${environment.documentManagementURL}/portal/task?taskId=${taskId}`)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          this.logger.log("done with task data");
         })
       );
   }

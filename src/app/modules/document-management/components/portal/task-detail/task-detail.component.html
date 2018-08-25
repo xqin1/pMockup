@@ -22,7 +22,7 @@
             <div>Status: {{selectedTask.task.status}}</div>
             <div class="due-date">Due Date: {{selectedTask.task.plannedCompletionDate | date: 'shortDate'}}</div>
           </span>
-          <span class="task-refresh-icon" matTooltip="refresh task" (click)="refreshTask($event)">
+          <span class="task-refresh-icon" matTooltip="refresh task" (click)="refreshTask(selectedTask.task.ID, $event)">
             <mat-icon color="primary">refresh</mat-icon>
         </span>
         </mat-panel-title>

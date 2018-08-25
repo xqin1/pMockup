@@ -7,6 +7,7 @@ export interface State {
   taskList: TaskData[];
   selectedTaskId: string;
   documentBuildIds: string[];
+  taskLoadingIds: string[];
 }
 
 const initialState: State = {
@@ -14,7 +15,8 @@ const initialState: State = {
   taskListLoading: false,
   taskList: [],
   selectedTaskId: null,
-  documentBuildIds: []
+  documentBuildIds: [],
+  taskLoadingIds: []
 };
 
 export function reducer(
@@ -28,17 +30,16 @@ export function reducer(
         taskListLoading: true
       };
     }
-
     case TaskActionTypes.TaskListLoadSuccess: {
       return {
         taskListLoaded: true,
         taskListLoading: false,
         taskList: action.payload,
         selectedTaskId: action.payload[0].task["ID"],
-        documentBuildIds: []
+        documentBuildIds: [],
+        taskLoadingIds: []
       };
     }
-
     case TaskActionTypes.TaskSelected: {
         return {
           ...state,
@@ -56,7 +57,31 @@ export function reducer(
           documentBuildIds: ids
         };
     }
+    case TaskActionTypes.TaskLoad: {
+      const ids = [].concat((state.taskLoadingIds));
+      if (!ids.includes(action.payload)) {
+        ids.push(action.payload);
+      }
+      return {
+        ...state,
+        taskLoadingIds: ids
+      };
+    }
+    case TaskActionTypes.TaskLoadSuccess: {
+      const ids = [].concat((state.taskLoadingIds));
+      const newTaskList = [].concat((state.taskList));
+      newTaskList.forEach((item, index) => {
+        if (item.task.ID === action.payload.task.ID) {
+          newTaskList[index] = action.payload;
+        }
+      });
+      return {
+        ...state,
+        taskList: newTaskList,
+        taskLoadingIds: ids.filter(id => id !== action.payload.task.ID)
 
+      };
+    }
     // case CollectionActionTypes.AddBookSuccess:
     // case CollectionActionTypes.RemoveBookFail: {
     //   if (state.ids.indexOf(action.payload.id) > -1) {
@@ -92,3 +117,5 @@ export const getTaskList = (state: State) => state.taskList;
 export const getSelectedTaskId = (state: State) => state.selectedTaskId;
 
 export const getDocumentBuildIds = (state: State) => state.documentBuildIds;
+
+export const getTaskLoadIds = (state: State) => state.taskLoadingIds;

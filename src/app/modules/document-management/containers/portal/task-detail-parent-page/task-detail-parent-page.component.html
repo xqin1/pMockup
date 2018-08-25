@@ -1,3 +1,4 @@
 <app-task-detail
-  [selectedTask]="selectedTask$ | async">
+  [selectedTask]="selectedTask$ | async"
+  (updateTask)="onTaskUpdate($event)">
 </app-task-detail>

@@ -102,4 +102,9 @@ export const getDocumentBuildIds = createSelector(
   fromTask.getDocumentBuildIds
 );
 
+export const getTaskLoadIds = createSelector(
+  getTaskState,
+  fromTask.getTaskLoadIds
+);
+
 

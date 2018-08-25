@@ -54,7 +54,6 @@ export class TaskStateComponent implements OnInit, OnChanges {
     }
   }
 
-
   ngOnInit() {
     // this.stepper.selectedIndex = 2;
 

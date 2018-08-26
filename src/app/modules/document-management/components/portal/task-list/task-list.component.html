@@ -4,8 +4,15 @@
       <mat-toolbar-row>
         <span class="task-page-title">Active Task List ({{taskList.length}})</span>
         <span class="line-spacer"></span>
-        <span class="task-list-refresh-icon" matTooltip="refresh task list">
+        <span *ngIf="!taskListLoading"
+              class="task-list-refresh-icon"
+              matTooltip="refresh task list"
+              (click)="onTaskListUpdate()">
             <mat-icon color="primary">refresh</mat-icon>
+        </span>
+        <span *ngIf="taskListLoading"
+              class="task-list-refresh-icon">
+            <mat-spinner [diameter]="24"></mat-spinner>
         </span>
       </mat-toolbar-row>
     </mat-toolbar>

@@ -1,5 +1,7 @@
 <app-task-list
   [taskList]="taskList$ | async"
+  [taskListLoading]="taskListLoading$ | async"
   [selectedTaskId]="selectedTaskId | async"
-  (selectTask)="onTaskSelected($event)">
+  (selectTask)="onTaskSelected($event)"
+  (updateTaskList)="onUpdateTaskList()">
 </app-task-list>

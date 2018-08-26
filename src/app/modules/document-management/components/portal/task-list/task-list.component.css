@@ -27,5 +27,8 @@
   overflow-y:scroll;
   padding-bottom:10px;
 }
+.task-list-refresh-icon {
+  cursor: pointer;
+}
 
 

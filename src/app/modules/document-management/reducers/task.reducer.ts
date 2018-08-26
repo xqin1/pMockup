@@ -31,11 +31,12 @@ export function reducer(
       };
     }
     case TaskActionTypes.TaskListLoadSuccess: {
+      const selectedTaskId = state.selectedTaskId === null ? action.payload[0].task["ID"] : state.selectedTaskId;
       return {
         taskListLoaded: true,
         taskListLoading: false,
         taskList: action.payload,
-        selectedTaskId: action.payload[0].task["ID"],
+        selectedTaskId: selectedTaskId,
         documentBuildIds: [],
         taskLoadingIds: []
       };

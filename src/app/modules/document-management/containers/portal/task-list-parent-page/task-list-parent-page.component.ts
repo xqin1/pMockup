@@ -12,18 +12,24 @@ import * as taskActions from '@app/modules/document-management/actions/task.acti
 })
 export class TaskListParentPageComponent implements OnInit {
   taskList$: Observable<TaskData[]>;
+  taskListLoading$: Observable<boolean>;
   selectedTaskId: Observable<string>;
   selectedTask: Observable<TaskData>;
   constructor(
     private store: Store<fromTask.State>
   ) {
     this.taskList$ = this.store.pipe(select(fromTask.getTaskList));
+    this.taskListLoading$ = this.store.pipe(select(fromTask.getTaskListLoading));
     this.selectedTaskId = this.store.pipe(select(fromTask.getSelectedTaskId));
     this.selectedTask = this.store.pipe(select(fromTask.getSelectedTask));
   }
 
   onTaskSelected(task: TaskData){
     this.store.dispatch(new taskActions.TaskSelected(task));
+  }
+
+  onUpdateTaskList() {
+    this.store.dispatch(new taskActions.TaskListLoad());
   }
   ngOnInit() {
   }

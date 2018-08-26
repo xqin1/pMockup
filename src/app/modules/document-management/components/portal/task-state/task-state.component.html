@@ -12,7 +12,8 @@
       <mat-step [completed]="false" #stepConcur>
           <ng-template matStepLabel>Concur</ng-template>
         <app-task-state-concur
-          [selectedTask]="selectedTask">
+          [selectedTask]="selectedTask"
+          [selectedDocument]="selectedDocument">
         </app-task-state-concur>
       </mat-step>
       <mat-step [completed]="false" #stepSign>

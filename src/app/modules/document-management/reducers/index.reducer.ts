@@ -112,4 +112,16 @@ export const getSelectedDocumentId = createSelector(
   fromTask.getSelectedDocumentId
 );
 
+export const getActiveDocument = createSelector(
+  getSelectedTask,
+  getSelectedDocumentId,
+  (task, id) => {
+    if (task !== null && task.task !== null && task.task.documents !== null && task.task.documents.length === 1) {
+      return task.task.documents[0];
+    }else{
+      return null;
+    }
+  }
+);
+
 

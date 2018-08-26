@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, ViewChild, Input, OnInit, OnChanges,
 import {TaskData} from '@app/modules/document-management/model/task-data.model';
 import {MatHorizontalStepper, MatStep} from '@angular/material';
 import { DocumentConfig} from '@app/modules/document-management/config';
+import {Document} from '@app/core/model/workfront/Document.model';
 
 @Component({
   selector: 'app-task-state',
@@ -13,6 +14,7 @@ export class TaskStateComponent implements OnInit, OnChanges {
   @Input() selectedTaskId: string;
   @Input() selectedTask: TaskData;
   @Input() documentBuildIds: string[];
+  @Input() selectedDocument: Document;
   @Output() documentBuild = new EventEmitter<string>();
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   @ViewChild('stepBuild') stepBuild: MatStep;
@@ -25,7 +27,6 @@ export class TaskStateComponent implements OnInit, OnChanges {
     this.documentBuild.emit(taskId);
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     if (changes["selectedTask"] && typeof this.stepper !== "undefined") {
       const stateName = changes["selectedTask"].currentValue.state;
       const index = DocumentConfig.taskState.filter(s => s["name"] === stateName)[0]["index"];
@@ -36,6 +37,8 @@ export class TaskStateComponent implements OnInit, OnChanges {
         this.stepArchive.completed = false;
       }else if (index === 1) {
         this.stepBuild.completed = true;
+        this.stepBuild.optional = true;
+        this.stepBuild.editable = true;
         this.stepConcur.completed = false;
         this.stepSign.completed = false;
         this.stepArchive.completed = false;

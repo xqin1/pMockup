@@ -41,7 +41,7 @@ export class PortalService {
   }
 
   getTaskState(task: Task): TaskState {
-    let taskState: TaskState = TaskState.Unsupported;
+    let taskState: TaskState = TaskState.Select;
     // we only deal with task with at most one document
     if ( task.documents === null || task.documents.length === 0) {
       if ( task.parameterValues !== null && task.parameterValues["DE:Enable Document Generation"] === "Yes") {

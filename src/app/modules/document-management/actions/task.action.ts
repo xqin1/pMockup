@@ -9,7 +9,8 @@ export enum TaskActionTypes {
   TaskLoadSuccess = '[Task] Task Loaded',
   TaskLoadError = '[Task] Task Load Error',
   TaskSelected = '[Task] Task Selected',
-  DocumentBuild = '[Task] Document Biild'
+  DocumentBuild = '[Task] Document Biild',
+  DocumentSelected = '[Task] Document Selected'
 }
 
 export class TaskListLoad implements Action {
@@ -60,6 +61,13 @@ export class DocumentBuild implements Action {
   constructor(public payload: string) {}
 }
 
+
+export class DocumentSelected implements Action {
+  readonly type = TaskActionTypes.DocumentSelected;
+
+  constructor(public payload: string) {}
+}
+
 export type TaskActionsUnion =
   | TaskListLoad
   | TaskListLoadSuccess
@@ -68,4 +76,5 @@ export type TaskActionsUnion =
   | TaskLoadSuccess
   | TaskLoadError
   | TaskSelected
-  | DocumentBuild;
+  | DocumentBuild
+  | DocumentSelected;

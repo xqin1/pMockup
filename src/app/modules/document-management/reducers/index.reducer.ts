@@ -70,7 +70,7 @@ export const getTaskState = createSelector(
 
 export const getTaskListLoading = createSelector(
   getTaskState,
-  fromTask.getTAskListLoading
+  fromTask.getTaskListLoading
 );
 
 export const getTaskListLoaded = createSelector(
@@ -105,6 +105,11 @@ export const getDocumentBuildIds = createSelector(
 export const getTaskLoadIds = createSelector(
   getTaskState,
   fromTask.getTaskLoadIds
+);
+
+export const getSelectedDocumentId = createSelector(
+  getTaskState,
+  fromTask.getSelectedDocumentId
 );
 
 

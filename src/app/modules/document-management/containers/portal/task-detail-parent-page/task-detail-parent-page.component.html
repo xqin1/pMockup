@@ -1,4 +1,5 @@
 <app-task-detail
   [selectedTask]="selectedTask$ | async"
+  [taskLoadIds]="taskLoadIds$ | async"
   (updateTask)="onTaskUpdate($event)">
 </app-task-detail>

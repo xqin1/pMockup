@@ -22,9 +22,16 @@
             <div>Status: {{selectedTask.task.status}}</div>
             <div class="due-date">Due Date: {{selectedTask.task.plannedCompletionDate | date: 'shortDate'}}</div>
           </span>
-          <span class="task-refresh-icon" matTooltip="refresh task" (click)="refreshTask(selectedTask.task.ID, $event)">
-            <mat-icon color="primary">refresh</mat-icon>
-        </span>
+          <span *ngIf="showRefreshButton()"
+                class="task-refresh-icon"
+                matTooltip="refresh task"
+                (click)="refreshTask(selectedTask.task.ID, $event)">
+                <mat-icon color="primary">refresh</mat-icon>
+          </span>
+          <span *ngIf="!showRefreshButton()"
+                class="task-refresh-icon">
+                <mat-spinner [diameter]="24"></mat-spinner>
+          </span>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="panel-content">

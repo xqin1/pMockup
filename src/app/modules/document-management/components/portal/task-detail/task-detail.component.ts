@@ -10,6 +10,7 @@ import { MatExpansionPanel} from '@angular/material';
 })
 export class TaskDetailComponent implements OnInit {
   @Input() selectedTask: TaskData;
+  @Input() taskLoadIds: string[];
   @Output() updateTask = new EventEmitter<string>();
   @ViewChild('detailPanel') detailPanel: MatExpansionPanel;
   panelOpenState = true;
@@ -30,6 +31,13 @@ export class TaskDetailComponent implements OnInit {
 
   togglePanel() {
     this.detailPanel.toggle();
+  }
+  showRefreshButton() {
+    let result = true;
+    if (this.taskLoadIds !== null && this.selectedTask !== null && this.taskLoadIds.includes(this.selectedTask.task.ID)) {
+      result = false;
+    }
+    return result;
   }
   ngOnInit() {
   }

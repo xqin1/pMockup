@@ -12,10 +12,12 @@ import * as taskActions from '@app/modules/document-management/actions/task.acti
 })
 export class TaskDetailParentPageComponent implements OnInit {
   selectedTask$: Observable<TaskData>;
+  taskLoadIds$: Observable<string[]>;
   constructor(
     private store: Store<fromTask.State>
   ) {
     this.selectedTask$ = this.store.pipe(select(fromTask.getSelectedTask));
+    this.taskLoadIds$ = this.store.pipe(select(fromTask.getTaskLoadIds));
   }
 
   onTaskUpdate(taskId: string) {

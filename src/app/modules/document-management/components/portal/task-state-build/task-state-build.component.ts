@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TaskData} from '@app/modules/document-management/model/task-data.model';
 import { environment } from '@env/environment';
+import {Document} from '@app/core/model/workfront/Document.model';
 
 @Component({
   selector: 'app-task-state-build',
@@ -11,6 +12,7 @@ import { environment } from '@env/environment';
 export class TaskStateBuildComponent implements OnInit {
   @Input() selectedTask: TaskData;
   @Input() documentBuildIds: string[];
+  @Input() selectedDocument: Document;
   @Output() documentBuild = new EventEmitter<string>();
   constructor() { }
 

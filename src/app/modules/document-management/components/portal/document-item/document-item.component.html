@@ -1,3 +1,26 @@
-<p>
-  document-item works!
-</p>
+<div *ngIf="selectedDocument" class="document-item">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFflex>
+      <mat-icon color="primary" class="file-icon">description_outline</mat-icon>
+    </div>
+    <div fxFlex>
+      <span class="document-name">{{getDocumentName()}}</span>
+    </div>
+    <div fxFlex>
+    </div>
+    <div fxFlex>
+      <span class="document-icon" *ngIf="showPDFPreview()">
+        <mat-icon color="primary" matTooltip="preview PDF" class="action-icon">picture_as_pdf</mat-icon>
+      </span>
+      <span class="document-icon">
+        <mat-icon color="primary" matTooltip="delete document" class="action-icon">delete_outline</mat-icon>
+      </span>
+      <span class="document-icon">
+        <mat-icon color="primary" matTooltip="download document" class="action-icon">file_download</mat-icon>
+      </span>
+      <span class="document-icon">
+        <mat-icon color="primary" matTooltip="upload replacement document" class="action-icon">file_upload</mat-icon>
+      </span>
+    </div>
+  </div>
+</div>

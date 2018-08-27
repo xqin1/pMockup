@@ -1,5 +1,26 @@
-<p>
-  concur step: {{selectedTask.task.name}}
-  {{selectedDocument | json}}
-</p>
+
+
+<div class="concur-page">
+  <div class="state-section">
+    <div class="state-title">
+      Complete Concurrence
+    </div>
+    <div class="state-instruction">
+      You can still make changes to your document by downloading it. Once it is finalized, and you
+      upload its replacement, select Approve to route it to the next person on the approval list.
+    </div>
+    <div fxLayout="row">
+      <div fxFlex>
+        <app-document-item [selectedDocument]="selectedDocument">
+        </app-document-item>
+        <div class="concur-status">
+         Concurrence status
+        </div>
+      </div>
+      <div fxFlex>
+        Regulatory information
+      </div>
+    </div>
+  </div>
+</div>
 

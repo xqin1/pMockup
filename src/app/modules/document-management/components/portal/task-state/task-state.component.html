@@ -6,10 +6,11 @@
           <app-task-state-build
             [selectedTask]="selectedTask"
             [documentBuildIds]="documentBuildIds"
+            [selectedDocument]="selectedDocument"
             (documentBuild)="onDocumentBuild($event)">
           </app-task-state-build>
       </mat-step>
-      <mat-step [completed]="false" #stepConcur>
+      <mat-step [completed]="false" [optional]="true" #stepConcur>
           <ng-template matStepLabel>Concur</ng-template>
         <app-task-state-concur
           [selectedTask]="selectedTask"

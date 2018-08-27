@@ -1,0 +1,21 @@
+.document-icon {
+  margin-left: 5px;
+}
+
+.document-item {
+  background-color: #b3e5fc1c;
+  margin-top: 15px;
+}
+
+.file-icon {
+  font-size: 48px !important;
+}
+
+.action-icon {
+  font-size: 14px !important;
+}
+
+.document-name {
+  font-size: 16px;
+  padding-left: 25px;
+}

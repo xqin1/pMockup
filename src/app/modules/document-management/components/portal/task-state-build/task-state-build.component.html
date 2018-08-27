@@ -43,7 +43,11 @@
         </div>
       </div>
       <div *ngSwitchDefault>
-          <app-document-item></app-document-item>
+        <div>
+          need to determine what we allow user to do here.
+        </div>
+          <app-document-item
+          [selectedDocument]="selectedDocument"></app-document-item>
       </div>
     </div>
 </div>

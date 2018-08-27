@@ -10,7 +10,7 @@
             (documentBuild)="onDocumentBuild($event)">
           </app-task-state-build>
       </mat-step>
-      <mat-step [completed]="false" [optional]="true" #stepConcur>
+      <mat-step [completed]="false" #stepConcur>
           <ng-template matStepLabel>Concur</ng-template>
         <app-task-state-concur
           [selectedTask]="selectedTask"

@@ -37,7 +37,6 @@ export class TaskStateComponent implements OnInit, OnChanges {
         this.stepArchive.completed = false;
       }else if (index === 1) {
         this.stepBuild.completed = true;
-        this.stepBuild.optional = true;
         this.stepConcur.completed = true;
         this.stepSign.completed = false;
         this.stepArchive.completed = false;

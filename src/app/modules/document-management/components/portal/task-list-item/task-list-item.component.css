@@ -8,7 +8,7 @@ a:hover {
 }
 
 .task-detail-card {
-  height: 60px;
+  height: 70px;
 }
 .task-detail-card:hover {
   background-color: #b3e5fc1c;
@@ -32,9 +32,19 @@ a:hover {
 }
 
 .mat-chip {
-  width: 80px;
+  width: 60px;
+  height: 20px;
   justify-content: center;
 }
 .state-text {
   color: white;
 }
+
+.mat-card {
+  padding: 12px !important;
+}
+
+.task-name{
+  font-weight: bold;
+}
+

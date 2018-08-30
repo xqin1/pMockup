@@ -47,7 +47,12 @@
 }
 
 html{
-  background: #f1f1f1;
+
+}
+
+body {
+  margin-left: 10px;
+  margin-right: 70px;
 }
 
 .document-page-header {
@@ -101,4 +106,10 @@ blockquote p {
 
 .material-icons.md-48 {
   font-size: 48px;
+}
+.material-icons {
+  vertical-align: middle;
+}
+.subtitle-text {
+  color: rgba(0, 0, 0, 0.54);
 }

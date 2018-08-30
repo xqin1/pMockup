@@ -10,10 +10,10 @@
                 {{taskData.task.name}}
             </span>
           </div>
-          <div fxFlex>
+          <div fxFlex fxLayoutAlign="end">
             <span>
-              Goal Date: <br/>
-              {{taskData.task.plannedCompletionDate | date: 'shortDate'}}
+              Due: <br/>
+              {{taskData.task.plannedCompletionDate | date: 'MM/dd/yyyy'}}
             </span>
           </div>
         </div>
@@ -26,10 +26,11 @@
                 {{taskData.task.project.name}}
             </span>
         </div>
-        <div fxFlex>
+        <div fxFlex fxLayoutAlign="end">
           <mat-chip-list>
-            <mat-chip selected [style.background-color]="getStateBackgroundColor(taskData.state)">
-              <span class="state-text">{{taskData.state}}</span>
+            <mat-chip *ngIf="getTaskStateData(taskData.state).show"
+              selected [style.background-color]="getTaskStateData(taskData.state).color">
+              <span class="state-text">{{getTaskStateData(taskData.state).label}}</span>
             </mat-chip>
           </mat-chip-list>
         </div>

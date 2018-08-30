@@ -14,21 +14,13 @@
 .task-card-list {
   padding-top: 5px;
 }
-.task-list-refresh-icon {
-}
 
-.task-list-page-header {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-}
 .task-list-container {
   max-height: 600px;
   overflow-y:scroll;
   padding-bottom:10px;
 }
-.task-list-refresh-icon {
-  cursor: pointer;
-}
+
+
 
 

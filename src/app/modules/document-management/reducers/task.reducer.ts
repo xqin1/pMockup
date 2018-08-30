@@ -124,6 +124,8 @@ export const getTaskListLoading = (state: State) => state.taskListLoading;
 
 export const getTaskList = (state: State) => state.taskList;
 
+export const getNumberOfTasks = (state: State) => state.taskList.length;
+
 export const getSelectedTaskId = (state: State) => state.selectedTaskId;
 
 export const getDocumentBuildIds = (state: State) => state.documentBuildIds;
@@ -131,3 +133,6 @@ export const getDocumentBuildIds = (state: State) => state.documentBuildIds;
 export const getTaskLoadIds = (state: State) => state.taskLoadingIds;
 
 export const getSelectedDocumentId = (state: State) => state.selectedDocumentId;
+
+
+

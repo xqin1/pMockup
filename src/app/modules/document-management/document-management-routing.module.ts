@@ -61,12 +61,12 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'portal',
+    path: 'kaleidoscope',
     component: DocumentPortalParentPageComponent,
     resolve: {
        data: TaskListResolverService
     },
-    canActivate: [AuthGuardService],
+   // canActivate: [AuthGuardService],
     children: [
       // {path: 'document-list', redirectTo: 'document-list', pathMatch: 'full'},
       // {

@@ -14,7 +14,9 @@ export class PortalService {
   user: User = new User();
   constructor(
     private logger: LoggerService
-  ) { }
+  ) {
+    this.user.name = "Xiaoming Qin";
+  }
 
   setCurrentUser(user: User) {
     this.user = user;

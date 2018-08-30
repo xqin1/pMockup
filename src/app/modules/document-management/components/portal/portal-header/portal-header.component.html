@@ -1,9 +1,26 @@
-<div class="header" fxLayout="row" fxLayoutAlign="space-between center">
+<div class="page-header" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="header-left" fxFlex fxFlexAlign="center">
-    <span class="title">Kaleidoscope</span>
-    <span class="page-icon"><mat-icon color="primary">blur_on</mat-icon></span>
+    <span class="title">KALEIDOSCOPE</span>
   </div>
-  <div class="header-right" fxFlex="100px" fxFlexAlign="center">
-    <span cy-data="userName"> {{userName}} </span>
+  <div class="header-right" fxFlex="200px" fxFlexAlign="center">
+    <span class="name" cy-data="userName">Hello {{userName}} </span>
+  </div>
+</div>
+<div class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="header-left" fxFlex fxFlexAlign="center">
+    <span class="task-title">Tasks ({{numberOfTasks}})</span>
+  </div>
+  <div class="header-right" fxFlex="250px" fxFlexAlign="center">
+    <span class="refresh-text subtitle-text" cy-data="last-refreshed">Last refreshed: {{selectedTask.lastRefreshed | date: 'shortTime'}} </span>
+    <span *ngIf="showRefreshButton()"
+          class="task-list-refresh-icon"
+          matTooltip="refresh task"
+          (click)="onTaskUpdate()">
+            <mat-icon color="primary" class="md-18">refresh</mat-icon>
+    </span>
+    <span *ngIf="!showRefreshButton()"
+          class="task-list-refresh-animation-icon">
+            <mat-spinner [diameter]="18"></mat-spinner>
+    </span>
   </div>
 </div>

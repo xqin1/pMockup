@@ -77,12 +77,12 @@ export const DocumentConfig = {
       }]
   },
   taskState: [
-    {"name": "Build", "index": 0, "color": "#375e9e"},
-    {"name": "Concur", "index": 1, "color": "#20f7f7"},
-    {"name": "Sign", "index": 2, "color": "#30a362"},
-    {"name": "Archive", "index": 3, "color": "#991030"},
-    {"name": "Upload", "index": 0, "color": "#c85def"},
-    {"name": "Select", "index": 0, "color": "#ef1c04"},
+    {"name": "Select", "index": -1, "color": "#ef1c04", "label": "Select", "show": false},
+    {"name": "Build", "index": 0, "color": "#23489e", "label": "Build", "show": true},
+    {"name": "Upload", "index": 0, "color": "#23489e", "label": "Build", "show": true},
+    {"name": "Concur", "index": 1, "color": "#40acf7", "label": "Concur", "show": true},
+    {"name": "Sign", "index": 2, "color": "#28a30c", "label": "Sign", "show": true},
+    {"name": "Archive", "index": 3, "color": "#991908", "label": "Archive", "show": true}
 ]
 
 

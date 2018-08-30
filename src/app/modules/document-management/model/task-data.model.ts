@@ -4,4 +4,5 @@ import {TaskState} from '@app/modules/document-management/model/task-state.enum'
 export class TaskData {
   task: Task;
   state: TaskState;
+  lastRefreshed: Date;
 };

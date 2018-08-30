@@ -38,6 +38,7 @@ export class TaskEffects {
             const taskData: TaskData = new TaskData();
             taskData.task = t;
             taskData.state = this.portalService.getTaskState(t);
+            taskData.lastRefreshed = new Date();
             taskList.push(taskData);
           }
           return new TaskListLoadSuccess(taskList);
@@ -58,6 +59,7 @@ export class TaskEffects {
             const taskData: TaskData = new TaskData();
             taskData.task = tasks[0];
             taskData.state = this.portalService.getTaskState(tasks[0]);
+            taskData.lastRefreshed = new Date();
             return new TaskLoadSuccess(taskData);
           }else {
             return new TaskLoadError('task load failed');

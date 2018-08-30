@@ -97,6 +97,11 @@ export const getSelectedTask = createSelector(
   }
 );
 
+export const getNumberOfTasks = createSelector(
+  getTaskState,
+  fromTask.getNumberOfTasks
+);
+
 export const getDocumentBuildIds = createSelector(
   getTaskState,
   fromTask.getDocumentBuildIds

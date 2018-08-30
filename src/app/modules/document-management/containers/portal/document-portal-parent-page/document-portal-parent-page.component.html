@@ -1,13 +1,25 @@
 <div fxLayout="column" class="fixVertical">
-  <app-document-portal-header-parent-page></app-document-portal-header-parent-page>
+  <div fxLayou="row">
+    <div fxFlex="80px" fxFlexAlign="center" class="logo">
+      <img class="img-logo" src="./assets/panorama_logo.png"/>
+    </div>
+    <div fxFlex>
+      <app-document-portal-header-parent-page></app-document-portal-header-parent-page>
+    </div>
+  </div>
   <div class="flex-container" fxFlex fxFlexFill>
-    <div fxLayout="row" fxlayoutAlign="center center" fxLayoutGap="5px" class="content-row">
-      <div fxFlex="400px" class="content-left">
-        <app-task-list-parent-page></app-task-list-parent-page>
-      </div>
-      <div fxFlex class="content-right">
-        <app-task-detail-parent-page></app-task-detail-parent-page>
-        <app-task-state-parent-page></app-task-state-parent-page>
+    <div fxLayou="row">
+      <div fxFlex="80px" class="layout-left-blank"></div>
+      <div fxFlex class="main-content">
+        <div fxLayout="row" fxlayoutAlign="center center" fxLayoutGap="5px" class="content-row">
+          <div fxFlex="400px" class="content-left">
+            <app-task-list-parent-page></app-task-list-parent-page>
+          </div>
+          <div fxFlex class="content-right">
+            <app-task-detail-parent-page></app-task-detail-parent-page>
+            <app-task-state-parent-page></app-task-state-parent-page>
+          </div>
+        </div>
       </div>
     </div>
   </div>

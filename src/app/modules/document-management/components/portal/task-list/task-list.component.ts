@@ -10,18 +10,12 @@ import { TaskData} from '@app/modules/document-management/model/task-data.model'
 export class TaskListComponent implements OnInit {
   @Input() taskList: TaskData[];
   @Input() selectedTaskId: TaskData;
-  @Input() taskListLoading: boolean;
   @Output() selectTask = new EventEmitter<TaskData>();
-  @Output() updateTaskList = new EventEmitter();
   constructor() { }
 
   onTaskSelected(task: TaskData) {
     this.selectTask.emit(task);
   }
-  onTaskListUpdate() {
-    this.updateTaskList.emit();
-  }
-
   ngOnInit() {
   }
 

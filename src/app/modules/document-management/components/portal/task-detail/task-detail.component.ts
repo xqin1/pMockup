@@ -13,31 +13,24 @@ export class TaskDetailComponent implements OnInit {
   @Input() taskLoadIds: string[];
   @Output() updateTask = new EventEmitter<string>();
   @ViewChild('detailPanel') detailPanel: MatExpansionPanel;
-  panelOpenState = true;
+  panelOpenState = false;
   constructor() { }
 
   getShowTaskLink(taskId: string) {
     return `${environment.workfrontHost}/task/view?ID=${taskId}`;
   }
 
-  refreshTask(taskId, event: Event) {
-    event.stopPropagation();
-    this.updateTask.emit(taskId);
-  }
 
   taskLinkClick(event: Event) {
     event.stopPropagation();
   }
 
   togglePanel() {
+    console.log("toggle");
+    this.detailPanel.disabled = false;
     this.detailPanel.toggle();
-  }
-  showRefreshButton() {
-    let result = true;
-    if (this.taskLoadIds !== null && this.selectedTask !== null && this.taskLoadIds.includes(this.selectedTask.task.ID)) {
-      result = false;
-    }
-    return result;
+    this.panelOpenState = !this.panelOpenState;
+    this.detailPanel.disabled = true;
   }
   ngOnInit() {
   }

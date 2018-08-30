@@ -1,14 +1,17 @@
 export interface ProjecCustomField {
   "DE:Goal Date": string;
-  "DE:Submission Classification";
-  "DE:Supplement Sub Type";
-  "DE:FDA Received Date";
-  "DE:GDUFA Goal Date";
-  "DE:Applicant";
-  "DE:Established Name";
-  "DE:Dosage Form";
-  "DE:Submission Type";
-  "DE:Product";
+  "DE:Submission Classification": string;
+  "DE:Supplement Sub Type": string;
+  "DE:FDA Received Date": string;
+  "DE:GDUFA Goal Date": string;
+  "DE:Applicant": string;
+  "DE:Established Name": string;
+  "DE:Dosage Form": string;
+  "DE:Submission Type": string;
+  "DE:Product": string;
+  "DE:Quality Date": string;
+  "DE: Quality Mid Review Date": string;
+
 }
 export class Project {
   ID: string;

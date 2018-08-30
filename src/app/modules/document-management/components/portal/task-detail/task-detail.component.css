@@ -7,24 +7,21 @@
   margin-right: 20px;
 }
 
-.task-name {
-  font-size: 16px;
-  font-weight:bold;
+.task-header {
+  font-size: 12px !important;
 }
 .task-link {
-  font-size: 12px;
-  padding-top: 5px;
+  padding-top: 5px !important;
 }
 .due-date {
   padding-top: 5px;
 }
 .mat-expansion-panel-header{
   background-color: #cfeef7 !important;
-  cursor: pointer !important;
+  cursor: default !important;
 }
 
 .mat-expansion-panel {
-  overflow:auto !important;
   background: #b3e5fc1c !important;
 }
 
@@ -36,8 +33,6 @@
 }
 
 .panel-toggle {
-  background: #cfeef7;
-  padding: 8px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -53,5 +48,26 @@ dl dt {
 }
 dl dd {
   padding-bottom: 2px;
+}
+
+.task-header {
+  margin-top: 10px;
+}
+.task-detail-header-right {
+  background-color: white;
+  padding: 5px 20px;
+  align-self: center;
+  color: dodgerblue;
+}
+.task-status {
+  font-size: 14px;
+  font-weight: bold;
+}
+.task-due-date {
+  font-size: 12px;
+}
+.toggle-button {
+  padding: 0px 0px !important;
+  color: dodgerblue !important;
 }
 

@@ -1,38 +1,31 @@
 <div class="task-detail-container">
-    <mat-expansion-panel [expanded]="true"
+    <mat-expansion-panel [expanded]="false"
                          [hideToggle]="true"
-                         (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false"
+                         [disabled]="true"
                          #detailPanel>
-      <mat-expansion-panel-header [collapsedHeight]="'105px'" [expandedHeight]="'105px'">
-        <mat-panel-title>
+      <mat-expansion-panel-header [collapsedHeight]="'80px'" [expandedHeight]="'80px'">
           <span>
-            <div class="task-name">
-              {{selectedTask.task.name}}
-            </div>
+            <div class="task-header subtitle-text">TASK</div>
             <div class="task-link">
               <a [href]="getShowTaskLink(selectedTask.task.ID)" target="_blank"
-                 class="title-link" (click)="taskLinkClick($event)">
-                Open Task Page
+                 (click)="taskLinkClick($event)">
+                   {{selectedTask.task.name}}
               </a>
+            </div>
+            <div class="panel-toggle" (click)="togglePanel()">
+              <span *ngIf="panelOpenState">
+                <button class="toggle-button" mat-button>Hide Submission Detail<mat-icon color="primary">arrow_drop_up</mat-icon></button>
+              </span>
+              <span *ngIf="!panelOpenState">
+                <button class="toggle-button" mat-button>Show Submission Detail<mat-icon color="primary">arrow_drop_down</mat-icon></button>
+              </span>
             </div>
           </span>
           <span class="line-spacer"></span>
           <span class="task-detail-header-right">
-            <div>Status: {{selectedTask.task.status}}</div>
-            <div class="due-date">Due Date: {{selectedTask.task.plannedCompletionDate | date: 'shortDate'}}</div>
+           <span class="task-status">{{selectedTask.task.status}} </span>
+            <span class="task-due-date">| DUE: {{selectedTask.task.plannedCompletionDate | date: 'MM/dd/yyyy'}}</span>
           </span>
-          <span *ngIf="showRefreshButton()"
-                class="task-refresh-icon"
-                matTooltip="refresh task"
-                (click)="refreshTask(selectedTask.task.ID, $event)">
-                <mat-icon color="primary">refresh</mat-icon>
-          </span>
-          <span *ngIf="!showRefreshButton()"
-                class="task-refresh-icon">
-                <mat-spinner [diameter]="24"></mat-spinner>
-          </span>
-        </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="panel-content">
         <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
@@ -94,17 +87,4 @@
       </div>
       </div>
     </mat-expansion-panel>
-    <div fxLayout="row">
-    <div fxFlex></div>
-    <div fxFlex="200px">
-      <div class="panel-toggle" (click)="togglePanel()">
-        <span *ngIf="panelOpenState">
-          <button mat-button><strong>Hide Submission Detail</strong><mat-icon color="primary">toggle_off</mat-icon></button>
-        </span>
-        <span *ngIf="!panelOpenState">
-          <button mat-button><strong>Show Submission Detail</strong><mat-icon color="primary">toggle_on</mat-icon></button>
-        </span>
-      </div>
-    </div>
-  </div>
 </div>

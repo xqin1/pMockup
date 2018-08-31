@@ -27,6 +27,10 @@ export class TaskStateComponent implements OnInit, OnChanges {
     this.documentBuild.emit(taskId);
   }
   ngOnChanges(changes: SimpleChanges) {
+    console.log("change");
+    console.log(changes);
+    console.log("step build");
+    console.log(this.stepBuild);
     if (changes["selectedTask"] && typeof this.stepper !== "undefined") {
       const stateName = changes["selectedTask"].currentValue.state;
       const index = DocumentConfig.taskState.filter(s => s["name"] === stateName)[0]["index"];
@@ -37,7 +41,7 @@ export class TaskStateComponent implements OnInit, OnChanges {
         this.stepArchive.completed = false;
       }else if (index === 1) {
         this.stepBuild.completed = true;
-        this.stepConcur.completed = true;
+        this.stepConcur.completed = false;
         this.stepSign.completed = false;
         this.stepArchive.completed = false;
       }else if (index === 2) {
@@ -53,6 +57,8 @@ export class TaskStateComponent implements OnInit, OnChanges {
       }
       this.stepper.selectedIndex = index;
     }
+    console.log("end of setting step");
+    console.log(this.stepBuild);
   }
 
   ngOnInit() {

@@ -22,7 +22,7 @@
 }
 
 .mat-expansion-panel {
-  background: #b3e5fc1c !important;
+  background-color: #cfeef7 !important;
 }
 
 .panel-content {
@@ -37,17 +37,23 @@
   font-weight: bold;
 }
 .detail-section-title {
-  font-weight: bold;
   font-size: 14px;
+  padding-bottom: 15px;
 }
-dl dt {
+.detail-key {
   font-weight: bold;
-  float: left;
-  padding-bottom: 2px;
-  padding-right: 2px;
+  padding-right: 10px;
 }
-dl dd {
-  padding-bottom: 2px;
+.detail-key-submission {
+  font-weight: bold;
+}
+.detail-value {
+}
+.detail-value-submission {
+  padding-bottom: 8px;
+}
+.detail-line {
+  padding-bottom: 8px;
 }
 
 .task-header {

@@ -1,0 +1,2 @@
+1. test IE
+2. Error handling -- when server done, etc. dispatch error event

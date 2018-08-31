@@ -19,12 +19,12 @@ export class TaskDetailComponent implements OnInit {
   getShowTaskLink(taskId: string) {
     return `${environment.workfrontHost}/task/view?ID=${taskId}`;
   }
-
-
   taskLinkClick(event: Event) {
     event.stopPropagation();
   }
-
+  getShowProjectLink(projectId: string) {
+    return `${environment.workfrontHost}/project/view?ID=${projectId}`;
+  }
   togglePanel() {
     console.log("toggle");
     this.detailPanel.disabled = false;

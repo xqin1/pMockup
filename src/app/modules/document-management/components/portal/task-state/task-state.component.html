@@ -1,34 +1,35 @@
 <div class="task-state">
-  <mat-card>
-    <mat-horizontal-stepper [linear]="true" #stepper>
-      <mat-step [completed]="false" #stepBuild>
-          <ng-template matStepLabel>Build</ng-template>
-          <app-task-state-build
-            [selectedTask]="selectedTask"
-            [documentBuildIds]="documentBuildIds"
-            [selectedDocument]="selectedDocument"
-            (documentBuild)="onDocumentBuild($event)">
-          </app-task-state-build>
-      </mat-step>
-      <mat-step [completed]="false" #stepConcur>
-          <ng-template matStepLabel>Concur</ng-template>
-        <app-task-state-concur
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <ng-template matStepperIcon="edit">
+      <mat-icon>done</mat-icon>
+    </ng-template>
+    <mat-step #stepBuild>
+      <ng-template matStepLabel>Build</ng-template>
+        <app-task-state-build
           [selectedTask]="selectedTask"
-          [selectedDocument]="selectedDocument">
-        </app-task-state-concur>
-      </mat-step>
-      <mat-step [completed]="false" #stepSign>
-        <ng-template matStepLabel>Sign</ng-template>
-        <app-task-state-sign
-          [selectedTask]="selectedTask">
-        </app-task-state-sign>
-      </mat-step>
-      <mat-step [completed]="false" #stepArchive>
-        <ng-template matStepLabel>Archive</ng-template>
-        <app-task-state-archive
-          [selectedTask]="selectedTask">
-        </app-task-state-archive>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </mat-card>
+          [documentBuildIds]="documentBuildIds"
+          [selectedDocument]="selectedDocument"
+          (documentBuild)="onDocumentBuild($event)">
+        </app-task-state-build>
+    </mat-step>
+    <mat-step #stepConcur>
+        <ng-template matStepLabel>Concur</ng-template>
+      <app-task-state-concur
+        [selectedTask]="selectedTask"
+        [selectedDocument]="selectedDocument">
+      </app-task-state-concur>
+    </mat-step>
+    <mat-step #stepSign>
+      <ng-template matStepLabel>Sign</ng-template>
+      <app-task-state-sign
+        [selectedTask]="selectedTask">
+      </app-task-state-sign>
+    </mat-step>
+    <mat-step #stepArchive>
+      <ng-template matStepLabel>Archive</ng-template>
+      <app-task-state-archive
+        [selectedTask]="selectedTask">
+      </app-task-state-archive>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

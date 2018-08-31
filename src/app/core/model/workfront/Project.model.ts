@@ -11,7 +11,6 @@ export interface ProjecCustomField {
   "DE:Product": string;
   "DE:Quality Date": string;
   "DE: Quality Mid Review Date": string;
-
 }
 export class Project {
   ID: string;

@@ -85,9 +85,9 @@ blockquote p {
   display: inline;
 }
 
-/*body {*/
-  /*font-size:small;*/
-/*}*/
+/*
+material related css
+ */
 .material-icons.md-14 {
   font-size: 14px;
 }
@@ -112,4 +112,26 @@ blockquote p {
 }
 .subtitle-text {
   color: rgba(0, 0, 0, 0.54);
+}
+
+/*
+common css for state contents, on state-concur, state-sign and state-archive page
+ */
+.state-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.state-instruction {
+  font-size: 12px;
+  padding-top: 10px;
+}
+
+.document-row {
+  background-color: #f1f1f1;
+  height: 60px
+}
+
+.state-content-row {
+  padding: 15px 15px;
 }

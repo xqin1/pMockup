@@ -22,13 +22,15 @@
     <mat-step #stepSign>
       <ng-template matStepLabel>Sign</ng-template>
       <app-task-state-sign
-        [selectedTask]="selectedTask">
+        [selectedTask]="selectedTask"
+        [selectedDocument]="selectedDocument">
       </app-task-state-sign>
     </mat-step>
     <mat-step #stepArchive>
       <ng-template matStepLabel>Archive</ng-template>
       <app-task-state-archive
-        [selectedTask]="selectedTask">
+        [selectedTask]="selectedTask"
+        [selectedDocument]="selectedDocument">
       </app-task-state-archive>
     </mat-step>
   </mat-horizontal-stepper>

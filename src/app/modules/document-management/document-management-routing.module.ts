@@ -28,7 +28,9 @@ import { TaskStateBuildComponent } from './components/portal/task-state-build/ta
 import { TaskStateConcurComponent } from './components/portal/task-state-concur/task-state-concur.component';
 import { TaskStateSignComponent } from './components/portal/task-state-sign/task-state-sign.component';
 import { TaskStateArchiveComponent } from './components/portal/task-state-archive/task-state-archive.component';
-
+import { TaskListItemComponent } from './components/portal/task-list-item/task-list-item.component';
+import { DocumentItemComponent } from './components/portal/document-item/document-item.component';
+import { TaskApprovalComponent } from './components/portal/task-approval/task-approval.component';
 const routes: Routes = [
   {
     path: 'document',
@@ -119,4 +121,7 @@ PortalHeaderComponent,
   TaskStateBuildComponent,
   TaskStateConcurComponent,
   TaskStateSignComponent,
-  TaskStateArchiveComponent];
+  TaskStateArchiveComponent,
+  TaskListItemComponent,
+  DocumentItemComponent,
+  TaskApprovalComponent];

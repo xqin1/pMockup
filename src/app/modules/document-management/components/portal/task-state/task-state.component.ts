@@ -58,6 +58,8 @@ export class TaskStateComponent implements OnInit, OnChanges {
   goNext() {
     if (this.stepper.selectedIndex === 1) {
       this.stepConcur.completed = true;
+    }else if (this.stepper.selectedIndex === 2) {
+      this.stepSign.completed = true;
     }
     this.stepper.next();
   }

@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {TaskData} from '@app/modules/document-management/model/task-data.model';
+import {Document} from '@app/core/model/workfront/Document.model';
 
 @Component({
   selector: 'app-task-state-sign',
@@ -9,6 +10,7 @@ import {TaskData} from '@app/modules/document-management/model/task-data.model';
 })
 export class TaskStateSignComponent implements OnInit {
   @Input() selectedTask: TaskData;
+  @Input() selectedDocument: Document;
   constructor() { }
 
   ngOnInit() {

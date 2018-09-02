@@ -1,3 +1,27 @@
-<p>
-  archive step: {{selectedTask.task.name}}
-</p>
+<div class="archive-page">
+  <div class="document-row">
+    <app-document-item [selectedDocument]="selectedDocument">
+    </app-document-item>
+  </div>
+  <div fxLayout="row"
+       fxLayoutAlign="space-around start"
+       fxLayoutGap="10px"
+       class="state-content-row">
+    <div fxFlex>
+      <div class="state-title">
+        Archive Document
+      </div>
+      <div class="state-instruction">
+        This document is ready to be archived.
+      </div>
+      <div class="state-approval">
+        Archive status etc. placeholder
+      </div>
+    </div>
+    <div fxFlex>
+      <div class="archive-right-side">
+        Other information placeholder
+      </div>
+    </div>
+  </div>
+</div>

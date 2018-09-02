@@ -21,46 +21,60 @@ export class TaskStateComponent implements OnInit, OnChanges {
   @ViewChild('stepConcur') stepConcur: MatStep;
   @ViewChild('stepSign') stepSign: MatStep;
   @ViewChild('stepArchive') stepArchive: MatStep;
+  index: number;
   constructor() { }
 
   onDocumentBuild(taskId: string) {
     this.documentBuild.emit(taskId);
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log("change");
-    console.log(changes);
-    console.log("step build");
-    console.log(this.stepBuild);
     if (changes["selectedTask"] && typeof this.stepper !== "undefined") {
       const stateName = changes["selectedTask"].currentValue.state;
-      const index = DocumentConfig.taskState.filter(s => s["name"] === stateName)[0]["index"];
-      if (index === 0) {
+      this.index = DocumentConfig.taskState.filter(s => s["name"] === stateName)[0]["index"];
+      if (this.index === 0) {
         this.stepBuild.completed = false;
         this.stepConcur.completed = false;
         this.stepSign.completed = false;
         this.stepArchive.completed = false;
-      }else if (index === 1) {
+      }else if (this.index === 1) {
         this.stepBuild.completed = true;
         this.stepConcur.completed = false;
         this.stepSign.completed = false;
         this.stepArchive.completed = false;
-      }else if (index === 2) {
+      }else if (this.index === 2) {
         this.stepBuild.completed = true;
         this.stepConcur.completed = true;
         this.stepSign.completed = false;
         this.stepArchive.completed = false;
-      }else if (index === 3) {
+      }else if (this.index === 3) {
         this.stepBuild.completed = true;
         this.stepConcur.completed = true;
         this.stepSign.completed = true;
         this.stepArchive.completed = false;
       }
-      this.stepper.selectedIndex = index;
+      this.stepper.selectedIndex = this.index;
     }
-    console.log("end of setting step");
-    console.log(this.stepBuild);
   }
+  goNext() {
+    if (this.stepper.selectedIndex === 1) {
+      this.stepConcur.completed = true;
+    }
+    this.stepper.next();
+  }
+  goPrevious() {
+    this.stepper.previous();
+  }
+  disableNext() {
+    let result = false;
+    if (this.stepper.selectedIndex === 0) {
+      if (!this.selectedDocument) {
+        result = true;
+      }
+    }else if (this.stepper.selectedIndex === 2) {
 
+    }
+    return result;
+  }
   ngOnInit() {
     // this.stepper.selectedIndex = 2;
 

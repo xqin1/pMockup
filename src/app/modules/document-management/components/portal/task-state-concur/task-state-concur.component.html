@@ -1,24 +1,26 @@
-
-
 <div class="concur-page">
-  <div class="state-section">
-    <div class="state-title">
-      Complete Concurrence
-    </div>
-    <div class="state-instruction">
-      You can still make changes to your document by downloading it. Once it is finalized, and you
-      upload its replacement, select Approve to route it to the next person on the approval list.
-    </div>
-    <div fxLayout="row">
-      <div fxFlex>
-        <app-document-item [selectedDocument]="selectedDocument">
-        </app-document-item>
-        <div class="concur-status">
-         Concurrence status
-        </div>
+  <div class="document-row">
+    <app-document-item [selectedDocument]="selectedDocument">
+    </app-document-item>
+  </div>
+  <div fxLayout="row"
+       fxLayoutAlign="space-around start"
+       fxLayoutGap="10px"
+       class="state-content-row">
+    <div fxFlex>
+      <div class="state-title">
+        Complete Concurrence
       </div>
-      <div fxFlex>
-        Regulatory information
+      <div class="state-instruction">
+        Click "Approve" to route this document to the next person on the list.
+      </div>
+      <div class="state-approval">
+        <app-task-approval></app-task-approval>
+      </div>
+    </div>
+    <div fxFlex>
+      <div class="concur-right-side">
+        contents add here
       </div>
     </div>
   </div>

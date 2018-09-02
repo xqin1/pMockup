@@ -18,6 +18,7 @@ import {TaskEffects} from '@app/modules/document-management/effects/task.effect'
 import { TaskListResolverService} from '@app/modules/document-management/services/task-list-resolver.service';
 import { TaskListItemComponent } from './components/portal/task-list-item/task-list-item.component';
 import { DocumentItemComponent } from './components/portal/document-item/document-item.component';
+import { TaskApprovalComponent } from './components/portal/task-approval/task-approval.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { DocumentItemComponent } from './components/portal/document-item/documen
     EffectsModule.forFeature([DocumentEffects, TaskEffects]),
     AuthModule
   ],
-  declarations: [routedComponents, TaskListItemComponent, DocumentItemComponent],
+  declarations: [routedComponents, TaskListItemComponent, DocumentItemComponent, TaskApprovalComponent],
   providers: [ DocumentManagementService, DocumentListResolverService, PortalService, TaskListResolverService],
   entryComponents: [FilePreviewDialogComponent, NotificationComponent, ArchiveConfirmationDialogComponent]
 })

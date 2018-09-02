@@ -1,21 +1,23 @@
-.document-icon {
-  margin-left: 5px;
-}
-
 .document-item {
-  background-color: #b3e5fc1c;
-  margin-top: 15px;
+  margin-left: 15px;
+  padding-top: 10px;
 }
 
-.file-icon {
-  font-size: 48px !important;
+.icon-section {
+  padding-right: 30px;
 }
-
 .action-icon {
-  font-size: 14px !important;
+  padding-right: 15px;
+  cursor: pointer;
 }
-
+.document-title {
+  font-size: 10px;
+}
 .document-name {
   font-size: 16px;
-  padding-left: 25px;
+  font-weight: bold;
+  padding-top: 5px;
+}
+.a {
+  text-decoration: none !important;
 }

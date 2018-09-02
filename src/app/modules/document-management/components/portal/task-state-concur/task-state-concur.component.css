@@ -5,5 +5,22 @@
 
 .state-instruction {
   font-size: 12px;
-  padding-top: 15px;
+  padding-top: 10px;
+}
+
+.document-row {
+  background-color: #f1f1f1;
+  height: 60px
+}
+
+.state-content-row {
+  padding: 15px 15px;
+}
+
+.concur-right-side {
+  border-width: 2px;
+  border-color: orange;
+  border-style:solid;
+  widht:100%;
+  height: 300px;
 }

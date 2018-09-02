@@ -16,6 +16,7 @@ import { AuthModule} from '@app/modules/document-management/auth/auth.module';
 import { PortalService} from '@app/modules/document-management/services/portal.service';
 import {TaskEffects} from '@app/modules/document-management/effects/task.effect';
 import { TaskListResolverService} from '@app/modules/document-management/services/task-list-resolver.service';
+import { DocumentBuildDialogComponent } from './components/portal/document-build-dialog/document-build-dialog.component';
 
 @NgModule({
   imports: [
@@ -27,8 +28,9 @@ import { TaskListResolverService} from '@app/modules/document-management/service
     EffectsModule.forFeature([DocumentEffects, TaskEffects]),
     AuthModule
   ],
-  declarations: [routedComponents],
+  declarations: [routedComponents, DocumentBuildDialogComponent],
   providers: [ DocumentManagementService, DocumentListResolverService, PortalService, TaskListResolverService],
-  entryComponents: [FilePreviewDialogComponent, NotificationComponent, ArchiveConfirmationDialogComponent]
+  entryComponents: [FilePreviewDialogComponent, NotificationComponent, ArchiveConfirmationDialogComponent,
+                    DocumentBuildDialogComponent]
 })
 export class DocumentManagementModule { }

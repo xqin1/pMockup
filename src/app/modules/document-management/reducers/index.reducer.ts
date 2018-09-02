@@ -102,10 +102,6 @@ export const getNumberOfTasks = createSelector(
   fromTask.getNumberOfTasks
 );
 
-export const getDocumentBuildIds = createSelector(
-  getTaskState,
-  fromTask.getDocumentBuildIds
-);
 
 export const getTaskLoadIds = createSelector(
   getTaskState,

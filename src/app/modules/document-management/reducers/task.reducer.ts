@@ -6,7 +6,6 @@ export interface State {
   taskListLoading: boolean;
   taskList: TaskData[];
   selectedTaskId: string;
-  documentBuildIds: string[];
   taskLoadingIds: string[];
   selectedDocumentId: string;
 }
@@ -16,7 +15,6 @@ const initialState: State = {
   taskListLoading: false,
   taskList: [],
   selectedTaskId: null,
-  documentBuildIds: [],
   taskLoadingIds: [],
   selectedDocumentId: null
 };
@@ -40,7 +38,6 @@ export function reducer(
         taskListLoading: false,
         taskList: action.payload,
         selectedTaskId: selectedTaskId,
-        documentBuildIds: [],
         taskLoadingIds: [],
         selectedDocumentId: selectedDocumentId
       };
@@ -56,16 +53,6 @@ export function reducer(
         ...state,
         selectedDocumentId: action.payload
       };
-    }
-    case TaskActionTypes.DocumentBuild: {
-        const ids = [].concat(state.documentBuildIds);
-        if (!ids.includes(action.payload)) {
-          ids.push(action.payload);
-        }
-        return {
-          ...state,
-          documentBuildIds: ids
-        };
     }
     case TaskActionTypes.TaskLoad: {
       const ids = [].concat((state.taskLoadingIds));
@@ -127,8 +114,6 @@ export const getTaskList = (state: State) => state.taskList;
 export const getNumberOfTasks = (state: State) => state.taskList.length;
 
 export const getSelectedTaskId = (state: State) => state.selectedTaskId;
-
-export const getDocumentBuildIds = (state: State) => state.documentBuildIds;
 
 export const getTaskLoadIds = (state: State) => state.taskLoadingIds;
 

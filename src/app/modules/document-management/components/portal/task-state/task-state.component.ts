@@ -13,9 +13,8 @@ import {Document} from '@app/core/model/workfront/Document.model';
 export class TaskStateComponent implements OnInit, OnChanges {
   @Input() selectedTaskId: string;
   @Input() selectedTask: TaskData;
-  @Input() documentBuildIds: string[];
   @Input() selectedDocument: Document;
-  @Output() documentBuild = new EventEmitter<string>();
+  @Output() documentBuildFinish = new EventEmitter<string>();
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   @ViewChild('stepBuild') stepBuild: MatStep;
   @ViewChild('stepConcur') stepConcur: MatStep;
@@ -24,8 +23,8 @@ export class TaskStateComponent implements OnInit, OnChanges {
   index: number;
   constructor() { }
 
-  onDocumentBuild(taskId: string) {
-    this.documentBuild.emit(taskId);
+  onDocumentBuildFinish(taskId: string) {
+    this.documentBuildFinish.emit(taskId);
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes["selectedTask"] && typeof this.stepper !== "undefined") {

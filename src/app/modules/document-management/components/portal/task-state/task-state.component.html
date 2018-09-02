@@ -7,9 +7,8 @@
       <ng-template matStepLabel>Build</ng-template>
         <app-task-state-build
           [selectedTask]="selectedTask"
-          [documentBuildIds]="documentBuildIds"
           [selectedDocument]="selectedDocument"
-          (documentBuild)="onDocumentBuild($event)">
+          (documentBuildFinish)="onDocumentBuildFinish($event)">
         </app-task-state-build>
     </mat-step>
     <mat-step #stepConcur>

@@ -21,12 +21,11 @@ export class TaskStateParentPageComponent implements OnInit {
   ) {
     this.selectedTaskId = this.store.pipe(select(fromTask.getSelectedTaskId));
     this.selectedTask = this.store.pipe(select(fromTask.getSelectedTask));
-    this.documentBuildIds = this.store.pipe(select(fromTask.getDocumentBuildIds));
     this.selectedDocument = this.store.pipe(select(fromTask.getActiveDocument));
   }
 
-  onDocumentBuild(taskId: string) {
-    this.store.dispatch(new taskActions.DocumentBuild(taskId));
+  onDocumentBuildFinish(taskId: string) {
+    this.store.dispatch(new taskActions.TaskLoad(taskId));
   }
 
   ngOnInit() {

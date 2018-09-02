@@ -1,15 +1,11 @@
 .task-state-build {
   margin-top: 24px;
-  min-height: 200px;
+  padding-left: 24px;
+  min-height: 250px;
 }
-.section-title{
-  font-size: 16px;
-  font-weight: bold;
-  padding-bottom: 15px;
-}
-.section-instruction{
-  font-size: 14px;
-  padding-bottom: 55px;
+
+.section-action {
+  padding-top: 160px;
 }
 .section-button{
   background:#30a362 !important;

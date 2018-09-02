@@ -15,6 +15,8 @@ for PPS
 ng build --prod --configuration=pps --base-href=/PEF_nda/
 ng build --target=production --environment pps --bh /PEF_nda/
 
+http://panoramaams-pps.preprod.fda.gov/PEF_nda/#/document-management/kaleidoscope
+
 local URLs
 http://localhost:9092/dmDocumentManagement/pdfPreview?documentId=58629efa0001381bacf135739892f94a
 http://localhost:7001/PanoramaDocMgmt/documentManagement/pdfPreview?documentId=5963b4970008909bc3febe44dd340938

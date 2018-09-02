@@ -22,3 +22,13 @@
   background: #f1f1f1;
 
 }
+
+.loader {
+  margin-left: 30%;
+}
+.loader-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 20%;
+  margin-top: 100px;
+}

@@ -22,14 +22,14 @@
         </div>
       </div>
       <div *ngSwitchCase="'Upload'">
-        <div class="section-title">
+        <div class="state-title">
           Upload A Document
         </div>
-        <div class="section-instruction">
+        <div class="state-instruction">
           Select Upload to upload a document to the task
         </div>
         <div class="section-action">
-          <button mat-raised-button class="section-button" color="green" (click)="uploadDocument()">
+          <button mat-raised-button class="section-button" (click)="uploadDocument()">
             <span class="button-text">Upload</span>
           </button>
         </div>

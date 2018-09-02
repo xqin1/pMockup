@@ -17,6 +17,7 @@ import { PortalService} from '@app/modules/document-management/services/portal.s
 import {TaskEffects} from '@app/modules/document-management/effects/task.effect';
 import { TaskListResolverService} from '@app/modules/document-management/services/task-list-resolver.service';
 import { DocumentBuildDialogComponent } from './components/portal/document-build-dialog/document-build-dialog.component';
+import { ContentLoaderModule } from '@netbasal/content-loader';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { DocumentBuildDialogComponent } from './components/portal/document-build
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers),
     EffectsModule.forFeature([DocumentEffects, TaskEffects]),
-    AuthModule
+    AuthModule,
+    ContentLoaderModule
   ],
   declarations: [routedComponents, DocumentBuildDialogComponent],
   providers: [ DocumentManagementService, DocumentListResolverService, PortalService, TaskListResolverService],

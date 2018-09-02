@@ -8,6 +8,7 @@
 .stepper-action {
   margin-left: 25px;
   margin-top: 10px;
+  float: right;
 }
 .stepper-button {
   padding-right: 15px;

@@ -21,6 +21,8 @@ import { SharedModule} from './shared/shared.module';
 import { PEFService} from '@app/core/services/pef.service';
 import { DMService} from '@app/core/services/dm.service';
 
+import { ContentLoaderModule } from '@netbasal/content-loader';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { DMService} from '@app/core/services/dm.service';
     CoreModule,
     AppRoutingModule,
     SharedModule,
-
+    ContentLoaderModule,
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

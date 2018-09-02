@@ -18,7 +18,7 @@ export class TaskListResolverService implements Resolve<any> {
     private store: Store<fromTask.State>,
   ) {}
 
-  resolve(): Observable<boolean> | Promise<boolean> {
+  resolve(): Observable<boolean> {
     console.log("resolve service");
     this.store.dispatch(new TaskListLoad());
     return this.waitForTaskListToLoad().pipe(

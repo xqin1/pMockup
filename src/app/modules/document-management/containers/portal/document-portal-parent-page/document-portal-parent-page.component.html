@@ -1,4 +1,4 @@
-<div fxLayout="column" class="fixVertical">
+<div fxLayout="column" class="fixVertical" *ngIf="taskListLoaded$ | async">
   <div fxLayou="row">
     <div fxFlex="80px" fxFlexAlign="center" class="logo">
       <img class="img-logo" src="./assets/panorama_logo.png"/>
@@ -23,6 +23,11 @@
       </div>
     </div>
   </div>
+</div>
+<div class="loading-section" *ngIf="taskListLoading$ | async" class="loader">
+  <span class="loader-text">Loading Data...</span>
+  <bullet-list-content-loader></bullet-list-content-loader>
+  <bullet-list-content-loader></bullet-list-content-loader>
 </div>
 
 

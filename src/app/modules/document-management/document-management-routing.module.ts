@@ -66,7 +66,7 @@ const routes: Routes = [
     path: 'kaleidoscope',
     component: DocumentPortalParentPageComponent,
     resolve: {
-       data: TaskListResolverService
+      // data: TaskListResolverService
     },
    // canActivate: [AuthGuardService],
     children: [

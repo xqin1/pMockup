@@ -80,8 +80,7 @@ export class DMService {
       );
   }
   getTaskListByUserId(userId) {
-    const taskData = of(TaskList);
-    return taskData;
+    return of(TaskList).pipe(delay(5000));
     // return this.http
     //   .get<Task[]>(`${environment.documentManagementURL}/portal/taskList?userId=${userId}`)
     //   .pipe(

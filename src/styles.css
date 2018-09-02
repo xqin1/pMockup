@@ -135,3 +135,7 @@ common css for state contents, on state-concur, state-sign and state-archive pag
 .state-content-row {
   padding: 15px 15px;
 }
+
+.snack-bar{
+  font-style: italic;
+}

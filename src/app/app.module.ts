@@ -22,6 +22,7 @@ import { PEFService} from '@app/core/services/pef.service';
 import { DMService} from '@app/core/services/dm.service';
 
 import { ContentLoaderModule } from '@netbasal/content-loader';
+import { CookieModule} from 'ngx-cookie';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ContentLoaderModule } from '@netbasal/content-loader';
     AppRoutingModule,
     SharedModule,
     ContentLoaderModule,
+    CookieModule.forRoot(),
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

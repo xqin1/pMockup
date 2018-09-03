@@ -10,6 +10,7 @@ import {Eligibility} from '@app/modules/document-management/model/eligibility.mo
 import {Task} from '@app/core/model/workfront/Task.model';
 import { TaskList } from '@app/modules/document-management/task-list';
 import {of} from 'rxjs/index';
+import {User} from '@app/core/model/workfront/User.model';
 
 
 @Injectable()
@@ -70,7 +71,18 @@ export class DMService {
   portalLogIn(emailAddress: string) {
     console.log(emailAddress);
     return this.http
-      .get<RegulatoryData>(`${environment.documentManagementURL}/portal/security/getUserByEmailAddress?emailAddress=${emailAddress}`)
+      .get<User>(`${environment.documentManagementURL}/portal/security/getUserByEmailAddress?emailAddress=${emailAddress}`)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          this.logger.log("done with login");
+        })
+      );
+  }
+  getUserBySessionId(sessionId: string) {
+    return this.http
+      .get<User>(`${environment.documentManagementURL}/portal/security/getUserBySessionId?sessionId=${sessionId}`)
       .pipe(
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),

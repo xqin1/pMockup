@@ -3,6 +3,7 @@ import { TaskListResolverService} from '@app/modules/document-management/service
 import { Observable} from 'rxjs/index';
 import { select, Store } from '@ngrx/store';
 import * as fromTask from '@app/modules/document-management/reducers/index.reducer';
+import * as AuthAction from '@app/modules/document-management/auth/actions/auth.action';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import { environment} from '@env/environment';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -45,17 +46,24 @@ export class DocumentPortalParentPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    timer(0, 500).pipe(
-      takeWhile(() => this.waitSessionid)
-    ).subscribe(() => {
-      const attaskSession = this.getCookie("attask");
-      console.log("get cookie in timer" + attaskSession);
-      if (attaskSession) {
-        console.log(attaskSession);
-        this.waitSessionid = false;
-      }
-    })
-    this.taskListResolveService.resolve();
+    if (environment.production) {
+      timer(0, 500).pipe(
+        takeWhile(() => this.waitSessionid)
+      ).subscribe(() => {
+        const attaskSession = this.getCookie("attask");
+        console.log("get cookie in timer" + attaskSession);
+        if (attaskSession) {
+          console.log(attaskSession);
+          this.waitSessionid = false;
+          this.store.dispatch(new AuthAction.Login(attaskSession.substr(0, 32)));
+        }
+      });
+    }else {
+      const sessionId = "0059d18453234fdbbf3bc928bf334344";
+      this.store.dispatch(new AuthAction.Login(sessionId));
+    }
+
+   // this.taskListResolveService.resolve();
     this.taskLoadIds$.subscribe(result => {
       if (result.length > 0) {
         this.snackBar.open("Retrieving Task Information...", "" , this.config);

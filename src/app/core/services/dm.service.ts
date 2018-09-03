@@ -11,7 +11,7 @@ import {Task} from '@app/core/model/workfront/Task.model';
 import { TaskList } from '@app/modules/document-management/task-list';
 import {of} from 'rxjs/index';
 import {User} from '@app/core/model/workfront/User.model';
-
+import {MockUser } from '@app/modules/document-management/user';
 
 @Injectable()
 export class DMService {
@@ -81,27 +81,35 @@ export class DMService {
       );
   }
   getUserBySessionId(sessionId: string) {
-    return this.http
-      .get<User>(`${environment.documentManagementURL}/portal/security/getUserBySessionId?sessionId=${sessionId}`)
-      .pipe(
-        map(res => res),
-        catchError(this.exceptionService.catchBadResponse),
-        finalize(() => {
-          this.logger.log("done with login");
-        })
-      );
+    if (environment.production) {
+      return this.http
+        .get<User>(`${environment.documentManagementURL}/portal/security/getUserBySessionId?sessionId=${sessionId}`)
+        .pipe(
+          map(res => res),
+          catchError(this.exceptionService.catchBadResponse),
+          finalize(() => {
+            this.logger.log("done with login");
+          })
+        );
+    }else {
+      return of(MockUser);
+    }
   }
   getTaskListByUserId(userId) {
-    return of(TaskList).pipe(delay(5000));
-    // return this.http
-    //   .get<Task[]>(`${environment.documentManagementURL}/portal/taskList?userId=${userId}`)
-    //   .pipe(
-    //     map(res => res),
-    //     catchError(this.exceptionService.catchBadResponse),
-    //     finalize(() => {
-    //       this.logger.log("done with task list data");
-    //     })
-    //   );
+    if (environment.production) {
+      return this.http
+        .get<Task[]>(`${environment.documentManagementURL}/portal/taskList?userId=${userId}`)
+        .pipe(
+          map(res => res),
+          catchError(this.exceptionService.catchBadResponse),
+          finalize(() => {
+            this.logger.log("done with task list data");
+          })
+        );
+    }else {
+      return of(TaskList).pipe(delay(2000));
+    }
+
   }
   getTaskByTaskId(taskId) {
     return this.http

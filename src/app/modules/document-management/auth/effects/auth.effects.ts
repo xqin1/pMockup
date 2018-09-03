@@ -6,6 +6,7 @@ import { Effect, Actions } from '@ngrx/effects';
 import { of } from 'rxjs';
 
 import * as AuthAction from '../actions/auth.action';
+import * as TaskAction from '@app/modules/document-management/actions/task.action';
 import { DMService} from '@app/core/services/dm.service';
 import { PortalService} from '@app/modules/document-management/services/portal.service';
 
@@ -16,16 +17,16 @@ export class AuthEffects {
     .ofType(AuthAction.LOGIN)
     .pipe(
         map((action: AuthAction.Login) => action.payload),
-        exhaustMap(email =>
+        exhaustMap(sessionId =>
           this.dmService
-            .portalLogIn(email)
+            .getUserBySessionId(sessionId)
             .pipe(
               map(result => {
                 if (result) {
                   this.portalService.setCurrentUser(result);
-                  return new AuthAction.LoginSuccess(true);
+                  return new TaskAction.TaskListLoad();
                 } else {
-                  return new AuthAction.LoginFailure('Email address is not valid');
+                  return new AuthAction.LoginFailure('Session is not valid');
                 }
               })
             )

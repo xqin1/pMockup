@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FilePreviewDialogComponent} from '@app/modules/document-management/components/document/file-preview-dialog/file-preview-dialog.component';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { environment} from '@env/environment';
 
 @Component({
@@ -12,7 +11,7 @@ import { environment} from '@env/environment';
 export class DocumentBuildDialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<FilePreviewDialogComponent>,
+    public dialogRef: MatDialogRef<DocumentBuildDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
     public sanitizer: DomSanitizer
   ) { }

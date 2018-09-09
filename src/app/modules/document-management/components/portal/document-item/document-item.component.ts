@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Document} from '@app/core/model/workfront/Document.model';
 import {environment} from '@env/environment';
+import {TaskData} from '@app/modules/document-management/model/task-data.model';
 @Component({
   selector: 'app-document-item',
   templateUrl: './document-item.component.html',
@@ -8,11 +9,13 @@ import {environment} from '@env/environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentItemComponent implements OnInit {
-  @Input() selectedDocument: Document;
+  @Input() document: Document;
+  @Input() selectedDocumentId: string;
+  @Output() selectDocument = new EventEmitter<string>();
   constructor() { }
 
   getDocumentName() {
-    return `${this.selectedDocument.name}.${this.selectedDocument.currentVersion.ext}`;
+    return `${this.document.name}.${this.document.currentVersion.ext}`;
   }
 
   getShowDocumentLink(documentId: string) {
@@ -27,10 +30,14 @@ export class DocumentItemComponent implements OnInit {
   }
   showPDFPreview() {
     let result = false;
-    if (this.selectedDocument.currentVersion.ext === "doc" || this.selectedDocument.currentVersion.ext === "docx") {
+    if (this.document.currentVersion.ext === "doc" || this.document.currentVersion.ext === "docx") {
       result = true;
     }
     return result;
+  }
+  onDocumentSelected() {
+    console.log("change");
+    this.selectDocument.emit(this.document.ID);
   }
   ngOnInit() {
   }

@@ -2,5 +2,7 @@
   [selectedTask]="selectedTask | async"
   [selectedTaskId]="selectedTaskId | async"
   [selectedDocument]="selectedDocument | async"
-  (documentBuildFinish)="onDocumentBuildFinish($event)">
+  [selectedDocumentId]="selectedDocumentId | async"
+  (documentBuildFinish)="onDocumentBuildFinish($event)"
+  (selectDocument)="onDocumentSelected($event)">
 </app-task-state>

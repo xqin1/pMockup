@@ -21,7 +21,7 @@ export class DocumentPortalParentPageComponent implements OnInit {
   taskListLoaded$: Observable<boolean>;
   taskLoadIds$: Observable<string[]>;
   config: MatSnackBarConfig = new MatSnackBarConfig();
-  private waitSessionid = true;
+  public waitSessionid = true;
 
   constructor(
     private taskListResolveService: TaskListResolverService,
@@ -45,14 +45,19 @@ export class DocumentPortalParentPageComponent implements OnInit {
     return this.cookieService.get(cookieName);
   }
 
+  removeCookie(cookieName: string) {
+    return this.cookieService.remove(cookieName);
+  }
+
   ngOnInit() {
     if (environment.production) {
+      this.removeCookie("attask");
       timer(0, 500).pipe(
         takeWhile(() => this.waitSessionid)
       ).subscribe(() => {
         const attaskSession = this.getCookie("attask");
         console.log("get cookie in timer" + attaskSession);
-        if (attaskSession) {
+        if (typeof attaskSession !== 'undefined') {
           console.log(attaskSession);
           this.waitSessionid = false;
           this.store.dispatch(new AuthAction.Login(attaskSession.substr(0, 32)));

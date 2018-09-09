@@ -1,6 +1,8 @@
 <div class="sign-page">
   <div class="document-row">
-    <app-document-item [selectedDocument]="selectedDocument">
+    <app-document-item
+      [document]="selectedDocument"
+      [selectedDocumentId]="selectedDocumentId">
     </app-document-item>
   </div>
   <div fxLayout="row"

@@ -35,19 +35,30 @@
         </div>
       </div>
       <div *ngSwitchCase="'Select'">
-        <div class="section-title">
+        <div class="state-title">
           Select Document
         </div>
-        <div class="section-instruction">
-          This page should show a list of document and allow user to select one.
+        <div class="state-instruction">
+          Select one document from the list
+        </div>
+        <div class="document-item-list">
+          <app-document-item-list
+          [documentList]="selectedTask.task.documents"
+          [selectedDocumentId]="selectedDocumentId"
+          (selectDocument)="onDocumentSelected($event)">
+          </app-document-item-list>
         </div>
       </div>
       <div *ngSwitchDefault>
-        <div>
-          need to determine what we allow user to do here.
+        <div class="state-title">
+          Document(s)
         </div>
-          <app-document-item
-          [selectedDocument]="selectedDocument"></app-document-item>
+        <div class="document-item-list">
+          <app-document-item-list
+            [documentList]="selectedTask.task.documents"
+            [selectedDocumentId]="selectedDocumentId">
+          </app-document-item-list>
+        </div>
       </div>
     </div>
 </div>

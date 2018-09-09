@@ -11,6 +11,7 @@ import {Document} from '@app/core/model/workfront/Document.model';
 export class TaskStateConcurComponent implements OnInit {
   @Input() selectedTask: TaskData;
   @Input() selectedDocument: Document;
+  @Input() selectedDocumentId: string;
   constructor() {
   }
 

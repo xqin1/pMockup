@@ -29,7 +29,7 @@
   <bullet-list-content-loader></bullet-list-content-loader>
   <bullet-list-content-loader></bullet-list-content-loader>
 </div>
-<div class="myFrame" *ngIf="taskListLoading$ | async">
+<div class="myFrame" *ngIf="waitSessionid">
   <iframe id="panorama"
           #myFrame
           [src]="getIframeURL()"></iframe>

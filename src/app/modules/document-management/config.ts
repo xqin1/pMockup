@@ -77,7 +77,7 @@ export const DocumentConfig = {
       }]
   },
   taskState: [
-    {"name": "Select", "index": -1, "color": "#ef1c04", "label": "Select", "show": false},
+    {"name": "Select", "index": 0, "color": "#ef1c04", "label": "Select", "show": true},
     {"name": "Build", "index": 0, "color": "#23489e", "label": "Build", "show": true},
     {"name": "Upload", "index": 0, "color": "#23489e", "label": "Build", "show": true},
     {"name": "Concur", "index": 1, "color": "#40acf7", "label": "Concur", "show": true},

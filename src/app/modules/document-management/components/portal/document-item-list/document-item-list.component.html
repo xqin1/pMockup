@@ -1,0 +1,9 @@
+<div class="document-item-container">
+    <div *ngFor="let document of documentList; index as i;" class="document-card-list">
+      <app-document-item
+        [document]="document"
+        [selectedDocumentId]="selectedDocumentId"
+        (selectDocument)="onDocumentSelected($event)">
+      </app-document-item>
+    </div>
+</div>

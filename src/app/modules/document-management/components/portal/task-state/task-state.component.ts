@@ -3,6 +3,7 @@ import {TaskData} from '@app/modules/document-management/model/task-data.model';
 import {MatHorizontalStepper, MatStep} from '@angular/material';
 import { DocumentConfig} from '@app/modules/document-management/config';
 import {Document} from '@app/core/model/workfront/Document.model';
+import { TaskState} from '@app/modules/document-management/model/task-state.enum';
 
 @Component({
   selector: 'app-task-state',
@@ -14,7 +15,9 @@ export class TaskStateComponent implements OnInit, OnChanges {
   @Input() selectedTaskId: string;
   @Input() selectedTask: TaskData;
   @Input() selectedDocument: Document;
+  @Input() selectedDocumentId: string;
   @Output() documentBuildFinish = new EventEmitter<string>();
+  @Output() selectDocument = new EventEmitter<string>();
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   @ViewChild('stepBuild') stepBuild: MatStep;
   @ViewChild('stepConcur') stepConcur: MatStep;
@@ -22,9 +25,14 @@ export class TaskStateComponent implements OnInit, OnChanges {
   @ViewChild('stepArchive') stepArchive: MatStep;
   index: number;
   constructor() { }
-
+  getFristStepLabel() {
+    return this.selectedTask.state === TaskState.Select ? 'Select' : 'Build';
+  }
   onDocumentBuildFinish(taskId: string) {
     this.documentBuildFinish.emit(taskId);
+  }
+  onDocumentSelected(documentId: string) {
+    this.selectDocument.emit(documentId);
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes["selectedTask"] && typeof this.stepper !== "undefined") {

@@ -14,7 +14,9 @@ import { DocumentBuildDialogComponent} from '@app/modules/document-management/co
 export class TaskStateBuildComponent implements OnInit {
   @Input() selectedTask: TaskData;
   @Input() selectedDocument: Document;
+  @Input() selectedDocumentId: string;
   @Output() documentBuildFinish = new EventEmitter<string>();
+  @Output() selectDocument = new EventEmitter<string>();
   constructor(
     public dialog: MatDialog
   ) { }
@@ -35,6 +37,9 @@ export class TaskStateBuildComponent implements OnInit {
     });
   }
 
+  onDocumentSelected(documentId: string) {
+    this.selectDocument.emit(documentId);
+  }
   // buildDocument(){
   //   const taskId = this.selectedTask.task.ID;
   //   const exariURL = `${environment.workfrontHost}/services/exariWS/task?taskID=${taskId}`;

@@ -18,6 +18,7 @@ import {TaskEffects} from '@app/modules/document-management/effects/task.effect'
 import { TaskListResolverService} from '@app/modules/document-management/services/task-list-resolver.service';
 import { DocumentBuildDialogComponent } from './components/portal/document-build-dialog/document-build-dialog.component';
 import { ContentLoaderModule } from '@netbasal/content-loader';
+import { DocumentItemListComponent } from './components/portal/document-item-list/document-item-list.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { ContentLoaderModule } from '@netbasal/content-loader';
     AuthModule,
     ContentLoaderModule
   ],
-  declarations: [routedComponents, DocumentBuildDialogComponent],
+  declarations: [routedComponents, DocumentBuildDialogComponent, DocumentItemListComponent],
   providers: [ DocumentManagementService, DocumentListResolverService, PortalService, TaskListResolverService],
   entryComponents: [FilePreviewDialogComponent, NotificationComponent, ArchiveConfirmationDialogComponent,
                     DocumentBuildDialogComponent]

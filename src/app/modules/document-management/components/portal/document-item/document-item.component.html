@@ -1,10 +1,16 @@
-<div *ngIf="selectedDocument" class="document-item">
+<div *ngIf="document" class="document-item">
   <div fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="40px" fxFlexAlign="start">
+      <div class="select-button" *ngIf="selectedDocumentId!==document.ID">
+        <mat-radio-button
+          (change)="onDocumentSelected()">
+        </mat-radio-button>
+      </div>
+    </div>
     <div fxFlex class="document-item-left">
       <div class="document-title subtitle-text">DOCUMENT</div>
       <div class="document-name">
-
-        <a [href]="getShowDocumentLink(selectedDocument.ID)" target="_blank">
+        <a [href]="getShowDocumentLink(document.ID)" target="_blank">
           {{getDocumentName()}}
         </a>
       </div>
@@ -15,10 +21,10 @@
           color="primary"
           matTooltip="preview PDF"
           class="action-icon md48"
-          (click)="openPDFPreview(selectedDocument.ID)">picture_as_pdf</mat-icon>
+          (click)="openPDFPreview(document.ID)">picture_as_pdf</mat-icon>
       </span>
       <span class="document-icon">
-        <a [href]="getDocumentDownloadUrl(selectedDocument.ID)">
+        <a [href]="getDocumentDownloadUrl(document.ID)">
           <mat-icon
             color="primary"
             matTooltip="download document"

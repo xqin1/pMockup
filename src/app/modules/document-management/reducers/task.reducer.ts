@@ -31,8 +31,14 @@ export function reducer(
       };
     }
     case TaskActionTypes.TaskListLoadSuccess: {
-      const selectedTaskId = state.selectedTaskId === null ? action.payload[0].task["ID"] : state.selectedTaskId;
-      const selectedDocumentId = state.selectedDocumentId;
+      let selectedTaskId = state.selectedTaskId;
+      let selectedDocumentId = state.selectedDocumentId;
+      if (state.selectedTaskId === null) {
+        selectedTaskId = action.payload[0].task.ID;
+        if (action.payload[0].task.documents.length === 1) {
+          selectedDocumentId = action.payload[0].task.documents[0].ID;
+        }
+      }
       return {
         taskListLoaded: true,
         taskListLoading: false,
@@ -43,10 +49,15 @@ export function reducer(
       };
     }
     case TaskActionTypes.TaskSelected: {
-        return {
-          ...state,
-          selectedTaskId: action.payload.task.ID
-        };
+      let selectedDocumentId = null;
+      if (action.payload.task.documents.length === 1) {
+        selectedDocumentId = action.payload.task.documents[0].ID;
+      }
+      return {
+        ...state,
+        selectedTaskId: action.payload.task.ID,
+        selectedDocumentId: selectedDocumentId
+      };
     }
     case TaskActionTypes.DocumentSelected: {
       return {

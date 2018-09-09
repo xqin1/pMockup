@@ -119,6 +119,8 @@ export const getActiveDocument = createSelector(
   (task, id) => {
     if (task !== null && task.task !== null && task.task.documents !== null && task.task.documents.length === 1) {
       return task.task.documents[0];
+    }else if (task !== null && task.task !== null && task.task.documents !== null && task.task.documents.length > 1) {
+      return task.task.documents.filter(d => d.ID === id)[0];
     }else{
       return null;
     }

@@ -5,17 +5,13 @@ import { CoreModule } from './core/core.module';
 import {HttpClientModule} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  StoreRouterConnectingModule,
-  RouterStateSerializer,
-} from '@ngrx/router-store';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
 import { environment } from '@env/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule} from './shared/shared.module';
 
 import { PEFService} from '@app/core/services/pef.service';
 import { DMService} from '@app/core/services/dm.service';
@@ -34,7 +30,6 @@ import { CookieModule} from 'ngx-cookie';
     HttpClientModule,
     CoreModule,
     AppRoutingModule,
-    SharedModule,
     ContentLoaderModule,
     CookieModule.forRoot(),
 

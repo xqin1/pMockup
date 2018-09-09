@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
+import { CommonModule} from '@angular/common';
+import { MaterialModule} from '@app/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SharedModule } from '@app/shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -16,8 +17,9 @@ import { DocumentItemListComponent } from './components/portal/document-item-lis
 
 @NgModule({
   imports: [
+    CommonModule,
+    MaterialModule,
     FlexLayoutModule,
-    SharedModule,
     DocumentManagementRoutingModule,
     NgxDatatableModule,
     StoreModule.forFeature('documentManagement', reducers),

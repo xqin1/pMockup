@@ -8,10 +8,12 @@ import { ExceptionService } from './services/exception.service';
 import { OutHeaderInterceptor } from './services/out-header.interceptor';
 import { UtilityService } from './services/utility.service';
 import { PageNotFoundComponent} from '@app/core/components/page-not-found/page-not-found.component';
+import { MaterialModule } from '../material';
+import { CommonModule} from '@angular/common';
 
 
 @NgModule({
-  imports: [ RouterModule, FlexLayoutModule],
+  imports: [ RouterModule, FlexLayoutModule, MaterialModule, CommonModule],
   declarations: [PageNotFoundComponent],
   exports: [ FlexLayoutModule],
   providers: [

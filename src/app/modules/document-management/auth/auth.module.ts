@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@app/shared/shared.module';
+import { CommonModule} from '@angular/common';
+import { MaterialModule} from '@app/material';
 import { AuthRoutingModule, routedComponents } from './auth-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -10,7 +11,8 @@ import { reducers } from './reducers';
 
 @NgModule({
   imports: [
-    SharedModule,
+    CommonModule,
+    MaterialModule,
     AuthRoutingModule,
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([AuthEffects]),

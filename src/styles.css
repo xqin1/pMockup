@@ -120,11 +120,13 @@ common css for state contents, on state-concur, state-sign and state-archive pag
 .state-title {
   font-size: 16px;
   font-weight: bold;
+  padding-left: 24px;
 }
 
 .state-instruction {
   font-size: 12px;
   padding-top: 10px;
+  padding-left: 24px;
 }
 
 .document-row {

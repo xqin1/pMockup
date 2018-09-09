@@ -7,10 +7,11 @@
 
 .stepper-action {
   margin-left: 25px;
-  margin-top: 10px;
+  margin-top: 20px;
   float: right;
+  padding-right: 50px;
 }
 .stepper-button {
-  padding-right: 15px;
+  padding-right: 25px;
 }
 

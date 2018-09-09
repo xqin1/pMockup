@@ -40,22 +40,18 @@ export class TaskStateBuildComponent implements OnInit {
   onDocumentSelected(documentId: string) {
     this.selectDocument.emit(documentId);
   }
-  // buildDocument(){
-  //   const taskId = this.selectedTask.task.ID;
-  //   const exariURL = `${environment.workfrontHost}/services/exariWS/task?taskID=${taskId}`;
-  //   this.documentBuild.emit(taskId);
-  //   window.open(exariURL, "_blank");
-  // }
+
   uploadDocument() {
     console.log("upload document");
   }
-  // showBuildButton() {
-  //   let result = true;
-  //   if (this.documentBuildIds !== null && this.selectedTask !== null && this.documentBuildIds.includes(this.selectedTask.task.ID)) {
-  //     result = false;
-  //   }
-  //   return result;
-  // }
+  showBuildButton() {
+    let result = false;
+    if (this.selectedTask !== null && this.selectedTask.task.parameterValues !== null &&
+      this.selectedTask.task.parameterValues["DE:Enable Document Generation"] === "Yes") {
+      result = true;
+    }
+    return result;
+  }
   ngOnInit() {
   }
 

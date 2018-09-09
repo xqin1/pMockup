@@ -1,1 +1,11 @@
+.document-item-selected {
+  border-color:#29b6f6;
+  border-style: solid;
+  border-width: thin;
+  background-color: #d7edf7;
+  cursor: default;
+}
 
+.document-item-container {
+  padding-bottom: 10px;
+}

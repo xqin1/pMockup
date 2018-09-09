@@ -1,9 +1,4 @@
 export const DocumentConfig = {
-  navigation: [
-    {name: "Select Document", value: "select", index: 0, icon: "find_in_page"},
-    {name: "Validate", value: "validate", index: 1, icon: "check_circle"},
-    {name: "Confirm Archive", value: "confirm", index: 2, icon: "unarchive"}
-  ],
   customFormExcludeFields: [
     "Access to Document Linking",
     // "Application Status",
@@ -31,11 +26,6 @@ export const DocumentConfig = {
     "OND PDUFA Goal Date Closed By",
     "Proprietary Name Review Goal Closed By"
   ],
-  sectionTitle: {
-    "customFormTitle": "Validate Smart Template Interview Information",
-    "regulatoryTitle": "Review Regulatory Information",
-    "projectClosed": "The review is complete and no documents can be archived"
-  },
   projectClosedCode: [
     "CPL",
     "NAP",
@@ -57,7 +47,6 @@ export const DocumentConfig = {
     "Archiving start"
   ],
   previewEligibleType: [
-    "pdf",
     "doc",
     "docx"
   ],

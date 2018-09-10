@@ -12,17 +12,23 @@
 }
 .task-link {
   padding-top: 5px !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  color: #01579B !important;
+}
+a {
+  color: #01579B !important;
 }
 .due-date {
   padding-top: 5px;
 }
 .mat-expansion-panel-header{
-  background-color: #cfeef7 !important;
+  background-color: #E1F5FE !important;
   cursor: default !important;
 }
 
 .mat-expansion-panel {
-  background-color: #cfeef7 !important;
+  background-color: #E1F5FE !important;
 }
 
 .panel-content {
@@ -66,11 +72,13 @@
   color: dodgerblue;
 }
 .task-status {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
+  color: #01579B;
 }
 .task-due-date {
   font-size: 12px;
+  color: #01579B;
 }
 .toggle-button {
   padding: 0px 0px !important;

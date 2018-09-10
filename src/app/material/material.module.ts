@@ -17,7 +17,8 @@ import {
   MatExpansionModule,
   MatRadioModule,
   MatStepperModule,
-  MatDialogModule
+  MatDialogModule,
+  MatBadgeModule
 } from '@angular/material';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 
@@ -41,8 +42,9 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     MatRadioModule,
     MatStepperModule,
     MatDialogModule,
+    MatBadgeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
 ],
   exports: [
     MatButtonModule,
@@ -63,6 +65,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     MatRadioModule,
     MatStepperModule,
     MatDialogModule,
+    MatBadgeModule,
     ReactiveFormsModule,
     FormsModule
   ]

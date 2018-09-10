@@ -1,4 +1,4 @@
-<div class="document-item-container">
+<div>
     <div *ngFor="let document of documentList; index as i;" class="document-card-list">
       <div class="document-item-container" [ngClass]="{'document-item-selected': selectedDocumentId===document.ID}">
         <app-document-item
@@ -7,5 +7,6 @@
           (selectDocument)="onDocumentSelected($event)">
         </app-document-item>
       </div>
+      <mat-divider></mat-divider>
     </div>
 </div>

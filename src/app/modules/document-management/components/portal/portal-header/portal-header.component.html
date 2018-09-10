@@ -7,10 +7,17 @@
   </div>
 </div>
 <div class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="header-left" fxFlex fxFlexAlign="center">
-    <span class="task-title">Tasks ({{numberOfTasks}})</span>
+  <div class="header-left" fxFlex fxFlexAlign="end">
+    <span class="task-title"
+          matBadge="{{numberOfTasks}}"
+          matBadgeOverlap="false"
+          matBadgePosition="after"
+          matBadgeSize="medium"
+          matBadgeColor="primary">
+      Tasks
+    </span>
   </div>
-  <div class="header-right" fxFlex="250px" fxFlexAlign="center">
+  <div class="header-right" fxFlex="250px" fxFlexAlign="end">
     <span class="refresh-text subtitle-text" cy-data="last-refreshed">Last refreshed: {{selectedTask.lastRefreshed | date: 'shortTime'}} </span>
     <span *ngIf="showRefreshButton()"
           class="task-list-refresh-icon"

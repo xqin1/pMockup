@@ -7,40 +7,6 @@
   flex: 1 1 auto;
 }
 
-.datatable-header{
-  background-color: #bcbcbc !important;
-}
-.ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
-  background-color: #bcbcbc;
-}
-.ngx-datatable.material .datatable-header .datatable-header-cell{
-  font-weight: 600 !important;
-  font-size: 12px !important;
-  color: #222222 !important;
-  vertical-align: middle !important;
-}
-
-
-.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell{
-  font-size:11px !important;
-  overflow: hidden !important;
-}
-
-.ngx-datatable.material .datatable-body .datatable-row-detail {
-  background-color: transparent !important;
-}
-
-.mat-tab-label {
-  margin-right: 80px !important;
-}
-
-/*.mat-tab-label mat-ripple mat-tab-label-active {*/
-  /*background-color: #bcbcbc !important;*/
-/*}*/
-
-.mat-tab-label-active {
-  background-color: #add2e7 !important;
-}
 
 .mat-card-header-text {
   width: 100%;
@@ -53,6 +19,7 @@ html{
 body {
   margin-left: 10px;
   margin-right: 70px;
+  background-color: #A0A0A3;
 }
 
 .document-page-header {
@@ -118,13 +85,13 @@ material related css
 common css for state contents, on state-concur, state-sign and state-archive page
  */
 .state-title {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
   padding-left: 24px;
 }
 
 .state-instruction {
-  font-size: 12px;
+  font-size: 14px;
   padding-top: 10px;
   padding-left: 24px;
 }

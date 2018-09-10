@@ -2,11 +2,10 @@
   margin-left: 15px;
   padding-top: 10px;
 }
-.document-item:hover {
-  background-color: #b3e5fc1c;
-  cursor: pointer;
-}
 
+a {
+  color: #01579B !important;
+}
 .icon-section {
   padding-right: 30px;
 }

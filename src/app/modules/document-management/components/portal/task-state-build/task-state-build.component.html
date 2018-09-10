@@ -44,10 +44,17 @@
       </div>
     </div>
     <div class="section-action">
-        <button mat-raised-button class="section-button" *ngIf="showBuildButton()" (click)="buildDocument()">
+        <button mat-raised-button
+                color="primary"
+                class="section-button"
+                *ngIf="showBuildButton()"
+                (click)="buildDocument()">
           <span class="button-text">Build</span>
         </button>
-        <button mat-raised-button class="section-button" (click)="uploadDocument()">
+        <button mat-raised-button
+                color="primary"
+                class="section-button"
+                (click)="uploadDocument()">
           <span class="button-text">Upload</span>
         </button>
 

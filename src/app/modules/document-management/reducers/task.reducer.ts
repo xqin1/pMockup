@@ -1,5 +1,7 @@
 import { TaskActionTypes, TaskActionsUnion} from '@app/modules/document-management/actions/task.action';
 import {TaskData} from '@app/modules/document-management/model/task-data.model';
+import {Notification} from '@app/modules/document-management/model/notification.model';
+import { DocumentConfig} from '@app/modules/document-management/config';
 
 export interface State {
   taskListLoaded: boolean;
@@ -8,6 +10,7 @@ export interface State {
   selectedTaskId: string;
   taskLoadingIds: string[];
   selectedDocumentId: string;
+  notification: Notification;
 }
 
 const initialState: State = {
@@ -16,7 +19,8 @@ const initialState: State = {
   taskList: [],
   selectedTaskId: null,
   taskLoadingIds: [],
-  selectedDocumentId: null
+  selectedDocumentId: null,
+  notification: null
 };
 
 export function reducer(
@@ -25,9 +29,14 @@ export function reducer(
 ): State {
   switch (action.type) {
     case TaskActionTypes.TaskListLoad: {
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = null;
+      notification.message = 'Loading Task List...';
       return {
         ...state,
-        taskListLoading: true
+        taskListLoading: true,
+        notification: notification
       };
     }
     case TaskActionTypes.TaskListLoadSuccess: {
@@ -39,13 +48,29 @@ export function reducer(
           selectedDocumentId = action.payload[0].task.documents[0].ID;
         }
       }
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = DocumentConfig.notificationSetting.duration;
+      notification.message = 'Task List Loaded Successful';
       return {
         taskListLoaded: true,
         taskListLoading: false,
         taskList: action.payload,
         selectedTaskId: selectedTaskId,
         taskLoadingIds: [],
-        selectedDocumentId: selectedDocumentId
+        selectedDocumentId: selectedDocumentId,
+        notification: notification
+      };
+    }
+    case TaskActionTypes.TaskListLoadError: {
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = DocumentConfig.notificationSetting.duration;
+      notification.message = 'Task List fails to load';
+      return {
+        ...state,
+        notification: notification
+
       };
     }
     case TaskActionTypes.TaskSelected: {
@@ -70,9 +95,14 @@ export function reducer(
       if (!ids.includes(action.payload)) {
         ids.push(action.payload);
       }
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = null;
+      notification.message = 'Loading Task...';
       return {
         ...state,
-        taskLoadingIds: ids
+        taskLoadingIds: ids,
+        notification: notification
       };
     }
     case TaskActionTypes.TaskLoadSuccess: {
@@ -83,32 +113,31 @@ export function reducer(
           newTaskList[index] = action.payload;
         }
       });
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = DocumentConfig.notificationSetting.duration;
+      notification.message = 'Task Loaded Successful';
       return {
         ...state,
         taskList: newTaskList,
-        taskLoadingIds: ids.filter(id => id !== action.payload.task.ID)
+        taskLoadingIds: ids.filter(id => id !== action.payload.task.ID),
+        notification: notification
 
       };
     }
-    // case CollectionActionTypes.AddBookSuccess:
-    // case CollectionActionTypes.RemoveBookFail: {
-    //   if (state.ids.indexOf(action.payload.id) > -1) {
-    //     return state;
-    //   }
-    //
-    //   return {
-    //     ...state,
-    //     ids: [...state.ids, action.payload.id],
-    //   };
-    // }
-    //
-    // case CollectionActionTypes.RemoveBookSuccess:
-    // case CollectionActionTypes.AddBookFail: {
-    //   return {
-    //     ...state,
-    //     ids: state.ids.filter(id => id !== action.payload.id),
-    //   };
-    // }
+    case TaskActionTypes.TaskLoadError: {
+      const ids = [].concat((state.taskLoadingIds));
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = DocumentConfig.notificationSetting.duration;
+      notification.message = 'Task failed to load';
+      return {
+        ...state,
+        notification: notification,
+        taskLoadingIds: ids.filter(id => id !== action.payload),
+
+      };
+    }
 
     default: {
       return state;
@@ -129,6 +158,8 @@ export const getSelectedTaskId = (state: State) => state.selectedTaskId;
 export const getTaskLoadIds = (state: State) => state.taskLoadingIds;
 
 export const getSelectedDocumentId = (state: State) => state.selectedDocumentId;
+
+export const getNotification = (state: State) => state.notification;
 
 
 

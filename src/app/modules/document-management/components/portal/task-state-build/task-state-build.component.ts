@@ -25,8 +25,10 @@ export class TaskStateBuildComponent implements OnInit {
     const taskId = this.selectedTask.task.ID;
     const exariURL = `${environment.workfrontHost}/services/exariWS/task?taskID=${taskId}`;
     const dialogRef = this.dialog.open(DocumentBuildDialogComponent, {
-      height: "700px",
-      width: "1600px",
+      height: "100vh",
+      width: "100vw",
+      maxHeight: "100vh",
+      maxWidth: "100vw",
       disableClose: true,
       data: exariURL
     });

@@ -27,3 +27,7 @@
 .document-item-list {
   margin-top: 15px;
 }
+
+.cdk-overlay-pane {
+  max-width: none !important;
+}

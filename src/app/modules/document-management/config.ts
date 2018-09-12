@@ -72,7 +72,11 @@ export const DocumentConfig = {
     {"name": "Concur", "index": 1, "color": "#007CBA", "label": "CONCUR", "show": true},
     {"name": "Sign", "index": 2, "color": "#57950D", "label": "SIGN", "show": true},
     {"name": "Archive", "index": 3, "color": "#6C1B3B", "label": "ARCHIVE", "show": true}
-]
+],
+  notificationSetting: {
+    duration: 5000
+  }
+
 
 
 };

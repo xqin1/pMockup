@@ -62,10 +62,10 @@ export class TaskEffects {
             taskData.lastRefreshed = new Date();
             return new TaskLoadSuccess(taskData);
           }else {
-            return new TaskLoadError('task load failed');
+            return new TaskLoadError(taskId);
           }
         }),
-        catchError(error => of(new TaskListLoadError(error)))
+        catchError(error => of(new TaskLoadError(error)))
       )
     )
   );

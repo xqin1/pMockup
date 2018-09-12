@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { TaskData} from '@app/modules/document-management/model/task-data.model';
+import { Notification} from '@app/modules/document-management/model/notification.model';
 
 export enum TaskActionTypes {
   TaskListLoad = '[Task] Task List Load',
@@ -9,7 +10,8 @@ export enum TaskActionTypes {
   TaskLoadSuccess = '[Task] Task Loaded',
   TaskLoadError = '[Task] Task Load Error',
   TaskSelected = '[Task] Task Selected',
-  DocumentSelected = '[Task] Document Selected'
+  DocumentSelected = '[Task] Document Selected',
+  SentNotification = '[Task] Sent Notification'
 }
 
 export class TaskListLoad implements Action {
@@ -60,6 +62,12 @@ export class DocumentSelected implements Action {
   constructor(public payload: string) {}
 }
 
+export class SendNotification implements Action {
+  readonly type = TaskActionTypes.SentNotification;
+
+  constructor(public payload: Notification) {}
+}
+
 export type TaskActionsUnion =
   | TaskListLoad
   | TaskListLoadSuccess
@@ -68,4 +76,5 @@ export type TaskActionsUnion =
   | TaskLoadSuccess
   | TaskLoadError
   | TaskSelected
-  | DocumentSelected;
+  | DocumentSelected
+  | SendNotification;

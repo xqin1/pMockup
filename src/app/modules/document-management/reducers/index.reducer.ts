@@ -83,4 +83,9 @@ export const getActiveDocument = createSelector(
   }
 );
 
+export const getNotification = createSelector(
+  getTaskState,
+  fromTask.getNotification
+);
+
 

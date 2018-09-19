@@ -74,7 +74,7 @@ export const DocumentConfig = {
     {"name": "Archive", "index": 3, "color": "#6C1B3B", "label": "ARCHIVE", "show": true}
 ],
   notificationSetting: {
-    duration: 5000
+    duration: 3000
   }
 
 

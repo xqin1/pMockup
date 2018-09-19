@@ -32,9 +32,10 @@
   margin-left: 20%;
   margin-top: 100px;
 }
-.snack-bar{
-  background: #29b6f6;
+/deep/.snack-bar{
   font-style: italic;
+  font-size: 16px !important;
+  background: #007CBA;
 }
 .myFrame {
   display: none;

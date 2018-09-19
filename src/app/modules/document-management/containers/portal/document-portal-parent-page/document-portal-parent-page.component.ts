@@ -55,8 +55,8 @@ export class DocumentPortalParentPageComponent implements OnInit {
   }
 
   pollTaskList() {
-    const pollInterval = interval(50000);
-    pollInterval.pipe(delay(5000)).subscribe(val => {
+    const pollInterval = timer(300000, 300000);
+    pollInterval.subscribe(val => {
       console.log("polling task list #: " + val);
       this.store.dispatch(new TaskAction.TaskListLoad());
     });
@@ -92,20 +92,6 @@ export class DocumentPortalParentPageComponent implements OnInit {
         }
       }
     });
-    // this.taskLoadIds$.subscribe(result => {
-    //   if (result.length > 0) {
-    //     this.snackBar.open("Retrieving Task Information...", "" , this.config);
-    //   }else{
-    //     this.snackBar.dismiss();
-    //   }
-    // });
-    // this.taskListLoading$.subscribe(result => {
-    //   if (result !== null && typeof result !== 'undefined' && result) {
-    //     this.snackBar.open("Retrieving Tasks Information...", "" , this.config);
-    //   }else{
-    //     this.snackBar.dismiss();
-    //   }
-    // });
   }
 
 }

@@ -4,5 +4,4 @@ export const environment = {
   documentManagementURL: 'http://panoramaams-pps.preprod.fda.gov/PanoramaDocMgmt',
   workfrontHost: 'http://panoramaams-pps.preprod.fda.gov',
   getCookieURL: 'http://panoramaams-pps.preprod.fda.gov'
-
 };

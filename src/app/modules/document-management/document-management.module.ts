@@ -16,6 +16,7 @@ import { ContentLoaderModule } from '@netbasal/content-loader';
 import { DocumentItemListComponent } from './components/portal/document-item-list/document-item-list.component';
 import { DocumentUploadDialogComponent } from './components/portal/document-upload-dialog/document-upload-dialog.component';
 import { NgxUploaderModule} from 'ngx-uploader';
+import { NgMathPipesModule} from 'ngx-pipes';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { NgxUploaderModule} from 'ngx-uploader';
     EffectsModule.forFeature([TaskEffects]),
     AuthModule,
     ContentLoaderModule,
-    NgxUploaderModule
+    NgxUploaderModule,
+    NgMathPipesModule
   ],
   declarations: [routedComponents, DocumentBuildDialogComponent, DocumentItemListComponent, DocumentUploadDialogComponent],
   providers: [ PortalService, TaskListResolverService],

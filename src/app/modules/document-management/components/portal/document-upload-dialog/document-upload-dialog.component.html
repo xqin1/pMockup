@@ -18,7 +18,7 @@
             </span>
             <span class="file-element">{{ f.name }}</span>
             <span class="file-element">|</span>
-            <span class="file-element">Size: {{ f.size }}</span>
+            <span class="file-element">Size: {{ f.size | bytes:1}}</span>
             <span class="file-element">|</span>
             <span class="file-element">Last Modified: {{ f.nativeFile.lastModified | date: 'MM/dd/yyyy HH:mm' }}</span>
           </span>

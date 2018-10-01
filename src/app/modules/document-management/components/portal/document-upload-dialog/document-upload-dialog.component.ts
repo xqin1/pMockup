@@ -3,11 +3,12 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { UploadFormData, FileUpload, VersionUpload} from '@app/modules/document-management/model/upload-form-data.model';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, UploadStatus } from 'ngx-uploader';
 import { environment} from '@env/environment';
-
+import {BytesPipe} from 'ngx-pipes';
 @Component({
   selector: 'app-document-upload-dialog',
   templateUrl: './document-upload-dialog.component.html',
-  styleUrls: ['./document-upload-dialog.component.css']
+  styleUrls: ['./document-upload-dialog.component.css'],
+  providers: [BytesPipe]
 })
 export class DocumentUploadDialogComponent implements OnInit {
   files: UploadFile[];
@@ -21,12 +22,13 @@ export class DocumentUploadDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DocumentUploadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UploadFormData,
+    private bytesPipe: BytesPipe
   ) {
     this.options = { concurrency: 1, maxUploads: 2 };
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
     this.humanizeBytes = humanizeBytes;
-    this.uploadUrl = environment.portalURL;
+    this.uploadUrl = environment.documentManagementURL + "/portal/upload";
     this.dataObj = {};
   }
 

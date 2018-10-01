@@ -9,5 +9,4 @@ export const environment = {
   documentManagementURL: 'dmService',
   workfrontHost: 'http://panoramaams-pps.preprod.fda.gov',
   getCookieURL: "http://localhost:4200/#/document-management/portal/login",
-  portalURL: 'dmService/portal'
 };

@@ -5,10 +5,11 @@
     </ng-template>
     <mat-step #stepBuild>
          <ng-template matStepLabel>
-            {{getFristStepLabel()}}
+           <span data-cy="step-build"> {{getFristStepLabel()}}</span>
         </ng-template>
         <app-task-state-build
           [selectedTask]="selectedTask"
+          [selectedTaskId]="selectedTaskId"
           [selectedDocument]="selectedDocument"
           [selectedDocumentId]="selectedDocumentId"
           (documentBuildFinish)="onDocumentBuildFinish($event)"

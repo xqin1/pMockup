@@ -1,0 +1,75 @@
+<div class="document-upload-dialog-container">
+    <h2 mat-dialog-title>Upload New Document</h2>
+    <mat-dialog-content>
+      <div fxLayout="row">
+        <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+              Drag file here or
+              <label class="upload-button">
+                <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput"> Browse
+              </label>
+              to upload.
+        </div>
+      </div>
+      <div class="upload-item" *ngFor="let f of files; let i = index;">
+        <div fxLayour="row">
+          <span class="filename">
+            <span class="file-element">
+              <mat-icon color="primary">file_copy</mat-icon>
+            </span>
+            <span class="file-element">{{ f.name }}</span>
+            <span class="file-element">|</span>
+            <span class="file-element">Size: {{ f.size }}</span>
+            <span class="file-element">|</span>
+            <span class="file-element">Last Modified: {{ f.nativeFile.lastModified | date: 'MM/dd/yyyy HH:mm' }}</span>
+          </span>
+          <span class="line-spacer"></span>
+          <span class="icon-file" (click)="removeFile(f.id)">
+              <mat-icon color="warn">delete</mat-icon>
+          </span>
+        </div>
+      </div>
+
+            <!--<div class="upload-item-content">-->
+
+              <!--<div class="progress-content">-->
+                <!--<div class="progress">-->
+                  <!--<span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="progress-text-content">-->
+          <!--<span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">-->
+            <!--<span>{{ f.progress?.data?.percentage }}% </span>-->
+            <!--<span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>-->
+            <!--<span *ngIf="f.progress?.data?.percentage === 100">Done</span>-->
+          <!--</span>-->
+                <!--<span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">-->
+            <!--<span>{{ f.progress?.data?.speedHuman }} </span>-->
+            <!--<span>ETA {{ f.progress?.data?.etaHuman }}</span>-->
+          <!--</span>-->
+              <!--</div>-->
+            <!--</div>-->
+
+
+    </mat-dialog-content>
+    <div class="action-buttons">
+      <mat-dialog-actions>
+        <span class="action-button">
+          <button
+            mat-button
+            mat-dialog-close (click)="dialogRef.close('cancel')">
+            Cancel
+          </button>
+        </span>
+        <span class="action-button">
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="files.length===0"
+            (click)="startUpload()">
+            Upload
+          </button>
+        </span>
+      </mat-dialog-actions>
+    </div>
+</div>
+

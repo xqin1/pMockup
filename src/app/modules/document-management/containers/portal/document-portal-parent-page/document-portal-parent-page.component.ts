@@ -83,14 +83,17 @@ export class DocumentPortalParentPageComponent implements OnInit {
     }
 
     this.notification$.subscribe(notification => {
-      if (notification.display) {
-        if (notification.duration !== null) {
-          this.config.duration = notification.duration;
+      setTimeout(() => {
+        if (notification.display) {
+          if (notification.duration !== null) {
+            this.config.duration = notification.duration;
+          }
+          if (notification.message !== null) {
+            this.snackBar.open(notification.message, "" , this.config);
+          }
         }
-        if (notification.message !== null) {
-          this.snackBar.open(notification.message, "" , this.config);
-        }
-      }
+      });
+
     });
   }
 

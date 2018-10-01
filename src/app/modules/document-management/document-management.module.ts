@@ -14,6 +14,8 @@ import { TaskListResolverService} from '@app/modules/document-management/service
 import { DocumentBuildDialogComponent } from './components/portal/document-build-dialog/document-build-dialog.component';
 import { ContentLoaderModule } from '@netbasal/content-loader';
 import { DocumentItemListComponent } from './components/portal/document-item-list/document-item-list.component';
+import { DocumentUploadDialogComponent } from './components/portal/document-upload-dialog/document-upload-dialog.component';
+import { NgxUploaderModule} from 'ngx-uploader';
 
 @NgModule({
   imports: [
@@ -25,10 +27,11 @@ import { DocumentItemListComponent } from './components/portal/document-item-lis
     StoreModule.forFeature('documentManagement', reducers),
     EffectsModule.forFeature([TaskEffects]),
     AuthModule,
-    ContentLoaderModule
+    ContentLoaderModule,
+    NgxUploaderModule
   ],
-  declarations: [routedComponents, DocumentBuildDialogComponent, DocumentItemListComponent],
+  declarations: [routedComponents, DocumentBuildDialogComponent, DocumentItemListComponent, DocumentUploadDialogComponent],
   providers: [ PortalService, TaskListResolverService],
-  entryComponents: [DocumentBuildDialogComponent]
+  entryComponents: [DocumentBuildDialogComponent, DocumentUploadDialogComponent]
 })
 export class DocumentManagementModule { }

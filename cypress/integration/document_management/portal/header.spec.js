@@ -20,6 +20,6 @@ describe('Portal Header Test', () => {
       cy.get('[data-cy=submit]').click();
     });
     it('page header should has name for logged in user', () => {
-      cy.get('[cy-data=userName').contains('Xiaoming Qin');
+      cy.get('[data-cy=userName]').contains('Xiaoming Qin');
     });
 });

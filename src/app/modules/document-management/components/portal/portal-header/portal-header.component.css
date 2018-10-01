@@ -3,7 +3,7 @@
   height:50px;
 }
 .task-header {
-  background-color: #f1f1f1;;
+  background-color: #f1f1f1;
   height:40px;
 }
 .header-left{margin-left:10px;}
@@ -21,7 +21,10 @@
   color: white;
   font-weight: bold;
   font-size: 14px;
-  padding-left: 10px;
+  padding-left: 20px;
+}
+.account-icon {
+  color:white;
 }
 .task-list-refresh-icon {
   cursor: pointer;

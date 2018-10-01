@@ -1,3 +1,4 @@
+import {StageApprover} from "./StageApprover.model";
 export class ApproverStatus {
   id: string;
   approvableObjCode: string;
@@ -13,4 +14,5 @@ export class ApproverStatus {
    stepApproverID: string;
    taskID: string;
    wildcardUserID: string;
+   stepApprover: StageApprover;
 }

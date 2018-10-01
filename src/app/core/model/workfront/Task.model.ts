@@ -1,6 +1,8 @@
 import { Project} from '@app/core/model/workfront/Project.model';
 import { ApproverStatus} from '@app/core/model/workfront/ApproverStatus.model';
 import { Document} from '@app/core/model/workfront/Document.model';
+import {ApprovalStage} from '@app/core/model/workfront/ApprovalStage.model';
+import {ApprovalProcess} from '@app/core/model/workfront/ApprovalProcess.model';
 
 export interface taskCustomField {
   "DE:Enable Document Generation": string;
@@ -20,4 +22,6 @@ export class Task {
   documents: Document[];
   project: Project;
   approverStatuses: ApproverStatus[];
+  approvalStage: ApprovalStage;
+  approvalProcess: ApprovalProcess;
 }

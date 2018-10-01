@@ -53,7 +53,7 @@ export class PortalService {
       if (task.approverStatuses !== null) {
         taskState = this.getTaskApprovedStatus(task.approverStatuses) ? TaskState.Sign : TaskState.Concur;
       }else {
-        taskState = TaskState.Concur;
+        taskState = TaskState.Sign;
       }
 
       if (taskState === TaskState.Sign) {

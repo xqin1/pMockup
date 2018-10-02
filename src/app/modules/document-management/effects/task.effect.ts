@@ -54,11 +54,11 @@ export class TaskEffects {
     map(action => action.payload),
     mergeMap((taskId) =>
       this.dmService.getTaskByTaskId(taskId).pipe(
-        map((tasks: Task[]) => {
-          if (tasks.length === 1) {
+        map((task: Task) => {
+          if (task != null) {
             const taskData: TaskData = new TaskData();
-            taskData.task = tasks[0];
-            taskData.state = this.portalService.getTaskState(tasks[0]);
+            taskData.task = task;
+            taskData.state = this.portalService.getTaskState(task);
             taskData.lastRefreshed = new Date();
             return new TaskLoadSuccess(taskData);
           }else {

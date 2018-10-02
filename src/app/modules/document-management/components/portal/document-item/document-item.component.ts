@@ -26,7 +26,8 @@ export class DocumentItemComponent implements OnInit {
     window.open(url, "_blank");
   }
   getDocumentDownloadUrl(documentId: string) {
-    return `${environment.workfrontHost}/document/download?ID=${documentId}`;
+    // return `${environment.workfrontHost}/document/download?ID=${documentId}`;
+    return `${environment.documentManagementURL}/portal/document/download?documentId=${documentId}`;
   }
   showPDFPreview() {
     let result = false;

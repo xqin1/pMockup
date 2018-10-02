@@ -96,9 +96,9 @@ export class DMService {
     }
   }
   getTaskListByUserId(userId) {
-    if (environment.production) {
+    if (!environment.production) {
       return this.http
-        .get<Task[]>(`${environment.documentManagementURL}/portal/taskList?userId=${userId}`)
+        .get<Task[]>(`${environment.documentManagementURL}/portal/task/userAssigned?userId=${userId}`)
         .pipe(
           map(res => res),
           catchError(this.exceptionService.catchBadResponse),
@@ -113,7 +113,7 @@ export class DMService {
   }
   getTaskByTaskId(taskId) {
     return this.http
-      .get<Task[]>(`${environment.documentManagementURL}/portal/task?taskId=${taskId}`)
+      .get<Task>(`${environment.documentManagementURL}/portal/task?taskId=${taskId}`)
       .pipe(
         map(res => res),
         catchError(this.exceptionService.catchBadResponse),

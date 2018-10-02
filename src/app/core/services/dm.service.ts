@@ -96,7 +96,7 @@ export class DMService {
     }
   }
   getTaskListByUserId(userId) {
-    if (!environment.production) {
+    if (environment.production) {
       return this.http
         .get<Task[]>(`${environment.documentManagementURL}/portal/task/userAssigned?userId=${userId}`)
         .pipe(

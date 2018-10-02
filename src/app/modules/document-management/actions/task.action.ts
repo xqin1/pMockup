@@ -11,7 +11,10 @@ export enum TaskActionTypes {
   TaskLoadError = '[Task] Task Load Error',
   TaskSelected = '[Task] Task Selected',
   DocumentSelected = '[Task] Document Selected',
-  SentNotification = '[Task] Sent Notification'
+  SentNotification = '[Task] Sent Notification',
+  DocumentUploadStart = '[Task] Start Upload Document',
+  DocumentUploadSuccess = '[Task] Document Upload Success',
+  DocumentUploadError = '[Task] Document Upload Error'
 }
 
 export class TaskListLoad implements Action {
@@ -68,6 +71,24 @@ export class SendNotification implements Action {
   constructor(public payload: Notification) {}
 }
 
+export class DocumentUploadStart implements Action {
+  readonly type = TaskActionTypes.DocumentUploadStart;
+
+  constructor() {}
+}
+
+export class DocumentUploadSuccess implements Action {
+  readonly type = TaskActionTypes.DocumentUploadSuccess;
+
+  constructor() {}
+}
+
+export class DocumentUploadError implements Action {
+  readonly type = TaskActionTypes.DocumentUploadError;
+
+  constructor() {}
+}
+
 export type TaskActionsUnion =
   | TaskListLoad
   | TaskListLoadSuccess
@@ -77,4 +98,7 @@ export type TaskActionsUnion =
   | TaskLoadError
   | TaskSelected
   | DocumentSelected
-  | SendNotification;
+  | SendNotification
+  | DocumentUploadStart
+  | DocumentUploadSuccess
+  | DocumentUploadError;

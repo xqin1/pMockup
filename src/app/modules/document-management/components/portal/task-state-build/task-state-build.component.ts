@@ -64,7 +64,7 @@ export class TaskStateBuildComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DocumentUploadDialogComponent, {
       height: "400px",
-      width: "600px",
+      width: "800px",
       disableClose: true,
       data: uploadFormData
     });

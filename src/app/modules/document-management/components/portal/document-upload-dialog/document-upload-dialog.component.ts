@@ -4,6 +4,9 @@ import { UploadFormData, FileUpload, VersionUpload} from '@app/modules/document-
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, UploadStatus } from 'ngx-uploader';
 import { environment} from '@env/environment';
 import {BytesPipe} from 'ngx-pipes';
+import { Store } from '@ngrx/store';
+import * as fromTask from '@app/modules/document-management/reducers/index.reducer';
+import * as TaskAction from '@app/modules/document-management/actions/task.action';
 @Component({
   selector: 'app-document-upload-dialog',
   templateUrl: './document-upload-dialog.component.html',
@@ -22,13 +25,13 @@ export class DocumentUploadDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DocumentUploadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UploadFormData,
-    private bytesPipe: BytesPipe
+    private store: Store<fromTask.State>,
   ) {
     this.options = { concurrency: 1, maxUploads: 2 };
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
     this.humanizeBytes = humanizeBytes;
-    this.uploadUrl = environment.documentManagementURL + "/portal/upload";
+    this.uploadUrl = environment.documentManagementURL + "/portal/document";
     this.dataObj = {};
   }
 
@@ -61,7 +64,15 @@ export class DocumentUploadDialogComponent implements OnInit {
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
       console.log(output.file.name + ' rejected');
     } else if (output.type === 'done' && typeof output.file !== 'undefined') {
-      console.log(output);
+      if (output.file.responseStatus === 200) {
+        this.store.dispatch(new TaskAction.DocumentUploadSuccess());
+        this.dialogRef.close();
+        setTimeout(() => {
+          this.store.dispatch(new TaskAction.TaskLoad(this.data.fileUpload.objID));
+        }, 2000);
+      }else{
+        this.store.dispatch(new TaskAction.DocumentUploadError());
+      }
     }
     this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
     if (this.files.length === 2) {
@@ -76,7 +87,7 @@ export class DocumentUploadDialogComponent implements OnInit {
       method: 'POST',
       data: this.dataObj
     };
-
+    this.store.dispatch(new TaskAction.DocumentUploadStart());
     this.uploadInput.emit(event);
   }
 
@@ -93,7 +104,6 @@ export class DocumentUploadDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
     if (this.data.uploadPurpose === "File") {
       this.uploadUrl += "/upload";
       this.formData = new FileUpload();
@@ -103,7 +113,5 @@ export class DocumentUploadDialogComponent implements OnInit {
       this.formData = new VersionUpload();
       this.formData = this.data.versionUpload;
     }
-    console.log(this.formData);
   }
-
 }

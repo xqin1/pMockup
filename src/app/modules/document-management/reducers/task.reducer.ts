@@ -138,6 +138,46 @@ export function reducer(
 
       };
     }
+    case TaskActionTypes.DocumentUploadStart: {
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = null;
+      notification.message = 'Uploading document...';
+      return {
+        ...state,
+        notification: notification
+      };
+    }
+    case TaskActionTypes.DocumentUploadSuccess: {
+        const notification = new Notification();
+        notification.display = true;
+        notification.duration = DocumentConfig.notificationSetting.duration;
+        notification.message = 'Document upload successful...';
+        return {
+          ...state,
+          notification: notification
+        };
+    }
+    case TaskActionTypes.DocumentUploadSuccess: {
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = DocumentConfig.notificationSetting.duration;
+      notification.message = 'Document upload successful...';
+      return {
+        ...state,
+        notification: notification
+      };
+    }
+    case TaskActionTypes.DocumentUploadError: {
+      const notification = new Notification();
+      notification.display = true;
+      notification.duration = DocumentConfig.notificationSetting.duration;
+      notification.message = 'Document upload failed...';
+      return {
+        ...state,
+        notification: notification
+      };
+    }
 
     default: {
       return state;

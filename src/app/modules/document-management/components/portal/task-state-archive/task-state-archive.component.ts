@@ -10,6 +10,7 @@ import {Document} from '@app/core/model/workfront/Document.model';
 })
 export class TaskStateArchiveComponent implements OnInit {
   @Input() selectedTask: TaskData;
+  @Input() selectedTaskId: string;
   @Input() selectedDocument: Document;
   @Input() selectedDocumentId: string;
   constructor() { }

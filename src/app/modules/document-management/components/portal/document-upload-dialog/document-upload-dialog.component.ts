@@ -22,6 +22,7 @@ export class DocumentUploadDialogComponent implements OnInit {
   uploadUrl: string;
   formData: FileUpload | VersionUpload = null;
   dataObj: any;
+  taskId: string;
   constructor(
     public dialogRef: MatDialogRef<DocumentUploadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UploadFormData,
@@ -47,29 +48,35 @@ export class DocumentUploadDialogComponent implements OnInit {
       //
       // this.uploadInput.emit(event);
     } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
-      this.formData["name"] = output.file.name;
-      this.formData["currentVersion"]["fileName"] = output.file.name;
-      this.dataObj["formData"] = JSON.stringify(this.formData);
-      this.files.push(output.file);
+        if (this.data.uploadPurpose === "File") {
+          this.formData["name"] = output.file.name;
+          this.formData["currentVersion"]["fileName"] = output.file.name;
+        }else{
+          this.formData["fileName"] = output.file.name;
+        }
+        this.dataObj["formData"] = JSON.stringify(this.formData);
+        this.files.push(output.file);
     } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
-      const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
+        const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
     } else if (output.type === 'removed') {
-      this.files = this.files.filter((file: UploadFile) => file !== output.file);
+        this.files = this.files.filter((file: UploadFile) => file !== output.file);
     } else if (output.type === 'dragOver') {
-      this.dragOver = true;
+        this.dragOver = true;
     } else if (output.type === 'dragOut') {
-      this.dragOver = false;
+        this.dragOver = false;
     } else if (output.type === 'drop') {
-      this.dragOver = false;
+        this.dragOver = false;
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
-      console.log(output.file.name + ' rejected');
+        console.log(output.file.name + ' rejected');
     } else if (output.type === 'done' && typeof output.file !== 'undefined') {
       if (output.file.responseStatus === 200) {
         this.store.dispatch(new TaskAction.DocumentUploadSuccess());
         this.dialogRef.close();
-        setTimeout(() => {
-          this.store.dispatch(new TaskAction.TaskLoad(this.data.fileUpload.objID));
-        }, 2000);
+        // setTimeout(() => {
+        //   this.store.dispatch(new TaskAction.TaskLoad(this.data.fileUpload.objID));
+        // }, 2000);
+        this.store.dispatch(new TaskAction.TaskLoad(this.taskId));
+
       }else{
         this.store.dispatch(new TaskAction.DocumentUploadError());
       }
@@ -108,10 +115,12 @@ export class DocumentUploadDialogComponent implements OnInit {
       this.uploadUrl += "/upload";
       this.formData = new FileUpload();
       this.formData = this.data.fileUpload;
+      this.taskId = this.data.fileUpload.objID;
     }else {
       this.uploadUrl += "/uploadVersion";
       this.formData = new VersionUpload();
       this.formData = this.data.versionUpload;
+      this.taskId = this.data.versionUpload.objID;
     }
   }
 }

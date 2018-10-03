@@ -158,16 +158,6 @@ export function reducer(
           notification: notification
         };
     }
-    case TaskActionTypes.DocumentUploadSuccess: {
-      const notification = new Notification();
-      notification.display = true;
-      notification.duration = DocumentConfig.notificationSetting.duration;
-      notification.message = 'Document upload successful...';
-      return {
-        ...state,
-        notification: notification
-      };
-    }
     case TaskActionTypes.DocumentUploadError: {
       const notification = new Notification();
       notification.display = true;

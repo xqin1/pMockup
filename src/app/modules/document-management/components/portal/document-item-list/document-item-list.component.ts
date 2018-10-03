@@ -10,6 +10,7 @@ import {Document} from '@app/core/model/workfront/Document.model';
 export class DocumentItemListComponent implements OnInit {
   @Input() documentList: Document[];
   @Input() selectedDocumentId: string;
+  @Input() selectedTaskId: string;
   @Output() selectDocument = new EventEmitter<string>();
   constructor() { }
 

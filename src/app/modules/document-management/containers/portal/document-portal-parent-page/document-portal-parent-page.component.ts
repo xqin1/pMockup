@@ -87,6 +87,8 @@ export class DocumentPortalParentPageComponent implements OnInit {
         if (notification.display) {
           if (notification.duration !== null) {
             this.config.duration = notification.duration;
+          }else{
+            this.config.duration = 20000;
           }
           if (notification.message !== null) {
             this.snackBar.open(notification.message, "" , this.config);

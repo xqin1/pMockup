@@ -20,6 +20,7 @@
         <ng-template matStepLabel>Concur</ng-template>
       <app-task-state-concur
         [selectedTask]="selectedTask"
+        [selectedTaskId]="selectedTaskId"
         [selectedDocument]="selectedDocument"
         [selectedDocumentId]="selectedDocumentId">
       </app-task-state-concur>
@@ -28,6 +29,7 @@
       <ng-template matStepLabel>Sign</ng-template>
       <app-task-state-sign
         [selectedTask]="selectedTask"
+        [selectedTaskId]="selectedTaskId"
         [selectedDocument]="selectedDocument"
         [selectedDocumentId]="selectedDocumentId">
       </app-task-state-sign>
@@ -36,6 +38,7 @@
       <ng-template matStepLabel>Archive</ng-template>
       <app-task-state-archive
         [selectedTask]="selectedTask"
+        [selectedTaskId]="selectedTaskId"
         [selectedDocument]="selectedDocument"
         [selectedDocumentId]="selectedDocumentId">
       </app-task-state-archive>

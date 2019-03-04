@@ -2,7 +2,7 @@
 import { map, catchError, tap, exhaustMap} from "rxjs/operators";
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Effect, Actions } from '@ngrx/effects';
+import { Effect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 
 import * as AuthAction from '../actions/auth.action';
@@ -13,9 +13,8 @@ import { PortalService} from '@app/modules/document-management/services/portal.s
 @Injectable()
 export class AuthEffects {
   @Effect()
-  login$ = this.actions$
-    .ofType(AuthAction.LOGIN)
-    .pipe(
+  login$ = this.actions$.pipe(
+    ofType(AuthAction.LOGIN),
         map((action: AuthAction.Login) => action.payload),
         exhaustMap(sessionId =>
           this.dmService
@@ -35,18 +34,16 @@ export class AuthEffects {
     );
 
   @Effect({dispatch: false})
-  loginSuccess$ = this.actions$
-    .ofType(AuthAction.LOGIN_SUCCESS)
-    .pipe(
+  loginSuccess$ = this.actions$.pipe(
+    ofType(AuthAction.LOGIN_SUCCESS),
       tap(() => {
         this.router.navigate(['/document-management/portal']);
       })
     );
 
   @Effect({ dispatch: false })
-  loginRedirect$ = this.actions$
-    .ofType(AuthAction.LOGIN_REDIRECT, AuthAction.LOGOUT)
-    .pipe(
+  loginRedirect$ = this.actions$.pipe(
+    ofType(AuthAction.LOGIN_REDIRECT, AuthAction.LOGOUT),
       tap(authed => {
         this.router.navigate(['document-management/portal/login']);
       })

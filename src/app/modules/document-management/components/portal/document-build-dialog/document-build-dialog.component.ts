@@ -20,7 +20,7 @@ export class DocumentBuildDialogComponent implements OnInit {
     if (environment.production) {
       return this.sanitizer.bypassSecurityTrustResourceUrl(this.data);
     } else {
-       return this.sanitizer.bypassSecurityTrustResourceUrl("http://localhost:4200/#/document-management/portal/login");
+       return this.sanitizer.bypassSecurityTrustResourceUrl("http://localhost:4200/#/document-management/kaleidoscope/login");
     }
   }
   ngOnInit() {

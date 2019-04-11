@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DocumentPortalHeaderParentPageComponent} from '@app/modules/document-management/containers/portal/document-portal-header-parent-page/document-portal-header-parent-page.component';
+import { DocumentPortalHeaderParentPageComponent} from '@app/modules/document-management/containers/portal/document-portal-header-parent-page/header-parent-page.component';
 import { DocumentPortalParentPageComponent} from '@app/modules/document-management/containers/portal/document-portal-parent-page/document-portal-parent-page.component';
 import { PortalHeaderComponent } from '@app/modules/document-management/components/portal/portal-header/portal-header.component';
 import { TaskListParentPageComponent } from './containers/portal/task-list-parent-page/task-list-parent-page.component';

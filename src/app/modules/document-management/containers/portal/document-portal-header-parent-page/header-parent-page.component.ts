@@ -6,8 +6,8 @@ import * as taskActions from '@app/modules/document-management/actions/task.acti
 import {TaskData} from '@app/modules/document-management/model/task-data.model';
 @Component({
   selector: 'app-document-portal-header-parent-page',
-  templateUrl: './document-portal-header-parent-page.component.html',
-  styleUrls: ['./document-portal-header-parent-page.component.css'],
+  templateUrl: './header-parent-page.component.html',
+  styleUrls: ['./header-parent-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })

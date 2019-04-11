@@ -7,6 +7,10 @@ const routes: Routes = [
     path: 'document-management',
     loadChildren: './modules/document-management/document-management.module#DocumentManagementModule',
   },
+  {
+    path: 'redactor',
+    loadChildren: './modules/redactor/redactor.module#RedactorModule',
+  },
     { path: '**', component: PageNotFoundComponent }
   ];
 

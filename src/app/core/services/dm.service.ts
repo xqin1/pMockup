@@ -12,6 +12,8 @@ import { TaskList } from '@app/modules/document-management/task-list';
 import {of} from 'rxjs/index';
 import {User} from '@app/core/model/workfront/User.model';
 import {MockUser } from '@app/modules/document-management/user';
+import {RedactorResponse} from '@app/modules/redactor/models/redactor-response.model';
+import {RedactorUpdateNoteModel} from '@app/modules/redactor/models/redactor-update-note.model';
 
 @Injectable()
 export class DMService {
@@ -122,6 +124,10 @@ export class DMService {
         })
       );
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  // redactor API
+  //////////////////////////////////////////////////////////////////////////////////////
   getRedactorTaskByTaskId(taskId) {
     return this.http
       .get<any>(`${environment.documentManagementURL}/redactor/getRedactorTask?taskId=${taskId}`)
@@ -130,6 +136,50 @@ export class DMService {
         catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with task data");
+        })
+      );
+  }
+  getApplicationNumber(appType: string, appNumber: string, limit: number) {
+    return this.http
+      .get<any>(`${environment.documentManagementURL}/redactor/getApplicationNumber?appType=${appType}&appNumber=${appNumber}&limit=${limit}`)
+      .pipe(
+        map(res => res.data),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          this.logger.log("done with application number");
+        })
+      );
+  }
+  getPostApprovalProjects(appType: string, appNumber: string) {
+    return this.http
+      .get<any>(`${environment.documentManagementURL}/redactor/getPostApprovalProjects?appType=${appType}&appNumber=${appNumber}`)
+      .pipe(
+        map(res => res.data),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          this.logger.log("done with get redactor projects");
+        })
+      );
+  }
+  getAttachRdactorTemplate(projectId: string) {
+    return this.http
+      .get<RedactorResponse>(`${environment.documentManagementURL}/redactor/attachRedactorTemplate?projectId=${projectId}`)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          this.logger.log("done with attach template");
+        })
+      );
+  }
+  updateRedactorProjectNotes(redactorNotes: RedactorUpdateNoteModel) {
+    return this.http
+      .post<RedactorResponse>(`${environment.documentManagementURL}/redactor/setRedactorNotes`, redactorNotes)
+      .pipe(
+        map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          this.logger.log("done with update redactor notes");
         })
       );
   }

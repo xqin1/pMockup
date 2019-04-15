@@ -40,7 +40,7 @@ import { CookieModule} from 'ngx-cookie';
     }),
 
     StoreDevtoolsModule.instrument({
-      name: 'Document Management Store DevTools',
+      name: 'Panorama Portal UI Store DevTools',
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([]),

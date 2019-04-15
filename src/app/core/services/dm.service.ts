@@ -113,9 +113,20 @@ export class DMService {
   }
   getTaskByTaskId(taskId) {
     return this.http
-      .get<Task>(`${environment.documentManagementURL}/portal/task?taskId=${taskId}`)
+      .get<any>(`${environment.documentManagementURL}/portal/task?taskId=${taskId}`)
       .pipe(
         map(res => res),
+        catchError(this.exceptionService.catchBadResponse),
+        finalize(() => {
+          this.logger.log("done with task data");
+        })
+      );
+  }
+  getRedactorTaskByTaskId(taskId) {
+    return this.http
+      .get<any>(`${environment.documentManagementURL}/redactor/getRedactorTask?taskId=${taskId}`)
+      .pipe(
+        map(res => res.data),
         catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with task data");

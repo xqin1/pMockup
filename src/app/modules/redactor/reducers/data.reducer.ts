@@ -42,7 +42,7 @@ export function reducer(
       return {
         taskDataLoaded: true,
         taskDataLoading: false,
-        taskData: action.payload[0],
+        taskData: action.payload,
         notification: noti
       };
     }

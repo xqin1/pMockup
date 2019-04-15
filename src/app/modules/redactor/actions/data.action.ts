@@ -12,7 +12,7 @@ export enum DataActionTypes {
 export class TaskDataLoad implements Action {
   readonly type = DataActionTypes.TaskDataLoad;
 
-  constructor() {}
+  constructor(public payload: string) {}
 }
 
 export class TaskDataLoadSuccess implements Action {

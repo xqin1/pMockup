@@ -1,38 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RedactorParentComponent} from '@app/modules/redactor/containers/redactor-parent/redactor-parent.component';
+import { TaskResolverService} from '@app/modules/redactor/services/task-resolver.service';
 
 const routes: Routes = [
   {
     path: ':taskId',
     component: RedactorParentComponent,
-    // resolve: {
-    //   // data: TaskListResolverService
-    // },
-   // canActivate: [AuthGuardService],
-    children: [
-      // {path: 'document-list', redirectTo: 'document-list', pathMatch: 'full'},
-      // {
-      //   path: 'document-list/:objectId/:userId',
-      //   component: DocumentListParentComponent,
-      //   resolve: {
-      //     data: DocumentListResolverService
-      //   }
-      // },
-      // {
-      //   path: 'document-metadata/:documentId',
-      //   component: DocumentMetadataParentPageComponent,
-      //
-      // },
-      // {
-      //   path: 'document-link/:documentId',
-      //   component: DocumentLinkParentComponent
-      // },
-      // {
-      //   path: 'document-eligibility/:documentId',
-      //   component: DocumentEligibilityParentComponent
-      // }
-    ]
+    resolve: {
+       data: TaskResolverService
+    },
+    children: []
   }
 ];
 

@@ -1,3 +1,5 @@
 <div class="hader-parent">
-  <app-header></app-header>
+  <app-header
+    [taskName]="taskName$ | async"
+    [projectName]="projectName$ | async"></app-header>
 </div>

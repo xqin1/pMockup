@@ -1,6 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromData from './data.reducer';
+import { Task} from '@app/core/model/workfront/Task.model';
 
 export interface RedactorState {
   data: fromData.State;
@@ -36,6 +37,14 @@ export const getTaskDataLoaded = createSelector(
 export const getTaskData = createSelector(
   getDataState,
   fromData.getTaskData
+);
+export const getTaskName = createSelector(
+  getTaskData,
+  (taskData: Task) => taskData.name
+);
+export const getProjectName = createSelector(
+  getTaskData,
+  (taskData: Task) => taskData.project.name
 );
 
 

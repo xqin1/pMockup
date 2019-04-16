@@ -1,3 +1,29 @@
-<p>
-  search works!
-</p>
+<div fxLayout="row" class="search-box">
+  <mat-card>
+    <mat-card-subtitle>Search Projects</mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field>
+        <input #appNum matInput placeholder="enter application number"
+               [matAutocomplete]="appNumAuto"
+               [formControl]="appNumInput"
+               [value]="query"
+               (keyup)="searchAppNumber($event.target.value)">
+        <mat-autocomplete
+          #appNumAuto="matAutocomplete"
+          (optionSelected)="selectAppNumber($event)">
+          <mat-option *ngFor="let appNum of appNumber" [value]="appNum">
+            {{appNum}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-spinner [class.show]="searching" [diameter]="30" [strokeWidth]="3"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary"
+              (click)="startSearchProjects()">
+        Search</button>
+    </mat-card-actions>
+    <mat-card-footer><span *ngIf="error">{{error}}</span></mat-card-footer>
+  </mat-card>
+</div>
+

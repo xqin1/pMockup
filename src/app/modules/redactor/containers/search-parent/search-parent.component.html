@@ -1,3 +1,10 @@
-<p>
-  search-parent works!
-</p>
+<app-search
+  [query]="searchQuery$ | async"
+  [searching]="loading$ | async"
+  [error]="error$ | async"
+  [appNumber]="appNumber$ | async"
+  (search)="search($event)"
+  (searchProjects)="onSearchProjects($event)">
+
+  </app-search>
+

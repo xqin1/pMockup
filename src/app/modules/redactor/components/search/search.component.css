@@ -1,0 +1,41 @@
+mat-card-title,
+mat-card-content,
+mat-card-footer,
+mat-card-subtitle{
+  display: flex;
+  justify-content: center;
+}
+.mat-card-subtitle{
+  font-size: 16px !important;
+}
+.mat-card {
+  width: 100% !important;
+  height: 100px !important;
+  padding: 8px !important;
+}
+
+mat-card-footer {
+  color: #ff0000;
+  padding: 5px 0;
+}
+
+.mat-form-field {
+  min-width: 300px;
+  margin-right: 10px;
+}
+
+.mat-spinner {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  visibility: hidden;
+}
+
+.mat-spinner.show {
+  visibility: visible;
+}
+
+.mat-card-actions {
+  margin-top:-60px !important;
+  margin-left: 800px !important;
+}

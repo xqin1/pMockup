@@ -3,8 +3,9 @@
   [searching]="loading$ | async"
   [error]="error$ | async"
   [appNumber]="appNumber$ | async"
+  [projectAccumulateMode] = "projectAccumulateMode$ | async"
   (search)="search($event)"
-  (searchProjects)="onSearchProjects($event)">
-
+  (searchProjects)="onSearchProjects($event)"
+  (setAccumulateMode)="onAccumulateModeChange($event)">
   </app-search>
 

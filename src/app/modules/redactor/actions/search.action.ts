@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 export enum SearchActionTypes {
   Search = '[AppNumber] Search',
   SearchComplete = '[AppNumber] Search Complete',
-  SearchError = '[AppNumber] Search Error',
+  SearchError = '[AppNumber] Search Error'
 }
 
 export class Search implements Action {

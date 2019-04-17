@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {MatCheckboxChange} from '@angular/material';
 
 @Component({
   selector: 'app-search',
@@ -11,8 +12,10 @@ export class SearchComponent implements OnInit {
   @Input() searching = false;
   @Input() error = '';
   @Input() appNumber = [];
+  @Input() projectAccumulateMode: boolean;
   @Output() search = new EventEmitter<string>();
   @Output() searchProjects = new EventEmitter<string>();
+  @Output() setAccumulateMode = new EventEmitter<boolean>();
 
   appNumInput: FormControl = new FormControl();
   constructor() { }
@@ -43,6 +46,11 @@ export class SearchComponent implements OnInit {
     }
     return hideButton;
   }
+
+  onChange(event: MatCheckboxChange) {
+    this.setAccumulateMode.emit(event.checked);
+  }
+
   ngOnInit() {
   }
 

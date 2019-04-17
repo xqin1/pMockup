@@ -1,4 +1,4 @@
-<div fxLayout="row" class="search-box">
+<div fxLayer="row" class="search-box">
   <mat-card>
     <mat-card-subtitle>Search Projects</mat-card-subtitle>
     <mat-card-content>
@@ -20,11 +20,13 @@
       <button mat-button color="primary" class="search-button"
               (click)="startSearchProjects()"
               [disabled]="showSearchButton()">
-        Search</button>
+        Search
+      </button>
+      <mat-checkbox class="search-option" (change)="onChange($event)" [checked]="projectAccumulateMode">Keep Existing Results</mat-checkbox>
     </mat-card-content>
-    <mat-card-actions>
+    <div class="accumulateOption">
 
-    </mat-card-actions>
+    </div>
     <mat-card-footer><span *ngIf="error">{{error}}</span></mat-card-footer>
   </mat-card>
 </div>

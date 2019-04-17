@@ -1,3 +1,31 @@
-<p>
-  search-result works!
-</p>
+<div class="search-result-section">
+  <ngx-datatable
+    style="width: 90%"
+    class="material"
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="5"
+    [selected]="selected"
+    [selectionType]="'checkbox'"
+    [selectAllRowsOnPage]="false"
+    [displayCheck]="displayCheck"
+    (activate)="onActivate($event)"
+    (select)='onSelect($event)'>
+    <ngx-datatable-column
+      [width]="30"
+      [sortable]="false"
+      [canAutoResize]="false"
+      [draggable]="false"
+      [resizeable]="false"
+      [headerCheckboxable]="true"
+      [checkboxable]="true">
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name"></ngx-datatable-column>
+    <ngx-datatable-column name="Gender"></ngx-datatable-column>
+    <ngx-datatable-column name="Company"></ngx-datatable-column>
+  </ngx-datatable>
+</div>
+

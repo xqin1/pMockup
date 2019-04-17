@@ -17,6 +17,8 @@ import { EffectsModule} from '@ngrx/effects';
 import { RedactorEffects} from '@app/modules/redactor/effects/redactor.effect';
 import { MaterialModule} from '@app/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 @NgModule({
   declarations: [routedComponents, HeaderParentComponent, SearchParentComponent, SearchResultParentComponent, SelectionParentComponent, SearchComponent, HeaderComponent, SearchResultComponent, SelectionComponent],
   imports: [
@@ -25,7 +27,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     StoreModule.forFeature('redactor', reducers),
     EffectsModule.forFeature([RedactorEffects]),
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxDatatableModule
   ],
   providers: [RedactorService, TaskResolverService]
 })

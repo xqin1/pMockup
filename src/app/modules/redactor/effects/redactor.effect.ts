@@ -74,8 +74,12 @@ export class RedactorEffects {
       this.dmService.getPostApprovalProjects("ANDA", appNumber).pipe(
         map((projects: Project[]) => {
           if (projects != null) {
-
-            return new SearchProjectComplete(projects);
+            this.redactorService.addProjects(projects);
+            const projectIds: string[] = [];
+            for(let p of projects) {
+              projectIds.push(p.ID);
+            }
+            return new SearchProjectComplete(projectIds);
           }else {
             return new SearchProjectError("Failed for search project");
           }

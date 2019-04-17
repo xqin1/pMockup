@@ -19,6 +19,7 @@ export class SearchParentComponent implements OnInit {
   appNumber$: Observable<number[]>;
   loading$: Observable<boolean>;
   error$: Observable<string>;
+  projectAccumulateMode$: Observable<boolean>;
   constructor(
     private store: Store<fromRedactor.State>
   ) {
@@ -29,6 +30,7 @@ export class SearchParentComponent implements OnInit {
     this.appNumber$ = store.pipe(select(fromRedactor.getSearchAppNumber));
     this.loading$ = store.pipe(select(fromRedactor.getSearchLoading));
     this.error$ = store.pipe(select(fromRedactor.getSearchError));
+    this.projectAccumulateMode$ = store.pipe(select(fromRedactor.getAccumulateMode));
   }
 
   search(query: string) {
@@ -37,6 +39,10 @@ export class SearchParentComponent implements OnInit {
 
   onSearchProjects(query: string) {
     this.store.dispatch(new SearchProjectActions.SearchProject(query));
+  }
+
+  onAccumulateModeChange(value: boolean){
+    this.store.dispatch(new SearchProjectActions.SearchProjectAccumulate(value));
   }
   ngOnInit() {
   }

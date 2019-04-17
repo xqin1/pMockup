@@ -1,16 +1,19 @@
 
 import { SearchProjectActionTypes, SearchProjectActionsUnion} from "../actions/search-project.action";
-import {Project} from '@app/core/model/workfront/Project.model';
 
 export interface State {
-  projects: Project[];
+  projectIds: string[];
+  selectionIds: string[];
+  accumulateMode: boolean;
   loading: boolean;
   error: string;
   query: string;
 }
 
 const initialState: State = {
-  projects: [],
+  projectIds: [],
+  selectionIds: [],
+  accumulateMode: true,
   loading: false,
   error: '',
   query: '',
@@ -21,25 +24,46 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
     case SearchProjectActionTypes.SearchProject: {
       const query = action.payload;
       if (query === '' || query.length > 6 || isNaN(+query)) {
+        if (state.accumulateMode){
+          return {
+            ...state,
+            loading: false,
+            error: '',
+            query,
+          };
+        }else{
+          return {
+            ...state,
+            projectIds: [],
+            loading: false,
+            error: '',
+            query,
+          };
+        }
+      }
+
+      if (state.accumulateMode){
         return {
-          projects: [],
-          loading: false,
+          ...state,
+          loading: true,
+          error: '',
+          query,
+        };
+      }else{
+        return {
+          ...state,
+          projectIds: [],
+          loading: true,
           error: '',
           query,
         };
       }
-
-      return {
-        projects: [],
-        loading: true,
-        error: '',
-        query,
-      };
     }
 
     case SearchProjectActionTypes.SearchProjectComplete: {
       return {
-        projects: action.payload,
+        ...state,
+        projectIds: action.payload,
         loading: false,
         error: '',
         query: state.query,
@@ -54,16 +78,27 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       };
     }
 
+    case SearchProjectActionTypes.SearchProjectAccumulate: {
+      return {
+        ...state,
+        accumulateMode: action.payload,
+      };
+    }
+
     default: {
       return state;
     }
   }
 }
 
-export const getProjects = (state: State) => state.projects;
+export const getProjectIds = (state: State) => state.projectIds;
 
 export const getProjectQuery = (state: State) => state.query;
 
 export const getProjectLoading = (state: State) => state.loading;
 
 export const getProjectError = (state: State) => state.error;
+
+export const getSelectionsIds = (state: State) => state.selectionIds;
+
+export const getAccumulateMode = (state: State) => state.accumulateMode;

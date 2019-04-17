@@ -40,7 +40,7 @@ mat-card-footer {
   font-size: 16px;
 }
 
-.mat-card-actions {
-  margin-top:-60px !important;
-  margin-left: 800px !important;
+.search-option{
+  position: relative;
+  padding-top: 15px;
 }

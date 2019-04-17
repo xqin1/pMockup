@@ -83,9 +83,9 @@ export const getSearchProjectState = createSelector(
   (state: RedactorState) => state.searchProject
 );
 
-export const getSearchProjects = createSelector(
+export const getSearchProjectIds = createSelector(
   getSearchProjectState,
-  fromSearchProject.getProjects
+  fromSearchProject.getProjectIds
 );
 export const getSearchProjectQuery = createSelector(
   getSearchProjectState,
@@ -99,6 +99,16 @@ export const getSearchProjectError = createSelector(
   getSearchProjectState,
   fromSearchProject.getProjectError
 );
+export const getSelectionProjectIds = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getSelectionsIds
+);
+
+export const getAccumulateMode = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getAccumulateMode
+);
+
 
 
 

@@ -39,6 +39,7 @@ export class SearchParentComponent implements OnInit {
 
   onSearchProjects(query: string) {
     this.store.dispatch(new SearchProjectActions.SearchProject(query));
+    this.store.dispatch(new SearchActions.Search(''));
   }
 
   onAccumulateModeChange(value: boolean){

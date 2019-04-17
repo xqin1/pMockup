@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, SimpleChange, OnChanges} from '@angular/core';
+import { RedactorService} from '@app/modules/redactor/services/redactor.service';
+import {Project} from '@app/core/model/workfront/Project.model';
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  styleUrls: ['./search-result.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchResultComponent implements OnInit {
+  @Input() projectIds: string[] = [];
+  projects: Project[] = [];
   rows = [
     {
       "name": "Ethel Price",
@@ -512,7 +517,9 @@ export class SearchResultComponent implements OnInit {
     }
   ];
   selected = [];
-  constructor() { }
+  constructor(
+    private redactorService: RedactorService
+  ) { }
 
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);
@@ -521,8 +528,16 @@ export class SearchResultComponent implements OnInit {
     this.selected.push(...selected);
   }
 
+  ngOnChanges(changes: SimpleChange) {
+    if (changes["projectIds"]) {
+      if(this.projectIds.length > 0){
+        this.projects = this.redactorService.getShowingProjects(this.projectIds);
+      }
+    }
+  }
+
   onActivate(event) {
-    console.log('Activate Event', event);
+   // console.log('Activate Event', event);
   }
 
   add() {

@@ -23,7 +23,16 @@ export class RedactorService {
     }
   }
 
-  getProjects() {
-    return this.projects;
+  getShowingProjects(projectIds: string[]) {
+    const myProjects: Project[] = [];
+    for(const projectId of projectIds){
+      const filterProjects = this.projects.filter(p => {
+        return p.ID === projectId;
+      });
+      if (filterProjects.length > 0 ) {
+        myProjects.push(filterProjects[0]);
+      }
+    }
+    return myProjects;
   }
 }

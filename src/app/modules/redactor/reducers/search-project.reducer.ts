@@ -59,14 +59,21 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
         };
       }
     }
-
     case SearchProjectActionTypes.SearchProjectComplete: {
+      const myIds: string[] = Object.assign([], action.payload);
+      if (state.accumulateMode){
+        state.projectIds.forEach(p => {
+          if (myIds.indexOf(p) < 0) {
+            myIds.push(p);
+          }
+        });
+      }
       return {
         ...state,
-        projectIds: action.payload,
+        projectIds: myIds,
         loading: false,
         error: '',
-        query: state.query,
+        query: '',
       };
     }
 

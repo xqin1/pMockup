@@ -6,7 +6,7 @@
         <input #appNum matInput placeholder="enter application number"
                [matAutocomplete]="appNumAuto"
                [formControl]="appNumInput"
-               [value]="query"
+               ([value])="query"
                (keyup)="searchAppNumber($event.target.value)">
         <mat-autocomplete
           #appNumAuto="matAutocomplete"

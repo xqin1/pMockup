@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import {asyncScheduler, Observable, of} from 'rxjs';
-import { catchError, map, mergeMap, switchMap, toArray, tap, debounceTime, skip, takeUntil } from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap, toArray, tap, debounceTime, skip, takeUntil, concat} from 'rxjs/operators';
 import { DMService } from '@app/core/services/dm.service';
 import { RedactorService} from '@app/modules/redactor/services/redactor.service';
 import { Task} from '@app/core/model/workfront/Task.model';
@@ -64,28 +64,28 @@ export class RedactorEffects {
           catchError(err => of(new SearchError(err)))
         );
       })
-  );
+  )
 
   @Effect()
   searchProject$: Observable<Action> = this.actions$.pipe(
     ofType<SearchProject>(SearchProjectActionTypes.SearchProject),
     map(action => action.payload),
     mergeMap((appNumber) =>
-      this.dmService.getPostApprovalProjects("ANDA", appNumber).pipe(
-        map((projects: Project[]) => {
-          if (projects != null) {
-            this.redactorService.addProjects(projects);
-            const projectIds: string[] = [];
-            for(let p of projects) {
-              projectIds.push(p.ID);
+        this.dmService.getPostApprovalProjects("ANDA", appNumber).pipe(
+          map((projects: Project[]) => {
+            if (projects != null) {
+              this.redactorService.addProjects(projects);
+              const projectIds: string[] = [];
+              for (let p of projects) {
+                projectIds.push(p.ID);
+              }
+              return new SearchProjectComplete(projectIds);
+            }else {
+              return new SearchProjectError("Failed for search project");
             }
-            return new SearchProjectComplete(projectIds);
-          }else {
-            return new SearchProjectError("Failed for search project");
-          }
-        }),
-        catchError(error => of(new SearchProjectError(error)))
-      )
+          }),
+          catchError(error => of(new SearchProjectError(error)))
+        )
     )
   );
 }

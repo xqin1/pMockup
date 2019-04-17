@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  pefDocumentArchiveURL: 'http://localhost:7001/PanoramaExtendedFramework/extendedform/docmgt/bulkarchiving',
-  documentManagementURL: 'http://localhost:7001/PanoramaDocMgmt',
-  workfrontHost: 'http://panoramaams-pps.preprod.fda.gov',
-  getCookieURL: "http://localhost:7001/panoramaUI/#/document-management/login"
+  pefDocumentArchiveURL: '//localhost:7001/PanoramaExtendedFramework/extendedform/docmgt/bulkarchiving',
+  documentManagementURL: '//localhost:7001/PanoramaDocMgmt',
+  workfrontHost: '//panoramaams-pps.preprod.fda.gov',
+  getCookieURL: "//localhost:7001/panoramaUI/#/document-management/login"
 };

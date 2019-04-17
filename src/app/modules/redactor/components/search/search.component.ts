@@ -35,11 +35,13 @@ export class SearchComponent implements OnInit {
   }
 
   showSearchButton() {
-    if( this.appNumInput.value.length > 2 && !this.searching) {
-      return false;
-    }else{
-      return true;
+    let hideButton = true;
+    if(this.appNumInput && this.appNumInput.value) {
+      if(this.appNumInput.value.length > 2 && !this.searching){
+        hideButton = false;
+      }
     }
+    return hideButton;
   }
   ngOnInit() {
   }

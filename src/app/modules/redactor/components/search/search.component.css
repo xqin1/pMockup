@@ -20,7 +20,7 @@ mat-card-footer {
 }
 
 .mat-form-field {
-  min-width: 300px;
+  min-width: 200px;
   margin-right: 10px;
 }
 
@@ -33,6 +33,11 @@ mat-card-footer {
 
 .mat-spinner.show {
   visibility: visible;
+}
+
+.search-button {
+  position: relative;
+  font-size: 16px;
 }
 
 .mat-card-actions {

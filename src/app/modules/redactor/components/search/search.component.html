@@ -17,11 +17,13 @@
         </mat-autocomplete>
       </mat-form-field>
       <mat-spinner [class.show]="searching" [diameter]="30" [strokeWidth]="3"></mat-spinner>
+      <button mat-button color="primary" class="search-button"
+              (click)="startSearchProjects()"
+              [disabled]="showSearchButton()">
+        Search</button>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button color="primary"
-              (click)="startSearchProjects()">
-        Search</button>
+
     </mat-card-actions>
     <mat-card-footer><span *ngIf="error">{{error}}</span></mat-card-footer>
   </mat-card>

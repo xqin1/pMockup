@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   pefDocumentArchiveURL: 'pefDocumentArchive',
   documentManagementURL: 'dmService',
-  workfrontHost: 'http://panoramaams-pps.preprod.fda.gov',
-  getCookieURL: "http://localhost:4200/#/document-management/portal/login",
+  workfrontHost: '//panoramaams-pps.preprod.fda.gov',
+  getCookieURL: "//localhost:4200/#/document-management/portal/login",
 };

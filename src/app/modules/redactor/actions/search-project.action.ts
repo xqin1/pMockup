@@ -1,7 +1,4 @@
 import { Action } from '@ngrx/store';
-import {Project} from '@app/core/model/workfront/Project.model';
-import {Search} from '@app/modules/redactor/actions/search.action';
-
 
 export enum SearchProjectActionTypes {
   SearchProject = '[Project] Search Project',

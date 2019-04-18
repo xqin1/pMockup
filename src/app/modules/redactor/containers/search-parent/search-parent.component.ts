@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import * as SearchActions from '../../actions/search.action';
+import * as SearchAppNumActions from '../../actions/search-appnum.action';
 import * as SearchProjectActions from '../../actions/search-project.action';
 import * as fromRedactor from '../../reducers/index.reducer';
 
@@ -24,22 +24,22 @@ export class SearchParentComponent implements OnInit {
     private store: Store<fromRedactor.State>
   ) {
     this.searchQuery$ = store.pipe(
-      select(fromRedactor.getSearchQuery),
+      select(fromRedactor.getSearchAppNumQuery),
       take(1)
     );
     this.appNumber$ = store.pipe(select(fromRedactor.getSearchAppNumber));
-    this.loading$ = store.pipe(select(fromRedactor.getSearchLoading));
-    this.error$ = store.pipe(select(fromRedactor.getSearchError));
+    this.loading$ = store.pipe(select(fromRedactor.getSearchAppNumLoading));
+    this.error$ = store.pipe(select(fromRedactor.getSearchAppNumError));
     this.projectAccumulateMode$ = store.pipe(select(fromRedactor.getAccumulateMode));
   }
 
   search(query: string) {
-    this.store.dispatch(new SearchActions.Search(query));
+    this.store.dispatch(new SearchAppNumActions.SearchAppNum(query));
   }
 
   onSearchProjects(query: string) {
     this.store.dispatch(new SearchProjectActions.SearchProject(query));
-    this.store.dispatch(new SearchActions.Search(''));
+    this.store.dispatch(new SearchAppNumActions.SearchAppNum(''));
   }
 
   onAccumulateModeChange(value: boolean){

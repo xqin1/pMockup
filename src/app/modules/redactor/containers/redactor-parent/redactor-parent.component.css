@@ -2,3 +2,13 @@
   flex: 1 1 100%;
   min-height: 100vh;
 }
+
+.loader {
+  margin-left: 30%;
+}
+.loader-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 20%;
+  margin-top: 100px;
+}

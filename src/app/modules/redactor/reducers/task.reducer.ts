@@ -1,5 +1,5 @@
 import {Notification} from '../models/notification.model';
-import { DataActionTypes, DataActionsUnion} from "../actions/data.action";
+import { TaskActionTypes, TaskActionsUnion} from "../actions/task.action";
 import { Task} from '@app/core/model/workfront/Task.model';
 import { CONFIG} from '../config';
 
@@ -20,25 +20,25 @@ const initialState: State = {
 
 export function reducer(
   state = initialState,
-  action: DataActionsUnion
+  action: TaskActionsUnion
 ): State {
   switch (action.type) {
-    case DataActionTypes.TaskDataLoad: {
+    case TaskActionTypes.TaskDataLoad: {
       const noti = new Notification();
       noti.display = true;
       noti.duration = null;
-      noti.message = 'Loading Task Data...';
+      noti.message = 'Loading Redactor Task Data...';
       return {
         ...state,
         taskDataLoading: true,
         notification: noti
       };
     }
-    case DataActionTypes.TaskDataLoadSuccess: {
+    case TaskActionTypes.TaskDataLoadSuccess: {
       const noti = new Notification();
       noti.display = true;
       noti.duration = CONFIG.notificationDuration;
-      noti.message = 'Task Data Loaded Successful';
+      noti.message = 'Redactor Task Loaded Successful';
       return {
         taskDataLoaded: true,
         taskDataLoading: false,
@@ -46,7 +46,7 @@ export function reducer(
         notification: noti
       };
     }
-    case DataActionTypes.TaskDataLoadError: {
+    case TaskActionTypes.TaskDataLoadError: {
       const noti = new Notification();
       noti.display = true;
       noti.duration = CONFIG.notificationDuration;

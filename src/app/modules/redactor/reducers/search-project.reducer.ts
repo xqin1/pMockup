@@ -1,5 +1,7 @@
 
 import { SearchProjectActionTypes, SearchProjectActionsUnion} from "../actions/search-project.action";
+import {Notification} from '@app/modules/redactor/models/notification.model';
+import {CONFIG} from '@app/modules/redactor/config';
 
 export interface State {
   projectIds: string[];
@@ -8,6 +10,7 @@ export interface State {
   loading: boolean;
   error: string;
   query: string;
+  notification: Notification;
 }
 
 const initialState: State = {
@@ -17,19 +20,20 @@ const initialState: State = {
   loading: false,
   error: '',
   query: '',
+  notification: new Notification()
 };
 
 export function reducer(state = initialState, action: SearchProjectActionsUnion): State {
   switch (action.type) {
     case SearchProjectActionTypes.SearchProject: {
-      const query = action.payload;
-      if (query === '' || query.length > 6 || isNaN(+query)) {
+      const myQuery = action.payload;
+      if (myQuery === '' || myQuery.length > 6 || isNaN(+myQuery)) {
         if (state.accumulateMode){
           return {
             ...state,
             loading: false,
             error: '',
-            query,
+            query: '',
           };
         }else{
           return {
@@ -37,17 +41,22 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
             projectIds: [],
             loading: false,
             error: '',
-            query,
+            query: ''
           };
         }
       }
 
+      const noti = new Notification();
+      noti.display = true;
+      noti.duration = 5000;
+      noti.message = 'Searching projects...';
       if (state.accumulateMode){
         return {
           ...state,
           loading: true,
           error: '',
-          query,
+          query: myQuery,
+          notification: noti
         };
       }else{
         return {
@@ -55,7 +64,8 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
           projectIds: [],
           loading: true,
           error: '',
-          query,
+          query: myQuery,
+          notification: noti
         };
       }
     }
@@ -68,20 +78,30 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
           }
         });
       }
+      const noti = new Notification();
+      noti.display = true;
+      noti.duration = null;
+      noti.message = `Finish searching projects...${action.payload.length} projects found`;
       return {
         ...state,
         projectIds: myIds,
         loading: false,
         error: '',
         query: '',
+        notification: noti
       };
     }
 
     case SearchProjectActionTypes.SearchProjectError: {
+      const noti = new Notification();
+      noti.display = true;
+      noti.duration = CONFIG.notificationDuration;
+      noti.message = 'Searching projects failed...';
       return {
         ...state,
         loading: false,
         error: action.payload,
+        notification: noti
       };
     }
 
@@ -99,13 +119,11 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
 }
 
 export const getProjectIds = (state: State) => state.projectIds;
-
 export const getProjectQuery = (state: State) => state.query;
-
 export const getProjectLoading = (state: State) => state.loading;
-
 export const getProjectError = (state: State) => state.error;
-
 export const getSelectionsIds = (state: State) => state.selectionIds;
-
 export const getAccumulateMode = (state: State) => state.accumulateMode;
+export const getProjectNotification = (state: State) => state.notification;
+
+

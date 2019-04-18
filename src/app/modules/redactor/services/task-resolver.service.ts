@@ -6,16 +6,16 @@ import {
 } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { RedactorService} from '@app/modules/redactor/services/redactor.service';
-import { Observable ,  of ,  forkJoin } from 'rxjs';
-import * as fromData from '@app/modules/redactor/reducers/index.reducer';
+import { Observable ,  of } from 'rxjs';
+import * as fromRedactor from '@app/modules/redactor/reducers/index.reducer';
 import { take, map, filter, switchMap, first } from 'rxjs/operators';
-import {TaskDataLoad} from '@app/modules/redactor/actions/data.action';
+import {TaskDataLoad} from '@app/modules/redactor/actions/task.action';
 
 @Injectable()
 export class TaskResolverService implements Resolve<any> {
   constructor(
     private redactorService: RedactorService,
-    private store: Store<fromData.State>,
+    private store: Store<fromRedactor.State>,
   ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<boolean> {
@@ -28,13 +28,13 @@ export class TaskResolverService implements Resolve<any> {
         })
       );
     }else{
-      console.log("taskId is requied in the URL");
+      console.log("taskId is required in the URL");
     }
   }
 
   waitForTaskListToLoad(): Observable<boolean> {
     return this.store.pipe(
-      select(fromData.getTaskDataLoaded),
+      select(fromRedactor.getTaskDataLoaded),
       map(loaded => loaded),
       first(loaded => loaded === true)
     );

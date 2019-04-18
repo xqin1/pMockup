@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import * as SearchActions from '../../actions/search.action';
+import * as SearchAppNumActions from '../../actions/search-appnum.action';
 import * as SearchProjectActions from '../../actions/search-project.action';
 import * as fromRedactor from '../../reducers/index.reducer';
 
@@ -14,7 +14,7 @@ import * as fromRedactor from '../../reducers/index.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchResultParentComponent implements OnInit {
-  projectIds$: Observable<string[]>
+  projectIds$: Observable<string[]>;
   constructor(
     private store: Store<fromRedactor.State>
   ) {

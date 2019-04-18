@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import {asyncScheduler, Observable, of} from 'rxjs';
-import {catchError, map, mergeMap, switchMap, toArray, tap, debounceTime, skip, takeUntil, concat} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap, debounceTime, skip, takeUntil} from 'rxjs/operators';
 import { DMService } from '@app/core/services/dm.service';
 import { RedactorService} from '@app/modules/redactor/services/redactor.service';
 import { Task} from '@app/core/model/workfront/Task.model';
 
-import {TaskDataLoad, TaskDataLoadError, TaskDataLoadSuccess, DataActionTypes} from '@app/modules/redactor/actions/data.action';
+import {TaskDataLoad, TaskDataLoadError, TaskDataLoadSuccess, TaskActionTypes} from '@app/modules/redactor/actions/task.action';
 
-import { Search, SearchComplete, SearchError, SearchActionTypes} from '@app/modules/redactor/actions/search.action';
+import { SearchAppNum, SearchAppNumComplete, SearchAppNumError, SearchAppNumActionTypes} from '@app/modules/redactor/actions/search-appnum.action';
 import { SearchProject, SearchProjectComplete, SearchProjectError, SearchProjectActionTypes} from '@app/modules/redactor/actions/search-project.action';
 import {EMPTY} from 'rxjs/internal/observable/empty';
 import {Project} from '@app/core/model/workfront/Project.model';
@@ -26,7 +26,7 @@ export class RedactorEffects {
 
   @Effect()
   loadTask$: Observable<Action> = this.actions$.pipe(
-    ofType<TaskDataLoad>(DataActionTypes.TaskDataLoad),
+    ofType<TaskDataLoad>(TaskActionTypes.TaskDataLoad),
     map(action => action.payload),
     mergeMap((taskId) =>
       this.dmService.getRedactorTaskByTaskId(taskId).pipe(
@@ -42,10 +42,32 @@ export class RedactorEffects {
       )
     )
   );
+  @Effect()
+  searchProject$: Observable<Action> = this.actions$.pipe(
+    ofType<SearchProject>(SearchProjectActionTypes.SearchProject),
+    map(action => action.payload),
+    mergeMap((appNumber) =>
+      this.dmService.getPostApprovalProjects("ANDA", appNumber).pipe(
+        map((projects: Project[]) => {
+          if (projects != null) {
+            this.redactorService.addProjects(projects);
+            const projectIds: string[] = [];
+            for (const p of projects) {
+              projectIds.push(p.ID);
+            }
+            return new SearchProjectComplete(projectIds);
+          }else {
+            return new SearchProjectError("Failed for search project");
+          }
+        }),
+        catchError(error => of(new SearchProjectError(error)))
+      )
+    )
+  );
 
   @Effect()
   searchAppNumber$ = ({ debounce = 300, scheduler = asyncScheduler } = {}): Observable<Action> => this.actions$.pipe(
-      ofType<Search>(SearchActionTypes.Search),
+      ofType<SearchAppNum>(SearchAppNumActionTypes.SearchAppNum),
       debounceTime(debounce, scheduler),
       map(action => action.payload),
       switchMap(query => {
@@ -54,38 +76,15 @@ export class RedactorEffects {
         }
 
         const nextSearch$ = this.actions$.pipe(
-          ofType(SearchActionTypes.Search),
+          ofType(SearchAppNumActionTypes.SearchAppNum),
           skip(1)
         );
 
         return this.dmService.getApplicationNumber("ANDA", query, 5).pipe(
           takeUntil(nextSearch$),
-          map((appNumber: number[]) => new SearchComplete(appNumber)),
-          catchError(err => of(new SearchError(err)))
+          map((appNumber: number[]) => new SearchAppNumComplete(appNumber)),
+          catchError(err => of(new SearchAppNumError(err)))
         );
       })
   )
-
-  @Effect()
-  searchProject$: Observable<Action> = this.actions$.pipe(
-    ofType<SearchProject>(SearchProjectActionTypes.SearchProject),
-    map(action => action.payload),
-    mergeMap((appNumber) =>
-        this.dmService.getPostApprovalProjects("ANDA", appNumber).pipe(
-          map((projects: Project[]) => {
-            if (projects != null) {
-              this.redactorService.addProjects(projects);
-              const projectIds: string[] = [];
-              for (let p of projects) {
-                projectIds.push(p.ID);
-              }
-              return new SearchProjectComplete(projectIds);
-            }else {
-              return new SearchProjectError("Failed for search project");
-            }
-          }),
-          catchError(error => of(new SearchProjectError(error)))
-        )
-    )
-  );
 }

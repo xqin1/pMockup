@@ -1,13 +1,13 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
-import * as fromData from './data.reducer';
-import * as fromSearch from './search.reducer';
+import * as fromTask from './task.reducer';
+import * as fromSearchAppNum from './search-appnum.reducer';
 import * as fromSearchProject from './search-project.reducer';
 import { Task} from '@app/core/model/workfront/Task.model';
 
 export interface RedactorState {
-  data: fromData.State;
-  search: fromSearch.State;
+  task: fromTask.State;
+  searchAppNum: fromSearchAppNum.State;
   searchProject: fromSearchProject.State;
 }
 
@@ -16,38 +16,42 @@ export interface State extends fromRoot.State {
 }
 
 export const reducers = {
-  data: fromData.reducer,
-  search: fromSearch.reducer,
+  task: fromTask.reducer,
+  searchAppNum: fromSearchAppNum.reducer,
   searchProject: fromSearchProject.reducer
 };
 
 export const getRedactorState = createFeatureSelector<State, RedactorState>('redactor');
 
-// DATA STATE
-export const getDataState = createSelector(
+// TASK STATE
+export const getTaskState = createSelector(
   getRedactorState,
-  state => state.data
+  state => state.task
 );
 
-export const getNotification = createSelector(
-  getDataState,
-  fromData.getNotification
+export const getTaskNotification = createSelector(
+  getTaskState,
+  fromTask.getNotification
 );
 export const getTaskDataLoading = createSelector(
-  getDataState,
-  fromData.getTaskDataLoading
+  getTaskState,
+  fromTask.getTaskDataLoading
 );
 export const getTaskDataLoaded = createSelector(
-  getDataState,
-  fromData.getTaskDataLoaded
+  getTaskState,
+  fromTask.getTaskDataLoaded
 );
 export const getTaskData = createSelector(
-  getDataState,
-  fromData.getTaskData
+  getTaskState,
+  fromTask.getTaskData
 );
 export const getTaskName = createSelector(
   getTaskData,
   (taskData: Task) => taskData.name
+);
+export const getTaskId = createSelector(
+  getTaskData,
+  (taskData: Task) => taskData.ID
 );
 export const getProjectName = createSelector(
   getTaskData,
@@ -55,26 +59,26 @@ export const getProjectName = createSelector(
 );
 
 // SEARCH App Number STATE
-export const getSearchState = createSelector(
+export const getSearchAppNumState = createSelector(
   getRedactorState,
-  (state: RedactorState) => state.search
+  (state: RedactorState) => state.searchAppNum
 );
 
 export const getSearchAppNumber = createSelector(
-  getSearchState,
-  fromSearch.getAppNumber
+  getSearchAppNumState,
+  fromSearchAppNum.getAppNumber
 );
-export const getSearchQuery = createSelector(
-  getSearchState,
-  fromSearch.getQuery
+export const getSearchAppNumQuery = createSelector(
+  getSearchAppNumState,
+  fromSearchAppNum.getAppNumQuery
 );
-export const getSearchLoading = createSelector(
-  getSearchState,
-  fromSearch.getLoading
+export const getSearchAppNumLoading = createSelector(
+  getSearchAppNumState,
+  fromSearchAppNum.getAppNumLoading
 );
-export const getSearchError = createSelector(
-  getSearchState,
-  fromSearch.getError
+export const getSearchAppNumError = createSelector(
+  getSearchAppNumState,
+  fromSearchAppNum.getAppNumError
 );
 
 // SEARCH PROJECT STATE
@@ -107,6 +111,11 @@ export const getSelectionProjectIds = createSelector(
 export const getAccumulateMode = createSelector(
   getSearchProjectState,
   fromSearchProject.getAccumulateMode
+);
+
+export const getProjectNotification = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getProjectNotification
 );
 
 

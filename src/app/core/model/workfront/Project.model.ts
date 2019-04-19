@@ -1,3 +1,5 @@
+import { Program} from '@app/core/model/workfront/program.model';
+
 export interface ProjecCustomField {
   "DE:Goal Date": string;
   "DE:Submission Classification": string;
@@ -21,5 +23,6 @@ export class Project {
   status: string;
   objCode: string;
   parameterValues: ProjecCustomField;
+  program: Program;
 
 }

@@ -70,10 +70,17 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       }
     }
     case SearchProjectActionTypes.SearchProjectComplete: {
-      const myIds: string[] = Object.assign([], action.payload);
+      let myIds: string[] = [];
       if (state.accumulateMode){
-        state.projectIds.forEach(p => {
-          if (myIds.indexOf(p) < 0) {
+       myIds = Object.assign([], state.projectIds);
+        action.payload.forEach(p => {
+          if (myIds.indexOf(p) < 0 && state.selectionIds.indexOf(p) < 0) {
+            myIds.push(p);
+          }
+        });
+      }else{
+        action.payload.forEach(p => {
+          if (state.selectionIds.indexOf(p) < 0) {
             myIds.push(p);
           }
         });
@@ -109,6 +116,27 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       return {
         ...state,
         accumulateMode: action.payload,
+      };
+    }
+
+    case SearchProjectActionTypes.SelectProject: {
+        const myProjectIds = [];
+        const mySelectionIds = Object.assign([], state.selectionIds);
+        state.projectIds.forEach(p => {
+          if (action.payload.indexOf(p) < 0) {
+            myProjectIds.push(p);
+          }
+        });
+      action.payload.forEach(p => {
+        if (state.selectionIds.indexOf(p) < 0) {
+          mySelectionIds.push(p);
+        }
+      });
+
+      return {
+        ...state,
+        projectIds: myProjectIds,
+        selectionIds: mySelectionIds
       };
     }
 

@@ -1,9 +1,24 @@
 <div class="search-result-section">
-  <ngx-datatable
-    style="width: 90%"
-    class="material"
+  <div class="result-header">
+    <mat-toolbar>
+      <span>Select Projects for Redaction</span>
+      <span class="line-spacer"></span>
+      <button *ngIf="selected.length>0"
+              class="select-button"
+              mat-raised-button
+              color="primary"
+              matBadge={{selected.length}}
+              matBadgePosition="after"
+              matBadgeColor="accent"
+              (click)="onSelectProject()">
+        Add Projects
+      </button>
+    </mat-toolbar>
+  </div>
+  <ngx-datatable #searchDataTable
+    class="material striped search-datatable"
     [rows]="projects"
-    [columnMode]="'force'"
+    [columnMode]="'flex'"
     [headerHeight]="50"
     [footerHeight]="50"
     [rowHeight]="'auto'"
@@ -11,7 +26,6 @@
     [selected]="selected"
     [selectionType]="'checkbox'"
     [selectAllRowsOnPage]="false"
-    [displayCheck]="displayCheck"
     (activate)="onActivate($event)"
     (select)='onSelect($event)'>
     <ngx-datatable-column
@@ -23,9 +37,44 @@
       [headerCheckboxable]="true"
       [checkboxable]="true">
     </ngx-datatable-column>
-    <ngx-datatable-column name="Name"></ngx-datatable-column>
-    <ngx-datatable-column name="Gender"></ngx-datatable-column>
-    <ngx-datatable-column name="Company"></ngx-datatable-column>
+    <ngx-datatable-column prop="name" [flexGrow]="2">
+      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span (click)="sort()">Name</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop='establishedName' [flexGrow]="2">
+      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span (click)="sort()">Established Name</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop='dosageForm' [flexGrow]="1">
+      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span (click)="sort()">Dosage Form</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop='approvedStrength' [flexGrow]="1">
+      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span (click)="sort()">Approved Strength</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+    <!--<ngx-datatable-footer>-->
+      <!--<ng-template-->
+        <!--ngx-datatable-footer-template>-->
+        <!--<button mat-button>my button</button>-->
+      <!--</ng-template>-->
+    <!--</ngx-datatable-footer>-->
   </ngx-datatable>
 </div>
 

@@ -4,7 +4,8 @@ export enum SearchProjectActionTypes {
   SearchProject = '[Project] Search Project',
   SearchProjectComplete = '[Project] Search Project Complete',
   SearchProjectError = '[Project] Search Project Error',
-  SearchProjectAccumulate = '[Project] Search Project Accumulate'
+  SearchProjectAccumulate = '[Project] Search Project Accumulate',
+  SelectProject = '[Project] Select Project'
 }
 
 export class SearchProject implements Action {
@@ -31,8 +32,15 @@ export class SearchProjectAccumulate implements Action {
   constructor(public payload: boolean) {}
 }
 
+export class SelectProject implements Action {
+  readonly type = SearchProjectActionTypes.SelectProject;
+
+  constructor(public payload: string[]) {}
+}
+
 export type SearchProjectActionsUnion =
   | SearchProject
   | SearchProjectComplete
   | SearchProjectError
-  | SearchProjectAccumulate;
+  | SearchProjectAccumulate
+  | SelectProject;

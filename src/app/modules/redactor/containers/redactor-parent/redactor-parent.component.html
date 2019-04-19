@@ -1,8 +1,8 @@
 <div class="flex-container" *ngIf="taskDataLoaded$ | async">
   <app-header-parent></app-header-parent>
   <app-search-parent></app-search-parent>
-  <div fxLayou="row" class="project-section">
-    <div fxFlex="800px">
+  <div fxLayou="row" class="project-section" fxLayoutGap="10px">
+    <div fxFlex="60%">
       <app-search-result-parent></app-search-result-parent>
     </div>
     <div fxFlex class="selection-section">

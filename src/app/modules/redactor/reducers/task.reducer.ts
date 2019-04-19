@@ -15,7 +15,7 @@ const initialState: State = {
   taskDataLoaded: false,
   taskDataLoading: false,
   taskData: null,
-  notification: null
+  notification: new Notification()
 };
 
 export function reducer(

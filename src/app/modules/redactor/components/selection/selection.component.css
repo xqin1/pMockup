@@ -1,0 +1,17 @@
+.selection-datatable {
+  text-align: left;
+  width:100%;
+  margin:10px auto;
+}
+
+.selection-button{
+  margin-right: 50px;
+}
+
+.selection-header {
+  height: 50px;
+}
+
+.remove-button {
+  line-height: 24px !important
+}

@@ -48,7 +48,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
 
       const noti = new Notification();
       noti.display = true;
-      noti.duration = 5000;
+      noti.duration = CONFIG.notificationDuration;
       noti.message = 'Searching projects...';
       if (state.accumulateMode){
         return {
@@ -87,7 +87,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       }
       const noti = new Notification();
       noti.display = true;
-      noti.duration = null;
+      noti.duration = CONFIG.notificationDuration;
       noti.message = `Finish searching projects...${action.payload.length} projects found`;
       return {
         ...state,
@@ -140,6 +140,32 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       };
     }
 
+    case SearchProjectActionTypes.RemoveSelecttedProject: {
+      const myProjectIds = [];
+      const mySelectionIds = [];
+      state.selectionIds.forEach(p => {
+        if (action.payload !== p) {
+          mySelectionIds.push(p);
+        }
+      });
+      if (state.projectIds.length > 0) {
+        state.projectIds.forEach(p => {
+          if (action.payload !== p) {
+            myProjectIds.push(p);
+          }
+        });
+      }else{
+        myProjectIds.push(action.payload);
+      }
+
+
+      return {
+        ...state,
+        projectIds: myProjectIds,
+        selectionIds: mySelectionIds
+      };
+    }
+
     default: {
       return state;
     }
@@ -153,5 +179,6 @@ export const getProjectError = (state: State) => state.error;
 export const getSelectionsIds = (state: State) => state.selectionIds;
 export const getAccumulateMode = (state: State) => state.accumulateMode;
 export const getProjectNotification = (state: State) => state.notification;
+
 
 

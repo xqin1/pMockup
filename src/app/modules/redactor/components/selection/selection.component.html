@@ -1,3 +1,49 @@
-<p>
-  selection works!
-</p>
+<div class="selection-result-section">
+  <div class="selection-header">
+    <mat-toolbar>
+      <span>Confirm Projects for Redaction</span>
+      <span class="line-spacer"></span>
+      <button *ngIf = "selectionIds.length > 0"
+              class="selection-button"
+              mat-raised-button
+              color="primary"
+              matBadge={{selectionIds.length}}
+              matBadgePosition="after"
+              matBadgeColor="accent"
+              (click)="onConfirmSelection()">
+        Confirm Projects
+      </button>
+    </mat-toolbar>
+  </div>
+  <ngx-datatable #selectionDataTable
+                 class="material striped selection-datatable"
+                 [rows]="selectedProjects"
+                 [columnMode]="'flex'"
+                 [headerHeight]="50"
+                 [rowHeight]="'auto'">
+    <ngx-datatable-column prop="name" [flexGrow]="3">
+      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span (click)="sort()">Name</span>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column
+      [sortable]="false"
+      [canAutoResize]="false"
+      [draggable]="false"
+      [resizeable]="false">
+      <ng-template ngx-datatable-header-template>
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button mat-raised-button color="warn" class="remove-button" (click)="onRemoveSelection(row)">
+          Remove
+          <mat-icon>clear</mat-icon>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+
+

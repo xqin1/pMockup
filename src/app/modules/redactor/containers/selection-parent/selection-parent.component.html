@@ -1,3 +1,6 @@
-<p>
-  selection-parent works!
-</p>
+<app-selection
+  [selectionIds]="selectionIds$ | async"
+  (removeSelection)="onRemoveSelection($event)"
+  (confirmSelection)="onConfirmProject($event)">
+
+</app-selection>

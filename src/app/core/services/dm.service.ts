@@ -172,7 +172,7 @@ export class DMService {
         })
       );
   }
-  updateRedactorProjectNotes(redactorNotes: RedactorUpdateNote) {
+  updateRedactorProjectNotes(redactorNotes: string) {
     return this.http
       .post<RedactorResponse>(`${environment.documentManagementURL}/redactor/setRedactorNotes`, redactorNotes)
       .pipe(

@@ -10,11 +10,19 @@ import { Task} from '@app/core/model/workfront/Task.model';
 import {TaskDataLoad, TaskDataLoadError, TaskDataLoadSuccess, TaskActionTypes} from '@app/modules/redactor/actions/task.action';
 
 import { SearchAppNum, SearchAppNumComplete, SearchAppNumError, SearchAppNumActionTypes} from '@app/modules/redactor/actions/search-appnum.action';
-import { SearchProject, SearchProjectComplete, SearchProjectError, SearchProjectActionTypes} from '@app/modules/redactor/actions/search-project.action';
+import {
+  SearchProject,
+  SearchProjectComplete,
+  SearchProjectError,
+  SearchProjectActionTypes,
+  UpdateRedactorProject,
+  UpdateRedactorProjectComplete, UpdateRedactorProjectError
+} from '@app/modules/redactor/actions/search-project.action';
 import { AttachTemplateComplete, AttachTemplateError} from '@app/modules/redactor/actions/search-project.action';
 import {EMPTY} from 'rxjs/internal/observable/empty';
 import {Project} from '@app/core/model/workfront/Project.model';
 import {RedactorResponse} from '@app/modules/redactor/models/redactor-response.model';
+import { RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
 
 
 @Injectable()
@@ -24,7 +32,6 @@ export class RedactorEffects {
     private dmService: DMService,
     private redactorService: RedactorService
   ) {}
-
 
   @Effect()
   loadTask$: Observable<Action> = this.actions$.pipe(
@@ -80,6 +87,23 @@ export class RedactorEffects {
           }
         }),
         catchError(error => of(new AttachTemplateError(projectId)))
+      )
+    )
+  );
+  @Effect()
+  updateRedactor$: Observable<Action> = this.actions$.pipe(
+    ofType<SearchProject>(SearchProjectActionTypes.UpdateRedactorProject),
+    map(action => action.payload),
+    mergeMap((note) =>
+      this.dmService.updateRedactorProjectNotes(note).pipe(
+        map((response: RedactorResponse) => {
+          if (response.result === "success") {
+            return new UpdateRedactorProjectComplete();
+          }else {
+            return new UpdateRedactorProjectError("update project error");
+          }
+        }),
+        catchError(error => of(new UpdateRedactorProjectError("update project error")))
       )
     )
   );

@@ -7,10 +7,10 @@ export enum SearchProjectActionTypes {
   SearchProjectError = '[Project] Search Project Error',
   SearchProjectAccumulate = '[Project] Search Project Accumulate',
   SelectProject = '[Project] Select Project',
-  RemoveSelecttedProject = '[Project] Remove Selected Project',
-  UpdateProject = '[Project] Update Project',
-  UpdateProjectComplete = '[Project] Update Project Complete',
-  UpdateProjectError = '[Project] Update Project Error',
+  RemoveSelectedProject = '[Project] Remove Selected Project',
+  UpdateRedactorProject = '[Project] Update Project',
+  UpdateRedactorProjectComplete = '[Project] Update Project Complete',
+  UpdateRedactorProjectError = '[Project] Update Project Error',
   AttachTemplate = '[Project] Attach Template',
   AttachTemplateComplete = '[Project] Attach Template Complete',
   AttachTemplateError = '[Project] Attach Template Error',
@@ -48,23 +48,23 @@ export class SelectProject implements Action {
 }
 
 export class RemoveSelectedProject implements Action {
-  readonly type = SearchProjectActionTypes.RemoveSelecttedProject;
+  readonly type = SearchProjectActionTypes.RemoveSelectedProject;
 
   constructor(public payload: string) {}
 }
 
-export class UpdateProject implements Action {
-  readonly type = SearchProjectActionTypes.UpdateProject;
+export class UpdateRedactorProject implements Action {
+  readonly type = SearchProjectActionTypes.UpdateRedactorProject;
 
-  constructor(public payload: RedactorUpdateNote) {}
+  constructor(public payload: string) {}
 }
 
-export class UpdateProjectComplete implements Action {
-  readonly type = SearchProjectActionTypes.UpdateProjectComplete;
+export class UpdateRedactorProjectComplete implements Action {
+  readonly type = SearchProjectActionTypes.UpdateRedactorProjectComplete;
 }
 
-export class UpdateProjectError implements Action {
-  readonly type = SearchProjectActionTypes.UpdateProjectError;
+export class UpdateRedactorProjectError implements Action {
+  readonly type = SearchProjectActionTypes.UpdateRedactorProjectError;
 
   constructor(public payload: string) {}
 }
@@ -97,9 +97,9 @@ export type SearchProjectActionsUnion =
   | SearchProjectAccumulate
   | SelectProject
   | RemoveSelectedProject
-  | UpdateProject
-  | UpdateProjectComplete
-  | UpdateProjectError
+  | UpdateRedactorProject
+  | UpdateRedactorProjectComplete
+  | UpdateRedactorProjectError
   | AttachTemplate
   | AttachTemplateComplete
   | AttachTemplateError

@@ -11,6 +11,7 @@ export interface State {
   error: string;
   query: string;
   notification: Notification;
+
   projectUpdating: boolean;
   projectUpdateComplete: boolean;
   projectUpdateError: string;
@@ -157,7 +158,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       };
     }
 
-    case SearchProjectActionTypes.RemoveSelecttedProject: {
+    case SearchProjectActionTypes.RemoveSelectedProject: {
       const myProjectIds = [];
       const mySelectionIds = [];
       state.selectionIds.forEach(p => {
@@ -183,11 +184,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       };
     }
 
-
-
-
-
-    case SearchProjectActionTypes.UpdateProject: {
+    case SearchProjectActionTypes.UpdateRedactorProject: {
         return {
           ...state,
           projectUpdating: true,
@@ -196,18 +193,28 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
         };
     }
 
-    case SearchProjectActionTypes.UpdateProjectComplete: {
+    case SearchProjectActionTypes.UpdateRedactorProjectComplete: {
       return {
         ...state,
         projectIds: [],
         selectionIds: [],
+        accumulateMode: true,
+        loading: false,
+        error: '',
+        query: '',
+        notification: new Notification(),
         projectUpdating: false,
         projectUpdateComplete: true,
-        projectUpdateError: ''
+        projectUpdateError: '',
+        templateAttaching: false,
+        templateAttachComplete: true,
+        templateAttachError: '',
+        templateAttachAllComplete: true,
+        projectTemplateAttached: []
       };
     }
 
-    case SearchProjectActionTypes.UpdateProjectError: {
+    case SearchProjectActionTypes.UpdateRedactorProjectError: {
       return {
         ...state,
         projectUpdating: false,
@@ -250,7 +257,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       return {
         ...state,
         templateAttaching: false,
-        templateAttachComplete: false,
+        templateAttachComplete: true,
         templateAttachError: '',
         templateAttachAllComplete: true
       };

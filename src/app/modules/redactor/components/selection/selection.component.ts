@@ -17,7 +17,7 @@ export class SelectionComponent implements OnInit {
   @Output() removeSelection = new EventEmitter<string>();
   @Output() attachTemplate = new EventEmitter<string>();
   @Output() finishAttachTemplate = new EventEmitter<string>();
-  @Output() updateProject = new EventEmitter<RedactorUpdateNote>();
+  @Output() updateRedactorProject = new EventEmitter<string>();
   selectedProjects: RedactorProject[] = [];
   constructor(
     private redactorService: RedactorService
@@ -41,28 +41,25 @@ export class SelectionComponent implements OnInit {
         this.selectedProjects = [];
       }
     }
-    if (changes["attachTemplateComplete"]) {
-      if (this.attachTemplateComplete){
+    if (changes["projectAttachedTemplate"]) {
+      if (this.projectAttachedTemplate.length > 0) {
         if (this.selectionIds.length === this.projectAttachedTemplate.length) {
           this.finishAttachTemplate.emit();
+          const note = new RedactorUpdateNote();
+          note.taskId = this.taskId;
+          const pIds = [], pNames = [];
+          for (const p of  this.selectedProjects){
+            pIds.push(p.id);
+            pNames.push(p.name);
+          }
+          note.projectIds = pIds;
+          note.projectNames = pNames;
+          this.updateRedactorProject.emit(JSON.stringify(note));
         } else {
           this.attachTemplate.emit(this.selectionIds[this.projectAttachedTemplate.length]);
         }
       }
-    }
-    if (changes["attachTemplateAllComplete"]) {
-      if (this.attachTemplateAllComplete) {
-        const note = new RedactorUpdateNote();
-        note.taskId = this.taskId;
-        const pIds = [], pNames = [];
-        for (const p of  this.selectedProjects){
-          pIds.push(p.id);
-          pNames.push(p.name);
-        }
-        note.projectIds = pIds;
-        note.projectNames = pNames;
-        this.updateProject.emit(note);
-      }
+
     }
   }
 

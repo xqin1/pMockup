@@ -31,8 +31,8 @@ export class SelectionParentComponent implements OnInit {
   onRemoveSelection(projectId: string) {
     this.store.dispatch(new SearchProjectActions.RemoveSelectedProject(projectId));
   }
-  onUpdateProject(update: RedactorUpdateNote) {
-   this.store.dispatch(new SearchProjectActions.UpdateProject(update));
+  onUpdateRedactorProject(update: string) {
+   this.store.dispatch(new SearchProjectActions.UpdateRedactorProject(update));
   }
   onAttachTemplate(projectId: string) {
     this.store.dispatch(new SearchProjectActions.AttachTemplate(projectId));

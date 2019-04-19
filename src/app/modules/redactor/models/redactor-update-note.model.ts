@@ -1,4 +1,4 @@
-export class RedactorUpdateNoteModel {
+export class RedactorUpdateNote {
   projectIds: string[];
   taskId: string;
   projectNames: string[];

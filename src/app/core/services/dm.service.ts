@@ -13,7 +13,7 @@ import {of} from 'rxjs/index';
 import {User} from '@app/core/model/workfront/User.model';
 import {MockUser } from '@app/modules/document-management/user';
 import {RedactorResponse} from '@app/modules/redactor/models/redactor-response.model';
-import {RedactorUpdateNoteModel} from '@app/modules/redactor/models/redactor-update-note.model';
+import {RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
 
 @Injectable()
 export class DMService {
@@ -161,7 +161,7 @@ export class DMService {
         })
       );
   }
-  getAttachRdactorTemplate(projectId: string) {
+  attachRdactorTemplate(projectId: string) {
     return this.http
       .get<RedactorResponse>(`${environment.documentManagementURL}/redactor/attachRedactorTemplate?projectId=${projectId}`)
       .pipe(
@@ -172,7 +172,7 @@ export class DMService {
         })
       );
   }
-  updateRedactorProjectNotes(redactorNotes: RedactorUpdateNoteModel) {
+  updateRedactorProjectNotes(redactorNotes: RedactorUpdateNote) {
     return this.http
       .post<RedactorResponse>(`${environment.documentManagementURL}/redactor/setRedactorNotes`, redactorNotes)
       .pipe(

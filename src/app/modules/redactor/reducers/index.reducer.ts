@@ -118,6 +118,43 @@ export const getProjectNotification = createSelector(
   fromSearchProject.getProjectNotification
 );
 
+// UPDATE PROJECt AFTER ATTACH TEMPLATE
+export const getProjectUpdating = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getProjectUpdating
+);
+export const getProjectUpdateComplete = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getProjectUpdateComplete
+);
+export const getProjectUpdateError = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getProjectUpdateError
+);
+
+// ATTACH TEMPLATE
+export const getTemplateAttaching = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getTemplateAttaching
+);
+export const getTemplateError = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getTemplateError
+);
+export const getTemplateAttachComplete = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getTemplateAttachComplete
+);
+export const getTemplateAttachAllComplete = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getTemplateAttachAllComplete
+);
+export const getProjectTemplateAttached = createSelector(
+  getSearchProjectState,
+  fromSearchProject.getProjectTemplateAttached
+);
+
+
 
 
 

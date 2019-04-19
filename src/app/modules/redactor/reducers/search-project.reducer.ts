@@ -11,6 +11,15 @@ export interface State {
   error: string;
   query: string;
   notification: Notification;
+  projectUpdating: boolean;
+  projectUpdateComplete: boolean;
+  projectUpdateError: string;
+
+  templateAttaching: boolean;
+  templateAttachComplete: boolean;
+  templateAttachAllComplete: boolean;
+  templateAttachError: string;
+  projectTemplateAttached: string[];
 }
 
 const initialState: State = {
@@ -20,7 +29,15 @@ const initialState: State = {
   loading: false,
   error: '',
   query: '',
-  notification: new Notification()
+  notification: new Notification(),
+  projectUpdating: false,
+  projectUpdateComplete: false,
+  projectUpdateError: '',
+  templateAttaching: false,
+  templateAttachComplete: false,
+  templateAttachError: '',
+  templateAttachAllComplete: false,
+  projectTemplateAttached: []
 };
 
 export function reducer(state = initialState, action: SearchProjectActionsUnion): State {
@@ -166,6 +183,79 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       };
     }
 
+
+
+
+
+    case SearchProjectActionTypes.UpdateProject: {
+        return {
+          ...state,
+          projectUpdating: true,
+          projectUpdateComplete: false,
+          projectUpdateError: ''
+        };
+    }
+
+    case SearchProjectActionTypes.UpdateProjectComplete: {
+      return {
+        ...state,
+        projectIds: [],
+        selectionIds: [],
+        projectUpdating: false,
+        projectUpdateComplete: true,
+        projectUpdateError: ''
+      };
+    }
+
+    case SearchProjectActionTypes.UpdateProjectError: {
+      return {
+        ...state,
+        projectUpdating: false,
+        projectUpdateComplete: true,
+        projectUpdateError: action.payload
+      };
+    }
+
+    case SearchProjectActionTypes.AttachTemplate: {
+      return {
+        ...state,
+        templateAttaching: true,
+        templateAttachComplete: false,
+        templateAttachError: ''
+      };
+    }
+
+    case SearchProjectActionTypes.AttachTemplateComplete: {
+      const myProjectAttachedTemplate = Object.assign([], state.projectTemplateAttached);
+      myProjectAttachedTemplate.push(action.payload);
+      return {
+        ...state,
+        templateAttaching: false,
+        templateAttachComplete: true,
+        templateAttachError: '',
+        projectTemplateAttached: myProjectAttachedTemplate
+      };
+    }
+
+    case SearchProjectActionTypes.AttachTemplateError: {
+      return {
+        ...state,
+        templateAttaching: false,
+        templateAttachComplete: true,
+        templateAttachError: action.payload
+      };
+    }
+
+    case SearchProjectActionTypes.AttachAllTemplateComplete: {
+      return {
+        ...state,
+        templateAttaching: false,
+        templateAttachComplete: false,
+        templateAttachError: '',
+        templateAttachAllComplete: true
+      };
+    }
+
     default: {
       return state;
     }
@@ -179,6 +269,14 @@ export const getProjectError = (state: State) => state.error;
 export const getSelectionsIds = (state: State) => state.selectionIds;
 export const getAccumulateMode = (state: State) => state.accumulateMode;
 export const getProjectNotification = (state: State) => state.notification;
+export const getProjectUpdating = (state: State) => state.projectUpdating;
+export const getProjectUpdateComplete = (state: State) => state.projectUpdateComplete;
+export const getProjectUpdateError = (state: State) => state.projectUpdateError;
+export const getTemplateAttaching = (state: State) => state.templateAttaching;
+export const getTemplateError = (state: State) => state.templateAttachError;
+export const getTemplateAttachComplete = (state: State) => state.templateAttachComplete;
+export const getTemplateAttachAllComplete = (state: State) => state.templateAttachAllComplete;
+export const getProjectTemplateAttached = (state: State) => state.projectTemplateAttached;
 
 
 

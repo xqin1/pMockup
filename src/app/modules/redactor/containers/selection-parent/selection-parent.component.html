@@ -1,6 +1,13 @@
 <app-selection
+  [taskId]="taskId$ | async"
   [selectionIds]="selectionIds$ | async"
+  [projectAttachedTemplate]="projectAttachedTemplate$ | async"
+  [attachTemplateComplete]="attachTemplateComplete$ | async"
+  [attachTemplateAllComplete]="attachTemplateAllComplete$ | async"
   (removeSelection)="onRemoveSelection($event)"
-  (confirmSelection)="onConfirmProject($event)">
+  (confirmProject)="onUpdateProject($event)"
+  (attachTemplate)="onAttachTemplate($event)"
+  (finishAttachTemplate)="onFinishAttachTemplate()"
+  (updateProject)="onUpdateProject($event)">
 
 </app-selection>

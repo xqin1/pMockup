@@ -11,8 +11,10 @@ import {TaskDataLoad, TaskDataLoadError, TaskDataLoadSuccess, TaskActionTypes} f
 
 import { SearchAppNum, SearchAppNumComplete, SearchAppNumError, SearchAppNumActionTypes} from '@app/modules/redactor/actions/search-appnum.action';
 import { SearchProject, SearchProjectComplete, SearchProjectError, SearchProjectActionTypes} from '@app/modules/redactor/actions/search-project.action';
+import { AttachTemplateComplete, AttachTemplateError} from '@app/modules/redactor/actions/search-project.action';
 import {EMPTY} from 'rxjs/internal/observable/empty';
 import {Project} from '@app/core/model/workfront/Project.model';
+import {RedactorResponse} from '@app/modules/redactor/models/redactor-response.model';
 
 
 @Injectable()
@@ -64,7 +66,23 @@ export class RedactorEffects {
       )
     )
   );
-
+  @Effect()
+  attachTemplate$: Observable<Action> = this.actions$.pipe(
+    ofType<SearchProject>(SearchProjectActionTypes.AttachTemplate),
+    map(action => action.payload),
+    mergeMap((projectId) =>
+      this.dmService.attachRdactorTemplate(projectId).pipe(
+        map((response: RedactorResponse) => {
+          if (response.result === "success") {
+            return new AttachTemplateComplete(projectId);
+          }else {
+            return new AttachTemplateError(projectId);
+          }
+        }),
+        catchError(error => of(new AttachTemplateError(projectId)))
+      )
+    )
+  );
   @Effect()
   searchAppNumber$ = ({ debounce = 300, scheduler = asyncScheduler } = {}): Observable<Action> => this.actions$.pipe(
       ofType<SearchAppNum>(SearchAppNumActionTypes.SearchAppNum),

@@ -9,7 +9,6 @@ mat-card-subtitle{
   font-size: 16px !important;
 }
 .mat-card {
-  width: 100% !important;
   height: 100px !important;
   padding: 8px !important;
 }

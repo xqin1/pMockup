@@ -26,7 +26,7 @@ export function reducer(
     case TaskActionTypes.TaskDataLoad: {
       const noti = new Notification();
       noti.display = true;
-      noti.duration = null;
+      noti.duration = CONFIG.notificationDuration;
       noti.message = 'Loading Redactor Task Data...';
       return {
         ...state,

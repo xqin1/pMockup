@@ -133,7 +133,7 @@ export class DMService {
       .get<any>(`${environment.documentManagementURL}/redactor/getRedactorTask?taskId=${taskId}`)
       .pipe(
         map(res => res.data),
-        catchError(this.exceptionService.catchBadResponse),
+       // catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with task data");
         })
@@ -144,7 +144,7 @@ export class DMService {
       .get<any>(`${environment.documentManagementURL}/redactor/getApplicationNumber?appType=${appType}&appNumber=${appNumber}&limit=${limit}`)
       .pipe(
         map(res => res.data),
-        catchError(this.exceptionService.catchBadResponse),
+       // catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with application number");
         })
@@ -155,7 +155,7 @@ export class DMService {
       .get<any>(`${environment.documentManagementURL}/redactor/getPostApprovalProjects?appType=${appType}&appNumber=${appNumber}`)
       .pipe(
         map(res => res.data),
-        catchError(this.exceptionService.catchBadResponse),
+      //  catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with get redactor projects");
         })
@@ -166,7 +166,7 @@ export class DMService {
       .get<RedactorResponse>(`${environment.documentManagementURL}/redactor/attachRedactorTemplate?projectId=${projectId}`)
       .pipe(
         map(res => res),
-        catchError(this.exceptionService.catchBadResponse),
+      //  catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with attach template");
         })
@@ -177,7 +177,7 @@ export class DMService {
       .post<RedactorResponse>(`${environment.documentManagementURL}/redactor/setRedactorNotes`, redactorNotes)
       .pipe(
         map(res => res),
-        catchError(this.exceptionService.catchBadResponse),
+      //  catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with update redactor notes");
         })

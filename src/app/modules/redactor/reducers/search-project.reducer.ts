@@ -217,9 +217,22 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
     case SearchProjectActionTypes.UpdateRedactorProjectError: {
       return {
         ...state,
+        ...state,
+        projectIds: [],
+        selectionIds: [],
+        accumulateMode: true,
+        loading: false,
+        error: '',
+        query: '',
+        notification: new Notification(),
         projectUpdating: false,
         projectUpdateComplete: true,
-        projectUpdateError: action.payload
+        projectUpdateError: "There's error while updating redactor project, please check the project and task's update tab.",
+        templateAttaching: false,
+        templateAttachComplete: true,
+        templateAttachError: '',
+        templateAttachAllComplete: true,
+        projectTemplateAttached: []
       };
     }
 

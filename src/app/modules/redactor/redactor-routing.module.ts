@@ -17,7 +17,7 @@ const routes: Routes = [
     path: ':taskId',
     component: RedactorParentComponent,
     resolve: {
-       data: TaskResolverService
+     //  data: TaskResolverService
     },
     children: []
   }

@@ -1,3 +1,11 @@
 .header {  background-color: #f1f1f1; height:80px }
-.header-left{margin-left:60px;}
+.header-left{margin-left:80px;}
 .header-right{}
+
+.header-project {
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+.header-task {
+  font-size: 16px;
+}

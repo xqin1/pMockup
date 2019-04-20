@@ -67,7 +67,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       const noti = new Notification();
       noti.display = true;
       noti.duration = null;
-      noti.message = 'Searching projects...';
+      noti.message = `Searching projects with application number ${myQuery}...`;
       if (state.accumulateMode){
         return {
           ...state,
@@ -106,7 +106,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       const noti = new Notification();
       noti.display = true;
       noti.duration = CONFIG.notificationDuration;
-      noti.message = `Finish searching projects...${action.payload.length} projects found`;
+      noti.message = `Finish searching projects with application number ${state.query}...${action.payload.length} projects found`;
       return {
         ...state,
         projectIds: myIds,

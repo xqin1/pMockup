@@ -9,7 +9,6 @@ import {MatCheckboxChange} from '@angular/material';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
-  @Input() query = '';
   @Input() searching = false;
   @Input() error = '';
   @Input() appNumber = [];
@@ -21,21 +20,21 @@ export class SearchComponent implements OnInit {
   appNumInput: FormControl = new FormControl();
   constructor() { }
 
-  searchAppNumber(searchText: string){
-      this.search.emit(searchText);
+  searchAppNumber(){
+    const appNum = this.appNumInput.value;
+    this.search.emit(appNum);
   }
-  // searchProject(){
-  //   console.log("search project: " + this.appNumInput.value);
-  // }
 
-  selectAppNumber($event){
+  selectAppNumber(){
     const appNum = this.appNumInput.value;
     this.searchProjects.emit(appNum);
+    this.appNumInput.setValue('');
   }
 
   startSearchProjects(){
     const appNum = this.appNumInput.value;
     this.searchProjects.emit(appNum);
+    this.appNumInput.setValue('');
   }
 
   showSearchButton() {

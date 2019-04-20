@@ -1,33 +1,35 @@
 <div fxLayer="row" class="search-box">
   <mat-card>
-    <mat-card-subtitle>Search Projects</mat-card-subtitle>
+    <mat-card-subtitle class="search-title">Search Projects</mat-card-subtitle>
     <mat-card-content>
       <mat-form-field>
         <input #appNum matInput placeholder="Enter application number"
                [matAutocomplete]="appNumAuto"
                [formControl]="appNumInput"
-               ([value])="query"
-               (keyup)="searchAppNumber($event.target.value)">
+               (keyup)="searchAppNumber()">
         <mat-autocomplete
           #appNumAuto="matAutocomplete"
-          (optionSelected)="selectAppNumber($event)">
+          (optionSelected)="selectAppNumber()">
           <mat-option *ngFor="let appNum of appNumber" [value]="appNum">
             {{appNum}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
       <mat-spinner [class.show]="searching" [diameter]="30" [strokeWidth]="3"></mat-spinner>
-      <button mat-button color="primary" class="search-button"
+      <button mat-raised-button color="primary" class="search-button"
               (click)="startSearchProjects()"
               [disabled]="showSearchButton()">
         Search
       </button>
-      <mat-checkbox class="search-option" (change)="onChange($event)" [checked]="projectAccumulateMode">Keep Existing Results</mat-checkbox>
     </mat-card-content>
-    <div class="accumulateOption">
-
-    </div>
-    <mat-card-footer><span *ngIf="error">{{error}}</span></mat-card-footer>
+    <mat-card-footer>
+      <mat-checkbox
+        class="search-option"
+        (change)="onChange($event)"
+        [checked]="projectAccumulateMode">
+        Keep Existing Results
+      </mat-checkbox>
+    </mat-card-footer>
   </mat-card>
 </div>
 

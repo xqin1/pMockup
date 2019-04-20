@@ -15,7 +15,6 @@ import * as fromRedactor from '../../reducers/index.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchParentComponent implements OnInit {
-  searchQuery$: Observable<string>;
   appNumber$: Observable<number[]>;
   loading$: Observable<boolean>;
   error$: Observable<string>;
@@ -23,10 +22,6 @@ export class SearchParentComponent implements OnInit {
   constructor(
     private store: Store<fromRedactor.State>
   ) {
-    this.searchQuery$ = store.pipe(
-      select(fromRedactor.getSearchAppNumQuery),
-      take(1)
-    );
     this.appNumber$ = store.pipe(select(fromRedactor.getSearchAppNumber));
     this.loading$ = store.pipe(select(fromRedactor.getSearchAppNumLoading));
     this.error$ = store.pipe(select(fromRedactor.getSearchAppNumError));

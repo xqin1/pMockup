@@ -14,8 +14,8 @@ mat-card-subtitle{
 }
 
 mat-card-footer {
-  color: #ff0000;
   padding: 5px 0;
+  margin-top: -30px;
 }
 
 .mat-form-field {
@@ -36,15 +36,18 @@ mat-card-footer {
 
 .search-button {
   position: relative;
-  font-size: 24px;
-  left: 10px;
+  font-size: 20px;
+  left: 20px;
 }
 
 .search-option{
   position: relative;
   padding-top: 15px;
-  left: 20px;
+  left:120px;
 }
 .search-box{
   padding-bottom: 10px;
+}
+.search-title{
+  font-size: 24px !important;
 }

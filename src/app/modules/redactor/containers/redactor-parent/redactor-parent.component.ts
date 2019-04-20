@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import { Title} from '@angular/platform-browser';
 import { select, Store } from '@ngrx/store';
 import * as fromRedactor from '../../reducers/index.reducer';
@@ -14,7 +14,8 @@ import {of} from 'rxjs/internal/observable/of';
 @Component({
   selector: 'app-redactor-parent',
   templateUrl: './redactor-parent.component.html',
-  styleUrls: ['./redactor-parent.component.css']
+  styleUrls: ['./redactor-parent.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RedactorParentComponent implements OnInit, OnDestroy {
   taskDataLoading$: Observable<boolean>;
@@ -68,7 +69,7 @@ export class RedactorParentComponent implements OnInit, OnDestroy {
           if (notification.duration !== null) {
             this.config.duration = notification.duration;
           }else{
-            this.config.duration = 20000;
+            this.config.duration = 100000;
           }
           if (notification.message !== null) {
             this.snackBar.open(notification.message, "" , this.config);

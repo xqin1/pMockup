@@ -1,0 +1,18 @@
+.progress-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+.progress-margin {
+  margin: 0 10px;
+}
+
+.title-bar {
+  margin-bottom: 35px;
+  background-color: #f1f1f1;
+}
+
+.mat-dialog-actions {
+  maring-top: 80px;
+}

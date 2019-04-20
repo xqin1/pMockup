@@ -66,7 +66,7 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
 
       const noti = new Notification();
       noti.display = true;
-      noti.duration = CONFIG.notificationDuration;
+      noti.duration = null;
       noti.message = 'Searching projects...';
       if (state.accumulateMode){
         return {

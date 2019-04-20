@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {RedactorProject} from '@app/modules/redactor/models/redactor-project.model';
 import {RedactorService} from '@app/modules/redactor/services/redactor.service';
 import {RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
@@ -10,7 +10,7 @@ import {MatDialog, MatDialogRef} from '@angular/material';
   templateUrl: './selection.component.html',
   styleUrls: ['./selection.component.css']
 })
-export class SelectionComponent implements OnInit {
+export class SelectionComponent implements OnInit, OnChanges {
   @Input() taskId: string;
   @Input() selectionIds: string[] = [];
   @Input() projectAttachedTemplate: string[] = [];
@@ -34,6 +34,10 @@ export class SelectionComponent implements OnInit {
 
   onConfirmSelection() {
     this.attachTemplate.emit(this.selectionIds[0]);
+    this.updateDialogRef = this.dialog.open(UpdateDialogParentComponent, {
+      width: '650px',
+      height: '300px'
+    });
   }
 
   openUpdateDialog() {
@@ -43,7 +47,7 @@ export class SelectionComponent implements OnInit {
     });
   }
 
-  ngOnChanges(changes: SimpleChange) {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes["selectionIds"]) {
       if (this.selectionIds.length > 0){
         this.selectedProjects = this.redactorService.getShowingProjects(this.selectionIds);

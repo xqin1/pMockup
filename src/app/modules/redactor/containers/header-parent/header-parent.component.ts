@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Store, select} from '@ngrx/store';
 import * as fromData from '../../reducers/index.reducer';
 import {Observable} from 'rxjs/Observable';
@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'app-header-parent',
   templateUrl: './header-parent.component.html',
-  styleUrls: ['./header-parent.component.css']
+  styleUrls: ['./header-parent.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderParentComponent implements OnInit {
   taskName$: Observable<string>;

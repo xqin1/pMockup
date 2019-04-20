@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
@@ -18,6 +18,7 @@ import { DMService} from '@app/core/services/dm.service';
 
 import { ContentLoaderModule } from '@netbasal/content-loader';
 import { CookieModule} from 'ngx-cookie';
+import {DEFAULT_TIMEOUT, TimeoutInterceptor} from '@app/core/services/timeout.interceptor';
 
 
 @NgModule({
@@ -47,7 +48,9 @@ import { CookieModule} from 'ngx-cookie';
   ],
   providers: [
     PEFService,
-    DMService
+    DMService,
+    [{ provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true }],
+    [{ provide: DEFAULT_TIMEOUT, useValue: 30000 }]
     ],
   bootstrap: [AppComponent]
 })

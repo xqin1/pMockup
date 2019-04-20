@@ -1,23 +1,29 @@
-<div class="title">
-  <mat-toolbar color="primary" class="title">Updaing Redaction Projects, Please don't close browser...</mat-toolbar>
+<div>
+  <mat-toolbar class="title-bar">Updaing Redaction Projects, Please don't close browser...</mat-toolbar>
   <h1 mat-dialog-title>
-    <div>
-      Attaching template to project {{projectAttachedTemplate.length + 1}} out of {{selectionIds.length}}...
+    <div *ngIf="showTemplate()">
+      Attaching template to project {{currentTemplateNumber}} out of {{selectionIds.length}}...
     </div>
-  <div>
-     Updating note on project and task....
-  </div>
-  <div>Finish Updating Redaction Projects!</div></h1>
-  <div class="progress-section">
+    <div *ngIf="showUpdate()">
+      Updating notes on task and projects...
+    </div>
+    <div *ngIf="showFinish()">
+      Finish Updating Redaction Projects!
+    </div>
+    <div *ngIf="showError()">
+      Error happens while {{errorMsg}}..., please try again.
+    </div>
+  </h1>
+  <div class="progress-section" *ngIf="showProgressBar()">
     <mat-progress-bar
       class="progress-margin"
       color="primary"
       mode="buffer"
-      value=20>
+      value={{progressValue}}>
     </mat-progress-bar>
   </div>
-  <mat-dialog-actions class="action-class">
-    <button mat-button type="button">Close</button>
-    <button mat-button type="button" mat-dialog-close>Close Application</button>
+  <mat-dialog-actions class="action-button" *ngIf="showButton()">
+    <!--<button mat-button type="button" (click)="closeApplication()">Close Application</button>-->
+    <button mat-raised-button color="primary" type="button" mat-dialog-close>Close</button>
   </mat-dialog-actions>
 </div>

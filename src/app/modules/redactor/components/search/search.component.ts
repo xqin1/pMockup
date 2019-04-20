@@ -40,8 +40,8 @@ export class SearchComponent implements OnInit {
 
   showSearchButton() {
     let hideButton = true;
-    if(this.appNumInput && this.appNumInput.value) {
-      if(this.appNumInput.value.length > 2 && !this.searching){
+    if (this.appNumInput && this.appNumInput.value) {
+      if (this.appNumInput.value.length > 2 && !this.searching){
         hideButton = false;
       }
     }

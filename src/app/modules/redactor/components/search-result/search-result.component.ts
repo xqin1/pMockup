@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, SimpleChange, OnChanges, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, SimpleChanges, OnChanges, Output, EventEmitter} from '@angular/core';
 import { RedactorService} from '@app/modules/redactor/services/redactor.service';
 import {RedactorProject} from '@app/modules/redactor/models/redactor-project.model';
 
@@ -8,7 +8,7 @@ import {RedactorProject} from '@app/modules/redactor/models/redactor-project.mod
   styleUrls: ['./search-result.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchResultComponent implements OnInit {
+export class SearchResultComponent implements OnInit, OnChanges {
   @Input() projectIds: string[] = [];
   @Output() selectProject = new EventEmitter<string[]>();
   projects: RedactorProject[] = [];
@@ -18,7 +18,7 @@ export class SearchResultComponent implements OnInit {
   ) { }
 
   onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
+    // console.log('Select Event', selected, this.selected);
 
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
@@ -26,15 +26,15 @@ export class SearchResultComponent implements OnInit {
 
   onSelectProject(){
     const selectIds = [];
-    for(const s of this.selected){
+    for (const s of this.selected){
       selectIds.push(s["id"]);
     }
     this.selectProject.emit(selectIds);
   }
 
-  ngOnChanges(changes: SimpleChange) {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes["projectIds"]) {
-      if(this.projectIds.length > 0){
+      if (this.projectIds.length > 0){
        this.projects = this.redactorService.getShowingProjects(this.projectIds);
       }else{
         this.projects = [];

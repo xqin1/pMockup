@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map, delay, catchError, finalize} from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import {map, delay, catchError, finalize, retry} from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ExceptionService } from '@app/core/services/exception.service';
 import { environment } from '../../../environments/environment';
 import {RegulatoryData} from '@app/modules/document-management/model/regulatory-data.model';
@@ -13,7 +13,6 @@ import {of} from 'rxjs/index';
 import {User} from '@app/core/model/workfront/User.model';
 import {MockUser } from '@app/modules/document-management/user';
 import {RedactorResponse} from '@app/modules/redactor/models/redactor-response.model';
-import {RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
 
 @Injectable()
 export class DMService {
@@ -22,7 +21,9 @@ export class DMService {
     private http: HttpClient,
     private exceptionService: ExceptionService,
     private logger: LoggerService
-  ) {}
+  ) {
+
+  }
   getPDFPreviewByDocumentID(documentID: string) {
     return this.http
       .get(`${environment.documentManagementURL}/documentManagement/pdfPreview?documentId=${documentID}`, {
@@ -163,8 +164,10 @@ export class DMService {
   }
   attachRdactorTemplate(projectId: string) {
     return this.http
-      .get<RedactorResponse>(`${environment.documentManagementURL}/redactor/attachRedactorTemplate?projectId=${projectId}`)
+      .get<RedactorResponse>(`${environment.documentManagementURL}/redactor/attachRedactorTemplate?projectId=${projectId}`,
+        { headers: new HttpHeaders({ timeout: `${300000}` }) })
       .pipe(
+        // retry(1),
         map(res => res),
       //  catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
@@ -174,10 +177,11 @@ export class DMService {
   }
   updateRedactorProjectNotes(redactorNotes: string) {
     return this.http
-      .post<RedactorResponse>(`${environment.documentManagementURL}/redactor/setRedactorNotes`, redactorNotes)
+      .post<RedactorResponse>(`${environment.documentManagementURL}/redactor/setRedactorNotes`, redactorNotes,
+        { headers: new HttpHeaders({ timeout: `${300000}` }) })
       .pipe(
         map(res => res),
-      //  catchError(this.exceptionService.catchBadResponse),
+      // //  catchError(this.exceptionService.catchBadResponse),
         finalize(() => {
           this.logger.log("done with update redactor notes");
         })

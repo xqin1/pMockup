@@ -1,1 +1,9 @@
-<app-update-dialog></app-update-dialog>
+<app-update-dialog
+  [selectionIds]="selectionIds$ | async"
+  [projectTemplateAttached]="projectTemplateAttached$ | async"
+  [templateAttachError]="templateAttachError$ | async"
+  [attachTemplateAllComplete]="attachTemplateAllComplete$ | async"
+  [projectUpdateError]="projectUpdateError$ | async"
+  [projectUpdating]="projectUpdating$ | async"
+  [projectUpdateComplete]="projectUpdateComplete$ | async">
+</app-update-dialog>

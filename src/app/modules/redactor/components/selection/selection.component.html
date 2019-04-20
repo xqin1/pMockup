@@ -1,5 +1,5 @@
 <!--<button (click)="openUpdateDialog()">open</button>-->
-<div class="selection-result-section">
+<div class="selection-result-section" *ngIf="selectionIds.length>0 || projectIds.length>0">
   <div class="selection-header">
     <mat-toolbar>
       <span>Confirm Projects for Redaction</span>

@@ -10,6 +10,7 @@ import {RedactorProject} from '@app/modules/redactor/models/redactor-project.mod
 })
 export class SearchResultComponent implements OnInit, OnChanges {
   @Input() projectIds: string[] = [];
+  @Input() selectionIds: string[] = [];
   @Output() selectProject = new EventEmitter<string[]>();
   projects: RedactorProject[] = [];
   selected = [];

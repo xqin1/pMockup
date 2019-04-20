@@ -1,6 +1,7 @@
 <app-selection
   [taskId]="taskId$ | async"
   [selectionIds]="selectionIds$ | async"
+  [projectIds]="projectIds$ | async"
   [projectAttachedTemplate]="projectAttachedTemplate$ | async"
   [attachTemplateComplete]="attachTemplateComplete$ | async"
   [attachTemplateAllComplete]="attachTemplateAllComplete$ | async"
@@ -8,5 +9,4 @@
   (attachTemplate)="onAttachTemplate($event)"
   (finishAttachTemplate)="onFinishAttachTemplate()"
   (updateRedactorProject)="onUpdateRedactorProject($event)">
-
 </app-selection>

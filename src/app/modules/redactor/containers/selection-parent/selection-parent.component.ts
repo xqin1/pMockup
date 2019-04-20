@@ -13,6 +13,7 @@ import { RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-
 })
 export class SelectionParentComponent implements OnInit {
   selectionIds$: Observable<string[]>;
+  projectIds$: Observable<string[]>;
   taskId$: Observable<string>;
   projectAttachedTemplate$: Observable<string[]>;
   attachTemplateComplete$: Observable<boolean>;
@@ -22,6 +23,7 @@ export class SelectionParentComponent implements OnInit {
     private store: Store<fromRedactor.State>
   ) {
     this.selectionIds$ = this.store.pipe(select(fromRedactor.getSelectionProjectIds));
+    this.projectIds$ = this.store.pipe(select(fromRedactor.getSearchProjectIds));
     this.taskId$ = this.store.pipe(select(fromRedactor.getTaskId));
     this.projectAttachedTemplate$ = this.store.pipe(select(fromRedactor.getProjectTemplateAttached));
     this.attachTemplateComplete$ = this.store.pipe(select(fromRedactor.getTemplateAttachComplete));

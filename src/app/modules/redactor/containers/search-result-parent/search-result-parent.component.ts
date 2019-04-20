@@ -12,10 +12,13 @@ import * as fromRedactor from '../../reducers/index.reducer';
 })
 export class SearchResultParentComponent implements OnInit {
   projectIds$: Observable<string[]>;
+  selectionIds$: Observable<string[]>;
   constructor(
     private store: Store<fromRedactor.State>
   ) {
     this.projectIds$ = this.store.pipe(select(fromRedactor.getSearchProjectIds));
+    this.selectionIds$ = this.store.pipe(select(fromRedactor.getSelectionProjectIds));
+
   }
 
   onSelectProject(projectIds: string[]) {

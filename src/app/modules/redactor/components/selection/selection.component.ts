@@ -13,6 +13,7 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 export class SelectionComponent implements OnInit, OnChanges {
   @Input() taskId: string;
   @Input() selectionIds: string[] = [];
+  @Input() projectIds: string[] = [];
   @Input() projectAttachedTemplate: string[] = [];
   @Input() attachTemplateComplete: boolean;
   @Input() attachTemplateAllComplete: boolean;

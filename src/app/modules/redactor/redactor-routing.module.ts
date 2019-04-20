@@ -9,6 +9,8 @@ import {SearchResultParentComponent} from '@app/modules/redactor/containers/sear
 import {SearchResultComponent} from '@app/modules/redactor/components/search-result/search-result.component';
 import {SelectionParentComponent} from '@app/modules/redactor/containers/selection-parent/selection-parent.component';
 import {SelectionComponent} from '@app/modules/redactor/components/selection/selection.component';
+import {UpdateDialogComponent} from '@app/modules/redactor/components/update-dialog/update-dialog.component';
+import { HeaderComponent} from '@app/modules/redactor/components/header/header.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,7 @@ const routes: Routes = [
 })
 export class RedactorRoutingModule { }
 export const routedComponents = [
-  RedactorParentComponent, HeaderParentComponent, HeaderParentComponent, SearchParentComponent, SearchComponent,
-  SearchResultParentComponent, SearchResultComponent, SelectionParentComponent, SelectionComponent
+  RedactorParentComponent, HeaderParentComponent, HeaderComponent, SearchParentComponent, SearchComponent,
+  SearchResultParentComponent, SearchResultComponent, SelectionParentComponent, SelectionComponent,
+  UpdateDialogComponent
 ];

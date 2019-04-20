@@ -18,7 +18,8 @@ import {
   MatRadioModule,
   MatStepperModule,
   MatDialogModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatProgressBarModule
 } from '@angular/material';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 
@@ -43,6 +44,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     MatStepperModule,
     MatDialogModule,
     MatBadgeModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     FormsModule,
 ],
@@ -66,6 +68,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     MatStepperModule,
     MatDialogModule,
     MatBadgeModule,
+    MatProgressBarModule,
     ReactiveFormsModule,
     FormsModule
   ]

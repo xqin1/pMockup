@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChange} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange} from '@angular/core';
 import {RedactorProject} from '@app/modules/redactor/models/redactor-project.model';
 import {RedactorService} from '@app/modules/redactor/services/redactor.service';
 import {RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
+import {UpdateDialogParentComponent} from '@app/modules/redactor/containers/update-dialog-parent/update-dialog-parent.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-selection',
@@ -19,18 +21,26 @@ export class SelectionComponent implements OnInit {
   @Output() finishAttachTemplate = new EventEmitter<string>();
   @Output() updateRedactorProject = new EventEmitter<string>();
   selectedProjects: RedactorProject[] = [];
+  updateDialogRef: MatDialogRef<UpdateDialogParentComponent>;
   constructor(
-    private redactorService: RedactorService
+    private redactorService: RedactorService,
+    public dialog: MatDialog
   ) { }
 
 
   onRemoveSelection(row: RedactorProject){
-    console.log(row.id);
     this.removeSelection.emit(row.id);
   }
 
   onConfirmSelection() {
     this.attachTemplate.emit(this.selectionIds[0]);
+  }
+
+  openUpdateDialog() {
+    this.updateDialogRef = this.dialog.open(UpdateDialogParentComponent, {
+      width: '650px',
+      height: '300px'
+    });
   }
 
   ngOnChanges(changes: SimpleChange) {

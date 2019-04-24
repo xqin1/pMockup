@@ -26,7 +26,7 @@ export interface State {
 const initialState: State = {
   projectIds: [],
   selectionIds: [],
-  accumulateMode: true,
+  accumulateMode: false,
   loading: false,
   error: '',
   query: '',
@@ -166,15 +166,12 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
           mySelectionIds.push(p);
         }
       });
-      if (state.projectIds.length > 0) {
         state.projectIds.forEach(p => {
           if (action.payload !== p) {
             myProjectIds.push(p);
           }
         });
-      }else{
-        myProjectIds.push(action.payload);
-      }
+      myProjectIds.push(action.payload);
 
 
       return {

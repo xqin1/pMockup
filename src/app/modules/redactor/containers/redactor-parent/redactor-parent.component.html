@@ -1,14 +1,8 @@
 <div class="flex-container" *ngIf="taskDataLoaded$ | async">
   <app-header-parent></app-header-parent>
   <app-search-parent></app-search-parent>
-  <div fxLayou="row" class="project-section" fxLayoutGap="10px">
-    <div fxFlex="65%">
-      <app-search-result-parent></app-search-result-parent>
-    </div>
-    <div fxFlex class="selection-section">
-      <app-selection-parent></app-selection-parent>
-    </div>
-  </div>
+  <app-search-result-parent></app-search-result-parent>
+  <app-selection-parent></app-selection-parent>
 </div>
 <div class="loading-section" *ngIf="taskDataLoading$ | async" class="loader">
   <facebook-content-loader></facebook-content-loader>

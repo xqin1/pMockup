@@ -121,6 +121,7 @@ common css for state contents, on state-concur, state-sign and state-archive pag
   background-color: #d7d7d7;
 }
 .ngx-datatable.material .datatable-header .datatable-header-cell{
-  font-weight: 800 !important;
-  font-size: 16px !important;
+  font-weight: bold !important;
+  font-size: 12px !important;
+  color: black;
 }

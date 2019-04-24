@@ -10,5 +10,9 @@
 
 .result-header {
   height: 50px;
+  width: 100%;
 }
 
+.mat-toolbar {
+  background: #eef6fb !important;
+}

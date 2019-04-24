@@ -1,12 +1,21 @@
 <div fxLayer="row" class="search-box">
   <mat-card>
-    <mat-card-subtitle class="search-title">Search Projects</mat-card-subtitle>
+    <mat-card-subtitle class="search-title">Search for Submission</mat-card-subtitle>
     <mat-card-content>
-      <mat-form-field>
+      <mat-form-field class="app-type-field">
+        <mat-label>Application Type</mat-label>
+        <mat-select [formControl]="appTypeDropdown">
+          <mat-option *ngFor="let appType of appTypes" [value]="appType">
+            {{appType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-input">
         <input #appNum matInput placeholder="Enter application number"
                [matAutocomplete]="appNumAuto"
                [formControl]="appNumInput"
-               (keyup)="searchAppNumber()">
+               (keyup)="searchAppNumber()"
+                autofocus>
         <mat-autocomplete
           #appNumAuto="matAutocomplete"
           (optionSelected)="selectAppNumber()">
@@ -16,20 +25,20 @@
         </mat-autocomplete>
       </mat-form-field>
       <mat-spinner [class.show]="searching" [diameter]="30" [strokeWidth]="3"></mat-spinner>
-      <button mat-raised-button color="primary" class="search-button"
+      <button mat-icon-button color="primary" class="search-button"
               (click)="startSearchProjects()"
               [disabled]="showSearchButton()">
-        Search
+        <mat-icon>search</mat-icon>
       </button>
     </mat-card-content>
-    <mat-card-footer>
-      <mat-checkbox
-        class="search-option"
-        (change)="onChange($event)"
-        [checked]="projectAccumulateMode">
-        Keep Existing Results
-      </mat-checkbox>
-    </mat-card-footer>
+    <!--<mat-card-footer>-->
+      <!--<mat-checkbox-->
+        <!--class="search-option"-->
+        <!--(change)="onChange($event)"-->
+        <!--[checked]="projectAccumulateMode">-->
+        <!--Keep Existing Results-->
+      <!--</mat-checkbox>-->
+    <!--</mat-card-footer>-->
   </mat-card>
 </div>
 

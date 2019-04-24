@@ -16,8 +16,9 @@ export class SearchComponent implements OnInit {
   @Output() search = new EventEmitter<string>();
   @Output() searchProjects = new EventEmitter<string>();
   @Output() setAccumulateMode = new EventEmitter<boolean>();
-
   appNumInput: FormControl = new FormControl();
+  appTypeDropdown: FormControl = new FormControl();
+  appTypes = ["ANDA"];
   constructor() { }
 
   searchAppNumber(){
@@ -52,6 +53,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appTypeDropdown.setValue("ANDA");
   }
 
 }

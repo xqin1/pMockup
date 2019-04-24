@@ -1,14 +1,16 @@
 <div>
-  <mat-toolbar class="title-bar">Updaing Redaction Projects, Please don't close browser...</mat-toolbar>
+  <mat-toolbar class="title-bar" *ngIf="!showButton()">
+    Updates in progress. Please don't close browser...
+  </mat-toolbar>
   <h1 mat-dialog-title>
     <div *ngIf="showTemplate()">
       Attaching template to project {{currentTemplateNumber}} out of {{selectionIds.length}}...
     </div>
     <div *ngIf="showUpdate()">
-      Updating notes on task and projects...
+      Finishing updates...
     </div>
     <div *ngIf="showFinish()">
-      Finish Updating Redaction Projects!
+      Updates Complete!
     </div>
     <div *ngIf="showError()">
       Error happens while {{errorMsg}}..., please try again.

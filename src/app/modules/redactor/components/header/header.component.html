@@ -1,13 +1,16 @@
-<div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="header-left" fxFlex="350px">
-    <h1>ANDA Redaction Application</h1>
-  </div>
-  <div class="header-right" fxFlex fxFlexLAlign="start center">
-    <div class="header-project">
-      {{projectName}}
-    </div>
-    <div class="header-task">
-      {{taskName}}
-    </div>
-  </div>
+<div class="header" fxLayout="row">
+  <mat-card class="header-card">
+    <mat-card-title class="header-title">
+      ANDA Redaction Application
+    </mat-card-title>
+    <mat-card-content>
+      <dl class="dl-horizontal">
+        <dt id="project-title">Project:</dt>
+        <dd id="project-name">{{projectName}}</dd>
+
+        <dt id="task-title">Task:</dt>
+        <dd id="task-name">{{taskName}}</dd>
+      </dl>
+    </mat-card-content>
+  </mat-card>
 </div>

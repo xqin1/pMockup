@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import * as fromRedactor from '../../reducers/index.reducer';
 import {Observable} from 'rxjs/Observable';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
-import {Notification} from '@app/modules/document-management/model/notification.model';
+import {Notification} from '@app/core/model/common/notification.model';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {TaskDataLoad} from '@app/modules/redactor/actions/task.action';

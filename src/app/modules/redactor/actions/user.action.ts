@@ -1,6 +1,4 @@
 import { Action } from '@ngrx/store';
-import { Task} from '@app/core/model/workfront/Task.model';
-import { Notification} from '@app/modules/redactor/models/notification.model';
 import {User} from '@app/core/model/workfront/User.model';
 
 export enum UserActionTypes {

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Task} from '@app/core/model/workfront/Task.model';
-import { Notification} from '@app/modules/redactor/models/notification.model';
+import { Notification} from '@app/core/model/common/notification.model';
 
 export enum TaskActionTypes {
   TaskDataLoad = '[Task] Task Data Load',

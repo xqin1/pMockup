@@ -38,14 +38,14 @@ export class SearchComponent implements OnInit {
     this.appNumInput.setValue('');
   }
 
-  showSearchButton() {
-    let hideButton = true;
+  disableSearchButton() {
+    let disableButton = true;
     if (this.appNumInput && this.appNumInput.value) {
-      if (this.appNumInput.value.length > 2 && !this.searching){
-        hideButton = false;
+      if (this.appNumInput.value.length > 2 && !this.searching && this.appNumInput.value.length < 7){
+        disableButton = false;
       }
     }
-    return hideButton;
+    return disableButton;
   }
 
   onChange(event: MatCheckboxChange) {

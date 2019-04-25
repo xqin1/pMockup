@@ -1,7 +1,6 @@
 
 import { SearchProjectActionTypes, SearchProjectActionsUnion} from "../actions/search-project.action";
-import {Notification} from '@app/modules/redactor/models/notification.model';
-import {CONFIG} from '@app/modules/redactor/config';
+import {Notification} from '@app/core/model/common/notification.model';import {CONFIG} from '@app/modules/redactor/config';
 
 export interface State {
   projectIds: string[];

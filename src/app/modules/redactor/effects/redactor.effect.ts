@@ -60,7 +60,6 @@ export class RedactorEffects {
     mergeMap((sessionId) =>
       this.dmService.getUserBySessionId(sessionId).pipe(
         map((user: User) => {
-          console.log("get user")
           if (user != null) {
             this.redactorService.setCurrentUser(user);
             return new UserDataLoadSuccess(user);

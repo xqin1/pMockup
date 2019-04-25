@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
 
 export enum SearchProjectActionTypes {
   SearchProject = '[Project] Search Project',

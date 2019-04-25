@@ -18,6 +18,7 @@ export class SelectionParentComponent implements OnInit {
   projectAttachedTemplate$: Observable<string[]>;
   attachTemplateComplete$: Observable<boolean>;
   attachTemplateAllComplete$: Observable<boolean>;
+  userEmail$: Observable<string>;
 
   constructor(
     private store: Store<fromRedactor.State>
@@ -28,6 +29,7 @@ export class SelectionParentComponent implements OnInit {
     this.projectAttachedTemplate$ = this.store.pipe(select(fromRedactor.getProjectTemplateAttached));
     this.attachTemplateComplete$ = this.store.pipe(select(fromRedactor.getTemplateAttachComplete));
     this.attachTemplateAllComplete$ = this.store.pipe(select(fromRedactor.getTemplateAttachAllComplete));
+    this.userEmail$ = this.store.pipe(select(fromRedactor.getUserEmail));
   }
 
   onRemoveSelection(projectId: string) {

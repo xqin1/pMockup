@@ -23,6 +23,8 @@ import {EMPTY} from 'rxjs/internal/observable/empty';
 import {Project} from '@app/core/model/workfront/Project.model';
 import {RedactorResponse} from '@app/modules/redactor/models/redactor-response.model';
 import { RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
+import {UserActionTypes, UserDataLoad, UserDataLoadError, UserDataLoadSuccess} from '@app/modules/redactor/actions/user.action';
+import {User} from '@app/core/model/workfront/User.model';
 
 
 @Injectable()
@@ -45,6 +47,25 @@ export class RedactorEffects {
             return new TaskDataLoadSuccess(task);
           }else {
             return new TaskDataLoadError(taskId);
+          }
+        }),
+        catchError(error => of(new TaskDataLoadError(error)))
+      )
+    )
+  );
+  @Effect()
+  loadUser$: Observable<Action> = this.actions$.pipe(
+    ofType<UserDataLoad>(UserActionTypes.UserDataLoad),
+    map(action => action.payload),
+    mergeMap((sessionId) =>
+      this.dmService.getUserBySessionId(sessionId).pipe(
+        map((user: User) => {
+          console.log("get user")
+          if (user != null) {
+            this.redactorService.setCurrentUser(user);
+            return new UserDataLoadSuccess(user);
+          }else {
+            return new UserDataLoadError(sessionId);
           }
         }),
         catchError(error => of(new TaskDataLoadError(error)))

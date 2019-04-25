@@ -1,10 +1,10 @@
-<div class="flex-container" *ngIf="taskDataLoaded$ | async">
+<div class="flex-container" *ngIf="taskDataLoaded$|async">
   <app-header-parent></app-header-parent>
   <app-search-parent></app-search-parent>
   <app-search-result-parent></app-search-result-parent>
   <app-selection-parent></app-selection-parent>
 </div>
-<div class="loading-section" *ngIf="taskDataLoading$ | async" class="loader">
+<div class="loading-section" *ngIf="taskDataLoading$|async" class="loader">
   <facebook-content-loader></facebook-content-loader>
   <bullet-list-content-loader></bullet-list-content-loader>
 </div>

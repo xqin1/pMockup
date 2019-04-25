@@ -1,14 +1,17 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromRoot from '@app/reducers';
 import * as fromTask from './task.reducer';
+import * as fromUser from './user.reducer';
 import * as fromSearchAppNum from './search-appnum.reducer';
 import * as fromSearchProject from './search-project.reducer';
 import { Task} from '@app/core/model/workfront/Task.model';
+import {User} from '@app/core/model/workfront/User.model';
 
 export interface RedactorState {
   task: fromTask.State;
   searchAppNum: fromSearchAppNum.State;
   searchProject: fromSearchProject.State;
+  user: fromUser.State;
 }
 
 export interface State extends fromRoot.State {
@@ -18,7 +21,8 @@ export interface State extends fromRoot.State {
 export const reducers = {
   task: fromTask.reducer,
   searchAppNum: fromSearchAppNum.reducer,
-  searchProject: fromSearchProject.reducer
+  searchProject: fromSearchProject.reducer,
+  user: fromUser.reducer
 };
 
 export const getRedactorState = createFeatureSelector<State, RedactorState>('redactor');
@@ -152,6 +156,28 @@ export const getTemplateAttachAllComplete = createSelector(
 export const getProjectTemplateAttached = createSelector(
   getSearchProjectState,
   fromSearchProject.getProjectTemplateAttached
+);
+
+// USER STATE
+export const getUserState = createSelector(
+  getRedactorState,
+  state => state.user
+);
+export const getUserDataLoading = createSelector(
+  getUserState,
+  fromUser.getUserDataLoading
+);
+export const getUserDataLoaded = createSelector(
+  getUserState,
+  fromUser.getUserDataLoaded
+);
+export const getUserData = createSelector(
+  getUserState,
+  fromUser.getUserData
+);
+export const getUserEmail = createSelector(
+  getUserData,
+  (userData: User) => userData.emailAddr
 );
 
 

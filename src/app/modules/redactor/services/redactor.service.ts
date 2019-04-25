@@ -3,12 +3,14 @@ import {LoggerService} from '@app/core/services/logger.service';
 import {Task} from '@app/core/model/workfront/Task.model';
 import {Project} from '@app/core/model/workfront/Project.model';
 import {RedactorProject} from '@app/modules/redactor/models/redactor-project.model';
+import {User} from '@app/core/model/workfront/User.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RedactorService {
   task: Task = new Task();
+  user: User = new User();
   projects: Project[] = [];
   constructor(
     private logger: LoggerService
@@ -16,6 +18,9 @@ export class RedactorService {
 
   setCurrentTask(task: Task) {
     this.task = task;
+  }
+  setCurrentUser(user: User) {
+    this.user = user;
   }
 
   addProjects(projects: Project[]){

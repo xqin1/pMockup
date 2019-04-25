@@ -86,10 +86,10 @@ export class DMService {
   getUserBySessionId(sessionId: string) {
     if (environment.production) {
       return this.http
-        .get<User>(`${environment.documentManagementURL}/portal/security/getUserBySessionId?sessionId=${sessionId}`)
+        .get<User>(`${environment.documentManagementURL}/redactor/getUserBySessionId?sessionId=${sessionId}`)
         .pipe(
           map(res => res),
-          catchError(this.exceptionService.catchBadResponse),
+          // catchError(this.exceptionService.catchBadResponse),
           finalize(() => {
             this.logger.log("done with login");
           })
@@ -97,22 +97,6 @@ export class DMService {
     }else {
       return of(MockUser);
     }
-  }
-  getTaskListByUserId(userId) {
-    if (environment.production) {
-      return this.http
-        .get<Task[]>(`${environment.documentManagementURL}/portal/task/userAssigned?userId=${userId}`)
-        .pipe(
-          map(res => res),
-          catchError(this.exceptionService.catchBadResponse),
-          finalize(() => {
-            this.logger.log("done with task list data");
-          })
-        );
-    }else {
-      return of(TaskList).pipe(delay(2000));
-    }
-
   }
   getTaskByTaskId(taskId) {
     return this.http
@@ -186,5 +170,21 @@ export class DMService {
           this.logger.log("done with update redactor notes");
         })
       );
+  }
+  getTaskListByUserId(userId) {
+    if (environment.production) {
+      return this.http
+        .get<Task[]>(`${environment.documentManagementURL}/portal/task/userAssigned?userId=${userId}`)
+        .pipe(
+          map(res => res),
+          catchError(this.exceptionService.catchBadResponse),
+          finalize(() => {
+            this.logger.log("done with task list data");
+          })
+        );
+    }else {
+      return of(TaskList).pipe(delay(2000));
+    }
+
   }
 }

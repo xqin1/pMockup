@@ -1,5 +1,6 @@
 export const environment = {
-  production: true,
+  production: false,
+  attaskSession: null,
   pefDocumentArchiveURL: '//panoramaams-pps.preprod.fda.gov/PanoramaExtendedFramework/extendedform/docmgt/bulkarchiving',
   documentManagementURL: '//panoramaams-pps.preprod.fda.gov/PanoramaDocMgmt',
   workfrontHost: '//panoramaams-pps.preprod.fda.gov',

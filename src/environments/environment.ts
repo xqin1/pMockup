@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  attaskSession: "7f619baa82394a97a831746b2845c622",
   pefDocumentArchiveURL: 'pefDocumentArchive',
   documentManagementURL: 'dmService',
   workfrontHost: '//panoramaams-pps.preprod.fda.gov',

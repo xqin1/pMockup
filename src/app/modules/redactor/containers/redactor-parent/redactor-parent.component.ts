@@ -8,8 +8,9 @@ import {Notification} from '@app/modules/document-management/model/notification.
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {TaskDataLoad} from '@app/modules/redactor/actions/task.action';
-import {switchMap} from 'rxjs/operators';
-import {of} from 'rxjs/internal/observable/of';
+import { CookieService} from 'ngx-cookie';
+import {environment} from '@env/environment';
+import {UserDataLoad} from '@app/modules/redactor/actions/user.action';
 
 @Component({
   selector: 'app-redactor-parent',
@@ -20,6 +21,8 @@ import {of} from 'rxjs/internal/observable/of';
 export class RedactorParentComponent implements OnInit, OnDestroy {
   taskDataLoading$: Observable<boolean>;
   taskDataLoaded$: Observable<boolean>;
+  userDataLoading$: Observable<boolean>;
+  userDataLoaded$: Observable<boolean>;
   taskNotification$: Observable<Notification>;
   projectNotification$: Observable<Notification>;
   config: MatSnackBarConfig = new MatSnackBarConfig();
@@ -28,10 +31,13 @@ export class RedactorParentComponent implements OnInit, OnDestroy {
     private titleService: Title,
     private store: Store<fromRedactor.State>,
     public snackBar: MatSnackBar,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private cookieService: CookieService
   ) {
     this.taskDataLoaded$ = this.store.pipe(select(fromRedactor.getTaskDataLoaded));
     this.taskDataLoading$ = this.store.pipe(select(fromRedactor.getTaskDataLoading));
+    this.userDataLoaded$ = this.store.pipe(select(fromRedactor.getUserDataLoaded));
+    this.userDataLoading$ = this.store.pipe(select(fromRedactor.getUserDataLoading));
     this.taskNotification$ = this.store.pipe(select(fromRedactor.getTaskNotification));
     this.projectNotification$ = this.store.pipe(select(fromRedactor.getProjectNotification));
 
@@ -44,6 +50,19 @@ export class RedactorParentComponent implements OnInit, OnDestroy {
         this.store.dispatch(new TaskDataLoad(taskId));
       }else{
         console.log("taskId is required in the URL");
+      }
+      // for user
+      if (environment.attaskSession === null) {
+        const attaskSession = this.cookieService.get("attask");
+        console.log("get attask session" + attaskSession);
+        if (typeof attaskSession !== 'undefined') {
+          this.store.dispatch(new UserDataLoad(attaskSession.substr(0, 32)));
+        }else{
+          console.log("cannot get attask cookie");
+        }
+      }else {
+        const sessionId = environment.attaskSession;
+        this.store.dispatch(new UserDataLoad(sessionId));
       }
     });
     this.titleService.setTitle("ANDA Redactor");

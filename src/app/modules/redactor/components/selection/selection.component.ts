@@ -17,6 +17,7 @@ export class SelectionComponent implements OnInit, OnChanges {
   @Input() projectAttachedTemplate: string[] = [];
   @Input() attachTemplateComplete: boolean;
   @Input() attachTemplateAllComplete: boolean;
+  @Input() userEmail: string;
   @Output() removeSelection = new EventEmitter<string>();
   @Output() attachTemplate = new EventEmitter<string>();
   @Output() finishAttachTemplate = new EventEmitter<string>();
@@ -69,6 +70,7 @@ export class SelectionComponent implements OnInit, OnChanges {
           }
           note.projectIds = pIds;
           note.projectNames = pNames;
+          note.userEmail = this.userEmail;
           this.updateRedactorProject.emit(JSON.stringify(note));
         } else {
           this.attachTemplate.emit(this.selectionIds[this.projectAttachedTemplate.length]);

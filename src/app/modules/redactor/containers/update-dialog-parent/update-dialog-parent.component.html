@@ -5,5 +5,6 @@
   [attachTemplateAllComplete]="attachTemplateAllComplete$ | async"
   [projectUpdateError]="projectUpdateError$ | async"
   [projectUpdating]="projectUpdating$ | async"
-  [projectUpdateComplete]="projectUpdateComplete$ | async">
+  [projectUpdateComplete]="projectUpdateComplete$ | async"
+  (appStartOver)="onAppStartOver($event)">
 </app-update-dialog>

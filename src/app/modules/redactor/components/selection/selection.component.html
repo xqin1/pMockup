@@ -1,78 +1,77 @@
-<!--<button (click)="openUpdateDialog()">open</button>-->
-<div
-     class="selection-result-section"
-     *ngIf="selectionIds.length>0 || projectIds.length>0">
+<div class="selection-result-section">
   <div class="selection-header" fxLayout="row">
     <mat-toolbar>
       <span>Selected Application/Submission</span>
       <span class="line-spacer"></span>
-      <button *ngIf = "selectionIds.length > 0"
-              class="selection-button"
-              mat-raised-button
-              color="primary"
-              matBadge={{selectionIds.length}}
-              matBadgePosition="after"
-              matBadgeColor="accent"
-              (click)="onConfirmSelection()">
-        Confirm
-      </button>
     </mat-toolbar>
   </div>
   <div fxLayout="row">
-  <ngx-datatable #selectionDataTable
-                 class="material striped selection-datatable"
-                 [rows]="selectedProjects"
-                 [columnMode]="'flex'"
-                 [headerHeight]="50"
-                 [rowHeight]="'auto'"
-                 [messages]="{emptyMessage: 'No records found'}">
-    <ngx-datatable-column prop="name" [flexGrow]="2">
-      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-        <span (click)="sort()">Name</span>
-      </ng-template>
-      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column prop='establishedName' [flexGrow]="1">
-      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-        <span (click)="sort()">Established Name</span>
-      </ng-template>
-      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column prop='dosageForm' [flexGrow]="1">
-      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-        <span (click)="sort()">Dosage Form</span>
-      </ng-template>
-      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column prop='approvedStrength' [flexGrow]="1">
-      <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-        <span (click)="sort()">Approved Strength</span>
-      </ng-template>
-      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column
-      [sortable]="false"
-      [canAutoResize]="false"
-      [draggable]="false"
-      [resizeable]="false">
-      <ng-template ngx-datatable-header-template>
-      </ng-template>
-      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        <button mat-raised-button color="warn" class="remove-button" (click)="onRemoveSelection(row)">
-          Remove
-          <mat-icon>clear</mat-icon>
-        </button>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>
+    <ngx-datatable #selectionDataTable
+                   class="material striped selection-datatable"
+                   [rows]="selectedProjects"
+                   [columnMode]="'flex'"
+                   [headerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [messages]="{emptyMessage: 'No records found'}">
+      <ngx-datatable-column prop="name" [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Name</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop='establishedName' [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Established Name</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop='dosageForm' [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Dosage Form</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column prop='approvedStrength' [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span (click)="sort()">Approved Strength</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{value}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false">
+        <ng-template ngx-datatable-header-template>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <button mat-raised-button color="primary" class="remove-button" (click)="onRemoveSelection(row)">
+            Remove
+            <mat-icon>clear</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  <div fxLayout="row" fxLayoutalign="end center" class="select-row" *ngIf = "selectionIds.length > 0">
+    <span class="line-spacer"></span>
+    <button class="selection-button"
+            mat-raised-button
+            color="primary"
+            matBadge={{selectionIds.length}}
+            matBadgePosition="after"
+            matBadgeColor="accent"
+            (click)="onConfirmSelection()">
+            Confirm
+    </button>
   </div>
 </div>
 

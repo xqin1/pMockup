@@ -27,7 +27,7 @@
       <mat-spinner [class.show]="searching" [diameter]="30" [strokeWidth]="3"></mat-spinner>
       <button mat-icon-button color="primary" class="search-button"
               (click)="startSearchProjects()"
-              [disabled]="showSearchButton()">
+              [disabled]="disableSearchButton()">
         <mat-icon>search</mat-icon>
       </button>
     </mat-card-content>

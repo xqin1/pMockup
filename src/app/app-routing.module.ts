@@ -4,10 +4,6 @@ import { PageNotFoundComponent} from '@app/core/components/page-not-found/page-n
 
 const routes: Routes = [
   {
-    path: 'document-management',
-    loadChildren: './modules/document-management/document-management.module#DocumentManagementModule',
-  },
-  {
     path: 'redactor',
     loadChildren: './modules/redactor/redactor.module#RedactorModule',
   },

@@ -1,6 +1,6 @@
 
 import { SearchProjectActionTypes, SearchProjectActionsUnion} from "../actions/search-project.action";
-import {Notification} from '@app/modules/redactor/models/notification.model';
+import {Notification} from '@app/core/model/common/notification.model';
 import {CONFIG} from '@app/modules/redactor/config';
 
 export interface State {
@@ -193,21 +193,9 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
     case SearchProjectActionTypes.UpdateRedactorProjectComplete: {
       return {
         ...state,
-        projectIds: [],
-        selectionIds: [],
-        accumulateMode: true,
-        loading: false,
-        error: '',
-        query: '',
-        notification: new Notification(),
         projectUpdating: false,
         projectUpdateComplete: true,
-        projectUpdateError: '',
-        templateAttaching: false,
-        templateAttachComplete: true,
-        templateAttachError: '',
-        templateAttachAllComplete: true,
-        projectTemplateAttached: []
+        projectUpdateError: ''
       };
     }
 
@@ -215,21 +203,9 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
       return {
         ...state,
         ...state,
-        projectIds: [],
-        selectionIds: [],
-        accumulateMode: true,
-        loading: false,
-        error: '',
-        query: '',
-        notification: new Notification(),
         projectUpdating: false,
-        projectUpdateComplete: true,
+        projectUpdateComplete: false,
         projectUpdateError: "There's error while updating redactor project, please check the project and task's update tab.",
-        templateAttaching: false,
-        templateAttachComplete: true,
-        templateAttachError: '',
-        templateAttachAllComplete: true,
-        projectTemplateAttached: []
       };
     }
 
@@ -270,6 +246,26 @@ export function reducer(state = initialState, action: SearchProjectActionsUnion)
         templateAttachComplete: true,
         templateAttachError: '',
         templateAttachAllComplete: true
+      };
+    }
+
+    case SearchProjectActionTypes.StartOver: {
+      return {
+        projectIds: [],
+        selectionIds: [],
+        accumulateMode: false,
+        loading: false,
+        error: '',
+        query: '',
+        notification: new Notification(),
+        projectUpdating: false,
+        projectUpdateComplete: false,
+        projectUpdateError: '',
+        templateAttaching: false,
+        templateAttachComplete: false,
+        templateAttachError: '',
+        templateAttachAllComplete: false,
+        projectTemplateAttached: []
       };
     }
 

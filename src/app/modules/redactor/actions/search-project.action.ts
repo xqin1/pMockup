@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
 
 export enum SearchProjectActionTypes {
   SearchProject = '[Project] Search Project',
@@ -15,6 +14,7 @@ export enum SearchProjectActionTypes {
   AttachTemplateComplete = '[Project] Attach Template Complete',
   AttachTemplateError = '[Project] Attach Template Error',
   AttachAllTemplateComplete = '[Project] Attach All Template Complete',
+  StartOver = '[Project] Start Over',
 }
 
 export class SearchProject implements Action {
@@ -90,6 +90,10 @@ export class AttachAllTemplateComplete implements Action {
   readonly type = SearchProjectActionTypes.AttachAllTemplateComplete;
 }
 
+export class StartOver implements Action {
+  readonly type = SearchProjectActionTypes.StartOver;
+}
+
 export type SearchProjectActionsUnion =
   | SearchProject
   | SearchProjectComplete
@@ -103,4 +107,5 @@ export type SearchProjectActionsUnion =
   | AttachTemplate
   | AttachTemplateComplete
   | AttachTemplateError
-  | AttachAllTemplateComplete;
+  | AttachAllTemplateComplete
+  | StartOver;

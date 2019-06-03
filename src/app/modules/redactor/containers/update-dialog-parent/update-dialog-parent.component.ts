@@ -1,8 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
 import * as fromRedactor from '@app/modules/redactor/reducers/index.reducer';
+import * as SearchProjectActions from '../../actions/search-project.action';
 
 
 @Component({
@@ -39,6 +40,9 @@ export class UpdateDialogParentComponent implements OnInit {
     this.projectUpdateComplete$ = this.store.pipe(select(fromRedactor.getProjectUpdateComplete));
   }
 
+  onAppStartOver(event: string) {
+    this.store.dispatch(new SearchProjectActions.StartOver());
+  }
   ngOnInit() {
   }
 

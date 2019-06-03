@@ -1,5 +1,3 @@
-import {Notification} from '../models/notification.model';
-import { CONFIG} from '../config';
 import {User} from '@app/core/model/workfront/User.model';
 import {UserActionTypes, UserActionsUnion} from '@app/modules/redactor/actions/user.action';
 
@@ -13,7 +11,7 @@ export interface State {
 const initialState: State = {
   userDataLoaded: false,
   userDataLoading: false,
-  userData: null,
+  userData: new User()
 };
 
 export function reducer(

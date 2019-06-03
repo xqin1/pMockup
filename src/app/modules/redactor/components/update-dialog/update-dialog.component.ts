@@ -1,4 +1,13 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, SimpleChanges, OnChanges} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  SimpleChanges,
+  OnChanges,
+  EventEmitter,
+  Output
+} from '@angular/core';
 
 @Component({
   selector: 'app-update-dialog',
@@ -16,6 +25,7 @@ export class UpdateDialogComponent implements OnInit, OnChanges {
   @Input() projectUpdating: boolean;
   @Input() projectUpdateError: string;
   @Input() projectUpdateComplete: boolean;
+  @Output() appStartOver = new EventEmitter<string>();
   errorMsg = '';
   progressValue = 0;
   currentTemplateNumber = 0;
@@ -23,6 +33,9 @@ export class UpdateDialogComponent implements OnInit, OnChanges {
 
   showTemplate() {
     if (this.showError()){
+      return false;
+    }
+    if (this.projectUpdateComplete) {
       return false;
     }
     return !this.attachTemplateAllComplete;
@@ -79,6 +92,9 @@ export class UpdateDialogComponent implements OnInit, OnChanges {
   closeApplication() {
     window.open('', '_parent', '');
     window.close();
+  }
+  startOver() {
+    this.appStartOver.emit("App Start Over");
   }
   ngOnInit() {
   }

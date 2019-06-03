@@ -1,9 +1,9 @@
 {
-  "/dmService": {
+  "/PanoramaDocMgmt": {
     "target": "http://localhost:7001/PanoramaDocMgmt",
     "secure": false,
     "pathRewrite": {
-      "^/dmService": ""
+      "^/PanoramaDocMgmt": ""
     }
   }
 }

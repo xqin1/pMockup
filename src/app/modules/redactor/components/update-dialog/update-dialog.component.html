@@ -26,6 +26,6 @@
   </div>
   <mat-dialog-actions class="action-button" *ngIf="showButton()">
     <!--<button mat-button type="button" (click)="closeApplication()">Close Application</button>-->
-    <button mat-raised-button color="primary" type="button" mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" type="button" mat-dialog-close (click)="startOver()">Close</button>
   </mat-dialog-actions>
 </div>

@@ -1,20 +1,8 @@
-<div
-  class="search-result-section"
-  *ngIf="projectIds.length>0 || selectionIds.length>0">
+<div class="search-result-section">
   <div class="result-header" fxLayout="row">
     <mat-toolbar class="result-title">
       <span>Application/Submission</span>
       <span class="line-spacer"></span>
-      <button *ngIf = "selected.length>0"
-              class="select-button"
-              mat-raised-button
-              color="primary"
-              matBadge={{selected.length}}
-              matBadgePosition="after"
-              matBadgeColor="accent"
-              (click)="onSelectProject()">
-        Select
-      </button>
     </mat-toolbar>
   </div>
   <div class="result-table" fxLayout="row">
@@ -73,6 +61,19 @@
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
+  </div>
+  <div fxLayout="row" fxLayoutalign="end center" class="select-row" *ngIf="selected.length>0">
+    <span class="line-spacer"></span>
+    <button
+      class="select-button"
+      mat-raised-button
+      color="primary"
+      matBadge={{selected.length}}
+      matBadgePosition="after"
+      matBadgeColor="accent"
+      (click)="onSelectProject()">
+      Add Selected
+    </button>
   </div>
 </div>
 

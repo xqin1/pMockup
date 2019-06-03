@@ -1,4 +1,4 @@
-import {Notification} from '../models/notification.model';
+import {Notification} from '@app/core/model/common/notification.model';
 import { TaskActionTypes, TaskActionsUnion} from "../actions/task.action";
 import { Task} from '@app/core/model/workfront/Task.model';
 import { CONFIG} from '../config';

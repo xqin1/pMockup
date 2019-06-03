@@ -3,7 +3,6 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as SearchProjectActions from '../../actions/search-project.action';
 import * as fromRedactor from '../../reducers/index.reducer';
-import { RedactorUpdateNote} from '@app/modules/redactor/models/redactor-update-note.model';
 
 @Component({
   selector: 'app-selection-parent',
